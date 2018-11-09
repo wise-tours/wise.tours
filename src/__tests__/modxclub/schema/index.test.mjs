@@ -28,46 +28,18 @@ const requiredTypes = [
       prisma: [
       ],
       api: [
-        "me",
-        "user",
-        "users",
-        "usersConnection",
-        "company",
-        "companies",
-        "companiesConnection",
-        "service",
-        "services",
-        "servicesConnection",
-        "notice",
-        "notices",
-        "noticesConnection",
-        "userNotice",
-        "userNotices",
-        "userNoticesConnection",
-        "project",
-        "projects",
-        "projectsConnection",
-        "blog",
-        "blogs",
-        "blogsConnection",
-        "topic",
-        "topics",
-        "topicsConnection",
-        "comment",
-        "comments",
-        "commentsConnection",
-        "thread",
-        "threads",
-        "threadsConnection",
-        "vote",
-        "votes",
-        "votesConnection",
-        "tag",
-        "tags",
-        "tagsConnection",
-        "topicTag",
-        "topicTags",
-        "topicTagsConnection",
+      ],
+    },
+  },
+  {
+    name: "Route",
+    fields: {
+      both: [
+        "id",
+      ],
+      prisma: [
+      ],
+      api: [
       ],
     },
   },
@@ -75,14 +47,15 @@ const requiredTypes = [
     name: "User",
     fields: {
       both: [
+        "createdAt",
+        "Votes",
+        "NotificationTypes",
       ],
       prisma: [
       ],
       api: [
-        "createdAt",
         "Companies",
         "Services",
-        "Notices",
         "Projects",
       ],
     },
@@ -402,7 +375,7 @@ describe('modxclub Verify prisma Schema', () => {
 });
 
 
-describe('modxclub Verify API Schema 2', () => {
+describe('modxclub Verify API Schema', () => {
 
   verifySchema(module.getApiSchema(), requiredTypes);
 

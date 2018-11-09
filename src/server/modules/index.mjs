@@ -3,6 +3,7 @@ import fs from "fs";
 
 import chalk from "chalk";
 
+import ModxclubModule from "./modxclub.ru";
 
 import MergeSchema from 'merge-graphql-schemas';
 
@@ -81,4 +82,15 @@ class CoreModule extends CmsModule {
 }
 
 
-export default CoreModule;
+export default class extends ModxclubModule{
+
+  constructor(options = {}) {
+
+    super(options);
+
+    this.mergeModules([
+      CoreModule,
+    ]);
+
+  }
+};

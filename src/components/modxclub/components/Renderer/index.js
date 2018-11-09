@@ -3,9 +3,6 @@ import React from "react";
 
 import PropTypes from "prop-types";
 
-import UsersPage from "@prisma-cms/front/lib/modules/pages/UsersPage";
-
-import UserPage from "../pages/UsersPage/UserPage";
 
 import PrismaRendererCmsRenderer from "../../../Renderer";
 
@@ -14,13 +11,16 @@ import withStyles from "material-ui/styles/withStyles";
 import MainMenu from "../menu/mainMenu";
 
 
-import MainPage from "../pages/MainPage";
-import TopicPage from "../pages/Topics/Topic";
-import TopicCreatePage from "../pages/Topics/Topic/Create";
-import TagPage from "../pages/Tags/Tag";
-import BlogPage from "../pages/Blogs/Blog";
-import CommentsPage from "../pages/Comments";
-import CommentPage from "../pages/Comments/Comment";
+
+// import UsersPage from "@prisma-cms/front/lib/modules/pages/UsersPage";
+// import UserPage from "../pages/UsersPage/UserPage";
+// import MainPage from "../pages/MainPage";
+// import TopicPage from "../pages/Topics/Topic";
+// import TopicCreatePage from "../pages/Topics/Topic/Create";
+// import TagPage from "../pages/Tags/Tag";
+// import BlogPage from "../pages/Blogs/Blog";
+// import CommentsPage from "../pages/Comments";
+// import CommentPage from "../pages/Comments/Comment";
 
 
 
@@ -100,142 +100,133 @@ export class Renderer extends PrismaRendererCmsRenderer {
 
 
     let routes = [
+      // {
+      //   exact: true,
+      //   path: "/people",
+      //   component: UsersPage,
+      // },
+      // {
+      //   exact: true,
+      //   path: ["/", "/topics"],
+      //   component: MainPage,
+      // },
+      // {
+      //   exact: true,
+      //   path: "/profile/:username",
+      //   render: (props) => {
+      //     const {
+      //       params,
+      //     } = props.match;
+
+      //     const {
+      //       username,
+      //     } = params || {};
+
+      //     return <UserPage
+      //       getQueryFragment={getQueryFragment}
+      //       key={username}
+      //       where={{
+      //         username,
+      //       }}
+      //       {...props}
+      //     />
+      //   }
+      // },
+      // {
+      //   exact: true,
+      //   path: "/add-topic.html",
+      //   component: TopicCreatePage,
+      // },
+      // {
+      //   exact: false,
+      //   path: "/(topics/.+|blog/.+[0-9].html)",
+      //   render: (props) => {
+
+      //     const {
+      //       match: {
+      //         params: {
+      //           0: uri,
+      //         },
+      //         // url: uri,
+      //       },
+      //     } = props;
+
+      //     return <TopicPage
+      //       key={uri}
+      //       where={{
+      //         uri: uri,
+      //       }}
+      //       {...props}
+      //     />
+      //   }
+      // },
+      // {
+      //   exact: false,
+      //   path: "/(blogs?/.+)",
+      //   render: (props) => {
+
+      //     const {
+      //       match: {
+      //         params: {
+      //           0: uri,
+      //         },
+      //       },
+      //     } = props;
+
+      //     return <BlogPage
+      //       where={{
+      //         uri,
+      //       }}
+      //       {...props}
+      //     />
+      //   }
+      // },
+      // {
+      //   exact: false,
+      //   path: /^\/tag\/(.+)/,
+      //   render: (props) => {
+      //     const {
+      //       match: {
+      //         params: {
+      //           0: tagName,
+      //         },
+      //       },
+      //     } = props;
+
+      //     return <TagPage
+      //       tagName={tagName}
+      //       {...props}
+      //     />
+      //   }
+      // },
+      // {
+      //   exact: true,
+      //   path: "/comments",
+      //   component: CommentsPage,
+      // },
+      // {
+      //   exact: false,
+      //   path: "/comments/comment-([0-9]+).html",
+      //   render: (props) => {
+
+      //     const {
+      //       match: {
+      //         params: {
+      //           0: commentId,
+      //         },
+      //       },
+      //     } = props;
+
+      //     return <CommentPage
+      //       key={commentId}
+      //       where={{
+      //         id: parseInt(commentId),
+      //       }}
+      //       {...props}
+      //     />
+      //   }
+      // }, 
       {
-        exact: true,
-        path: "/people",
-        component: UsersPage,
-      },
-      {
-        exact: true,
-        path: ["/", "/topics"],
-        component: MainPage,
-      },
-      {
-        exact: true,
-        path: "/profile/:username",
-        render: (props) => {
-          const {
-            params,
-          } = props.match;
-
-          const {
-            username,
-          } = params || {};
-
-          return <UserPage
-            getQueryFragment={getQueryFragment}
-            key={username}
-            where={{
-              username,
-            }}
-            {...props}
-          />
-        }
-      },
-      {
-        exact: true,
-        path: "/add-topic.html",
-        component: TopicCreatePage,
-      },
-      {
-        exact: false,
-        path: "/(topics/.+|blog/.+[0-9].html)",
-        // path: /^\/((topics\/.+)|(blog\/.+[0-9].html$))/,
-        render: (props) => {
-
-          // console.log("Renderer props", props);
-
-          const {
-            match: {
-              params: {
-                0: uri,
-              },
-              // url: uri,
-            },
-          } = props;
-
-          return <TopicPage
-            key={uri}
-            where={{
-              uri: uri,
-            }}
-            {...props}
-          />
-        }
-      },
-      {
-        exact: false,
-        // path: /^\/(blogs?\/(.+))/,
-        path: "/(blogs?/.+)",
-        render: (props) => {
-
-          // console.log("Renderer props", props);
-
-          const {
-            match: {
-              params: {
-                0: uri,
-              },
-            },
-          } = props;
-
-          return <BlogPage
-            where={{
-              uri,
-            }}
-            {...props}
-          />
-        }
-      },
-      {
-        exact: false,
-        path: /^\/tag\/(.+)/,
-        render: (props) => {
-          const {
-            match: {
-              params: {
-                0: tagName,
-              },
-            },
-          } = props;
-
-          return <TagPage
-            tagName={tagName}
-            {...props}
-          />
-        }
-      },
-      {
-        exact: true,
-        path: "/comments",
-        component: CommentsPage,
-      },
-      {
-        exact: false,
-        path: "/comments/comment-([0-9]+).html",
-        render: (props) => {
-
-          // console.log("Renderer props", props);
-          // return null;
-
-          const {
-            match: {
-              params: {
-                0: commentId,
-              },
-              // url: uri,
-            },
-          } = props;
-
-          return <CommentPage
-            key={commentId}
-            where={{
-              id: parseInt(commentId),
-            }}
-            {...props}
-          />
-        }
-      }, {
         path: "*",
         render: props => this.renderOtherPages(props),
       },
