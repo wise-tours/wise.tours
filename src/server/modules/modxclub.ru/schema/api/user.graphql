@@ -17,3 +17,6 @@ input UserUpdateInput {
   address: String
 }
 
+input UserCreateOneWithoutResourcesInput {
+  connect: UserWhereUniqueInput
+}

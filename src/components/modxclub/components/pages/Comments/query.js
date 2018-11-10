@@ -2,7 +2,7 @@
 import React from "react";
 
 import {
-  CommentNoNestingFragment,
+  ResourceNoNestingFragment,
   UserNoNestingFragment,
 } from "../../../../../schema/generated/api.fragments";
 
@@ -12,45 +12,45 @@ import { graphql, compose } from "react-apollo";
 
 
 
-export const commentFragment = `
-  fragment commentFragment on Comment{
-    ...CommentNoNesting
+export const resourceFragment = `
+  fragment resourceFragment on Resource{
+    ...ResourceNoNesting
 
     CreatedBy{
       ...UserNoNesting
     }
     
-    parent
-    Topic{
-      id
-      uri
-      name
-    }
   }
   
-  ${CommentNoNestingFragment}
+  ${ResourceNoNestingFragment}
   ${UserNoNestingFragment}
 `
+// parent
+// Topic{
+//   id
+//   uri
+//   name
+// }
 
-export const commentsListFragment = `
-  fragment commentsListFragment on Comment{
-    ...commentFragment
+export const resourcesListFragment = `
+  fragment resourcesListFragment on Resource{
+    ...resourceFragment
   }
 
-  ${commentFragment}
+  ${resourceFragment}
 `;
 
 
 
-export const commentsConnectionQuery = gql`
+export const resourcesConnectionQuery = gql`
 
-  query commentsConnection(
+  query resourcesConnection(
     $first:Int!
     $skip:Int
-    $where: CommentWhereInput
-    $orderBy: CommentOrderByInput!
+    $where: ResourceWhereInput
+    $orderBy: ResourceOrderByInput!
   ){
-    objectsConnection: commentsConnection(
+    objectsConnection: resourcesConnection(
       orderBy: $orderBy
       first: $first
       skip: $skip
@@ -61,36 +61,36 @@ export const commentsConnectionQuery = gql`
       }
       edges{
         node{
-          ...commentsListFragment
+          ...resourcesListFragment
         }
       }
     }
   }
 
-  ${commentsListFragment}
+  ${resourcesListFragment}
 
 `;
 
-export const commentQuery = gql`
+export const resourceQuery = gql`
 
-  query comment(
-    $where: CommentWhereUniqueInput!
+  query resource(
+    $where: ResourceWhereUniqueInput!
   ){
-    object: comment(
+    object: resource(
       where: $where
     ){ 
-      ...commentFragment 
+      ...resourceFragment 
     }
   }
 
-  ${commentFragment}
+  ${resourceFragment}
 
 `;
 
 
 
-const CommentsQuery = graphql(commentsConnectionQuery);
-export const CommentsConnector = CommentsQuery(props => {
+const ResourcesQuery = graphql(resourcesConnectionQuery);
+export const CommentsConnector = ResourcesQuery(props => {
 
   const {
     View,
@@ -104,8 +104,8 @@ export const CommentsConnector = CommentsQuery(props => {
 
 
 
-const CommentQuery = graphql(commentQuery);
-export const Comment = CommentQuery(props => {
+const ResourceQuery = graphql(resourceQuery);
+export const Comment = ResourceQuery(props => {
 
   const {
     View,

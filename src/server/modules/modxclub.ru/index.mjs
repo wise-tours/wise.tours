@@ -5,6 +5,8 @@ import PrismaModule from "@prisma-cms/prisma-module";
 import SocialModule from "@prisma-cms/social-module";
 
 import UserModule from "./user";
+import TopicModule from "./topic";
+import BlogModule from "./blog";
 
 import MergeSchema from 'merge-graphql-schemas';
 
@@ -26,6 +28,8 @@ class ModxclubModule extends PrismaModule {
     this.mergeModules([
       SocialModule,
       UserModule,
+      TopicModule,
+      BlogModule,
     ]);
 
   }
@@ -41,6 +45,8 @@ class ModxclubModule extends PrismaModule {
 
       "ResourceCreateInput",
       "ResourceUpdateInput",
+
+      "UserCreateOneWithoutResourcesInput",
 
     ]);
 

@@ -1,0 +1,18 @@
+
+input BlogCreateInput {
+  name: String!
+  longtitle: String
+  content: Json!
+  published: Boolean
+}
+
+input BlogUpdateInput {
+  name: String
+  longtitle: String
+  content: Json
+  published: Boolean
+  # hidemenu: Boolean
+  # deleted: Boolean
+  # hidemenu: Boolean
+  # searchable: Boolean
+}

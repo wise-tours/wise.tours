@@ -1,0 +1,19 @@
+
+input TopicCreateInput {
+  name: String!
+  longtitle: String
+  content: Json!
+  published: Boolean
+  blogID: ID!
+}
+
+input TopicUpdateInput {
+  name: String
+  longtitle: String
+  content: Json
+  published: Boolean
+  # hidemenu: Boolean
+  # deleted: Boolean
+  # hidemenu: Boolean
+  # searchable: Boolean
+}

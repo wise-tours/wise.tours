@@ -226,14 +226,14 @@ export class Renderer extends PrismaRendererCmsRenderer {
       //     />
       //   }
       // }, 
-      {
-        path: "*",
-        render: props => this.renderOtherPages(props),
-      },
+      // {
+      //   path: "*",
+      //   render: props => this.renderOtherPages(props),
+      // },
     ].concat(baseRoutes);
 
 
-    // console.log("routes", routes);
+    console.log("routes", routes);
 
     return routes;
   }

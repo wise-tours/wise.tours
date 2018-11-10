@@ -36,4 +36,13 @@ type Mutation {
     files: [Upload!]!
   ): [File!]
 
+
+  createTopicProcessor(
+    data: TopicCreateInput!
+  ): ResourceResponse!
+
+  createBlogProcessor(
+    data: BlogCreateInput!
+  ): ResourceResponse!
+
 }
