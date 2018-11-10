@@ -79,6 +79,7 @@ class ModxclubModule extends PrismaModule {
       signup,
       createResourceProcessor,
       updateUserProcessor,
+      createTopicProcessor,
       singleUpload,
       multipleUpload,
     } = Mutation;
@@ -89,6 +90,7 @@ class ModxclubModule extends PrismaModule {
         signup,
         createResourceProcessor,
         updateUserProcessor,
+        createTopicProcessor,
         singleUpload,
         multipleUpload,
       },

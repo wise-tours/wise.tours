@@ -3,7 +3,7 @@
 // import PrismaModule from "@prisma-cms/prisma-module";
 
 import ResourceModule, {
-  // UserPayload,
+  ResourceProcessor,
 } from "@prisma-cms/resource-module";
 
 import MergeSchema from 'merge-graphql-schemas';
@@ -17,11 +17,63 @@ const __dirname = path.dirname(moduleURL.pathname);
 const { fileLoader, mergeTypes } = MergeSchema;
 
 
-// export class ModxclubTopicProcessor extends UserPayload{
+export class ModxclubResourceProcessor extends ResourceProcessor {
 
-   
 
-// }
+  async create(method, args, info) {
+
+    let {
+      data: {
+        blogID,
+        ...data
+      },
+    } = args;
+
+
+    let {
+      type,
+    } = data;
+
+
+    switch(type){
+
+      case "Topic":
+  
+        if(!blogID){
+          return this.addError("Не был указан ID блога");
+        }
+        else {
+          Object.assign(data, {
+            Parent: {
+              connect: {
+                id: blogID,
+              },
+            },
+          });
+        }
+
+        break;
+
+    }
+
+    // let uriData = await this.prepareUri(args);
+
+    // Object.assign(data, {
+    //   ...uriData,
+    //   ...this.getCreatedBy(),
+    // });
+
+
+    Object.assign(args, {
+      data,
+    });
+
+    // return this.addFieldError("test", "error");
+
+    return super.create(method, args, info);
+  }
+
+}
 
 
 class ModxclubTopicModule extends ResourceModule {
@@ -60,34 +112,41 @@ class ModxclubTopicModule extends ResourceModule {
 
 
 
-  // getResolvers() {
+  getResolvers() {
 
 
-  //   let resolvers = super.getResolvers();
+    let resolvers = super.getResolvers();
 
-  //   const {
-  //     Mutation: {
-  //       signup,
-  //       ...Mutation
-  //     },
-  //     ...other
-  //   } = resolvers;
+    const {
+      Mutation: {
+        ...Mutation
+      },
+      ...other
+    } = resolvers;
 
- 
 
-  //   return {
-  //     Mutation: {
-  //       ...Mutation,
-  //       signup: (source, args, ctx, info) => {
 
-  //         return new ModxclubTopicProcessor(ctx).signup(source, args, ctx, info);
-  //       },
-  //     },
-  //     ...other,
-  //   };
+    return {
+      Mutation: {
+        ...Mutation,
+        createTopicProcessor: (source, args, ctx, info) => {
+      
+          Object.assign(args.data, {
+            type: "Topic",
+          });
 
-  // }
+          return this.getProcessor(ctx).createWithResponse("Resource", args, info);
+        }
+      },
+      ...other,
+    };
 
+  }
+
+
+  getProcessorClass() {
+    return ModxclubResourceProcessor;
+  }
 
 }
 
