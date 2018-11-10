@@ -5,7 +5,7 @@ import PrismaModule from "@prisma-cms/prisma-module";
 import SocialModule from "@prisma-cms/social-module";
 
 import UserModule from "./user";
-import TopicModule from "./topic";
+import ResourceModule from "./resource";
 import BlogModule from "./blog";
 
 import MergeSchema from 'merge-graphql-schemas';
@@ -28,7 +28,7 @@ class ModxclubModule extends PrismaModule {
     this.mergeModules([
       SocialModule,
       UserModule,
-      TopicModule,
+      ResourceModule,
       BlogModule,
     ]);
 
@@ -80,6 +80,7 @@ class ModxclubModule extends PrismaModule {
       createResourceProcessor,
       updateUserProcessor,
       createTopicProcessor,
+      createCommentProcessor,
       singleUpload,
       multipleUpload,
     } = Mutation;
@@ -91,6 +92,7 @@ class ModxclubModule extends PrismaModule {
         createResourceProcessor,
         updateUserProcessor,
         createTopicProcessor,
+        createCommentProcessor,
         singleUpload,
         multipleUpload,
       },

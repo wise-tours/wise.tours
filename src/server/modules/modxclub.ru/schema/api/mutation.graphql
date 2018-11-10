@@ -37,12 +37,16 @@ type Mutation {
   ): [File!]
 
 
+  createBlogProcessor(
+    data: BlogCreateInput!
+  ): ResourceResponse!
+
   createTopicProcessor(
     data: TopicCreateInput!
   ): ResourceResponse!
 
-  createBlogProcessor(
-    data: BlogCreateInput!
+  createCommentProcessor(
+    data: TopicCommentInput!
   ): ResourceResponse!
 
 }
