@@ -46,7 +46,7 @@ type Mutation {
   ): ResourceResponse!
 
   createCommentProcessor(
-    data: TopicCommentInput!
+    data: CommentCreateInput!
   ): ResourceResponse!
 
 }
