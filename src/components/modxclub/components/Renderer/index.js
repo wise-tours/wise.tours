@@ -19,7 +19,7 @@ import MainMenu from "../menu/mainMenu";
 // import TopicCreatePage from "../pages/Topics/Topic/Create";
 // import TagPage from "../pages/Tags/Tag";
 // import BlogPage from "../pages/Blogs/Blog";
-// import CommentsPage from "../pages/Comments";
+import CommentsPage from "../pages/Comments";
 // import CommentPage from "../pages/Comments/Comment";
 
 
@@ -199,11 +199,11 @@ export class Renderer extends PrismaRendererCmsRenderer {
       //     />
       //   }
       // },
-      // {
-      //   exact: true,
-      //   path: "/comments",
-      //   component: CommentsPage,
-      // },
+      {
+        exact: true,
+        path: "/comments",
+        component: CommentsPage,
+      },
       // {
       //   exact: false,
       //   path: "/comments/comment-([0-9]+).html",

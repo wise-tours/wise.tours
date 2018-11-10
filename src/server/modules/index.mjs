@@ -11,7 +11,7 @@ import { CmsModule } from "@prisma-cms/server";
 
 
 import LogModule from "@prisma-cms/log-module";
-import UserModule from "@prisma-cms/user-module";
+// import UserModule from "@prisma-cms/user-module";
 import MailModule from "@prisma-cms/mail-module";
 import UploadModule from "@prisma-cms/upload-module";
 import RouterModule from "@prisma-cms/router-module";
@@ -34,7 +34,7 @@ class CoreModule extends CmsModule {
     super(options);
 
     this.mergeModules([
-      UserModule,
+      // UserModule,
       LogModule,
       MailModule,
       UploadModule,
@@ -84,15 +84,17 @@ class CoreModule extends CmsModule {
 }
 
 
-export default class extends ModxclubModule{
+export default class extends ModxclubModule {
 
   constructor(options = {}) {
 
-    super(options);
+    super({
+      modules: [
+        CoreModule,
+      ],
+    });
 
-    this.mergeModules([
-      CoreModule,
-    ]);
+    // console.log("modules", this.modules);
 
   }
 };

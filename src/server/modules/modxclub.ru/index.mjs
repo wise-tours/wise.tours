@@ -1,8 +1,10 @@
-  
+
 
 import PrismaModule from "@prisma-cms/prisma-module";
 
 import SocialModule from "@prisma-cms/social-module";
+
+import UserModule from "./user";
 
 import MergeSchema from 'merge-graphql-schemas';
 
@@ -14,15 +16,16 @@ const __dirname = path.dirname(moduleURL.pathname);
 
 const { fileLoader, mergeTypes } = MergeSchema;
 
-class ModxclubModules extends PrismaModule {
+class ModxclubModule extends PrismaModule {
 
 
-  constructor() {
+  constructor(options) {
 
-    super();
+    super(options);
 
     this.mergeModules([
       SocialModule,
+      UserModule,
     ]);
 
   }
@@ -30,7 +33,16 @@ class ModxclubModules extends PrismaModule {
   getApiSchema(types = []) {
 
 
-    let apiSchema = super.getApiSchema(types, []);
+    let apiSchema = super.getApiSchema(types, [
+      "Mutation",
+
+      "UserCreateInput",
+      "UserUpdateInput",
+
+      "ResourceCreateInput",
+      "ResourceUpdateInput",
+
+    ]);
 
 
     let schema = fileLoader(__dirname + '/schema/api/', {
@@ -45,21 +57,42 @@ class ModxclubModules extends PrismaModule {
 
 
 
-  // getResolvers() {
+  getResolvers() {
 
 
-  //   let resolvers = super.getResolvers();
+    let resolvers = super.getResolvers();
 
-  //   Object.assign(resolvers.Query, {
-  //     users: this.users,
-  //   });
+    const {
+      Mutation,
+      ...other
+    } = resolvers;
 
-  //   return resolvers;
 
-  // }
+    const {
+      signin,
+      signup,
+      createResourceProcessor,
+      updateUserProcessor,
+      singleUpload,
+      multipleUpload,
+    } = Mutation;
+    
+    return {
+      Mutation: {
+        signin,
+        signup,
+        createResourceProcessor,
+        updateUserProcessor,
+        singleUpload,
+        multipleUpload,
+      },
+      ...other,
+    };
+
+  }
 
 
 }
 
 
-export default ModxclubModules;
+export default ModxclubModule;

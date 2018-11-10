@@ -1,0 +1,39 @@
+
+
+type Mutation {
+  
+  signup(
+    data: UserCreateInput!
+  ): AuthPayload!
+
+  signin(
+    where: UserWhereUniqueInput!
+    password: String!
+  ): AuthPayload!
+
+  # createUserProcessor(
+  #   data: UserCreateInput!
+  # ): UserResponse!
+  updateUserProcessor(
+    where: UserWhereUniqueInput
+    data: UserUpdateInput!
+  ): UserResponse!
+
+  createResourceProcessor(
+    data: ResourceCreateInput!
+  ): ResourceResponse!
+
+  updateResourceProcessor(
+    data: ResourceUpdateInput!
+    where: ResourceWhereUniqueInput!
+  ): ResourceResponse!
+
+  singleUpload(
+    file: Upload!
+  ): File
+
+  multipleUpload(
+    files: [Upload!]!
+  ): [File!]
+
+}
