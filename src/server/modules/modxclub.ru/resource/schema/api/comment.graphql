@@ -1,0 +1,20 @@
+
+input CommentCreateInput {
+  # name: String!
+  # longtitle: String
+  content: Json!
+  # published: Boolean
+  topicID: ID!
+  # parent: ID
+}
+
+input CommentUpdateInput {
+  # name: String
+  # longtitle: String
+  content: Json
+  # published: Boolean
+  # hidemenu: Boolean
+  # deleted: Boolean
+  # hidemenu: Boolean
+  # searchable: Boolean
+}

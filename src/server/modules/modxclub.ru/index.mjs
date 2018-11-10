@@ -2,7 +2,7 @@
 
 import PrismaModule from "@prisma-cms/prisma-module";
 
-import SocialModule from "@prisma-cms/social-module";
+import SocietyModule from "@prisma-cms/society-module";
 
 import UserModule from "./user";
 import ResourceModule from "./resource";
@@ -26,13 +26,33 @@ class ModxclubModule extends PrismaModule {
     super(options);
 
     this.mergeModules([
-      SocialModule,
+      SocietyModule,
       UserModule,
       ResourceModule,
       BlogModule,
     ]);
 
   }
+
+
+  getSchema(types = []) {
+
+    let schema = fileLoader(__dirname + '/schema/database/', {
+      recursive: true,
+    });
+
+
+    if (schema) {
+      types = types.concat(schema);
+    }
+
+
+    let typesArray = super.getSchema(types);
+
+    return typesArray;
+
+  }
+  
 
   getApiSchema(types = []) {
 
@@ -77,20 +97,22 @@ class ModxclubModule extends PrismaModule {
     const {
       signin,
       signup,
-      createResourceProcessor,
+      // createResourceProcessor,
       updateUserProcessor,
+      createBlogProcessor,
       createTopicProcessor,
       createCommentProcessor,
       singleUpload,
       multipleUpload,
     } = Mutation;
-    
+
     return {
       Mutation: {
         signin,
         signup,
-        createResourceProcessor,
+        // createResourceProcessor,
         updateUserProcessor,
+        createBlogProcessor,
         createTopicProcessor,
         createCommentProcessor,
         singleUpload,

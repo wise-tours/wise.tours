@@ -50,6 +50,7 @@ const requiredTypes = [
         "createdAt",
         "Votes",
         "NotificationTypes",
+        "oldID",
       ],
       prisma: [
       ],
@@ -168,6 +169,10 @@ const requiredTypes = [
     name: "Resource",
     fields: {
       both: [
+        "Comments",
+        "CommentTarget",
+        "Votes",
+        "oldID",
       ],
       prisma: [
       ],
@@ -194,163 +199,166 @@ const requiredTypes = [
       ],
     },
   },
-  {
-    name: "Blog",
-    fields: {
-      both: [
-      ],
-      prisma: [
-      ],
-      api: [
-        "id",
-        "name",
-        "longtitle",
-        "content",
-        "alias",
-        "published",
-        "deleted",
-        "hidemenu",
-        "searchable",
-        "class_key",
-        "context_key",
-        "uri",
-        "uri_override",
-        "createdby",
-        "template",
-        "publishedon",
-        "createdAt",
-        "updatedAt",
-        "CreatedBy",
-        "personal",
-        "Topics",
-      ],
-    },
-  },
-  {
-    name: "Topic",
-    fields: {
-      both: [
-      ],
-      prisma: [
-      ],
-      api: [
-        "id",
-        "name",
-        "name",
-        "longtitle",
-        "content",
-        "createdAt",
-        "updatedAt",
-        "alias",
-        "published",
-        "deleted",
-        "hidemenu",
-        "searchable",
-        "class_key",
-        "context_key",
-        "uri",
-        "uri_override",
-        "createdby",
-        "template",
-        "publishedon",
-        "CreatedBy",
-        "Tags",
-        "blog_id",
-        "Blog",
-        "Comments",
-        "thread_id",
-        "Thread",
-      ],
-    },
-  },
+  // {
+  //   name: "Blog",
+  //   fields: {
+  //     both: [
+  //     ],
+  //     prisma: [
+  //     ],
+  //     api: [
+  //       "id",
+  //       "name",
+  //       "longtitle",
+  //       "content",
+  //       "alias",
+  //       "published",
+  //       "deleted",
+  //       "hidemenu",
+  //       "searchable",
+  //       "class_key",
+  //       "context_key",
+  //       "uri",
+  //       "uri_override",
+  //       "createdby",
+  //       "template",
+  //       "publishedon",
+  //       "createdAt",
+  //       "updatedAt",
+  //       "CreatedBy",
+  //       "personal",
+  //       "Topics",
+  //     ],
+  //   },
+  // },
+  // {
+  //   name: "Topic",
+  //   fields: {
+  //     both: [
+  //     ],
+  //     prisma: [
+  //     ],
+  //     api: [
+  //       "id",
+  //       "name",
+  //       "name",
+  //       "longtitle",
+  //       "content",
+  //       "createdAt",
+  //       "updatedAt",
+  //       "alias",
+  //       "published",
+  //       "deleted",
+  //       "hidemenu",
+  //       "searchable",
+  //       "class_key",
+  //       "context_key",
+  //       "uri",
+  //       "uri_override",
+  //       "createdby",
+  //       "template",
+  //       "publishedon",
+  //       "CreatedBy",
+  //       "Tags",
+  //       "blog_id",
+  //       "Blog",
+  //       "Comments",
+  //       "thread_id",
+  //       "Thread",
+  //     ],
+  //   },
+  // },
   {
     name: "Tag",
     fields: {
       both: [
+        "id",
+        "name",
+        "Resources",
       ],
       prisma: [
       ],
       api: [
-        "name",
         "count",
         "topic_ids",
       ],
     },
   },
-  {
-    name: "TopicTag",
-    fields: {
-      both: [
-      ],
-      prisma: [
-      ],
-      api: [
-        "id",
-        "name",
-        "topic_id",
-        "Topic",
-      ],
-    },
-  },
-  {
-    name: "Comment",
-    fields: {
-      both: [
-      ],
-      prisma: [
-      ],
-      api: [
-        "id",
-        "createdAt",
-        "updatedAt",
-        "text",
-        "createdby",
-        "Author",
-        "parent",
-        "Parent",
-        "deleted",
-        "published",
-        "comments_count",
-        "thread_id",
-        "Thread",
-        "topic_id",
-        "Topic",
-        "Childs",
-        "CreatedBy",
-      ],
-    },
-  },
-  {
-    name: "Thread",
-    fields: {
-      both: [
-      ],
-      prisma: [
-      ],
-      api: [
-        "id",
-        "target_id",
-        "target_class",
-        "comments_count",
-        "createdAt",
-        "updatedAt",
-        "rating",
-        "positive_votes",
-        "negative_votes",
-        "neutral_votes",
-        "Comments",
-      ],
-    },
-  },
+  // {
+  //   name: "TopicTag",
+  //   fields: {
+  //     both: [
+  //     ],
+  //     prisma: [
+  //     ],
+  //     api: [
+  //       "id",
+  //       "name",
+  //       "topic_id",
+  //       "Topic",
+  //     ],
+  //   },
+  // },
+  // {
+  //   name: "Comment",
+  //   fields: {
+  //     both: [
+  //     ],
+  //     prisma: [
+  //     ],
+  //     api: [
+  //       "id",
+  //       "createdAt",
+  //       "updatedAt",
+  //       "text",
+  //       "createdby",
+  //       "Author",
+  //       "parent",
+  //       "Parent",
+  //       "deleted",
+  //       "published",
+  //       "comments_count",
+  //       "thread_id",
+  //       "Thread",
+  //       "topic_id",
+  //       "Topic",
+  //       "Childs",
+  //       "CreatedBy",
+  //     ],
+  //   },
+  // },
+  // {
+  //   name: "Thread",
+  //   fields: {
+  //     both: [
+  //     ],
+  //     prisma: [
+  //     ],
+  //     api: [
+  //       "id",
+  //       "target_id",
+  //       "target_class",
+  //       "comments_count",
+  //       "createdAt",
+  //       "updatedAt",
+  //       "rating",
+  //       "positive_votes",
+  //       "negative_votes",
+  //       "neutral_votes",
+  //       "Comments",
+  //     ],
+  //   },
+  // },
   {
     name: "Vote",
     fields: {
       both: [
+        "id",
+        "Resource",
       ],
       prisma: [
       ],
       api: [
-        "id",
         "target_id",
         "target_class",
         "thread_id",

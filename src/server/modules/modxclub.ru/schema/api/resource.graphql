@@ -8,7 +8,6 @@ input ResourceCreateInput {
   deleted: Boolean
   hidemenu: Boolean
   searchable: Boolean
-  alias: String!
   uri: String!
   isfolder: Boolean
 }

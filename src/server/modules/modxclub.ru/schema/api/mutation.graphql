@@ -19,14 +19,14 @@ type Mutation {
     data: UserUpdateInput!
   ): UserResponse!
 
-  createResourceProcessor(
-    data: ResourceCreateInput!
-  ): ResourceResponse!
+  # createResourceProcessor(
+  #   data: ResourceCreateInput!
+  # ): ResourceResponse!
 
-  updateResourceProcessor(
-    data: ResourceUpdateInput!
-    where: ResourceWhereUniqueInput!
-  ): ResourceResponse!
+  # updateResourceProcessor(
+  #   data: ResourceUpdateInput!
+  #   where: ResourceWhereUniqueInput!
+  # ): ResourceResponse!
 
   singleUpload(
     file: Upload!
