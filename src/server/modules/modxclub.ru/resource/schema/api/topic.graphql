@@ -4,7 +4,8 @@ input TopicCreateInput {
   longtitle: String
   content: Json!
   published: Boolean
-  blogID: ID!
+  topic_tags: [String!]
+  # blogID: ID!
 }
 
 input TopicUpdateInput {

@@ -1,7 +1,7 @@
 {
-  "name": "@prisma-cms/boilerplate",
-  "version": "2.0.5-beta",
-  "description": "Opensource framework CMS powered by GraphQL, Prisma, MySQL, React & Apollo GraphQL",
+  "name": "@modxclub/modxclub.ru",
+  "version": "2.1.0",
+  "description": "modxclub.ru",
   "private": false,
   "scripts": {
     "start": "react-scripts start",
@@ -19,12 +19,14 @@
   },
   "dependencies": {
     "@modxclub/react-editor": "latest",
+    "@modxclub/import-old-site": "latest",
     "@prisma-cms/component": "latest",
-    "@prisma-cms/front": "^1.9.11-beta",
+    "@prisma-cms/front": "latest",
     "@prisma-cms/log-module": "latest",
     "@prisma-cms/mail-module": "latest",
     "@prisma-cms/prisma-module": "latest",
     "@prisma-cms/router-module": "latest",
+    "@prisma-cms/society-module": "latest",
     "@prisma-cms/server": "latest",
     "@prisma-cms/ui": "latest",
     "@prisma-cms/upload-module": "latest",
@@ -68,10 +70,6 @@
     "not op_mini all"
   ],
   "main": "src/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/prisma-cms/boilerplate.git"
-  },
   "keywords": [
     "prisma",
     "cms",
@@ -84,8 +82,12 @@
   ],
   "author": "Fi1osof",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/prisma-cms/boilerplate/issues"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MODX-Club/modxclub.ru.git"
   },
-  "homepage": "https://github.com/prisma-cms/boilerplate#readme"
+  "bugs": {
+    "url": "https://github.com/MODX-Club/modxclub.ru/issues"
+  },
+  "homepage": "https://github.com/MODX-Club/modxclub.ru#readme"
 }

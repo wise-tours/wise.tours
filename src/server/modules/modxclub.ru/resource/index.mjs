@@ -30,9 +30,10 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
 
     let {
       data: {
-        blogID,
+        // blogID,
         topicID,
         parent,
+        topic_tags,
         ...data
       },
     } = args;
@@ -40,6 +41,7 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
 
     let {
       type,
+      name,
     } = data;
 
 
@@ -47,32 +49,49 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
 
       case "Topic":
 
-        if (!blogID) {
-          return this.addError("Не был указан ID блога");
-        }
-        else {
+        {
+          const {
+            contentText,
+          } = this.prepareContent(args, data, method) || {};
+
+          if (!contentText) {
+            // this.addFieldError("content", "Не заполнен текст");
+            this.addError("Не заполнен текст");
+            return;
+          }
+
+          // let name = contentText.substr(0, 50) || "";
+          const uri = `/topics/${name}`;
+
+          // if (!blogID) {
+          //   return this.addError("Не был указан ID блога");
+          // }
+          // else {
 
           // Проверяем есть ли такой топик
-          const exists = await db.exists.Resource({
-            id: blogID,
-            type: "Blog",
-          });
+          // const exists = await db.exists.Resource({
+          //   id: blogID,
+          //   type: "Blog",
+          // });
 
-          if (!exists) {
-            return this.addError("Не был получен блог");
-          }
-          else {
-            Object.assign(data, {
-              Blog: {
-                connect: {
-                  id: blogID,
-                },
+          // if (!exists) {
+          //   return this.addError("Не был получен блог");
+          // }
+          // else {
+          Object.assign(data, {
+            uri,
+            isfolder: false,
+            Blog: {
+              connect: {
+                // id: blogID,
+                oldID: 637,
               },
-            });
-          }
+            },
+          });
+          // }
 
+          // }
         }
-
         break;
 
       case "Comment":
@@ -90,7 +109,9 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
         } = this.prepareContent(args, data, method) || {};
 
         if (!contentText) {
-          this.addFieldError("content", "Не заполнен текст");
+          // this.addFieldError("content", "Не заполнен текст");
+          this.addError("Не заполнен текст");
+          return;
         }
         else {
 
@@ -127,7 +148,8 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
               Object.assign(data, {
 
                 name,
-                uri: `${TopicUri}/comments/${name}`,
+                // uri: `${TopicUri}/comments/${name}`,
+                uri: `/comments/${TopicUri}/${name}`,
                 isfolder: false,
 
                 CommentTarget: {

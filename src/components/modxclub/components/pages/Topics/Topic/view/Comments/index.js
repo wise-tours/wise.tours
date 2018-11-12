@@ -72,8 +72,8 @@ class TopicComments extends Component {
             object: {},
           }}
           _dirty={{
-            text: [],
-            topic_id: topicId,
+            content: [],
+            topicID: topicId,
           }}
         />
         :

@@ -25,7 +25,7 @@ export class TopicCreatePage extends TopicPage {
 
   onSave = (result) => {
 
-    console.log("onSave", result);
+    // console.log("onSave", result);
 
     if (result && result.data) {
 
@@ -50,7 +50,7 @@ export class TopicCreatePage extends TopicPage {
 
       if (uri && location.pathname !== uri) {
 
-        history.replace(`/${uri}`);
+        history.replace(uri);
       }
 
     }

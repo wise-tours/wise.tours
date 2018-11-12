@@ -189,7 +189,7 @@ class TopicView extends EditableView {
             helperText: "Укажите название топика",
           }) : null}
 
-          {inEditMode && !topicId ? this.getTextField({
+          {/* {inEditMode && !topicId ? this.getTextField({
             name: "topic_tags",
             label: "Теги",
             helperText: "Перечислите теги через запятую",
@@ -206,7 +206,7 @@ class TopicView extends EditableView {
               });
 
             }
-          }) : null}
+          }) : null} */}
 
         </Grid>
 
