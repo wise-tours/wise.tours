@@ -3,6 +3,7 @@
 import PrismaModule from "@prisma-cms/prisma-module";
 
 import SocietyModule from "@prisma-cms/society-module";
+import ImportModule from "@modxclub/import-old-site";
 
 import UserModule from "./user";
 import ResourceModule from "./resource";
@@ -30,6 +31,7 @@ class ModxclubModule extends PrismaModule {
       UserModule,
       ResourceModule,
       BlogModule,
+      ImportModule,
     ]);
 
   }
@@ -52,7 +54,7 @@ class ModxclubModule extends PrismaModule {
     return typesArray;
 
   }
-  
+
 
   getApiSchema(types = []) {
 
@@ -89,6 +91,21 @@ class ModxclubModule extends PrismaModule {
     let resolvers = super.getResolvers();
 
     const {
+      Query: {
+        letter,
+        letters,
+        lettersConnection,
+        file,
+        files,
+        filesConnection,
+        logedin,
+        logedins,
+        logedinsConnection,
+        log,
+        logs,
+        logsConnection,
+        ...Query
+      },
       Mutation,
       ...other
     } = resolvers;
@@ -104,21 +121,45 @@ class ModxclubModule extends PrismaModule {
       createCommentProcessor,
       singleUpload,
       multipleUpload,
+      startImportProcessor,
     } = Mutation;
 
+
+    let AllowedMutations = {
+      signin,
+      signup,
+      // createResourceProcessor,
+      updateUserProcessor,
+      createBlogProcessor,
+      createTopicProcessor,
+      createCommentProcessor,
+      singleUpload,
+      multipleUpload,
+      startImportProcessor,
+    };
+
+    // for(var i in AllowedMutations){
+    //   AllowedMutations[i] = () => {
+    //     throw new Error ("Ведутся технические работы. Ориентировочно закончатся в 10 утра по Москве.");
+    //   }
+    // }
+
+
     return {
-      Mutation: {
-        signin,
-        signup,
-        // createResourceProcessor,
-        updateUserProcessor,
-        createBlogProcessor,
-        createTopicProcessor,
-        createCommentProcessor,
-        singleUpload,
-        multipleUpload,
+      Query: {
+        ...Query,
       },
+      Mutation: AllowedMutations,
       ...other,
+      Log: {
+        stack: () => null,
+      },
+      Letter: {
+        id: () => null,
+        email: () => null,
+        subject: () => null,
+        message: () => null,
+      },
     };
 
   }

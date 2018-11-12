@@ -47,10 +47,14 @@ const requiredTypes = [
     name: "User",
     fields: {
       both: [
+        "id",
         "createdAt",
         "Votes",
         "NotificationTypes",
         "oldID",
+        "Imports",
+        "Tags",
+        "ResourceTags",
       ],
       prisma: [
       ],
@@ -169,10 +173,26 @@ const requiredTypes = [
     name: "Resource",
     fields: {
       both: [
+        "id",
+        "published",
+        "deleted",
+        "hidemenu",
+        "searchable",
         "Comments",
         "CommentTarget",
         "Votes",
         "oldID",
+        "Tags",
+        "rating",
+        "positiveVotesCount",
+        "negativeVotesCount",
+        "neutralVotesCount",
+        "Votes",
+        "CommentTarget",
+        "Comments",
+        "CreatedBy",
+        "Topics",
+        "Blog",
       ],
       prisma: [
       ],
@@ -273,8 +293,13 @@ const requiredTypes = [
     fields: {
       both: [
         "id",
+        "createdAt",
+        "updatedAt",
         "name",
+        // "count",
+        "status",
         "Resources",
+        "CreatedBy",
       ],
       prisma: [
       ],
@@ -284,21 +309,23 @@ const requiredTypes = [
       ],
     },
   },
-  // {
-  //   name: "TopicTag",
-  //   fields: {
-  //     both: [
-  //     ],
-  //     prisma: [
-  //     ],
-  //     api: [
-  //       "id",
-  //       "name",
-  //       "topic_id",
-  //       "Topic",
-  //     ],
-  //   },
-  // },
+  {
+    name: "ResourceTag",
+    fields: {
+      both: [
+        "id",
+        "createdAt",
+        "updatedAt",
+        "status",
+        "CreatedBy",
+        "Resource",
+      ],
+      prisma: [
+      ],
+      api: [
+      ],
+    },
+  },
   // {
   //   name: "Comment",
   //   fields: {
@@ -368,6 +395,33 @@ const requiredTypes = [
         "value",
         "createdAt",
         "Target",
+      ],
+    },
+  },
+  {
+    name: "Import",
+    fields: {
+      both: [
+        "id",
+        "CreatedBy",
+        "Logs",
+      ],
+      prisma: [
+      ],
+      api: [
+      ],
+    },
+  },
+  {
+    name: "Log",
+    fields: {
+      both: [
+        "id",
+        "Import",
+      ],
+      prisma: [
+      ],
+      api: [
       ],
     },
   },

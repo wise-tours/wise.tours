@@ -1,4 +1,4 @@
 
 type User {
-  oldID: Int
+  oldID: Int @unique
 }

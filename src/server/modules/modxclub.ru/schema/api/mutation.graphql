@@ -49,4 +49,9 @@ type Mutation {
     data: CommentCreateInput!
   ): ResourceResponse!
 
+  startImportProcessor(
+    sourceDbConfig: ImportDbConfig!
+    targetDbConfig: ImportDbConfig!
+  ): ImportResponse!
+
 }

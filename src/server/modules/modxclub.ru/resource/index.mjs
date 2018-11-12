@@ -63,7 +63,7 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
           }
           else {
             Object.assign(data, {
-              Parent: {
+              Blog: {
                 connect: {
                   id: blogID,
                 },

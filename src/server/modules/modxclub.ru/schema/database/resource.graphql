@@ -1,4 +1,6 @@
 
 type Resource {
-  oldID: Int
+  oldID: Int @unique
+  Topics: [Resource!]! @relation(name: "BlogTopics")
+  Blog: Resource @relation(name: "BlogTopics")
 }
