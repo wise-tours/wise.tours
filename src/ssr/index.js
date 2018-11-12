@@ -26,7 +26,7 @@ require('@babel/register')({
 
 require('@babel/polyfill');
 
-let SSRmiddlewareClass = require('./SSR');
+let SSRmiddlewareClass = require('./SSR/modxclub');
 
 let SSRmiddleware = new SSRmiddlewareClass().middleware;
 

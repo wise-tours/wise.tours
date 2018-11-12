@@ -140,7 +140,8 @@ export class Renderer extends PrismaRendererCmsRenderer {
       },
       {
         exact: false,
-        path: "(/topics/.+|blog/.+[0-9].html)",
+        // path: "(/topics/.+|blog/.+[0-9].html)",
+        path: /(\/topics\/.+|\/blog\/.+[0-9].html)/,
         render: (props) => {
 
           const {
