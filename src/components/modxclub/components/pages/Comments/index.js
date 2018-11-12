@@ -21,7 +21,7 @@ class CommentsPage extends Page {
   static defaultProps = {
     ...Page.defaultProps,
     first: 10,
-    orderBy: "id_DESC",
+    orderBy: "createdAt_DESC",
     View,
   }
 
@@ -39,8 +39,9 @@ class CommentsPage extends Page {
 
   render() {
 
-    const {
+    let {
       first,
+      where,
       ...other
     } = this.props;
 
@@ -63,8 +64,14 @@ class CommentsPage extends Page {
       skip = (page - 1) * first;
     }
 
+    where = {
+      ...where,
+      type: "Comment",
+    }
+
     return super.render(
       <CommentsConnector
+        where={where}
         first={first}
         skip={skip}
         page={page ? parseInt(page) : undefined}
