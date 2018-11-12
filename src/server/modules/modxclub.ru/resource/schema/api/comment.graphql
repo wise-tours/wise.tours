@@ -2,6 +2,7 @@
 input CommentCreateInput {
   # name: String!
   # longtitle: String
+  text: Json
   content: Json!
   # published: Boolean
   topicID: ID!

@@ -149,7 +149,7 @@ export const updateTopicProcessor = gql`
 
   mutation updateTopicProcessor(
     $data: TopicUpdateInput!
-    $where: TopicWhereUniqueInput!
+    $where: ResourceWhereUniqueInput!
     $getCommentsText:Boolean = true
   ){
     response: updateTopicProcessor(

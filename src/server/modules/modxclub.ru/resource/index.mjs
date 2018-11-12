@@ -34,6 +34,9 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
         topicID,
         parent,
         topic_tags,
+
+        // Временно, так как у кого-нибудь могут закешироваться данные в браузере
+        text: fake,
         ...data
       },
     } = args;
@@ -268,6 +271,14 @@ class ModxclubTopicModule extends ResourceModule {
           });
 
           return this.getProcessor(ctx).createWithResponse("Resource", args, info);
+        },
+        updateCommentProcessor: (source, args, ctx, info) => {
+
+          return this.getProcessor(ctx).updateWithResponse("Resource", args, info);
+        },
+        updateTopicProcessor: (source, args, ctx, info) => {
+
+          return this.getProcessor(ctx).updateWithResponse("Resource", args, info);
         },
       },
       ...other,

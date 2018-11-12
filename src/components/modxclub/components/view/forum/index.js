@@ -49,8 +49,6 @@ export class ForumConnector extends Component {
 
     super(props);
 
-    console.log("Forum constructor");
-
   }
 
 

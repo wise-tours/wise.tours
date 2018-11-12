@@ -27,7 +27,7 @@ import CommentPage from "../pages/Comments/Comment";
 
 export const styles = theme => {
 
-  console.log("theme", theme);
+  // console.log("theme", theme);
 
   const {
     typography: {
@@ -228,14 +228,15 @@ export class Renderer extends PrismaRendererCmsRenderer {
           />
         }
       }, 
-      {
-        path: "*",
-        render: props => this.renderOtherPages(props),
-      },
+      // {
+      //   path: "*",
+      //   render: props => this.renderOtherPages(props),
+      // },
     ].concat(baseRoutes);
 
+    
 
-    console.log("routes", routes);
+    // console.log("routes", routes);
 
     return routes;
   }

@@ -45,8 +45,18 @@ type Mutation {
     data: TopicCreateInput!
   ): ResourceResponse!
 
+  updateTopicProcessor(
+    data: TopicUpdateInput!
+    where: ResourceWhereUniqueInput!
+  ): ResourceResponse!
+
   createCommentProcessor(
     data: CommentCreateInput!
+  ): ResourceResponse!
+
+  updateCommentProcessor(
+    data: CommentUpdateInput!
+    where: ResourceWhereUniqueInput!
   ): ResourceResponse!
 
   startImportProcessor(
