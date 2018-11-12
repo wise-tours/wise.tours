@@ -6,31 +6,23 @@ import Grid from 'material-ui/Grid';
 
 import {
   styles,
-  TableView,
-} from 'apollo-cms/lib/DataView/List/Table';
+  UsersPageView as PrismaCmsUsersPageView,
+} from '@prisma-cms/front/lib/modules/pages/UsersPage/View';
 
-// import {Link} from 'react-router-dom';
-
-
-import UserLink from '../../../ui/User/Link';
  
-
-import Pagination from '../../../Pagination';
+import {
+  Pagination,
+  UserLink,
+} from '@modxclub/ui';
 
 import moment from 'moment';
 
  
-export class UsersPageView extends TableView {
+export class UsersPageView extends PrismaCmsUsersPageView {
  
 
   static defaultProps = {
-    ...TableView.defaultProps,
-    // listName: "companiesConnection",
-    title: "Users",
-    limit: 10,
-    // Header,
-    // Body,
-    withPagination: true,
+    ...PrismaCmsUsersPageView.defaultProps,
     columnData: [
       {
         id: 'username',
@@ -62,80 +54,7 @@ export class UsersPageView extends TableView {
     ],
   };
 
-
-  render() {
-
-    const {
-      page,
-      withPagination,
-    } = this.props;
-
-    // console.log("this.defaultProps", this.defaultProps);
-
-    const {
-      objectsConnection,
-      loading,
-      variables: {
-        first: limit,
-      },
-    } = this.props.data;
-
-
-    const {
-      edges,
-      aggregate,
-    } = objectsConnection || {};
-
-    const {
-      count = 0,
-    } = aggregate || {};
-
-    if (!edges || !edges.length) {
-
-      if (loading) {
-        return null;
-      }
-      else {
-        return <Typography>
-          Данные не были получены
-        </Typography>
-      }
-
-
-    }
-
-
-    return <Fragment>
-
-      {super.render()}
-
-      {withPagination ? <Grid
-        container
-        spacing={0}
-      >
-
-        {edges && edges.length ? <Grid
-          item
-          xs={12}
-
-        >
-          <Pagination
-            limit={limit}
-            total={count}
-            page={page || 1}
-            style={{
-              marginTop: 20,
-            }}
-          />
-        </Grid> : null
-        }
-
-      </Grid> : null
-      }
-
-    </Fragment>;
-
-  }
+ 
 
 }
 

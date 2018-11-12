@@ -54,4 +54,8 @@ type Mutation {
     targetDbConfig: ImportDbConfig!
   ): ImportResponse!
 
+  resetPassword(
+    where: UserWhereUniqueInput!
+  ): Boolean!
+
 }

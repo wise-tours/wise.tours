@@ -13,7 +13,8 @@ import MainMenu from "../menu/mainMenu";
 
 
 // import UsersPage from "@prisma-cms/front/lib/modules/pages/UsersPage";
-// import UserPage from "../pages/UsersPage/UserPage";
+import UsersPage from "../pages/UsersPage/";
+import UserPage from "../pages/UsersPage/UserPage";
 // import MainPage from "../pages/MainPage";
 // import TopicPage from "../pages/Topics/Topic";
 // import TopicCreatePage from "../pages/Topics/Topic/Create";
@@ -100,38 +101,38 @@ export class Renderer extends PrismaRendererCmsRenderer {
 
 
     let routes = [
-      // {
-      //   exact: true,
-      //   path: "/people",
-      //   component: UsersPage,
-      // },
+      {
+        exact: true,
+        path: "/people",
+        component: UsersPage,
+      },
       // {
       //   exact: true,
       //   path: ["/", "/topics"],
       //   component: MainPage,
       // },
-      // {
-      //   exact: true,
-      //   path: "/profile/:username",
-      //   render: (props) => {
-      //     const {
-      //       params,
-      //     } = props.match;
+      {
+        exact: true,
+        path: "/profile/:username",
+        render: (props) => {
+          const {
+            params,
+          } = props.match;
 
-      //     const {
-      //       username,
-      //     } = params || {};
+          const {
+            username,
+          } = params || {};
 
-      //     return <UserPage
-      //       getQueryFragment={getQueryFragment}
-      //       key={username}
-      //       where={{
-      //         username,
-      //       }}
-      //       {...props}
-      //     />
-      //   }
-      // },
+          return <UserPage
+            getQueryFragment={getQueryFragment}
+            key={username}
+            where={{
+              username,
+            }}
+            {...props}
+          />
+        }
+      },
       // {
       //   exact: true,
       //   path: "/add-topic.html",

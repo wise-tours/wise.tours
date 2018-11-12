@@ -122,6 +122,7 @@ class ModxclubModule extends PrismaModule {
       singleUpload,
       multipleUpload,
       startImportProcessor,
+      resetPassword,
     } = Mutation;
 
 
@@ -136,6 +137,7 @@ class ModxclubModule extends PrismaModule {
       singleUpload,
       multipleUpload,
       startImportProcessor,
+      resetPassword,
     };
 
     // for(var i in AllowedMutations){
