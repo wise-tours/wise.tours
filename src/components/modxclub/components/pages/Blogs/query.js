@@ -6,52 +6,12 @@ import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 
 
-const blogsListQuery = gql`
-  query blogs(
-    $where: BlogWhereInput
-    $orderBy: BlogOrderByInput
-    $skip: Int
-    $first: Int!
-  ){
-    blogsConnection(
-      where: $where
-      orderBy: $orderBy
-      first: $first
-      skip: $skip
-    ){
-      aggregate{
-        count
-      }
-      edges{
-        node{
-          ...blogsListFragment
-        }
-      }
-    }
-  }
-
-  query blog {
-    blog(
-      where:{
-        # id
-        uri: "blog/club/"
-      }
-    ){
-      ...blog
-    }
-  }
-
-
-
-`;
-
 
 export const blogFieldsFragment = `
-  fragment blogFields on Blog{
+  fragment blogFields on Resource{
     id
     name
     longtitle
-    alias
     uri
   }
 `;
@@ -59,7 +19,7 @@ export const blogFieldsFragment = `
 
 
 export const blogFragment = `
-  fragment blogFragment on Blog{
+  fragment blogFragment on Resource{
     ...blogFields
   }
   ${blogFieldsFragment}
@@ -67,14 +27,14 @@ export const blogFragment = `
 
 
 export const blogsListFragment = `
-  fragment blogsListFragment on Blog{
+  fragment blogsListFragment on Resource{
     ...blogFields
   }
   ${blogFragment}
 `;
 
 export const blogFullFragment = `
-  fragment blogFullFragment on Blog{
+  fragment blogFullFragment on Resource{
     ...blogFragment
   }
   ${blogFragment}
@@ -86,8 +46,8 @@ export const blogsConnectionQuery = gql`
   query blogsConnection(
     $first:Int!
     $skip:Int
-    $where: BlogWhereInput
-    $orderBy: BlogOrderByInput!
+    $where: ResourceWhereInput
+    $orderBy: ResourceOrderByInput!
   ){
     objectsConnection: blogsConnection(
       orderBy: $orderBy
@@ -115,9 +75,9 @@ export const blogsConnectionQuery = gql`
 export const blogQuery = gql`
 
   query blog(
-    $where: BlogWhereUniqueInput!
+    $where: ResourceWhereUniqueInput!
   ){
-    object: blog(
+    object: resource(
       where: $where
     ){ 
       ...blogFullFragment

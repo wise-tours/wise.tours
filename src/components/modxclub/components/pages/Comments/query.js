@@ -19,6 +19,12 @@ export const resourceFragment = `
     CreatedBy{
       ...UserNoNesting
     }
+
+    CommentTarget{
+      id
+      name
+      uri
+    }
     
   }
   

@@ -71,7 +71,9 @@ class BlogView extends EditableView {
     if (blogId) {
       forum = <Forum
         where={{
-          blog_id: blogId,
+          Blog: {
+            id: blogId,
+          },
         }}
         {...other}
       />

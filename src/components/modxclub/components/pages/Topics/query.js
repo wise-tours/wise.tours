@@ -7,26 +7,26 @@ import { graphql, compose } from "react-apollo";
 
 
 import {
-  TopicNoNestingFragment,
-  VoteNoNestingFragment,
+  ResourceNoNestingFragment,
+  UserNoNestingFragment,
 } from "../../../../../schema/generated/api.fragments";
 
 
 export const topicFragment = `
-  fragment topicFragment on Topic{
-    ...TopicNoNesting
+  fragment topicFragment on Resource{
+    ...ResourceNoNesting
     CreatedBy{
-      ...TopicUserNoNesting
+      ...UserNoNesting
     }
     Comments(
       orderBy: id_ASC
     ){
       id
+      uri
       createdAt
-      parent
-      text @include(if:$getCommentsText)
+      content @include(if:$getCommentsText)
       CreatedBy{
-        ...TopicUserNoNesting
+        ...UserNoNesting
       }
     }
     Blog{
@@ -35,35 +35,22 @@ export const topicFragment = `
       longtitle
       uri
     }
-    Thread{
-      id
-      rating
-      Votes{
-        ...VoteNoNesting
+    Tags{
+      Tag{
+        id
+        name
       }
     }
-    Tags{
-      id
-      name
-    }
   }
+ 
 
-
-  fragment TopicUserNoNesting on User {
-    id
-    username
-    fullname
-    image
-  }
-  
-
-  ${TopicNoNestingFragment}
-  ${VoteNoNestingFragment}
+  ${ResourceNoNestingFragment}
+  ${UserNoNestingFragment}
 `
 
 
 export const topicsListFragment = `
-  fragment topicsListFragment on Topic{
+  fragment topicsListFragment on Resource{
     ...topicFragment
   }
 
@@ -72,7 +59,7 @@ export const topicsListFragment = `
 
 
 export const topicsFullFragment = `
-  fragment topicsFullFragment on Topic{
+  fragment topicsFullFragment on Resource{
     ...topicFragment
     content
   }
@@ -86,11 +73,11 @@ export const topicsConnectionQuery = gql`
   query topicsConnection(
     $first:Int!
     $skip:Int
-    $where: TopicWhereInput
-    $orderBy: TopicOrderByInput!
+    $where:  ResourceWhereInput
+    $orderBy:  ResourceOrderByInput!
     $getCommentsText:Boolean = false
   ){
-    objectsConnection: topicsConnection(
+    objectsConnection: resourcesConnection(
       orderBy: $orderBy
       first: $first
       skip: $skip
@@ -115,10 +102,10 @@ export const topicsConnectionQuery = gql`
 export const topicQuery = gql`
 
   query topic(
-    $where: TopicWhereUniqueInput!
+    $where: ResourceWhereUniqueInput!
     $getCommentsText:Boolean = true
   ){
-    object: topic(
+    object: resource(
       where: $where
     ){ 
       ...topicsFullFragment

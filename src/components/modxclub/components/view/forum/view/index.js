@@ -109,7 +109,7 @@ class ForumView extends TableView {
         className: classes.topicColumn,
         renderer: (value, record) => {
 
-          console.log("Topic record", record);
+          // console.log("Topic record", record);
 
           const {
             id: topicId,
@@ -121,16 +121,22 @@ class ForumView extends TableView {
 
           let tagsList = [];
 
+          // console.log("Topic Tags", Tags);
+
           Tags && Tags.map(tag => {
 
             const {
               id,
-              name,
+              Tag,
             } = tag;
+
+            const {
+              name,
+            } = Tag;
 
             tagsList.push(<TagLink
               key={id}
-              object={tag}
+              object={Tag}
               color="textSecondary"
               className={[classes.tag].join(" ")}
               textClassName={[activeTag === name ? "active" : ""].join(" ")}

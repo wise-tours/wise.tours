@@ -55,7 +55,7 @@ class TagView extends EditableView {
       ...other
     } = this.props;
 
- 
+
 
     const {
       name: tagName,
@@ -67,7 +67,11 @@ class TagView extends EditableView {
     if (tagName) {
       forum = <Forum
         where={{
-          tag: tagName,
+          Tags_some: {
+            Tag: {
+              name: tagName,
+            },
+          },
         }}
         {...other}
       />

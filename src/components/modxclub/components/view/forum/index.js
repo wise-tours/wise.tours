@@ -82,12 +82,15 @@ export class ForumConnector extends Component {
       skip = (page - 1) * first;
     }
 
+    where = {
+      ...where,
+      type: "Topic",
+    }
 
     if(tagName){
-      where = {
-        ...where,
+      Object.assign(where, {
         tag: tagName,
-      }
+      });
     }
 
     return (
