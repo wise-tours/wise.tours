@@ -13,6 +13,9 @@ const resolvers = coreModule.getResolvers();
 startServer({
   typeDefs: 'src/schema/generated/api.graphql',
   resolvers,
+  MailerProps: {
+    mailSender: "no-reply@modxclub.ru",
+  },
 });
 
 
