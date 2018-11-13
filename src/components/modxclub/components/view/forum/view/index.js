@@ -110,7 +110,7 @@ class ForumView extends TableView {
         className: classes.topicColumn,
         renderer: (value, record) => {
 
-          // console.log("Topic record", record);
+          console.log("Topic record", record);
 
           const {
             id: topicId,
@@ -273,19 +273,18 @@ class ForumView extends TableView {
           let activity;
 
           const {
-            createdAt,
             updatedAt,
             Comments,
           } = record;
 
-          let date = moment(updatedAt || createdAt);
+          let date = moment(updatedAt);
 
 
-          let latestComment = Comments && Comments[0];
+          let latestComment = Comments.length && Comments[Comments.length - 1];
 
-          if (latestComment && latestComment.createdAt) {
+          if (latestComment) {
 
-            const commentDate = moment(latestComment.createdAt);
+            const commentDate = moment(latestComment.updatedAt);
 
             if (commentDate > date) {
               date = commentDate;

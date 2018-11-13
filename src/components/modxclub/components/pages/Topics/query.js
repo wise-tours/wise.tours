@@ -24,6 +24,7 @@ export const topicFragment = `
       id
       uri
       createdAt
+      updatedAt
       content @include(if:$getCommentsText)
       CreatedBy{
         ...UserNoNesting

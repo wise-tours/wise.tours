@@ -1,6 +1,7 @@
 2.1.1
 ============================================
 - Added Notifications setting
+- Added users and resources subscriptions
 
 2.1.0
 ============================================
