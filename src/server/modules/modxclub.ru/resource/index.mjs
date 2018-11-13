@@ -129,6 +129,8 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
             this.sendNotifications(message, subject, usersWhere);
             
           }
+
+          return result;
         }
 
         break;
