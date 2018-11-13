@@ -185,7 +185,7 @@ export class Renderer extends PrismaRendererCmsRenderer {
       },
       {
         exact: false,
-        path: /^\/tag\/(.+)/,
+        path: /^\/tag\/(.+?)\/?$/,
         render: (props) => {
           const {
             match: {
