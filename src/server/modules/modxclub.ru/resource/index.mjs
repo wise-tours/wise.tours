@@ -25,8 +25,18 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
 
 
     const {
+      currentUser,
       db,
     } = this.ctx;
+
+    const {
+      id: currentUserId,
+    } = currentUser || {};
+
+    if (!currentUserId) {
+      throw new Error("Необходимо авторизоваться");
+    }
+
 
     let {
       data: {
@@ -146,6 +156,7 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
 
               const {
                 uri: TopicUri,
+                name: topicName,
               } = Topic;
 
               Object.assign(data, {
@@ -161,15 +172,67 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
                   },
                 },
               });
+
+
+              Object.assign(args, {
+                data,
+              });
+
+              const result = await super.create(method, args, info);
+
+              const {
+                id: commentId,
+              } = result || {};
+
+              // console.log(chalk.green("result"), result, commentId);
+
+              /**
+               * Если был создан комментарий, отправляем уведомления
+               */
+              if (commentId) {
+
+                const siteUrl = "https://modxclub.ru";
+
+                let subject = `Новый комментарий в топике ${topicName}`;
+                let message = `<p>
+                  В топике <a href="${siteUrl}${TopicUri}">${topicName}</a> создан новый комментарий.
+                </p>
+                  <div>
+                    ${contentText.substr(0, 1000)}
+                  </div>
+                `;
+
+                const usersWhere = {
+                  id_not: currentUserId,
+                  Resources_some: {
+                    OR: [
+                      {
+                        id: topicID,
+                      },
+                      {
+                        CommentTarget: {
+                          id: topicID,
+                        },
+                      },
+                    ],
+                  },
+                  NotificationTypes_some: {
+                    name_in: ["new_comment", "new_reply"],
+                  },
+                }
+
+                this.sendNotifications(message, subject, usersWhere);
+
+              }
+
+              return result;
             }
 
           }
 
         }
 
-        // console.log(chalk.green("data"), data);
 
-        // this.addFieldError("test", "Sdfsdf");
         break;
 
     }
@@ -236,6 +299,96 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
 
 
     return super.update(method, args, info);
+  }
+
+
+  async sendNotifications(message, subject, where) {
+
+    const {
+      ctx,
+    } = this;
+
+    const {
+      db,
+    } = ctx;
+
+    const users = await db.query.users({
+      where: {
+        email_gt: "",
+        ...where,
+      }
+    })
+      .catch(error => {
+        console.error(chalk.red("Error"), error);
+      })
+      ;
+
+
+    const processor = this.getProcessor(message, subject, users, this.writeEmail.bind(this));
+
+    for await (const result of processor) {
+
+
+    }
+
+  }
+
+
+  async * getProcessor(message, subject, users, processor) {
+
+    while (users && users.length) {
+
+      const user = users.splice(0, 1)[0];
+
+
+      const result = await processor(message, subject, user)
+        .catch(error => {
+
+          console.log(chalk.red("getProcessor error"), error);
+
+          this.error(error);
+          return error;
+        });
+
+
+      yield result;
+    }
+
+    // await this.log(`Записано: ${writed}, пропущено: ${skiped}, ошибок: ${errors}`, "Info");
+
+    // if (errors) {
+    //   throw new Error("Есть ошибки при импорте");
+    // }
+
+  }
+
+  async writeEmail(message, subject, user) {
+
+    // console.log(chalk.green("writeEmail"), message, subject, user);
+
+    const {
+      db,
+    } = this.ctx;
+
+    const {
+      email,
+    } = user;
+
+    const result = await db.mutation.createLetter({
+      data: {
+        message,
+        subject,
+        email,
+      },
+    })
+      .catch(error => {
+
+        console.log(chalk.red("writeEmail error"), error);
+
+        this.error(error);
+      });
+
+    return result;
   }
 
 }
