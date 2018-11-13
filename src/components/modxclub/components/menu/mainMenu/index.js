@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import Grid from 'material-ui/Grid';
+// import IconButton from 'material-ui/IconButton';
 
+import { Grid } from '@modxclub/ui';
 
-import MenuIcon from 'material-ui-icons/Menu';
+// import MenuIcon from 'material-ui-icons/Menu';
 
 import UserItem from "./User";
 
@@ -44,6 +44,7 @@ export class MainMenu extends Component {
 
   static contextTypes = {
     openLoginForm: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
     user: PropTypes.object,
   }
 
@@ -57,6 +58,7 @@ export class MainMenu extends Component {
 
     const {
       user: currentUser,
+      logout,
     } = this.context;
 
 
@@ -88,6 +90,8 @@ export class MainMenu extends Component {
 
           <Grid
             container
+            alignItems="center"
+            spacing={8}
           >
             <Grid
               item
@@ -98,7 +102,20 @@ export class MainMenu extends Component {
 
             {currentUser
               ?
-              [
+              <Fragment>
+                <Grid
+                  key="write"
+                  item
+                >
+                  <Link
+                    to="/add-topic.html"
+                  >
+                    <Typography>
+                      Создать топик
+                    </Typography>
+                  </Link>
+
+                </Grid>
                 <Grid
                   key="user"
                   item
@@ -107,19 +124,20 @@ export class MainMenu extends Component {
                     key={userId}
                     user={currentUser}
                   />
-                </Grid>,
+                </Grid>
                 <Grid
                   key="logout"
                   item
                 >
-                  {/* <Button
-                  onClick={() => this.logout()}
-                >
-                  Signout
-              </Button> */}
+                  <a
+                    href="javascript:;"
+                    onClick={() => logout()}
+                  >
+                    Выход
+                  </a>
 
                 </Grid>
-              ]
+              </Fragment>
               :
               <Grid
                 key="login"
@@ -139,8 +157,8 @@ export class MainMenu extends Component {
                   <Typography
                     component="span"
                   >
-                    Signin
-              </Typography>
+                    Войти
+                  </Typography>
                 </Button>
 
               </Grid>
