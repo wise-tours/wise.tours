@@ -110,7 +110,7 @@ class ForumView extends TableView {
         className: classes.topicColumn,
         renderer: (value, record) => {
 
-          console.log("Topic record", record);
+          // console.log("Topic record", record);
 
           const {
             id: topicId,

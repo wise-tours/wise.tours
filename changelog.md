@@ -2,6 +2,7 @@
 ============================================
 - Added Notifications setting
 - Added users and resources subscriptions
+- Fix update resources
 
 2.1.0
 ============================================

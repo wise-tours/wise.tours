@@ -35,7 +35,7 @@ export class ForumConnector extends Component {
     first: 12,
     where: {
     },
-    orderBy: "createdAt_DESC",
+    orderBy: "updatedAt_DESC",
     getCommentsText: false,
   }
 

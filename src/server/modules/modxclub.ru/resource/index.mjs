@@ -167,10 +167,9 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
 
         }
 
-        console.log(chalk.green("data"), data);
+        // console.log(chalk.green("data"), data);
 
         // this.addFieldError("test", "Sdfsdf");
-
         break;
 
     }
@@ -190,6 +189,53 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
     // return this.addFieldError("test", "error");
 
     return super.create(method, args, info);
+  }
+
+
+
+  async update(method, args, info) {
+
+    let {
+      where,
+      ...other
+    } = args;
+
+    const {
+      currentUser,
+      db,
+    } = this.ctx;
+
+    const {
+      id: currentUserId,
+    } = currentUser || {};
+
+    if (!currentUserId) {
+      throw new Error("Необходимо авторизоваться");
+    }
+
+    const resource = await db.query.resource({
+      where,
+    }, `{
+      id
+      CreatedBy{
+        id
+      }
+    }`);
+
+    if (!resource) {
+      throw new Error("Не был получен ресурс");
+    }
+
+    const {
+      id: createdby,
+    } = resource.CreatedBy || {};
+
+    if (createdby !== currentUserId) {
+      throw new Error("Нельзя редактировать чужой документ");
+    }
+
+
+    return super.update(method, args, info);
   }
 
 }
@@ -285,7 +331,7 @@ class ModxclubTopicModule extends ResourceModule {
       Subscription: {
         resource: {
           subscribe: async (parent, args, ctx, info) => {
-  
+
             return ctx.db.subscription.resource({}, info);
           },
         },
