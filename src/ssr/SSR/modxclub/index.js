@@ -149,6 +149,11 @@ export class ModxclubSSR extends SSR {
 
     this.addSitemapDocument(xml, uri, {
       url: `/comments/`,
+      priority: 0.6,
+    })
+
+    this.addSitemapDocument(xml, uri, {
+      url: `/people/`,
       priority: 0.5,
     })
 
