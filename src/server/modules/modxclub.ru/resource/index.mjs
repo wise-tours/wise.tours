@@ -246,6 +246,7 @@ class ModxclubTopicModule extends ResourceModule {
 
 
     return {
+      ...other,
       Mutation: {
         ...Mutation,
         createBlogProcessor: (source, args, ctx, info) => {
@@ -281,7 +282,14 @@ class ModxclubTopicModule extends ResourceModule {
           return this.getProcessor(ctx).updateWithResponse("Resource", args, info);
         },
       },
-      ...other,
+      Subscription: {
+        resource: {
+          subscribe: async (parent, args, ctx, info) => {
+  
+            return ctx.db.subscription.resource({}, info);
+          },
+        },
+      },
     };
 
   }

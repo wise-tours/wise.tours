@@ -1,0 +1,9 @@
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+}
+
+type ResourceSubscriptionPayload {
+  mutation: MutationType!
+  node: Resource
+}

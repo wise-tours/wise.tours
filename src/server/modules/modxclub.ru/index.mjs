@@ -71,6 +71,8 @@ class ModxclubModule extends PrismaModule {
       "UserCreateOneWithoutResourcesInput",
       "NotificationTypeUpdateManyWithoutUsersInput",
 
+      "UserSubscriptionPayload",
+      "ResourceSubscriptionPayload",
     ]);
 
 
@@ -151,13 +153,14 @@ class ModxclubModule extends PrismaModule {
     //   }
     // }
 
+    // console.log("resolvers other", other);
 
     return {
+      ...other,
       Query: {
         ...Query,
       },
       Mutation: AllowedMutations,
-      ...other,
       Log: {
         stack: () => null,
       },

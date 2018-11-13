@@ -104,6 +104,7 @@ class ModxclubUserModule extends UserModule {
  
 
     return {
+      ...other,
       Mutation: {
         ...Mutation,
         signup: (source, args, ctx, info) => {
@@ -111,7 +112,14 @@ class ModxclubUserModule extends UserModule {
           return new ModxclubUserProcessor(ctx).signup(source, args, ctx, info);
         },
       },
-      ...other,
+      Subscription: {
+        user: {
+          subscribe: async (parent, args, ctx, info) => {
+  
+            return ctx.db.subscription.user({}, info);
+          },
+        },
+      },
     };
 
   }

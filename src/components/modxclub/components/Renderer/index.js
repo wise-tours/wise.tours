@@ -23,6 +23,7 @@ import BlogPage from "../pages/Blogs/Blog";
 import CommentsPage from "../pages/Comments";
 import CommentPage from "../pages/Comments/Comment";
 
+import SubscriptionProvider from "./SubscriptionProvider";
 
 
 export const styles = theme => {
@@ -72,6 +73,8 @@ export class Renderer extends PrismaRendererCmsRenderer {
   static contextTypes = {
     ...PrismaRendererCmsRenderer.contextTypes,
     getQueryFragment: PropTypes.func.isRequired,
+    client: PropTypes.object.isRequired,
+    loadApiData: PropTypes.func.isRequired,
   }
 
   getRoutes() {
@@ -228,14 +231,14 @@ export class Renderer extends PrismaRendererCmsRenderer {
             {...props}
           />
         }
-      }, 
+      },
       // {
       //   path: "*",
       //   render: props => this.renderOtherPages(props),
       // },
     ].concat(baseRoutes);
 
-    
+
 
     // console.log("routes", routes);
 
@@ -246,6 +249,24 @@ export class Renderer extends PrismaRendererCmsRenderer {
   renderMenu() {
 
     return <MainMenu />;
+  }
+
+
+  render() {
+
+    const {
+      user: currentUser,
+      client,
+      loadApiData,
+    } = this.context;
+
+    return <SubscriptionProvider
+      user={currentUser}
+      client={client}
+      loadApiData={loadApiData}
+    >
+      {super.render()}
+    </SubscriptionProvider>
   }
 
 }
