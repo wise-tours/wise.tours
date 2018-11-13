@@ -7,6 +7,8 @@ import PropTypes from "prop-types";
 import Page from '../../layout';
 
 
+import PageNotFound from "../../404";
+
 
 
 import View from "./view";
@@ -74,7 +76,9 @@ export class TopicPage extends Page {
         return null;
       }
       else {
-        return "Топик не найден";
+        return <PageNotFound 
+          title="Топик не найден"
+        />
       }
 
     }

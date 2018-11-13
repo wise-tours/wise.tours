@@ -22,6 +22,7 @@ import {
   TagLink,
 } from "@modxclub/ui";
 
+import PageNotFound from "../../../pages/404";
 
 let customStyles = theme => {
 
@@ -76,7 +77,7 @@ class ForumView extends TableView {
 
 
 
-  constructor(props){
+  constructor(props) {
 
     super(props);
 
@@ -169,7 +170,7 @@ class ForumView extends TableView {
         className: classes.alignCenter,
         renderer: (value, record) => {
 
-          if(!value){
+          if (!value) {
             return null;
           }
 
@@ -300,6 +301,35 @@ class ForumView extends TableView {
 
     return columns;
 
+  }
+
+
+  render() {
+
+
+    const {
+      data,
+      ...other
+    } = this.props;
+
+
+    const {
+      objectsConnection,
+      loading,
+    } = data;
+
+    if (!objectsConnection || !objectsConnection.edges.length) {
+      if (loading) {
+        return null;
+      }
+      else {
+        return <PageNotFound
+          title="Топики не были получены"
+        />
+      }
+    }
+
+    return super.render();
   }
 
 }

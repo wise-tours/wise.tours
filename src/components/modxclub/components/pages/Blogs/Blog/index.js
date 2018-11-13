@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 
 import Page from '../../layout';
 
+import PageNotFound from "../../404";
 
 
 import { BlogConnector } from "../query";
@@ -73,7 +74,9 @@ export class BlogPage extends Page {
         output = null;
       }
       else {
-        output = "Не был получен блог";
+        return <PageNotFound 
+          title="Блог не найден"
+        />
       }
 
     }

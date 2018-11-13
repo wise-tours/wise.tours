@@ -15,6 +15,8 @@ import Page from '../../layout';
 import gql from 'graphql-tag';
 import PrismaCmsConnector from '@prisma-cms/connector';
 
+import PageNotFound from "../../404";
+
 export class UserPage extends Page {
 
 
@@ -30,64 +32,49 @@ export class UserPage extends Page {
   }
 
 
-  // static contextTypes = {
-  //   user: PropTypes.object,
-  // }
 
+  setPageMeta(meta = {}) {
 
-  // saveUser = async (data) => {
+    const {
+      data: {
+        object,
+      },
+    } = this.props;
 
-  //   const {
-  //     updateUserProcessor,
-  //   } = this.props;
+    if (!object) {
+      return;
+    }
 
-  //   const {
-  //     user: {
-  //       user,
-  //     },
-  //   } = this.props;
-
-
-  //   if (!user) {
-  //     return false;
-  //   }
-
-  //   const {
-  //     id,
-  //   } = user;
-
-  //   const result = await updateUserProcessor({
-  //     variables: {
-  //       updateUserData: data,
-  //       updateUserWhere: {
-  //         id,
-  //       },
-  //     },
-  //   })
-  //     .then(r => r)
-  //     .catch(e => {
-  //       console.error(e);
-  //     });
-
-  //   console.log("updateUser result", result);
-
-  //   return result;
-
-  // }
+    return super.setPageMeta(meta);
+  }
 
 
   render() {
 
     const {
       View,
+      data,
       ...other
     } = this.props;
 
+    const {
+      object,
+      loading,
+    } = data;
+
+    if (!object) {
+      if (loading) {
+        return null;
+      }
+      else {
+        return <PageNotFound
+          title="Пользователь не найден"
+        />
+      }
+    }
 
     return super.render(<View
-      // object={user}
-      // data={data}
-      // saveObject={this.saveUser}
+      data={data}
       {...other}
     />)
   }
