@@ -69,6 +69,7 @@ class ModxclubModule extends PrismaModule {
       "ResourceUpdateInput",
 
       "UserCreateOneWithoutResourcesInput",
+      "NotificationTypeUpdateManyWithoutUsersInput",
 
     ]);
 

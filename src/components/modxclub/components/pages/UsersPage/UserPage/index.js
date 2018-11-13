@@ -102,6 +102,9 @@ export default class UserPageConnector extends PrismaCmsConnector {
           where:$where
         ){
           ...UserNoNesting
+          NotificationTypes{
+            id
+          }
         } 
       }
 

@@ -28,7 +28,7 @@ import PrismaCmsUserPageView from "@prisma-cms/front/lib/modules/pages/UsersPage
 // });
 
 
-
+import NotificationTypes from "./NotificationTypes";
 
 export default class UserPageView extends PrismaCmsUserPageView {
 
@@ -193,6 +193,10 @@ export default class UserPageView extends PrismaCmsUserPageView {
 
 
     const {
+      mutate,
+    } = this.props;
+
+    const {
       user: currentUser,
     } = this.context;
 
@@ -242,28 +246,28 @@ export default class UserPageView extends PrismaCmsUserPageView {
             item
             xs={12}
           >
- 
 
-              <input 
-                style={{
-                  height: 1,
-                  opacity: 1,
-                  padding: 0,
-                  margin: 0,
-                  border: 0,
-                }}
-              />
 
-              <div>
-                {this.getTextField({
-                  name: "password",
-                  type: "password",
-                  label: "Пароль",
-                  helperText: "Новый пароль",
-                  fullWidth: false,
-                })}
-              </div>
- 
+            <input
+              style={{
+                height: 1,
+                opacity: 1,
+                padding: 0,
+                margin: 0,
+                border: 0,
+              }}
+            />
+
+            <div>
+              {this.getTextField({
+                name: "password",
+                type: "password",
+                label: "Пароль",
+                helperText: "Новый пароль",
+                fullWidth: false,
+              })}
+            </div>
+
 
           </Grid>
 
@@ -273,6 +277,11 @@ export default class UserPageView extends PrismaCmsUserPageView {
         null
       }
 
+      <NotificationTypes
+        user={object}
+        inEditMode={inEditMode}
+        mutate={mutate}
+      />
 
     </Grid>;
 
