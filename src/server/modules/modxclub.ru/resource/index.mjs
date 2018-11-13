@@ -63,6 +63,7 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
       case "Topic":
 
         {
+
           const {
             contentText,
           } = this.prepareContent(args, data, method) || {};
@@ -73,24 +74,8 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
             return;
           }
 
-          // let name = contentText.substr(0, 50) || "";
           const uri = `/topics/${name}`;
 
-          // if (!blogID) {
-          //   return this.addError("Не был указан ID блога");
-          // }
-          // else {
-
-          // Проверяем есть ли такой топик
-          // const exists = await db.exists.Resource({
-          //   id: blogID,
-          //   type: "Blog",
-          // });
-
-          // if (!exists) {
-          //   return this.addError("Не был получен блог");
-          // }
-          // else {
           Object.assign(data, {
             uri,
             isfolder: false,
@@ -101,11 +86,53 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
               },
             },
           });
-          // }
 
-          // }
+
+          Object.assign(args, {
+            data,
+          });
+
+
+          const result = await super.create(method, args, info);
+
+
+          const {
+            id: topicID,
+            name: topicName,
+            uri: topicUri,
+          } = result || {};
+
+
+          /**
+           * Если был создан топик, отправляем уведомления
+           */
+          if (topicID) {
+
+            const siteUrl = "https://modxclub.ru";
+
+            let subject = `Новый топик ${topicName}`;
+            let message = `<p>
+              <a href="${siteUrl}${topicUri}">${topicName}</a>.
+            </p>
+              <div>
+                ${contentText.substr(0, 3000)}
+              </div>
+            `;
+
+            const usersWhere = {
+              id_not: currentUserId,
+              NotificationTypes_some: {
+                name: "new_topic",
+              },
+            }
+
+            this.sendNotifications(message, subject, usersWhere);
+            
+          }
         }
+
         break;
+
 
       case "Comment":
 
