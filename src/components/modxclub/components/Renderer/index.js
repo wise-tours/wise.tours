@@ -138,13 +138,41 @@ export class Renderer extends PrismaRendererCmsRenderer {
       },
       {
         exact: true,
+        path: "/comments",
+        component: CommentsPage,
+      },
+      {
+        exact: false,
+        path: "/comments/(.+)",
+        render: (props) => {
+
+          const {
+            match: {
+              url,
+              // params: {
+              //   0: commentId,
+              // },
+            },
+          } = props;
+
+          return <CommentPage
+            key={url}
+            where={{
+              uri: url,
+            }}
+            {...props}
+          />
+        }
+      },
+      {
+        exact: true,
         path: "/add-topic.html",
         component: TopicCreatePage,
       },
       {
         exact: false,
         // path: "(/topics/.+|blog/.+[0-9].html)",
-        path: /(\/topics\/.+|\/blog\/.+[0-9].html)/,
+        path: /^(\/topics\/.+|\/blog\/.+[0-9].html)/,
         render: (props) => {
 
           const {
@@ -200,34 +228,6 @@ export class Renderer extends PrismaRendererCmsRenderer {
 
           return <TagPage
             tagName={tagName}
-            {...props}
-          />
-        }
-      },
-      {
-        exact: true,
-        path: "/comments",
-        component: CommentsPage,
-      },
-      {
-        exact: false,
-        path: "/comments/(.+)",
-        render: (props) => {
-
-          const {
-            match: {
-              url,
-              // params: {
-              //   0: commentId,
-              // },
-            },
-          } = props;
-
-          return <CommentPage
-            key={url}
-            where={{
-              uri: url,
-            }}
             {...props}
           />
         }

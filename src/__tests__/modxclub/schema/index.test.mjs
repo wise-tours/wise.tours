@@ -193,6 +193,7 @@ const requiredTypes = [
         "CreatedBy",
         "Topics",
         "Blog",
+        "mockUpdate",
       ],
       prisma: [
       ],
