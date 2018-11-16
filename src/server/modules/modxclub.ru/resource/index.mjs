@@ -127,7 +127,7 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
             }
 
             this.sendNotifications(message, subject, usersWhere);
-            
+
           }
 
           return result;
@@ -216,9 +216,36 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
               // console.log(chalk.green("result"), result, commentId);
 
               /**
-               * Если был создан комментарий, отправляем уведомления
+               * Если был создан комментарий, 
                */
               if (commentId) {
+
+                /**
+                 * Обновляем дату топика, чтобы сортировку актуализировать
+                 */
+                await db.mutation.updateResource({
+                  data: {
+                    CommentTarget: {
+                      update: {
+                        mockUpdate: new Date(),
+                      },
+                    },
+                  },
+                  where: {
+                    id: commentId,
+                  },
+                })
+                .catch(error => {
+                  /**
+                   * Не обламываем процесс, если не получилось обновить дату топика
+                   */
+                  this.error(error);
+                  console.error(chalk.red("Update CommentTarget error"), error);
+                });
+
+                /**
+                 * отправляем уведомления
+                 */
 
                 const siteUrl = "https://modxclub.ru";
 
