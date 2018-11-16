@@ -171,6 +171,9 @@ export default class SubscriptionProvider extends Component {
 
     const {
       children,
+      user,
+      client,
+      loadApiData,
       ...other
     } = this.props;
 
