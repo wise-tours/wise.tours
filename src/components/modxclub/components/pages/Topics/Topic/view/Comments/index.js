@@ -63,7 +63,7 @@ class TopicComments extends Component {
 
       {comments}
 
- 
+
       {topicId
         ?
         <NewComment
@@ -72,7 +72,19 @@ class TopicComments extends Component {
             object: {},
           }}
           _dirty={{
-            content: [],
+            content: {
+              "blocks": [
+                {
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {}
+            },
             topicID: topicId,
           }}
         />
