@@ -1,6 +1,6 @@
 {
   "name": "@modxclub/modxclub.ru",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "modxclub.ru",
   "private": false,
   "scripts": {
@@ -18,16 +18,16 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@modxclub/react-editor": "latest",
     "@modxclub/import-old-site": "latest",
     "@prisma-cms/component": "latest",
+    "@prisma-cms/editor": "^1.1.0",
     "@prisma-cms/front": "latest",
     "@prisma-cms/log-module": "latest",
     "@prisma-cms/mail-module": "latest",
     "@prisma-cms/prisma-module": "latest",
     "@prisma-cms/router-module": "latest",
-    "@prisma-cms/society-module": "latest",
     "@prisma-cms/server": "latest",
+    "@prisma-cms/society-module": "latest",
     "@prisma-cms/ui": "latest",
     "@prisma-cms/upload-module": "latest",
     "@prisma-cms/user-module": "latest",

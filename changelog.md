@@ -1,3 +1,8 @@
+2.2.0
+============================================
+- Added @prisma-cms/editor
+- Fix styles
+
 2.1.1
 ============================================
 - Added Notifications setting
