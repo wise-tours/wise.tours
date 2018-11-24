@@ -247,7 +247,6 @@ export default class UserPageView extends PrismaCmsUserPageView {
             xs={12}
           >
 
-
             <input
               style={{
                 height: 1,
@@ -268,6 +267,20 @@ export default class UserPageView extends PrismaCmsUserPageView {
               })}
             </div>
 
+          </Grid>
+
+
+          <Grid
+            item
+            xs={12}
+          >
+
+            {this.getTextField({
+              name: "email",
+              helperText: "Сменить емейл",
+              label: "Емейл",
+              fullWidth: false,
+            })}
 
           </Grid>
 
