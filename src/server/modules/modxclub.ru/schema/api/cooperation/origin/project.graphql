@@ -10,8 +10,8 @@ type ProjectResponse{
 input ProjectCreateInput {
   name: String!
   description: String
-  Members: ProjectMemberCreateManyWithoutProjectInput
-  Tasks: TaskCreateManyWithoutProjectInput
+  # Members: ProjectMemberCreateManyWithoutProjectInput
+  # Tasks: TaskCreateManyWithoutProjectInput
 }
 
 
