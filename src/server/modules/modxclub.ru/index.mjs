@@ -8,8 +8,11 @@ import ImportModule from "@modxclub/import-old-site";
 import UserModule from "./user";
 import ResourceModule from "./resource";
 import BlogModule from "./blog";
+import CooperationModule from "./cooperation";
 
 import MergeSchema from 'merge-graphql-schemas';
+
+import chalk from 'chalk';
 
 import path from 'path';
 
@@ -18,6 +21,8 @@ const moduleURL = new URL(import.meta.url);
 const __dirname = path.dirname(moduleURL.pathname);
 
 const { fileLoader, mergeTypes } = MergeSchema;
+
+import { parse, print } from "graphql";
 
 class ModxclubModule extends PrismaModule {
 
@@ -32,6 +37,7 @@ class ModxclubModule extends PrismaModule {
       ResourceModule,
       BlogModule,
       ImportModule,
+      CooperationModule,
     ]);
 
   }
@@ -73,6 +79,63 @@ class ModxclubModule extends PrismaModule {
 
       "UserSubscriptionPayload",
       "ResourceSubscriptionPayload",
+
+
+      // Cooperation
+      // "ProjectMemberCreateManyInput",
+      // "ProjectCreateInput",
+      // "TaskCreateManyWithoutProjectInput",
+      // "TaskCreateInput",
+      // "ProjectCreateOneWithoutTasksInput",
+      // "TaskCreateOneWithoutChildsInput",
+      // "TaskCreateManyWithoutParentInput",
+      // "TimerCreateInput",
+      // "TaskCreateOneWithoutTimersInput",
+      // "TaskCreateManyWithoutRelatedFromInput",
+      // "TaskCreateManyWithoutRelatedToInput",
+      // "TaskCreateOneWithoutMembersInput",
+      // "UserCreateOneInput",
+      // "UserCreateOneWithoutTasksInput",
+      // "TeamCreateOneWithoutChildsInput",
+      // "TeamCreateManyWithoutParentInput",
+      // "UserCreateOneWithoutTeamsCreatedInput",
+      // "TeamMemberCreateManyWithoutTeamInput",
+      // "ProjectCreateOneInput",
+      // "UserCreateOneWithoutProjectsInput",
+      // "ServiceCreateOneInput",
+      // "TeamCreateOneWithoutMembersInput",
+      // "UserCreateOneWithoutTeamsInput",
+      // "ServiceUpdateOneInput",
+      // "UserUpdateOneInput",
+      // "ProjectUpdateOneInput",
+      // "UserUpdateOneWithoutProjectsInput",
+      // "TaskUpdateManyWithoutProjectInput",
+      // "UserUpdateOneWithoutProjectsCreatedInput",
+      // "ProjectMemberUpdateManyInput",
+      // "TaskUpdateOneWithoutTimersInput",
+      // "UserUpdateOneWithoutTimersInput",
+      // "UserUpdateOneWithoutTeamsInput",
+      // "TeamUpdateOneWithoutMembersInput",
+      // "TeamMemberUpdateManyWithoutTeamInput",
+      // "UserUpdateOneWithoutTeamsCreatedInput",
+      // "TeamUpdateManyWithoutParentInput",
+      // "TeamUpdateOneWithoutChildsInput",
+      // "UserUpdateOneWithoutTasksInput",
+      // "TaskUpdateOneWithoutMembersInput",
+      // "TaskMemberUpdateManyWithoutTaskInput",
+      // "ProjectUpdateOneWithoutTasksInput",
+      // "TaskMemberUpdateManyWithoutTaskInput",
+      // "TaskUpdateOneWithoutChildsInput",
+      // "TaskUpdateManyWithoutParentInput",
+      // "TaskUpdateManyWithoutRelatedToInput",
+      // "TaskUpdateManyWithoutRelatedFromInput",
+      // "TimerUpdateManyWithoutTaskInput",
+
+      // // custom
+      // "ProjectCreateInput",
+      // "ProjectUpdateInput",
+
+
     ]);
 
 
@@ -81,6 +144,54 @@ class ModxclubModule extends PrismaModule {
     });
 
     apiSchema = mergeTypes([apiSchema.concat(schema)], { all: true });
+
+    // console.log("apiSchema", apiSchema);
+
+
+    /**
+     * Фильтруем все резолверы, коих нет в текущем классе
+     */
+    const resolvers = this.getResolvers();
+
+    // console.log(chalk.green("resolvers"), resolvers);
+
+
+    const parsed = parse(apiSchema);
+
+    // parsed.definitions = parsed.definitions.filter(
+    //   n => n.kind !== "SchemaDefinition" && !(
+    //     n.kind === "ObjectTypeDefinition" && ["Query", "Mutation", "Subscription"].indexOf(n.name.value) !== -1)
+    // );
+
+    let operations = parsed.definitions.filter(
+      n => n.kind === "ObjectTypeDefinition"
+        && ["Query", "Mutation", "Subscription"].indexOf(n.name.value) !== -1
+      // && !resolvers[n.name.value][]
+    );
+
+    // console.log(chalk.green("parsed.definitions"), parsed.definitions);
+    // console.log(chalk.green("operations"), operations);
+
+    operations.map(n => {
+
+      let {
+        name: {
+          value: operationName,
+        },
+        fields,
+      } = n;
+
+      n.fields = fields.filter(field => {
+        // console.log(chalk.green("field"), field);
+        return resolvers[operationName][field.name.value] ? true : false;
+      });
+
+    });
+
+    // console.log(chalk.green("operations 2"), operations);
+
+    apiSchema = print(parsed);
+
 
     return apiSchema;
 

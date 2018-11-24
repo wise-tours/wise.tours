@@ -1,0 +1,12 @@
+
+type TimerResponse{
+  success: Boolean!
+  message: String
+  errors: [Error!]!
+  data: Timer
+}
+
+input TimerCreateInput {
+  stopedAt: DateTime
+  Task: TaskCreateOneWithoutTimersInput!
+}
