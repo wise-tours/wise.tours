@@ -83,6 +83,7 @@ class ModxclubModule extends PrismaModule {
 
       // Cooperation
       "ProjectCreateInput",
+      "ProjectUpdateInput",
       "TaskSubscriptionPayload",
       "ProjectMemberCreateManyInput",
       "TaskCreateManyWithoutProjectInput",
@@ -239,6 +240,7 @@ class ModxclubModule extends PrismaModule {
       startImportProcessor,
       resetPassword,
       createProjectProcessor,
+      updateProjectProcessor,
     } = Mutation;
 
 
@@ -257,6 +259,7 @@ class ModxclubModule extends PrismaModule {
       startImportProcessor,
       resetPassword,
       createProjectProcessor,
+      updateProjectProcessor,
     };
 
     // for(var i in AllowedMutations){
