@@ -26,6 +26,11 @@ input TaskCreateInput {
   RelatedTo: TaskCreateManyWithoutRelatedFromInput
 }
 
+type TaskSubscriptionPayload {
+  mutation: MutationType!
+  node: Task
+}
+
 input TaskCreateOneWithoutChildsInput { 
   connect: TaskWhereUniqueInput
 }

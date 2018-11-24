@@ -10,3 +10,8 @@ input TimerCreateInput {
   stopedAt: DateTime
   Task: TaskCreateOneWithoutTimersInput!
 }
+
+type TimerSubscriptionPayload {
+  mutation: MutationType!
+  node: Timer
+}
