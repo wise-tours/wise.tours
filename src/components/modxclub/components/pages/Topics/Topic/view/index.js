@@ -294,6 +294,7 @@ class TopicView extends EditableView {
           className="topic-editor"
           content={content}
           inEditMode={inEditMode || false}
+          readOnly={inEditMode ? false : true}
           fullView={true}
           allow_edit={allow_edit}
           onChange={(state, rawContent) => {
