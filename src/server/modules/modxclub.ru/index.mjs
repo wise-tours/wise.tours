@@ -267,6 +267,24 @@ class ModxclubModule extends PrismaModule {
     //   }
     // }
 
+    // Dev
+    // for (var i in AllowedMutations) {
+
+    //   const action = AllowedMutations[i];
+
+    //   AllowedMutations[i] = (a, b, c, d) => {
+    //     return new Promise((resolve, reject) => {
+
+    //       setTimeout(async () => {
+    //         await action(a,b,c,d)
+    //           .then(resolve)
+    //           .catch(reject);
+    //       }, 2000);
+
+    //     });
+    //   }
+    // }
+
     // console.log("resolvers other", other);
 
     return {
