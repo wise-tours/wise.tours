@@ -235,13 +235,13 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
                     id: commentId,
                   },
                 })
-                .catch(error => {
-                  /**
-                   * Не обламываем процесс, если не получилось обновить дату топика
-                   */
-                  this.error(error);
-                  console.error(chalk.red("Update CommentTarget error"), error);
-                });
+                  .catch(error => {
+                    /**
+                     * Не обламываем процесс, если не получилось обновить дату топика
+                     */
+                    this.error(error);
+                    console.error(chalk.red("Update CommentTarget error"), error);
+                  });
 
                 /**
                  * отправляем уведомления
@@ -463,6 +463,13 @@ class ModxclubTopicModule extends ResourceModule {
 
   // }
 
+
+  getSchema(){
+
+    return;
+  }
+
+
   getApiSchema(types = []) {
 
 
@@ -495,6 +502,10 @@ class ModxclubTopicModule extends ResourceModule {
       Mutation: {
         ...Mutation
       },
+      // Query: {
+      //   resource,
+      //   ...Query
+      // },
       ...other
     } = resolvers;
 
@@ -502,6 +513,18 @@ class ModxclubTopicModule extends ResourceModule {
 
     return {
       ...other,
+      // Query: {
+      //   ...Query,
+      //   resource: async (source, args, ctx, info) => {
+
+      //     const result = await resource(source, args, ctx, info);
+
+      //     console.log("args where", args.where);
+      //     console.log("result", result);
+
+      //     return result;
+      //   },
+      // },
       Mutation: {
         ...Mutation,
         createBlogProcessor: (source, args, ctx, info) => {

@@ -258,6 +258,7 @@ export class Renderer extends PrismaRendererCmsRenderer {
           "/projects",
           "/katalog-sajtov",
         ],
+        // component: ProjectPage,
         // path: "/projects/:projectId",
         render: (props) => {
           const {
@@ -266,9 +267,13 @@ export class Renderer extends PrismaRendererCmsRenderer {
             },
           } = props;
 
+          // console.log("props", props);
+          // console.log("props.location", props.location);
+
           return <ProjectPage
             key={pathname}
             where={{
+              // uri: "/projects/dvazhdy-proekt",
               uri: pathname,
             }}
             {...props}

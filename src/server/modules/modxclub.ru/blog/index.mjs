@@ -37,6 +37,11 @@ class ModxclubBlogModule extends ResourceModule {
 
   // }
 
+  getSchema(){
+
+    return;
+  }
+
   getApiSchema(types = []) {
 
 
@@ -60,33 +65,35 @@ class ModxclubBlogModule extends ResourceModule {
 
 
 
-  // getResolvers() {
+  getResolvers() {
 
 
-  //   let resolvers = super.getResolvers();
+    // let resolvers = super.getResolvers();
 
-  //   const {
-  //     Mutation: {
-  //       signup,
-  //       ...Mutation
-  //     },
-  //     ...other
-  //   } = resolvers;
+    // const {
+    //   Mutation: {
+    //     signup,
+    //     ...Mutation
+    //   },
+    //   ...other
+    // } = resolvers;
 
  
 
-  //   return {
-  //     Mutation: {
-  //       ...Mutation,
-  //       signup: (source, args, ctx, info) => {
+    // return {
+    //   Mutation: {
+    //     ...Mutation,
+    //     signup: (source, args, ctx, info) => {
 
-  //         return new ModxclubBlogProcessor(ctx).signup(source, args, ctx, info);
-  //       },
-  //     },
-  //     ...other,
-  //   };
+    //       return new ModxclubBlogProcessor(ctx).signup(source, args, ctx, info);
+    //     },
+    //   },
+    //   ...other,
+    // };
 
-  // }
+    return {}
+
+  }
 
 
 }

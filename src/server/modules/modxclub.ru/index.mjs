@@ -298,11 +298,26 @@ class ModxclubModule extends PrismaModule {
 
     // console.log("resolvers other", other);
 
+
+    // const {
+    //   resource,
+    // } = Query
+
     return {
       ...other,
-      Query: {
-        ...Query,
-      },
+      Query,
+      // Query: {
+      //   ...Query,
+      //   resource: async (source, args, ctx, info) => {
+
+      //     const result = await resource(source, args, ctx, info);
+
+      //     console.log("args where", args.where);
+      //     console.log("result", result);
+
+      //     return result;
+      //   },
+      // },
       Mutation: AllowedMutations,
       Log: {
         stack: () => null,

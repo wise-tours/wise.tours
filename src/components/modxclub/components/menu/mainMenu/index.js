@@ -161,13 +161,29 @@ export class MainMenu extends Component {
             <Grid
               item
             >
-              <Link
-                to="/graphql-voyager"
+              <a
+                href="/graphql-voyager"
+                rel="noindex,nofollow"
               >
                 <Typography>
                   Схема
                 </Typography>
-              </Link>
+              </a>
+
+            </Grid>
+
+            <Grid
+              item
+            >
+              <a
+                href="https://api.modxclub.ru"
+                rel="noindex,nofollow"
+                target="_blank"
+              >
+                <Typography>
+                  API
+                </Typography>
+              </a>
 
             </Grid>
 

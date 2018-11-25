@@ -49,9 +49,13 @@ export class ProjectPage extends Page {
 
     const {
       data: {
-        object: project,
+        object: Resource,
       },
     } = this.props;
+    
+    const {
+      Project: project,
+    } = Resource || {};
 
 
     if (!project) {

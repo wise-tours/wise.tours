@@ -7,24 +7,29 @@ import withStyles from "material-ui/styles/withStyles";
 import { Typography } from 'material-ui';
 
 
-import Card, { CardContent, CardActions, CardHeader, CardMedia } from 'material-ui/Card';
+import Card, {
+  CardContent,
+  // CardActions,
+  // CardHeader,
+  CardMedia,
+} from 'material-ui/Card';
 import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
+// import IconButton from 'material-ui/IconButton';
 // import CompaniesList from '../../../fields/user/companies_list';
 import Chip from 'material-ui/Chip';
 import Dialog from 'material-ui/Dialog';
-import TextField from 'material-ui/TextField';
+// import TextField from 'material-ui/TextField';
 
-import EditIcon from 'material-ui-icons/ModeEdit';
-import MembersIcon from 'material-ui-icons/People';
-import SaveIcon from 'material-ui-icons/Save';
+// import EditIcon from 'material-ui-icons/ModeEdit';
+// import MembersIcon from 'material-ui-icons/People';
+// import SaveIcon from 'material-ui-icons/Save';
 
 // import MembersListEditor from './memberslist';
 
 import { Uploader } from "@prisma-cms/ui";
 
 
-import moment from "moment";
+// import moment from "moment";
 
 import {
   UserLink,
@@ -48,6 +53,7 @@ const styles = theme => {
     },
     thumb: {
       width: "100%",
+      maxWidth: 600,
       cursor: "pointer",
     },
     imageOpened: {
@@ -175,7 +181,7 @@ class ProjectView extends EditableView {
     } = r.data;
 
 
-    console.log("onUpload", singleUpload);
+    // console.log("onUpload", singleUpload);
 
     const {
       path: image,
