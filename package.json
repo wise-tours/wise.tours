@@ -32,6 +32,7 @@
     "@prisma-cms/upload-module": "latest",
     "@prisma-cms/user-module": "latest",
     "@prisma-cms/cooperation-module": "latest",
+    "@prisma-cms/cooperation": "latest",
     "@prisma-cms/resource-module": "latest",
     "@types/react": "^16.1.0",
     "apollo-cache-inmemory": "^1.3.7",

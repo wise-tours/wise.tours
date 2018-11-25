@@ -88,10 +88,12 @@ class ModxclubModule extends PrismaModule {
       "ProjectMemberCreateManyInput",
       "TaskCreateManyWithoutProjectInput",
       "TaskCreateInput",
+      "TaskUpdateInput",
       "ProjectCreateOneWithoutTasksInput",
       "TaskCreateOneWithoutChildsInput",
       "TaskCreateManyWithoutParentInput",
       "TimerCreateInput",
+      "TimerUpdateInput",
       "TaskCreateOneWithoutTimersInput",
       "TaskCreateManyWithoutRelatedFromInput",
       "TaskCreateManyWithoutRelatedToInput",
@@ -241,6 +243,10 @@ class ModxclubModule extends PrismaModule {
       resetPassword,
       createProjectProcessor,
       updateProjectProcessor,
+      createTaskProcessor,
+      updateTaskProcessor,
+      createTimerProcessor,
+      updateTimerProcessor,
     } = Mutation;
 
 
@@ -260,6 +266,10 @@ class ModxclubModule extends PrismaModule {
       resetPassword,
       createProjectProcessor,
       updateProjectProcessor,
+      createTaskProcessor,
+      updateTaskProcessor,
+      createTimerProcessor,
+      updateTimerProcessor,
     };
 
     // for(var i in AllowedMutations){

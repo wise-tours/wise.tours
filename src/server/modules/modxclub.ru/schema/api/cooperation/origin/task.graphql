@@ -26,6 +26,23 @@ input TaskCreateInput {
   RelatedTo: TaskCreateManyWithoutRelatedFromInput
 }
 
+input TaskUpdateInput {
+  name: String
+  description: String
+  content: Json
+  status: TaskStatus
+  startDatePlaning: DateTime
+  endDatePlaning: DateTime
+  startDate: DateTime
+  endDate: DateTime
+  Project: ProjectUpdateOneWithoutTasksInput
+  Members: TaskMemberUpdateManyWithoutTaskInput
+  Parent: TaskUpdateOneWithoutChildsInput
+  Childs: TaskUpdateManyWithoutParentInput
+  RelatedFrom: TaskUpdateManyWithoutRelatedToInput
+  RelatedTo: TaskUpdateManyWithoutRelatedFromInput
+}
+
 type TaskSubscriptionPayload {
   mutation: MutationType!
   node: Task

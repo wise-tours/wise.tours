@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 import gql from "graphql-tag";
 
+import CooperationSubscriptionProvider from "@prisma-cms/cooperation/lib/components/SubscriptionProvider";
 
 export default class SubscriptionProvider extends Component {
 
@@ -14,22 +15,22 @@ export default class SubscriptionProvider extends Component {
   }
 
 
-  static contextTypes = { 
+  static contextTypes = {
   };
- 
+
 
   state = {
     subscriptions: [],
-  } 
- 
+  }
 
-  componentDidMount() { 
+
+  componentDidMount() {
 
     this.subscribe();
 
   }
 
-  componentWillUnmount() { 
+  componentWillUnmount() {
 
     this.unsubscribe();
 
@@ -39,18 +40,18 @@ export default class SubscriptionProvider extends Component {
 
   async subscribe() {
 
- 
 
-    const { 
+
+    const {
       client,
       loadApiData,
     } = this.props;
- 
+
 
     const {
       localStorage,
     } = this.context;
- 
+
 
     await this.unsubscribe();
 
@@ -58,8 +59,8 @@ export default class SubscriptionProvider extends Component {
     let {
       subscriptions,
     } = this.state;
- 
-  
+
+
 
     const subscribeUser = gql`
       subscription user{
@@ -70,18 +71,18 @@ export default class SubscriptionProvider extends Component {
           }
         }
       }
-    `; 
- 
+    `;
+
 
 
     const userSub = await client
       .subscribe({
         query: subscribeUser,
-        variables: { 
+        variables: {
         },
       })
       .subscribe({
-        next: async (data) => { 
+        next: async (data) => {
 
           await client.reFetchObservableQueries();
 
@@ -92,11 +93,11 @@ export default class SubscriptionProvider extends Component {
       });
 
     subscriptions.push(userSub);
- 
+
     this.setState({
       subscriptions,
     });
-  
+
 
     const subscribeResource = gql`
       subscription resource{
@@ -107,18 +108,18 @@ export default class SubscriptionProvider extends Component {
           }
         }
       }
-    `; 
- 
+    `;
+
 
 
     const resourceSub = await client
       .subscribe({
         query: subscribeResource,
-        variables: { 
+        variables: {
         },
       })
       .subscribe({
-        next: async (data) => { 
+        next: async (data) => {
 
           await client.reFetchObservableQueries();
 
@@ -129,17 +130,17 @@ export default class SubscriptionProvider extends Component {
       });
 
     subscriptions.push(resourceSub);
- 
+
     this.setState({
       subscriptions,
     });
- 
+
 
   }
 
 
   unsubscribe() {
- 
+
 
     return new Promise((resolve) => {
 
@@ -148,12 +149,12 @@ export default class SubscriptionProvider extends Component {
       } = this.state;
 
       if (subscriptions && subscriptions.length) {
- 
+
 
         subscriptions.map(n => {
           n.unsubscribe();
         });
- 
+
         Object.assign(this.state, {
           subscriptions: [],
         });
@@ -166,7 +167,7 @@ export default class SubscriptionProvider extends Component {
 
   }
 
-  
+
   render() {
 
     const {
@@ -177,10 +178,15 @@ export default class SubscriptionProvider extends Component {
       ...other
     } = this.props;
 
-    return children ? <children.type
-      {...children.props}
-      {...other}
-    /> : null;
+    return <CooperationSubscriptionProvider
+      user={user}
+      client={client}
+    >
+      {children ? <children.type
+        {...children.props}
+        {...other}
+      /> : null}
+    </CooperationSubscriptionProvider>
 
   }
 

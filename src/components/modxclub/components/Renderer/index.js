@@ -22,6 +22,7 @@ import TagPage from "../pages/Tags/Tag";
 import BlogPage from "../pages/Blogs/Blog";
 import CommentsPage from "../pages/Comments";
 import CommentPage from "../pages/Comments/Comment";
+import TasksPage from "../pages/Tasks";
 
 import SubscriptionProvider from "./SubscriptionProvider";
 
@@ -231,6 +232,11 @@ export class Renderer extends PrismaRendererCmsRenderer {
             {...props}
           />
         }
+      },
+      {
+        exact: true,
+        path: "/tasks",
+        component: TasksPage,
       },
       // {
       //   path: "*",
