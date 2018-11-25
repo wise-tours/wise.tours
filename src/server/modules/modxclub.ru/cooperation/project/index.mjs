@@ -33,18 +33,16 @@ export class ModxclubProjectProcessor extends ProjectProcessor {
 
     const resourceProcessor = new ResourceProcessor(ctx);
 
-    let resourceData = {
-      type: "Project",
-      name,
-      uri: `/projects/${name}`,
-    };
-
     let resourceUriData = await resourceProcessor.prepareUri({
-      data: resourceData,
+      data: {
+        type: "Project",
+        name,
+        uri: `/projects/${name}`,
+      },
     });
 
 
-    console.log(chalk.green("resourceUriData"), resourceUriData);
+    // console.log(chalk.green("resourceUriData"), resourceUriData);
 
     const Resource = {
       create: {
@@ -58,6 +56,7 @@ export class ModxclubProjectProcessor extends ProjectProcessor {
     Object.assign(data, {
       name,
       Resource,
+      resourceData: Resource.create,
     });
 
 
@@ -86,7 +85,12 @@ export class ModxclubProjectProcessor extends ProjectProcessor {
     } = args;
 
 
-    let Resource;
+    let Resource = {
+      update: {
+      },
+    };
+
+    let resourceData = Resource.update;
 
     if (name !== undefined) {
 
@@ -96,11 +100,9 @@ export class ModxclubProjectProcessor extends ProjectProcessor {
         name = undefined;
       }
       else {
-        Resource = {
-          update: {
-            name,
-          },
-        }
+        Object.assign(resourceData, {
+          name,
+        });
       }
 
     }
@@ -111,6 +113,7 @@ export class ModxclubProjectProcessor extends ProjectProcessor {
     Object.assign(data, {
       name,
       Resource,
+      resourceData,
     });
 
 
@@ -129,9 +132,15 @@ export class ModxclubProjectProcessor extends ProjectProcessor {
 
     // console.log(chalk.green("CreateProject args.data"), args.data);
 
+    const {
+      db,
+    } = this.ctx;
+
     let {
       data: {
         url,
+        image,
+        resourceData,
         ...data
       },
     } = args;
@@ -143,6 +152,42 @@ export class ModxclubProjectProcessor extends ProjectProcessor {
 
       if (!url.match(/^http.*\:\/\//)) {
         url = `http://${url}`;
+      }
+
+    }
+
+
+    /**
+     * Обновляем картинку
+     */
+    if (image) {
+
+      let files = await db.query.files({
+        where: {
+          path: image,
+        },
+        first: 1,
+      });
+
+      const file = files && files[0] || null;
+
+      if (!file) {
+        return this.addError("Не был получен файл");
+      }
+      else {
+
+        const {
+          id: fileId,
+        } = file;
+
+        Object.assign(resourceData, {
+          Image: {
+            connect: {
+              id: fileId,
+            },
+          },
+        });
+
       }
 
     }

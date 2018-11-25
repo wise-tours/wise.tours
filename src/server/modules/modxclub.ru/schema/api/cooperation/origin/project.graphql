@@ -11,6 +11,7 @@ input ProjectCreateInput {
   name: String!
   description: String
   url: String
+  image: String
   # Members: ProjectMemberCreateManyWithoutProjectInput
   # Tasks: TaskCreateManyWithoutProjectInput
 }
@@ -19,6 +20,7 @@ input ProjectUpdateInput {
   name: String
   description: String
   url: String
+  image: String
   # Members: ProjectMemberCreateManyWithoutProjectInput
   # Tasks: TaskCreateManyWithoutProjectInput
 }

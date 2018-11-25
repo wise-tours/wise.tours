@@ -74,17 +74,6 @@ export class MainMenu extends Component {
       >
         <Toolbar>
 
-          <Typography
-            variant="title"
-            color="inherit"
-            className={classes.flex}
-          >
-            <Link
-              to="/"
-            >
-              MODXCLUB
-            </Link>
-          </Typography>
 
           {/* <Button color="inherit">Login</Button> */}
 
@@ -95,10 +84,100 @@ export class MainMenu extends Component {
           >
             <Grid
               item
-              xs
             >
+              <Typography
+                variant="title"
+                color="inherit"
+                className={classes.flex}
+              >
+                <Link
+                  to="/"
+                >
+                  MODXCLUB
+                </Link>
+              </Typography>
 
             </Grid>
+
+            <Grid
+              item
+              xs
+            >
+            </Grid>
+
+
+            <Grid
+              item
+            >
+              <Link
+                to="/people"
+              >
+                <Typography>
+                  Участники
+                </Typography>
+              </Link>
+
+            </Grid>
+
+            <Grid
+              item
+            >
+              <Link
+                to="/projects"
+              >
+                <Typography>
+                  Проекты
+                </Typography>
+              </Link>
+
+            </Grid>
+
+            <Grid
+              item
+            >
+              <Link
+                to="/tasks"
+              >
+                <Typography>
+                  Задачи
+                </Typography>
+              </Link>
+
+            </Grid>
+
+            <Grid
+              item
+            >
+              <Link
+                to="/timers"
+              >
+                <Typography>
+                  Выполнение
+                </Typography>
+              </Link>
+
+            </Grid>
+
+            <Grid
+              item
+            >
+              <Link
+                to="/graphql-voyager"
+              >
+                <Typography>
+                  Схема
+                </Typography>
+              </Link>
+
+            </Grid>
+
+
+            <Grid
+              item
+              xs
+            >
+            </Grid>
+
 
             {currentUser
               ?
@@ -172,7 +251,7 @@ export class MainMenu extends Component {
           </IconButton> */}
 
         </Toolbar>
-      </AppBar>
+      </AppBar >
     );
   }
 }

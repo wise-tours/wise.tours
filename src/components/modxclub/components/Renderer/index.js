@@ -22,10 +22,16 @@ import TagPage from "../pages/Tags/Tag";
 import BlogPage from "../pages/Blogs/Blog";
 import CommentsPage from "../pages/Comments";
 import CommentPage from "../pages/Comments/Comment";
-import TasksPage from "../pages/Tasks";
+import ProjectsPage from "../pages/cooperation/Projects";
+import ProjectPage from "../pages/cooperation/Projects/Project";
+import ProjectCreatePage from "../pages/cooperation/Projects/Project/Create";
+import TasksPage from "../pages/cooperation/Tasks";
 
 import SubscriptionProvider from "./SubscriptionProvider";
 
+import {
+  TimersPage,
+} from "@prisma-cms/cooperation";
 
 export const styles = theme => {
 
@@ -232,6 +238,47 @@ export class Renderer extends PrismaRendererCmsRenderer {
             {...props}
           />
         }
+      },
+      {
+        exact: true,
+        path: [
+          "/projects",
+          "/katalog-sajtov",
+        ],
+        component: ProjectsPage,
+      },
+      {
+        exact: true,
+        path: "/projects/create",
+        component: ProjectCreatePage,
+      },
+      {
+        exact: false,
+        path: [
+          "/projects",
+          "/katalog-sajtov",
+        ],
+        // path: "/projects/:projectId",
+        render: (props) => {
+          const {
+            location: {
+              pathname,
+            },
+          } = props;
+
+          return <ProjectPage
+            key={pathname}
+            where={{
+              uri: pathname,
+            }}
+            {...props}
+          />
+        }
+      },
+      {
+        exact: true,
+        path: "/timers",
+        component: TimersPage,
       },
       {
         exact: true,
