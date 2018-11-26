@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  ProjectPage,
+  TaskPage,
 } from "../";
 
-class CreateProjectPage extends Component {
+class CreateTaskPage extends Component {
 
 
   onSave(result) {
+
 
     if (result) {
 
@@ -18,30 +19,16 @@ class CreateProjectPage extends Component {
 
 
       const {
-        // id,
-        Resource,
+        id,
       } = object || {};
 
-      const {
-        uri,
-      } = Resource || {};
-
-      // if (id) {
-
-      //   const {
-      //     history,
-      //   } = this.props;
-
-      //   history.push(`/projects/${id}/`);
-      // }
-
-      if (uri) {
+      if (id) {
 
         const {
           history,
         } = this.props;
 
-        history.push(uri);
+        history.push(`/tasks/${id}/`);
       }
 
     }
@@ -51,14 +38,25 @@ class CreateProjectPage extends Component {
 
   render() {
 
-    return <ProjectPage
+    const {
+      match: {
+        params: {
+          projectId,
+        },
+      },
+    } = this.props;
+
+    return <TaskPage
       data={{
-        object: {
-          Project: {},
-        }
+        object: {}
       }}
       _dirty={{
         name: "",
+        Project: projectId ? {
+          connect: {
+            id: projectId,
+          },
+        } : undefined,
       }}
       onSave={result => this.onSave(result)}
     />
@@ -66,4 +64,4 @@ class CreateProjectPage extends Component {
 }
 
 
-export default CreateProjectPage;
+export default CreateTaskPage;

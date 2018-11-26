@@ -90,6 +90,9 @@ export const projectFragment = `
     
     Tasks{
       ...TaskNoNesting
+      CreatedBy{
+        ...UserNoNesting
+      }
       Timers(
         where:{
           stopedAt: null

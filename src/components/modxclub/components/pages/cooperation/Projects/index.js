@@ -22,7 +22,7 @@ class ProjectsPage extends Page {
   static defaultProps = {
     ...Page.defaultProps,
     first: 12,
-    orderBy: "createdAt_DESC",
+    orderBy: "updatedAt_DESC",
     View,
   }
 

@@ -253,8 +253,6 @@ export default class MembersListEditor extends Component {
 
 		members.map(member => {
 
-			console.log('member', member);
-
 			let {
 				id,
 				username,

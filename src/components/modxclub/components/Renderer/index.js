@@ -16,6 +16,7 @@ import MainPage from "../pages/MainPage";
 // import UsersPage from "@prisma-cms/front/lib/modules/pages/UsersPage";
 import UsersPage from "../pages/UsersPage/";
 import UserPage from "../pages/UsersPage/UserPage";
+import TopicsPage from "../pages/Topics";
 import TopicPage from "../pages/Topics/Topic";
 import TopicCreatePage from "../pages/Topics/Topic/Create";
 import TagPage from "../pages/Tags/Tag";
@@ -26,12 +27,13 @@ import ProjectsPage from "../pages/cooperation/Projects";
 import ProjectPage from "../pages/cooperation/Projects/Project";
 import ProjectCreatePage from "../pages/cooperation/Projects/Project/Create";
 import TasksPage from "../pages/cooperation/Tasks";
+import TaskPage from "../pages/cooperation/Tasks/Task";
+import TaskCreatePage from "../pages/cooperation/Tasks/Task/Create";
+import TimersPage from "../pages/cooperation/Timers";
+import TimerPage from "../pages/cooperation/Timers/Timer";
 
 import SubscriptionProvider from "./SubscriptionProvider";
 
-import {
-  TimersPage,
-} from "@prisma-cms/cooperation";
 
 export const styles = theme => {
 
@@ -113,7 +115,7 @@ export class Renderer extends PrismaRendererCmsRenderer {
     let routes = [
       {
         exact: true,
-        path: ["/", "/topics"],
+        path: "/",
         component: MainPage,
       },
       {
@@ -175,6 +177,11 @@ export class Renderer extends PrismaRendererCmsRenderer {
         exact: true,
         path: "/add-topic.html",
         component: TopicCreatePage,
+      },
+      {
+        exact: true,
+        path: "/topics",
+        component: TopicsPage,
       },
       {
         exact: false,
@@ -285,10 +292,60 @@ export class Renderer extends PrismaRendererCmsRenderer {
         path: "/timers",
         component: TimersPage,
       },
+      // {
+      //   exact: true,
+      //   path: "/timers/:timerId",
+      //   render: (props) => {
+      //     const {
+      //       params,
+      //     } = props.match;
+
+      //     const {
+      //       timerId,
+      //     } = params || {};
+
+      //     return <TimerPage
+      //       key={timerId}
+      //       where={{
+      //         id: timerId,
+      //       }}
+      //       {...props}
+      //     />
+      //   }
+      // },
       {
         exact: true,
         path: "/tasks",
         component: TasksPage,
+      },
+      {
+        exact: false,
+        path: [
+          "/tasks/create/:projectId",
+          // "/tasks/create",
+        ],
+        component: TaskCreatePage,
+      },
+      {
+        exact: true,
+        path: "/tasks/:taskId",
+        render: (props) => {
+          const {
+            params,
+          } = props.match;
+
+          const {
+            taskId,
+          } = params || {};
+
+          return <TaskPage
+            key={taskId}
+            where={{
+              id: taskId,
+            }}
+            {...props}
+          />
+        }
       },
       // {
       //   path: "*",

@@ -40,7 +40,8 @@ import {
 } from "@modxclub/ui"
 
 
-import TasksListView from "../../../Tasks/View/List";
+// import TasksListView from "../../../Tasks/View/List";
+import TasksListView from "./Tasks/";
 
 
 const styles = theme => {
@@ -192,6 +193,42 @@ class ProjectView extends EditableView {
         image,
       });
     }
+
+  }
+
+
+  renderTasks() {
+
+    const {
+      id: projectId,
+      Tasks,
+    } = this.getObjectWithMutations() || {};
+
+    const showDetails = false;
+
+    return Tasks && <CardContent>
+
+      <Typography
+        variant="subheading"
+      >
+        Задачи в проекте
+      </Typography>
+
+      <TasksListView
+        tasks={Tasks}
+        showDetails={showDetails}
+      />
+
+      <Link
+        to={`/tasks/create/${projectId}`}
+      >
+        <Typography
+        >
+          Поставить задачу
+        </Typography>
+      </Link>
+
+    </CardContent> || null;
 
   }
 
@@ -547,6 +584,8 @@ class ProjectView extends EditableView {
         }
 
         {object.content}
+
+
       </CardContent>
 
 
@@ -616,6 +655,7 @@ class ProjectView extends EditableView {
       }
 
 
+      {this.renderTasks()}
 
 
 

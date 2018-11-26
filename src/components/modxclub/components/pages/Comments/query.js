@@ -95,7 +95,26 @@ export const resourceQuery = gql`
 
 
 
-const ResourcesQuery = graphql(resourcesConnectionQuery);
+const ResourcesQuery = graphql(resourcesConnectionQuery, {
+  options: props => {
+
+    const {
+      where,
+      ...other
+    } = props;
+
+    return {
+      variables: {
+        ...other,
+        where: {
+          ...where,
+          type: "Comment",
+        }
+      },
+    }
+  }
+});
+
 export const CommentsConnector = ResourcesQuery(props => {
 
   const {
@@ -111,6 +130,7 @@ export const CommentsConnector = ResourcesQuery(props => {
 
 
 const ResourceQuery = graphql(resourceQuery);
+
 export const Comment = ResourceQuery(props => {
 
   const {

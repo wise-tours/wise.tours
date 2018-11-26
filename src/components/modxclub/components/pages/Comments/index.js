@@ -64,17 +64,12 @@ class CommentsPage extends Page {
       skip = (page - 1) * first;
     }
 
-    where = {
-      ...where,
-      type: "Comment",
-    }
-
     return super.render(
       <CommentsConnector
         where={where}
         first={first}
         skip={skip}
-        page={page ? parseInt(page) : undefined}
+        page={page}
         {...other}
       />
     );

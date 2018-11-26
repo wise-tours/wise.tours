@@ -1,7 +1,15 @@
+2.4.1
+============================================
+- Added create tasks in projects
+- Added start/stop timers
+- Added comments list on main page
+- Added tasks list on main page
+
 2.4.0
 ============================================
 - Cleanup schema
 - Added menu items
+- Added projects, tasks, timers
 
 2.3.1
 ============================================
@@ -10,7 +18,7 @@
 
 2.3.0
 ============================================
-- Import Teams, Servcies, Projects
+- Import Teams, Services, Projects
 - Added create project
 
 2.2.1

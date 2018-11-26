@@ -1,19 +1,16 @@
-
-import React, { Fragment } from "react";
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// import CooperationTasksPage from "@prisma-cms/cooperation/lib/components/pages/Tasks";
-
 import Page from "../../layout";
-import View from "./View/Gantt";
-
 
 import {
-  TasksConnector,
+  TimersConnector,
 } from "./query";
 
+import View from "./View";
 
-export class TasksPage extends Page {
+
+class TimersPage extends Page {
 
   static propTypes = {
     ...Page.propTypes,
@@ -24,8 +21,8 @@ export class TasksPage extends Page {
 
   static defaultProps = {
     ...Page.defaultProps,
-    first: 1000,
-    orderBy: "createdAt_ASC",
+    first: 10,
+    orderBy: "createdAt_DESC",
     View,
   }
 
@@ -34,7 +31,7 @@ export class TasksPage extends Page {
   setPageMeta(meta = {}) {
 
     return super.setPageMeta({
-      title: "Задачи",
+      title: "Таймеры",
       ...meta,
     });
 
@@ -42,7 +39,6 @@ export class TasksPage extends Page {
 
 
   render() {
-
 
     let {
       first,
@@ -69,30 +65,17 @@ export class TasksPage extends Page {
       skip = (page - 1) * first;
     }
 
-    return (<Fragment>
-
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-            #root {
-              display: flex;
-              flex-direction: column;
-            }
-          `,
-        }}
-      />
-
-      <TasksConnector
+    return super.render(
+      <TimersConnector
         where={where}
         first={first}
         skip={skip}
         page={page ? parseInt(page) : undefined}
         {...other}
       />
-
-    </Fragment>);
+    );
   }
-
 }
 
-export default TasksPage;
+
+export default TimersPage;

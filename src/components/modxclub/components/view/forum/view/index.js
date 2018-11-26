@@ -81,7 +81,6 @@ class ForumView extends TableView {
 
     super(props);
 
-    console.log("ForumView constructor", this);
 
   }
 

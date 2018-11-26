@@ -43,6 +43,7 @@ class ProjectsList extends Component {
         } = n;
 
         return <Grid
+          key={id}
           item
           xs={12}
           sm={6}
@@ -50,7 +51,6 @@ class ProjectsList extends Component {
           lg={3}
         >
           <UpdateProject
-            key={id}
             data={{
               object: n,
             }}

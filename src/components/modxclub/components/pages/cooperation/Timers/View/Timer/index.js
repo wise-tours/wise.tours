@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Editor from "@modxclub/react-editor";
-
 import EditableView from 'apollo-cms/lib/DataView/Object/Editable';
 
 import withStyles from "material-ui/styles/withStyles";
-import { Typography } from 'material-ui';
-import SendIcon from 'material-ui-icons/Send';
+import { Typography, IconButton } from 'material-ui';
+import StopIcon from 'material-ui-icons/Stop';
 
 import Grid from "@prisma-cms/front/lib/modules/ui/Grid";
 
 import moment from "moment";
 
 import {
-  TopicLink,
   UserLink,
-  BlogLink,
-  CommentLink,
+  TimerLink,
+  ProjectLink,
+  TaskLink,
 } from "@modxclub/ui"
 
 const styles = theme => {
@@ -25,46 +23,27 @@ const styles = theme => {
   return {
 
     root: {
-      margin: "30px 0 0",
-      borderTop: "1px solid #ddd",
-      padding: "20px 0",
-    },
-
-    addCommentTitle: {
-      marginBottom: 15,
     },
   }
 
 }
 
-class CommentView extends EditableView {
+class TimerView extends EditableView {
 
 
   static propTypes = {
     ...EditableView.propTypes,
     classes: PropTypes.object.isRequired,
-    linkType: PropTypes.oneOf(["comment", "target"]).isRequired,
   };
 
   static defaultProps = {
     ...EditableView.defaultProps,
-    SaveIcon: SendIcon,
-    linkType: "comment",
   };
 
   static contextTypes = {
     ...EditableView.contextTypes,
     openLoginForm: PropTypes.func.isRequired,
   };
-
-
-  // constructor(props){
-
-  //   super(props);
-
-  //   console.log("CommentView constructor", this);
-
-  // }
 
 
   canEdit() {
@@ -93,6 +72,58 @@ class CommentView extends EditableView {
   }
 
 
+  getButtons() {
+
+    const canEdit = this.canEdit();
+
+    // if (!canEdit) {
+    //   return null;
+    // }
+
+    const {
+      id: timerId,
+      stopedAt,
+    } = this.getObjectWithMutations() || {};
+
+    if (!timerId || stopedAt) {
+      return null;
+    }
+
+    let buttons = [];
+
+
+    buttons.push(<IconButton
+      key="stop"
+      onClick={() => this.stopTimer(timerId)}
+      disabled={!canEdit}
+    >
+      <StopIcon />
+    </IconButton>);
+
+    return buttons;
+  }
+
+
+  async stopTimer(timerId) {
+
+    const {
+      mutate,
+    } = this.props;
+
+    return await mutate({
+      variables: {
+        where: {
+          id: timerId,
+        },
+        data: {
+          stopedAt: new Date(),
+        },
+      },
+    });
+
+  }
+
+
   save() {
 
     const {
@@ -115,7 +146,7 @@ class CommentView extends EditableView {
       id,
     } = this.getObject() || {};
 
-    return `comment_${id || "new2"}`;
+    return `timer_${id || "new"}`;
   }
 
 
@@ -124,30 +155,28 @@ class CommentView extends EditableView {
 
     const {
       classes,
-      linkType,
     } = this.props;
 
     const object = this.getObjectWithMutations();
 
     const {
-      id: commentId,
+      id: timerId,
       CreatedBy,
       createdAt,
+      stopedAt,
+      Task,
     } = object || {}
+
+
+    const {
+      Project,
+    } = Task || {}
+
 
 
 
     const inEditMode = this.isInEditMode();
 
-    if (!commentId) {
-
-      return <Typography
-        variant="subheading"
-        className={classes.addCommentTitle}
-      >
-        Добавить комментарий
-    </Typography>;
-    }
 
     return <div
       className={classes.header}
@@ -157,23 +186,6 @@ class CommentView extends EditableView {
         spacing={16}
       >
 
-        {CreatedBy
-          ?
-          <Grid
-            item
-          >
-
-            <UserLink
-              user={CreatedBy}
-              showName={false}
-            // avatarProps={{
-            //   size: "medium",
-            // }}
-            />
-          </Grid>
-          : null
-        }
-
         <Grid
           item
           xs
@@ -181,41 +193,88 @@ class CommentView extends EditableView {
 
           <Grid
             container
+            alignItems="center"
           >
+
+
+            <Grid
+              item
+            >
+
+              {/* {inEditMode
+                ?
+                this.getTextField({
+                  name: "name",
+                  fullWidth: true,
+                })
+                :
+
+                timerId ? <TimerLink
+                  object={object}
+                />
+                  :
+                  null
+              } */}
+
+              {Task ? <TaskLink
+                object={Task}
+              /> : null}
+
+              {Project ? <span> (<ProjectLink
+                object={Project}
+              />)
+              </span> : null}
+
+            </Grid>
+
+            <Grid
+              item
+            >
+
+
+              {this.getButtons()}
+
+            </Grid>
 
             <Grid
               item
               xs
             >
-              {CreatedBy
-                ?
-                <UserLink
-                  user={CreatedBy}
-                  withAvatar={false}
-                />
-                :
-                null
-              }
-
             </Grid>
+
 
             <Grid
               item
             >
-
-              {/* {createdAt ? <Typography
-                variant="caption"
-                color="textSecondary"
-              >
-                {moment(createdAt).format('lll')}
-              </Typography> : null} */}
-
-              {commentId ? <CommentLink
-                object={object}
-                linkType={linkType}
-              /> : null}
-
+              {CreatedBy
+                ?
+                <UserLink
+                  user={CreatedBy}
+                />
+                :
+                null
+              }
             </Grid>
+
+
+
+            {createdAt ?
+              <Grid
+                item
+                xs={12}
+              >
+                Начало: {moment(createdAt).format('lll')}
+              </Grid>
+              : null}
+
+            {stopedAt ?
+              <Grid
+                item
+                xs={12}
+              >
+                Конец: {moment(stopedAt).format('lll')}
+              </Grid>
+              : null}
 
           </Grid>
 
@@ -237,38 +296,21 @@ class CommentView extends EditableView {
     } = this.props;
 
 
-    const comment = this.getObjectWithMutations();
+    const timer = this.getObjectWithMutations();
 
 
-    if (!comment) {
+    if (!timer) {
       return null;
     }
 
     const {
       content,
-    } = comment;
+    } = timer;
 
 
     const inEditMode = this.isInEditMode();
     const allow_edit = this.canEdit();
 
-
-    const editor = <Editor
-      // className="topic-editor"
-      content={content}
-      inEditMode={inEditMode || false}
-      fullView={true}
-      allow_edit={allow_edit}
-      onChange={(state, rawContent) => {
-        // console.log("onChange newState", state);
-        // console.log("onChange rawContent", rawContent);
-
-        this.updateObject({
-          content: rawContent,
-        });
-
-      }}
-    />;
 
     return <Grid
       container
@@ -276,16 +318,9 @@ class CommentView extends EditableView {
 
       <Grid
         item
-        xs
-      >
-        {editor}
-      </Grid>
-
-      <Grid
-        item
       >
 
-        {this.getButtons()}
+
 
       </Grid>
 
@@ -298,28 +333,6 @@ class CommentView extends EditableView {
 
     return this.renderDefaultView();
 
-
-    // return <Grid
-    //   container
-    // >
-
-    //   <Grid
-    //     item
-    //     xs
-    //   >
-    //     {this.renderDefaultView()}
-    //   </Grid>
-
-    //   <Grid
-    //     item
-    //   >
-
-    //     {this.getButtons()}
-
-    //   </Grid>
-
-
-    // </Grid>
 
   }
 
@@ -360,4 +373,4 @@ class CommentView extends EditableView {
 }
 
 
-export default withStyles(styles)(CommentView);
+export default withStyles(styles)(TimerView);

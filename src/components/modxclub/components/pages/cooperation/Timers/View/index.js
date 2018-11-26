@@ -1,19 +1,18 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import CommentsList from "@modxclub/ui/src/Comments/List";
 
-import { Pagination } from '@modxclub/ui';
 import { Typography } from 'material-ui';
 
-import { Grid } from "@modxclub/ui"
+import { Grid, Pagination } from "@modxclub/ui"
 
-class CommentsView extends Component {
+import TimersList from "./List";
+
+class TimersView extends Component {
 
   static propTypes = {
-    pagination: PropTypes.number,
-  };
 
+  };
 
   render() {
 
@@ -56,7 +55,7 @@ class CommentsView extends Component {
     }
 
 
-    let comments = edges.map(n => n.node);
+    let timers = edges.map(n => n.node);
 
 
     let content = <Grid
@@ -70,21 +69,18 @@ class CommentsView extends Component {
 
       >
 
-        <CommentsList
-          comments={comments}
-          linkType="target"
+        <TimersList
+          timers={timers}
         />
 
-        {page !== undefined ?
-          <Pagination
-            limit={limit}
-            total={count}
-            page={page || 1}
-            style={{
-              marginTop: 20,
-            }}
-          /> : null
-        }
+        <Pagination
+          limit={limit}
+          total={count}
+          page={page || 1}
+          style={{
+            marginTop: 20,
+          }}
+        />
       </Grid> : null
       }
 
@@ -96,4 +92,4 @@ class CommentsView extends Component {
 }
 
 
-export default CommentsView;
+export default TimersView;

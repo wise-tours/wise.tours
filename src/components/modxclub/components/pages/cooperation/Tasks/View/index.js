@@ -1,19 +1,19 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import CommentsList from "@modxclub/ui/src/Comments/List";
 
-import { Pagination } from '@modxclub/ui';
 import { Typography } from 'material-ui';
 
-import { Grid } from "@modxclub/ui"
+import Grid from "../../../ui/Grid"
+import Pagination from "../../../ui/Pagination"
 
-class CommentsView extends Component {
+import TasksList from "./List";
+
+class TasksView extends Component {
 
   static propTypes = {
-    pagination: PropTypes.number,
-  };
 
+  };
 
   render() {
 
@@ -56,7 +56,7 @@ class CommentsView extends Component {
     }
 
 
-    let comments = edges.map(n => n.node);
+    let tasks = edges.map(n => n.node);
 
 
     let content = <Grid
@@ -70,21 +70,18 @@ class CommentsView extends Component {
 
       >
 
-        <CommentsList
-          comments={comments}
-          linkType="target"
+        <TasksList
+          tasks={tasks}
         />
 
-        {page !== undefined ?
-          <Pagination
-            limit={limit}
-            total={count}
-            page={page || 1}
-            style={{
-              marginTop: 20,
-            }}
-          /> : null
-        }
+        <Pagination
+          limit={limit}
+          total={count}
+          page={page || 1}
+          style={{
+            marginTop: 20,
+          }}
+        />
       </Grid> : null
       }
 
@@ -96,4 +93,4 @@ class CommentsView extends Component {
 }
 
 
-export default CommentsView;
+export default TasksView;

@@ -29,7 +29,7 @@ import { Typography } from 'material-ui';
 
 import Grid from "@prisma-cms/front/lib/modules/ui/Grid";
 
-import CommentsView from "./Comments"; 
+import CommentsView from "./Comments";
 
 const styles = {
   root: {
@@ -92,7 +92,7 @@ class TopicView extends EditableView {
       id,
     } = this.getObject() || {};
 
-    return `item_${id || "new"}`;
+    return `topic_${id || "new"}`;
   }
 
 
@@ -297,7 +297,8 @@ class TopicView extends EditableView {
           readOnly={inEditMode ? false : true}
           fullView={true}
           allow_edit={allow_edit}
-          onChange={(state, rawContent) => {
+          // onChange={(state, rawContent) => {
+          onChange={(rawContent) => {
             // console.log("onChange newState", state);
             // console.log("onChange rawContent", rawContent);
 
