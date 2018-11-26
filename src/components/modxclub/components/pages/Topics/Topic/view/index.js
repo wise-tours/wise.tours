@@ -297,7 +297,6 @@ class TopicView extends EditableView {
           readOnly={inEditMode ? false : true}
           fullView={true}
           allow_edit={allow_edit}
-          // onChange={(state, rawContent) => {
           onChange={(rawContent) => {
             // console.log("onChange newState", state);
             // console.log("onChange rawContent", rawContent);

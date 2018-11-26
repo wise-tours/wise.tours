@@ -25,6 +25,7 @@ import TimersListView from "../../../Timers/View/List";
 
 
 import {
+  createTaskProcessor,
   updateTaskProcessor,
 } from "../../query";
 
@@ -114,6 +115,48 @@ export class TaskView extends EditableView {
     }
 
     return super.save();
+  }
+
+
+
+  async saveObject(data) {
+
+    let {
+      mutate,
+      createTask,
+      updateTask,
+    } = this.props;
+
+    if (!mutate) {
+
+      const {
+        id,
+      } = this.getObjectWithMutations() || {};
+
+      if (id && updateTask) {
+        mutate = updateTask;
+      }
+      else if (!id && createTask) {
+        mutate = createTask;
+      }
+      else {
+        throw (new Error("Mutate not defined"));
+      }
+
+    }
+
+    const mutation = this.getMutation(data);
+
+    const result = await mutate(mutation).then(r => r).catch(e => {
+
+      // throw (e);
+      return e;
+    });
+
+    // console.log("result 333", result);
+
+    return result;
+
   }
 
 
@@ -597,8 +640,11 @@ export class TaskView extends EditableView {
 
 const processors = compose(
 
+  graphql(createTaskProcessor, {
+    name: "createTask",
+  }),
   graphql(updateTaskProcessor, {
-    // name: "updateTask",
+    name: "updateTask",
   }),
   // graphql(createTimerProcessor, {
   //   name: "createTimer",

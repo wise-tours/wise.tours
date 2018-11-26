@@ -1,3 +1,8 @@
+2.4.2
+============================================
+- Fix update comment
+- Fix create task
+
 2.4.1
 ============================================
 - Added create tasks in projects
