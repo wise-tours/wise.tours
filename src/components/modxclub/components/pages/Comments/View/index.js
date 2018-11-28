@@ -15,6 +15,20 @@ class CommentsView extends Component {
   };
 
 
+  async componentDidMount() {
+
+    const {
+      data,
+    } = this.props;
+
+    if (data && !data.loading) {
+      await data.refetch && data.refetch();
+    }
+
+    super.componentDidMount && super.componentDidMount();
+  }
+
+
   render() {
 
 

@@ -15,6 +15,21 @@ class ActiveTasks extends Component {
     data: PropTypes.object.isRequired,
   };
 
+
+  async componentDidMount() {
+
+    const {
+      data,
+    } = this.props;
+
+    if (data && !data.loading) {
+      await data.refetch && data.refetch();
+    }
+
+    super.componentDidMount && super.componentDidMount();
+  }
+
+
   render() {
 
     const {
@@ -31,7 +46,7 @@ class ActiveTasks extends Component {
       }
     }
 
-    let tasks = objectsConnection.edges.map(({ node }) => node);
+    let tasks = objectsConnection && objectsConnection.edges.map(({ node }) => node) || [];
 
     return (
       <TasksView

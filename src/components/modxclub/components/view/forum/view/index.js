@@ -77,12 +77,12 @@ class ForumView extends TableView {
 
 
 
-  constructor(props) {
+  // constructor(props) {
 
-    super(props);
+  //   super(props);
 
 
-  }
+  // }
 
 
 
@@ -301,6 +301,19 @@ class ForumView extends TableView {
 
   }
 
+
+  async componentDidMount() {
+
+    const {
+      data,
+    } = this.props;
+
+    if (data && !data.loading) {
+      await data.refetch && data.refetch();
+    }
+
+    super.componentDidMount && super.componentDidMount();
+  }
 
   render() {
 

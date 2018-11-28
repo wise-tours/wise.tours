@@ -155,24 +155,13 @@ class ModxclubModule extends PrismaModule {
      */
     const resolvers = this.getResolvers();
 
-    // console.log(chalk.green("resolvers"), resolvers);
-
-
     const parsed = parse(apiSchema);
-
-    // parsed.definitions = parsed.definitions.filter(
-    //   n => n.kind !== "SchemaDefinition" && !(
-    //     n.kind === "ObjectTypeDefinition" && ["Query", "Mutation", "Subscription"].indexOf(n.name.value) !== -1)
-    // );
 
     let operations = parsed.definitions.filter(
       n => n.kind === "ObjectTypeDefinition"
         && ["Query", "Mutation", "Subscription"].indexOf(n.name.value) !== -1
       // && !resolvers[n.name.value][]
     );
-
-    // console.log(chalk.green("parsed.definitions"), parsed.definitions);
-    // console.log(chalk.green("operations"), operations);
 
     operations.map(n => {
 
@@ -189,8 +178,6 @@ class ModxclubModule extends PrismaModule {
       });
 
     });
-
-    // console.log(chalk.green("operations 2"), operations);
 
     apiSchema = print(parsed);
 
