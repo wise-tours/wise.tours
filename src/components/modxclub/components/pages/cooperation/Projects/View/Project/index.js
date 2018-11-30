@@ -79,6 +79,7 @@ class ProjectView extends EditableView {
     ...EditableView.propTypes,
     classes: PropTypes.object.isRequired,
     showDetails: PropTypes.bool.isRequired,
+    tasksLimit: PropTypes.number,
   };
 
   static defaultProps = {
@@ -204,6 +205,10 @@ class ProjectView extends EditableView {
       Tasks,
     } = this.getObjectWithMutations() || {};
 
+    const {
+      tasksLimit,
+    } = this.props;
+
     const showDetails = false;
 
     return Tasks && <CardContent>
@@ -217,6 +222,7 @@ class ProjectView extends EditableView {
       <TasksListView
         tasks={Tasks}
         showDetails={showDetails}
+        tasksLimit={tasksLimit}
       />
 
       <Link

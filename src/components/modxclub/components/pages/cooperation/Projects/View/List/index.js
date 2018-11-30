@@ -54,6 +54,7 @@ class ProjectsList extends Component {
             data={{
               object: n,
             }}
+            tasksLimit={3}
           />
         </Grid>
       })}

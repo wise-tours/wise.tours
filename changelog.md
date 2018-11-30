@@ -1,3 +1,8 @@
+2.4.5
+============================================
+- Added letters rank on new comment
+- Fix project link
+
 2.4.4
 ============================================
 - Fix Gantt view

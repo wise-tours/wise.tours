@@ -126,7 +126,7 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
               },
             }
 
-            this.sendNotifications(message, subject, usersWhere);
+            this.sendNotifications({ message, subject }, usersWhere);
 
           }
 
@@ -277,7 +277,11 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
                   },
                 }
 
-                this.sendNotifications(message, subject, usersWhere);
+                this.sendNotifications({
+                  message,
+                  subject,
+                  rank: 100,
+                }, usersWhere);
 
               }
 
@@ -358,7 +362,7 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
   }
 
 
-  async sendNotifications(message, subject, where) {
+  async sendNotifications(data, where) {
 
     const {
       ctx,
@@ -380,7 +384,7 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
       ;
 
 
-    const processor = this.getProcessor(message, subject, users, this.writeEmail.bind(this));
+    const processor = this.getProcessor(data, users, this.writeEmail.bind(this));
 
     for await (const result of processor) {
 
@@ -390,14 +394,14 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
   }
 
 
-  async * getProcessor(message, subject, users, processor) {
+  async * getProcessor(data, users, processor) {
 
     while (users && users.length) {
 
       const user = users.splice(0, 1)[0];
 
 
-      const result = await processor(message, subject, user)
+      const result = await processor(data, user)
         .catch(error => {
 
           console.log(chalk.red("getProcessor error"), error);
@@ -418,9 +422,7 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
 
   }
 
-  async writeEmail(message, subject, user) {
-
-    // console.log(chalk.green("writeEmail"), message, subject, user);
+  async writeEmail(data, user) {
 
     const {
       db,
@@ -432,14 +434,15 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
 
     const result = await db.mutation.createLetter({
       data: {
-        message,
-        subject,
+        // message,
+        // subject,
+        ...data,
         email,
       },
     })
       .catch(error => {
 
-        console.log(chalk.red("writeEmail error"), error);
+        console.error(chalk.red("writeEmail error"), error);
 
         this.error(error);
       });
@@ -464,7 +467,7 @@ class ModxclubTopicModule extends ResourceModule {
   // }
 
 
-  getSchema(){
+  getSchema() {
 
     return;
   }

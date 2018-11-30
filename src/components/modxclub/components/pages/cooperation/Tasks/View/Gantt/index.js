@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui';
 
 
-import moment from "moment";
+// import moment from "moment";
 
-import TimeLine from "@prisma-cms/react-timeline-gantt";
+// import TimeLine from "@prisma-cms/react-timeline-gantt";
 // import TaskList from "./TaskList";
 // import DataTask from "./DataTask";
 
@@ -16,18 +16,18 @@ import {
   processors,
 } from "@prisma-cms/cooperation/lib/components/pages/Tasks/View/Gantt";
 
-import * as Gannt from "@prisma-cms/cooperation/lib/components/pages/Tasks/View/Gantt";
+// import * as Gannt from "@prisma-cms/cooperation/lib/components/pages/Tasks/View/Gantt";
 
 
-import { graphql, compose } from 'react-apollo';
+// import { graphql, compose } from 'react-apollo';
 
-import {
-  Task as TaskQuery,
-  createTaskProcessor,
-  updateTaskProcessor,
-} from "../../query";
+// import {
+//   Task as TaskQuery,
+//   createTaskProcessor,
+//   updateTaskProcessor,
+// } from "../../query";
 
-console.log("Gannt", Gannt);
+// console.log("Gannt", Gannt);
 
 // const UpdateTask = graphql(updateTaskProcessor)(TaskView);
 // const CreateTask = graphql(createTaskProcessor)(TaskView);
@@ -75,6 +75,11 @@ class GanttView extends PrismaCooperationGanttView {
   // static propTypes = {
 
   // }
+
+  static defaultProps = {
+    ...PrismaCooperationGanttView.defaultProps,
+    // DataTask,
+  }
 
   // static contextTypes = {
   //   // client: PropTypes.object.isRequired,

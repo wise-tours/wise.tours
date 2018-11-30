@@ -5,9 +5,37 @@ import PropTypes from 'prop-types';
 
 import PrismaCmsPageLayout from "@prisma-cms/front/lib/modules/pages/layout";
 
+import {
+  UserLink,
+  TaskLink,
+  Editor,
+  ProjectLink,
+} from "@modxclub/ui"
 
 export default class PageLayout extends PrismaCmsPageLayout {
 
+  static propTypes = {
+    ...PrismaCmsPageLayout.propTypes,
+    UserLink: PropTypes.func.isRequired,
+    TaskLink: PropTypes.func.isRequired,
+    Editor: PropTypes.func.isRequired,
+    ProjectLink: PropTypes.func.isRequired,
+  }
+
+  static childContextTypes = {
+    ...PrismaCmsPageLayout.childContextTypes,
+    UserLink: PropTypes.func,
+    TaskLink: PropTypes.func,
+    Editor: PropTypes.func,
+    ProjectLink: PropTypes.func,
+  }
+
+  static defaultProps = {
+    UserLink,
+    TaskLink,
+    Editor,
+    ProjectLink,
+  }
 
   render(content) {
 

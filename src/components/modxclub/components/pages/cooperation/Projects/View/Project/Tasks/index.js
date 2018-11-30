@@ -9,12 +9,14 @@ class TasksList extends Component {
 
   static propTypes = {
     tasks: PropTypes.array.isRequired,
+    tasksLimit: PropTypes.number,
   }
 
   render() {
 
     const {
       tasks,
+      tasksLimit,
     } = this.props;
 
     let output = null;
@@ -24,7 +26,12 @@ class TasksList extends Component {
     }
 
     if (tasks.length) {
-      output = tasks.map(n => {
+      output = tasks.map((n, index) => {
+
+        if (tasksLimit > 0 && tasksLimit < index + 1) {
+          return;
+        }
+
         const {
           id,
         } = n;
@@ -45,7 +52,7 @@ class TasksList extends Component {
       </Typography>
     }
 
-    return output; 
+    return output;
   }
 }
 

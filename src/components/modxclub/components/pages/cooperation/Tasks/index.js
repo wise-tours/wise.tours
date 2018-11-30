@@ -83,6 +83,7 @@ export class TasksPage extends Page {
       />
 
       <CooperationTasksPage
+        TasksConnector={TasksConnector}
         // where={where}
         // first={first}
         // skip={skip}
