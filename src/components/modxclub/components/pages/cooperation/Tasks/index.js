@@ -2,7 +2,7 @@
 import React, { Fragment } from "react";
 import PropTypes from 'prop-types';
 
-// import CooperationTasksPage from "@prisma-cms/cooperation/lib/components/pages/Tasks";
+import CooperationTasksPage from "@prisma-cms/cooperation/lib/components/pages/Tasks";
 
 import Page from "../../layout";
 import View from "./View/Gantt";
@@ -17,57 +17,57 @@ export class TasksPage extends Page {
 
   static propTypes = {
     ...Page.propTypes,
-    first: PropTypes.number.isRequired,
-    orderBy: PropTypes.string.isRequired,
+    // first: PropTypes.number.isRequired,
+    // orderBy: PropTypes.string.isRequired,
   };
 
 
   static defaultProps = {
     ...Page.defaultProps,
-    first: 1000,
-    orderBy: "createdAt_ASC",
+    // first: 1000,
+    // orderBy: "createdAt_ASC",
     View,
   }
 
 
 
-  setPageMeta(meta = {}) {
+  // setPageMeta(meta = {}) {
 
-    return super.setPageMeta({
-      title: "Задачи",
-      ...meta,
-    });
+  //   return super.setPageMeta({
+  //     title: "Задачи",
+  //     ...meta,
+  //   });
 
-  }
+  // }
 
 
   render() {
 
 
     let {
-      first,
-      where,
+      // first,
+      // where,
       ...other
     } = this.props;
 
-    const {
-      uri,
-    } = this.context;
+    // const {
+    //   uri,
+    // } = this.context;
 
 
-    let {
-      page,
-    } = uri.query(true);
+    // let {
+    //   page,
+    // } = uri.query(true);
 
 
 
-    let skip;
+    // let skip;
 
-    page = page && parseInt(page) || 0;
+    // page = page && parseInt(page) || 0;
 
-    if (first && page > 1) {
-      skip = (page - 1) * first;
-    }
+    // if (first && page > 1) {
+    //   skip = (page - 1) * first;
+    // }
 
     return (<Fragment>
 
@@ -82,11 +82,11 @@ export class TasksPage extends Page {
         }}
       />
 
-      <TasksConnector
-        where={where}
-        first={first}
-        skip={skip}
-        page={page ? parseInt(page) : undefined}
+      <CooperationTasksPage
+        // where={where}
+        // first={first}
+        // skip={skip}
+        // page={page ? parseInt(page) : undefined}
         {...other}
       />
 

@@ -1,3 +1,9 @@
+2.4.3
+============================================
+- Tasks filters by status
+- Edit task status
+- Fix Gantt DnD
+
 2.4.2
 ============================================
 - Fix update comment
