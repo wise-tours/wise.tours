@@ -16,7 +16,7 @@ input UserUpdateInput {
   image: String
   address: String
   email: String
-  # NotificationTypes: NotificationTypeUpdateManyWithoutUsersInput
+  NotificationTypes: NotificationTypeUpdateManyWithoutUsersInput
 }
 
 
