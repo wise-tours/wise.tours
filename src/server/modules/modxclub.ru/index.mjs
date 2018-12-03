@@ -3,7 +3,13 @@
 import PrismaModule from "@prisma-cms/prisma-module";
 
 import SocietyModule from "@prisma-cms/society-module";
+import EthereumModule from "@prisma-cms/ethereum-module";
 import ImportModule from "@modxclub/import-old-site";
+
+import LogModule from "@prisma-cms/log-module";
+import MailModule from "@prisma-cms/mail-module";
+import UploadModule from "@prisma-cms/upload-module";
+import RouterModule from "@prisma-cms/router-module";
 
 import UserModule from "./user";
 import ResourceModule from "./resource";
@@ -32,7 +38,12 @@ class ModxclubModule extends PrismaModule {
     super(options);
 
     this.mergeModules([
+      LogModule,
+      MailModule,
+      UploadModule,
+      RouterModule,
       SocietyModule,
+      EthereumModule,
       UserModule,
       ResourceModule,
       BlogModule,
@@ -66,7 +77,7 @@ class ModxclubModule extends PrismaModule {
 
 
     let apiSchema = super.getApiSchema(types, [
-      "Mutation",
+      // "Mutation",
 
       "UserCreateInput",
       "UserUpdateInput",
@@ -147,7 +158,7 @@ class ModxclubModule extends PrismaModule {
 
     apiSchema = mergeTypes([apiSchema.concat(schema)], { all: true });
 
-    // console.log("apiSchema", apiSchema);
+    // console.log(chalk.green("Modxclub apiSchema"), apiSchema);
 
 
     /**
@@ -193,6 +204,8 @@ class ModxclubModule extends PrismaModule {
 
     let resolvers = super.getResolvers();
 
+    // console.log("resolvers", resolvers);
+
     const {
       Query: {
         letter,
@@ -207,6 +220,7 @@ class ModxclubModule extends PrismaModule {
         log,
         logs,
         logsConnection,
+
         ...Query
       },
       Mutation,
@@ -234,6 +248,8 @@ class ModxclubModule extends PrismaModule {
       updateTaskProcessor,
       createTimerProcessor,
       updateTimerProcessor,
+
+      ethUnlockPersonalAccount,
     } = Mutation;
 
 
@@ -257,6 +273,8 @@ class ModxclubModule extends PrismaModule {
       updateTaskProcessor,
       createTimerProcessor,
       updateTimerProcessor,
+
+      ethUnlockPersonalAccount,
     };
 
     // for(var i in AllowedMutations){

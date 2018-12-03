@@ -10,11 +10,11 @@ import MergeSchema from 'merge-graphql-schemas';
 import { CmsModule } from "@prisma-cms/server";
 
 
-import LogModule from "@prisma-cms/log-module";
-// import UserModule from "@prisma-cms/user-module";
-import MailModule from "@prisma-cms/mail-module";
-import UploadModule from "@prisma-cms/upload-module";
-import RouterModule from "@prisma-cms/router-module";
+// import LogModule from "@prisma-cms/log-module";
+// // import UserModule from "@prisma-cms/user-module";
+// import MailModule from "@prisma-cms/mail-module";
+// import UploadModule from "@prisma-cms/upload-module";
+// import RouterModule from "@prisma-cms/router-module";
 
 
 import path from 'path';
@@ -29,56 +29,56 @@ class CoreModule extends CmsModule {
 
 
 
-  constructor(options = {}) {
+  // constructor(options = {}) {
 
-    super(options);
+  //   super(options);
 
-    this.mergeModules([
-      // UserModule,
-      LogModule,
-      MailModule,
-      UploadModule,
-      RouterModule,
-    ]);
+  //   this.mergeModules([
+  //     // UserModule,
+  //     LogModule,
+  //     MailModule,
+  //     UploadModule,
+  //     RouterModule,
+  //   ]);
 
-  }
-
-
-  getSchema(types = []) {
-
-    let schema = fileLoader(__dirname + '/schema/database/', {
-      recursive: true,
-    });
+  // }
 
 
-    if (schema) {
-      types = types.concat(schema);
-    }
+  // getSchema(types = []) {
+
+  //   let schema = fileLoader(__dirname + '/schema/database/', {
+  //     recursive: true,
+  //   });
 
 
-    let typesArray = super.getSchema(types);
-
-    return typesArray;
-
-  }
+  //   if (schema) {
+  //     types = types.concat(schema);
+  //   }
 
 
-  getApiSchema(types = [], excludeTypes = []) {
+  //   let typesArray = super.getSchema(types);
+
+  //   return typesArray;
+
+  // }
 
 
-    let apiSchema = super.getApiSchema(types, excludeTypes.concat([
-    ]));
+  // getApiSchema(types = [], excludeTypes = []) {
 
 
-    let schema = fileLoader(__dirname + '/schema/api/', {
-      recursive: true,
-    });
+  //   let apiSchema = super.getApiSchema(types, excludeTypes.concat([
+  //   ]));
 
-    apiSchema = mergeTypes([apiSchema.concat(schema)], { all: true });
 
-    return apiSchema;
+  //   let schema = fileLoader(__dirname + '/schema/api/', {
+  //     recursive: true,
+  //   });
 
-  }
+  //   apiSchema = mergeTypes([apiSchema.concat(schema)], { all: true });
+
+  //   return apiSchema;
+
+  // }
 
 
 }
@@ -90,7 +90,7 @@ export default class extends ModxclubModule {
 
     super({
       modules: [
-        CoreModule,
+        // CoreModule,
       ],
     });
 
