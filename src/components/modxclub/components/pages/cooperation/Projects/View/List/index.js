@@ -8,7 +8,7 @@ import {
   updateProjectProcessor,
 } from "../../query";
 
-import Project from "../Project";
+import Project from "./Project";
 
 import {
   Grid,
@@ -25,6 +25,7 @@ class ProjectsList extends Component {
 
   static defaultProps = {
   };
+  
 
   render() {
 

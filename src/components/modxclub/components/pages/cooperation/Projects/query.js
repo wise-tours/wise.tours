@@ -103,6 +103,12 @@ export const projectFragment = `
           ...UserNoNesting
         }
       }
+      CreatedBy{
+        ...UserNoNesting
+      }
+      Parent {
+        ...TaskNoNesting
+      }
     }
     Resource{
       id

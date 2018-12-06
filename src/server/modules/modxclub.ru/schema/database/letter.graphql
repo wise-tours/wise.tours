@@ -1,0 +1,6 @@
+
+type Letter {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

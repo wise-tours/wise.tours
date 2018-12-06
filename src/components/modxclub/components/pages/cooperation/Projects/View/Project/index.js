@@ -1,54 +1,54 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import EditableView from 'apollo-cms/lib/DataView/Object/Editable';
+// import EditableView from 'apollo-cms/lib/DataView/Object/Editable';
 
 import withStyles from "material-ui/styles/withStyles";
+
+
+
 import { Typography } from 'material-ui';
 
 
 import Card, {
   CardContent,
-  // CardActions,
-  // CardHeader,
   CardMedia,
 } from 'material-ui/Card';
 import Button from 'material-ui/Button';
-// import IconButton from 'material-ui/IconButton';
-// import CompaniesList from '../../../fields/user/companies_list';
 import Chip from 'material-ui/Chip';
 import Dialog from 'material-ui/Dialog';
-// import TextField from 'material-ui/TextField';
-
-// import EditIcon from 'material-ui-icons/ModeEdit';
-// import MembersIcon from 'material-ui-icons/People';
-// import SaveIcon from 'material-ui-icons/Save';
-
-// import MembersListEditor from './memberslist';
 
 import { Uploader } from "@prisma-cms/ui";
 
-
-// import moment from "moment";
 
 import {
   UserLink,
   ProjectLink,
   Link,
-  Avatar,
   Grid,
 } from "@modxclub/ui"
 
+import {
+  styles as baseStyles,
+  ProjectView as PrismaCmsCooperationProjectView,
+} from "@prisma-cms/cooperation/lib/components/pages/Projects/View/Project";
 
-// import TasksListView from "../../../Tasks/View/List";
-import TasksListView from "./Tasks/";
 
+export const styles = theme => {
 
-const styles = theme => {
+  const styles = baseStyles(theme);
+
+  const {
+    root,
+    ...other
+  } = styles;
 
   return {
     root: {
+      ...root,
+      height: "100%",
     },
+    ...other,
     header: {
       padding: "15px 15px 0",
     },
@@ -72,77 +72,83 @@ const styles = theme => {
 
 }
 
-class ProjectView extends EditableView {
+
+export class ProjectView extends PrismaCmsCooperationProjectView {
 
 
   static propTypes = {
-    ...EditableView.propTypes,
+    ...PrismaCmsCooperationProjectView.propTypes,
     classes: PropTypes.object.isRequired,
     showDetails: PropTypes.bool.isRequired,
     tasksLimit: PropTypes.number,
   };
 
   static defaultProps = {
-    ...EditableView.defaultProps,
+    ...PrismaCmsCooperationProjectView.defaultProps,
     showDetails: false,
   };
 
   static contextTypes = {
-    ...EditableView.contextTypes,
+    ...PrismaCmsCooperationProjectView.contextTypes,
     openLoginForm: PropTypes.func.isRequired,
   };
 
 
-  canEdit() {
+  renderHeader() {
 
-    const {
-      user: currentUser,
-    } = this.context;
-
-    const {
-      id: currentUserId,
-      sudo,
-    } = currentUser || {};
-
-
-    const {
-      id,
-      CreatedBy,
-    } = this.getObjectWithMutations() || {};
-
-
-    const {
-      id: createdById,
-    } = CreatedBy || {}
-
-    return !id || (createdById && createdById === currentUserId) || sudo === true;
+    return null;
   }
 
+  // canEdit() {
 
-  save() {
+  //   const {
+  //     user: currentUser,
+  //   } = this.context;
 
-    const {
-      user: currentUser,
-      openLoginForm,
-    } = this.context;
-
-    if (!currentUser) {
-
-      return openLoginForm();
-    }
-
-    return super.save();
-  }
+  //   const {
+  //     id: currentUserId,
+  //     sudo,
+  //   } = currentUser || {};
 
 
-  getCacheKey() {
+  //   const {
+  //     id,
+  //     CreatedBy,
+  //   } = this.getObjectWithMutations() || {};
 
-    const {
-      id,
-    } = this.getObject() || {};
 
-    return `project_${id || "new"}`;
-  }
+  //   const {
+  //     id: createdById,
+  //   } = CreatedBy || {}
+
+  //   return !id || (createdById && createdById === currentUserId) || sudo === true;
+  // }
+
+
+  // save() {
+
+  //   const {
+  //     user: currentUser,
+  //     openLoginForm,
+  //   } = this.context;
+
+  //   if (!currentUser) {
+
+  //     return openLoginForm();
+  //   }
+
+  //   return super.save();
+  // }
+
+
+  // getCacheKey() {
+
+  //   const {
+  //     id,
+  //   } = this.getObject() || {};
+
+  //   return `project_${id || "new"}`;
+  // }
 
 
 
@@ -169,10 +175,10 @@ class ProjectView extends EditableView {
   };
 
 
-  renderHeader() {
+  // renderHeader() {
 
-    return null;
-  }
+  //   return null;
+  // }
 
 
 
@@ -198,44 +204,14 @@ class ProjectView extends EditableView {
   }
 
 
-  renderTasks() {
+
+  renderResetButton() {
 
     const {
-      id: projectId,
-      Tasks,
-    } = this.getObjectWithMutations() || {};
+      id,
+    } = this.getObjectWithMutations() || {}
 
-    const {
-      tasksLimit,
-    } = this.props;
-
-    const showDetails = false;
-
-    return Tasks && <CardContent>
-
-      <Typography
-        variant="subheading"
-      >
-        Задачи в проекте
-      </Typography>
-
-      <TasksListView
-        tasks={Tasks}
-        showDetails={showDetails}
-        tasksLimit={tasksLimit}
-      />
-
-      <Link
-        to={`/tasks/create/${projectId}`}
-      >
-        <Typography
-        >
-          Поставить задачу
-        </Typography>
-      </Link>
-
-    </CardContent> || null;
-
+    return id ? super.renderResetButton() : null;
   }
 
 
@@ -705,46 +681,7 @@ class ProjectView extends EditableView {
 
 
 
-  renderEditableView() {
 
-    return this.renderDefaultView();
-
-  }
-
-
-
-  renderResetButton() {
-
-    const {
-      id,
-    } = this.getObjectWithMutations() || {}
-
-    return id ? super.renderResetButton() : null;
-  }
-
-
-
-  // render() {
-
-  //   const object = this.getObjectWithMutations();
-
-  //   if (!object) {
-  //     return null;
-  //   }
-
-  //   const {
-  //     classes,
-  //   } = this.props;
-
-  //   return <div
-  //     className={classes.root}
-  //   >
-
-  //     {super.render()}
-
-  //   </div>
-
-  // }
 }
 
 

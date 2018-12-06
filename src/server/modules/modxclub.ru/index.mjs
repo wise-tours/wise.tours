@@ -249,7 +249,7 @@ class ModxclubModule extends PrismaModule {
       createTimerProcessor,
       updateTimerProcessor,
 
-      ethUnlockPersonalAccount,
+      // ethUnlockPersonalAccount,
     } = Mutation;
 
 
@@ -274,7 +274,7 @@ class ModxclubModule extends PrismaModule {
       createTimerProcessor,
       updateTimerProcessor,
 
-      ethUnlockPersonalAccount,
+      // ethUnlockPersonalAccount,
     };
 
     // for(var i in AllowedMutations){

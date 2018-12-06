@@ -35,6 +35,13 @@ import TimerPage from "../pages/cooperation/Timers/Timer";
 import SubscriptionProvider from "./SubscriptionProvider";
 
 
+import {
+  UserLink,
+  ProjectLink,
+  TaskLink,
+} from "@modxclub/ui"
+
+
 export const styles = theme => {
 
   // console.log("theme", theme);
@@ -85,6 +92,26 @@ export class Renderer extends PrismaRendererCmsRenderer {
     client: PropTypes.object.isRequired,
     loadApiData: PropTypes.func.isRequired,
   }
+
+
+  static childContextTypes = {
+    ...PrismaRendererCmsRenderer.childContextTypes,
+    UserLink: PropTypes.func,
+    ProjectLink: PropTypes.func,
+    TaskLink: PropTypes.func,
+  }
+
+
+  getChildContext() {
+
+    return {
+      ...super.getChildContext(),
+      UserLink,
+      ProjectLink,
+      TaskLink,
+    }
+  }
+
 
   getRoutes() {
 

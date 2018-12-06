@@ -1,3 +1,7 @@
+2.6.0
+============================================
+- Added nested tasks view in project
+
 2.5.0
 ============================================
 - Added @prisma-cms/ethereum-module
