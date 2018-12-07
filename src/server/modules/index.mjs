@@ -25,7 +25,7 @@ const __dirname = path.dirname(moduleURL.pathname);
 
 const { fileLoader, mergeTypes } = MergeSchema;
 
-class CoreModule extends CmsModule {
+// class CoreModule extends CmsModule {
 
 
 
@@ -81,7 +81,7 @@ class CoreModule extends CmsModule {
   // }
 
 
-}
+// }
 
 
 export default class extends ModxclubModule {

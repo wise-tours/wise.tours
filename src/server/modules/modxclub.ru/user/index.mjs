@@ -17,10 +17,10 @@ const __dirname = path.dirname(moduleURL.pathname);
 const { fileLoader, mergeTypes } = MergeSchema;
 
 
-export class ModxclubUserProcessor extends UserPayload{
+export class ModxclubUserProcessor extends UserPayload {
 
-  
-  async signup(source, args, ctx, info){
+
+  async signup(source, args, ctx, info) {
 
     let {
       data: {
@@ -31,20 +31,107 @@ export class ModxclubUserProcessor extends UserPayload{
     } = args;
 
 
-    if(!username){
+    if (!username) {
       this.addFieldError("username", "Не указан логин");
     }
 
-    if(!email){
+    if (!email) {
       this.addFieldError("email", "Не указан емейл");
     }
 
-    if(!password){
+    if (!password) {
       this.addFieldError("password", "Не указан пароль");
     }
 
 
     return super.signup(null, source, args, ctx, info);
+  }
+
+
+  async mutate(method, args, info) {
+
+    let {
+      data: {
+        ethWallet,
+        ...data
+      },
+      where,
+      ...otherArgs
+    } = args;
+
+
+    const {
+      db,
+    } = this.ctx;
+
+
+    if (ethWallet && where) {
+
+      const user = await db.query.user({
+        where,
+      }, `{
+        id
+        EthAccounts{
+          id
+          address
+        },
+      }`);
+
+      if (!user) {
+        return this.addError("Не был получен пользователь");
+      }
+
+      const {
+        EthAccounts,
+      } = user;
+
+      /**
+       * Если есть аккаунт, обновляем его.
+       * Если нету, создаем новый
+       */
+
+      if (EthAccounts && EthAccounts[0]) {
+
+        const {
+          id,
+        } = EthAccounts[0];
+
+        Object.assign(data, {
+          EthAccounts: {
+            update: {
+              where: {
+                id,
+              },
+              data: {
+                address: ethWallet,
+              },
+            },
+          },
+        });
+
+      }
+      else {
+
+        Object.assign(data, {
+          EthAccounts: {
+            create: {
+              address: ethWallet,
+            },
+          },
+        });
+
+      }
+
+    }
+
+
+    args = {
+      ...otherArgs,
+      where,
+      data,
+    }
+
+    return super.mutate(method, args, info);
   }
 
 }
@@ -96,12 +183,13 @@ class ModxclubUserModule extends UserModule {
     const {
       Mutation: {
         signup,
+        updateUserProcessor,
         ...Mutation
       },
       ...other
     } = resolvers;
 
- 
+
 
     return {
       ...other,
@@ -111,11 +199,15 @@ class ModxclubUserModule extends UserModule {
 
           return new ModxclubUserProcessor(ctx).signup(source, args, ctx, info);
         },
+        updateUserProcessor: (source, args, ctx, info) => {
+
+          return new ModxclubUserProcessor(ctx).updateWithResponse("User", args, info);
+        },
       },
       Subscription: {
         user: {
           subscribe: async (parent, args, ctx, info) => {
-  
+
             return ctx.db.subscription.user({}, info);
           },
         },

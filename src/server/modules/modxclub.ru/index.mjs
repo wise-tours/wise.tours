@@ -44,11 +44,16 @@ class ModxclubModule extends PrismaModule {
       RouterModule,
       SocietyModule,
       EthereumModule,
-      UserModule,
+      ImportModule,
+      
+      /**
+       * Важно кастомные классы в последнюю очередь использовать.
+       * Но надо будет вообще вывести базовые кслассы в отдельный загрузчик
+       */
       ResourceModule,
       BlogModule,
-      ImportModule,
       CooperationModule,
+      UserModule,
     ]);
 
   }
@@ -224,6 +229,7 @@ class ModxclubModule extends PrismaModule {
         ...Query
       },
       Mutation,
+      User,
       ...other
     } = resolvers;
 
@@ -332,6 +338,22 @@ class ModxclubModule extends PrismaModule {
         email: () => null,
         subject: () => null,
         message: () => null,
+      },
+      User: {
+        ...User,
+        // EthAccounts: (source, args, ctx) => {
+
+        //   const {
+        //     id: userId,
+        //     EthAccounts,
+        //   } = source;
+
+        //   const {
+        //     id: currentUserId,
+        //   } = ctx.currentUser || {};
+
+        //   return !currentUserId || currentUserId !== userId ? [] : EthAccounts;
+        // },
       },
     };
 

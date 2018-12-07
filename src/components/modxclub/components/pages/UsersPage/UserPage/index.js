@@ -105,6 +105,13 @@ export default class UserPageConnector extends PrismaCmsConnector {
           NotificationTypes{
             id
           }
+          EthAccounts{
+            id
+            address
+            balance(
+              convert: ether
+            )
+          }
         } 
       }
 

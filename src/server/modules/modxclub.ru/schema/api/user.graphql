@@ -16,6 +16,7 @@ input UserUpdateInput {
   image: String
   address: String
   email: String
+  ethWallet: String
   NotificationTypes: NotificationTypeUpdateManyWithoutUsersInput
 }
 

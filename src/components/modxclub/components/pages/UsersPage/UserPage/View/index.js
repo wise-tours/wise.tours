@@ -29,6 +29,7 @@ import PrismaCmsUserPageView from "@prisma-cms/front/lib/modules/pages/UsersPage
 
 
 import NotificationTypes from "./NotificationTypes";
+import { Typography } from 'material-ui';
 
 export default class UserPageView extends PrismaCmsUserPageView {
 
@@ -176,7 +177,146 @@ export default class UserPageView extends PrismaCmsUserPageView {
   //   ...super.state,
   // }
 
+  getEthWallet() {
+
+    const object = this.getObjectWithMutations();
+
+    let {
+      ethWallet,
+      EthAccounts,
+    } = object;
+
+    const {
+      address,
+    } = EthAccounts && EthAccounts[0] || {};
+
+    return ethWallet || address;
+  }
+
+
   renderDefaultView() {
+
+    // return <UserView 
+    //   {...this.props}
+    // />
+
+    const object = this.getObjectWithMutations();
+    const inEditMode = this.isInEditMode();
+
+    let {
+      id,
+      username,
+      fullname,
+      EthAccounts,
+    } = object;
+
+    const {
+      mutate,
+    } = this.props;
+
+    const {
+      user: currentUser,
+    } = this.context;
+
+
+    const {
+      balance,
+    } = EthAccounts && EthAccounts[0] || {};
+
+
+    const {
+      changePassword,
+    } = this.state;
+
+    const {
+    } = currentUser || {}
+
+    const ethWallet = this.getEthWallet();
+
+    return <Grid
+      container
+      spacing={16}
+    >
+
+      <Grid
+        item
+      >
+
+        {this.renderAvatar()}
+
+      </Grid>
+
+      <Grid
+        item
+        xs
+      >
+
+        <Grid
+          container
+          spacing={16}
+        >
+
+          <Grid
+            item
+            xs={12}
+            md={6}
+          >
+
+
+            {ethWallet ?
+              <Fragment>
+                <Grid
+                  item
+                  xs={12}
+                >
+
+                  <Typography>
+                    Кошелек: <a
+                      href={`https://etherscan.io/address/${ethWallet}`}
+                      target="_blank"
+                    >
+                      {ethWallet}
+                    </a>
+                  </Typography>
+
+                  <Typography>
+                    Баланс Eth: {balance}
+                  </Typography>
+
+                </Grid>
+              </Fragment>
+              : null
+            }
+
+
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+            md={6}
+          >
+
+            <NotificationTypes
+              user={object}
+              inEditMode={inEditMode}
+              mutate={mutate}
+            />
+
+          </Grid>
+
+        </Grid>
+
+      </Grid>
+
+
+
+    </Grid>;
+
+  }
+
+  renderEditableView() {
+
 
     // return <UserView 
     //   {...this.props}
@@ -208,6 +348,8 @@ export default class UserPageView extends PrismaCmsUserPageView {
     const {
     } = currentUser || {}
 
+    const ethWallet = this.getEthWallet();
+
     return <Grid
       container
       spacing={16}
@@ -215,109 +357,6 @@ export default class UserPageView extends PrismaCmsUserPageView {
 
       <Grid
         item
-        xs={12}
-      >
-
-        {this.renderAvatar()}
-
-      </Grid>
-
-
-      {inEditMode
-        ?
-        <Fragment>
-
-          <Grid
-            item
-            xs={12}
-          >
-
-            {this.getTextField({
-              name: "fullname",
-              helperText: "Отображаемое на сайте имя",
-              label: "Имя",
-              fullWidth: false,
-            })}
-
-          </Grid>
-
-
-          <Grid
-            item
-            xs={12}
-          >
-
-            <input
-              style={{
-                height: 1,
-                opacity: 1,
-                padding: 0,
-                margin: 0,
-                border: 0,
-              }}
-            />
-
-            <div>
-              {this.getTextField({
-                name: "password",
-                type: "password",
-                label: "Пароль",
-                helperText: "Новый пароль",
-                fullWidth: false,
-              })}
-            </div>
-
-          </Grid>
-
-
-          <Grid
-            item
-            xs={12}
-          >
-
-            {this.getTextField({
-              name: "email",
-              helperText: "Сменить емейл",
-              label: "Емейл",
-              fullWidth: false,
-            })}
-
-          </Grid>
-
-
-        </Fragment>
-        :
-        null
-      }
-
-      <NotificationTypes
-        user={object}
-        inEditMode={inEditMode}
-        mutate={mutate}
-      />
-
-    </Grid>;
-
-  }
-
-  renderEditableView() {
-
-    return this.renderDefaultView();
-
-    const object = this.getObjectWithMutations();
-    const inEditMode = this.isInEditMode();
-
-    const {
-      user: currentUser,
-    } = this.context;
-
-    return <Grid
-      container
-    >
-
-      <Grid
-        item
-        xs={12}
       >
 
         {this.renderAvatar()}
@@ -326,80 +365,109 @@ export default class UserPageView extends PrismaCmsUserPageView {
 
       <Grid
         item
-        xs={12}
-        sm={6}
-        md={4}
+        xs
       >
 
         <Grid
           container
-          spacing={8}
+          spacing={16}
         >
 
           <Grid
             item
             xs={12}
+            md={6}
           >
-            {this.getTextField({
-              name: "fullname",
-              label: "Fullname",
-              helperText: "Type fullname",
-            })}
+
+
+            <Grid
+              item
+              xs={12}
+            >
+
+              {this.getTextField({
+                name: "ethWallet",
+                helperText: "Сменить ethereum кошелек",
+                label: "Адрес кошелька",
+                value: ethWallet || "",
+              })}
+
+            </Grid>
+
+
+            <Grid
+              item
+              xs={12}
+            >
+
+              {this.getTextField({
+                name: "fullname",
+                helperText: "Отображаемое на сайте имя",
+                label: "Имя",
+              })}
+
+            </Grid>
+
+
+            <Grid
+              item
+              xs={12}
+            >
+
+              <input
+                style={{
+                  height: 1,
+                  opacity: 1,
+                  padding: 0,
+                  margin: 0,
+                  border: 0,
+                }}
+              />
+
+              <div>
+                {this.getTextField({
+                  name: "password",
+                  type: "password",
+                  label: "Пароль",
+                  helperText: "Новый пароль",
+                })}
+              </div>
+
+            </Grid>
+
+
+            <Grid
+              item
+              xs={12}
+            >
+
+              {this.getTextField({
+                name: "email",
+                helperText: "Сменить емейл",
+                label: "Емейл",
+              })}
+
+            </Grid>
+
           </Grid>
 
           <Grid
             item
             xs={12}
+            md={6}
           >
-            {this.getTextField({
-              name: "username",
-              label: "Username",
-              helperText: "Type username",
-            })}
-          </Grid>
 
-          <Grid
-            item
-            xs={12}
-          >
-            {this.getTextField({
-              name: "email",
-              label: "Email",
-              helperText: "Type email",
-            })}
-          </Grid>
+            <NotificationTypes
+              user={object}
+              inEditMode={inEditMode}
+              mutate={mutate}
+            />
 
-          <Grid
-            item
-            xs={12}
-          >
-            {this.getTextField({
-              name: "password",
-              label: "Password",
-              type: "password",
-              helperText: "Type password",
-            })}
           </Grid>
 
         </Grid>
 
-
       </Grid>
-
-      {/* <Grid
-        item
-        xs={12}
-        sm={6}
-        md={4}
-      >
-
-        <UsersGroupsBlock
-          user={object}
-          inEditMode={inEditMode && currentUser && currentUser.sudo ? true : false}
-        />
-
-
-      </Grid> */}
 
 
 
