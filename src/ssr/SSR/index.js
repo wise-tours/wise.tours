@@ -67,7 +67,7 @@ class Server {
   }
 
 
-  getApi(){
+  getApi() {
 
     return api;
   }
@@ -81,7 +81,7 @@ class Server {
     global.document = undefined;
 
 
-    const protocol = req.headers["server-protocol"] || req.protocol || "http"; 
+    const protocol = req.headers["server-protocol"] || req.protocol || "http";
 
     const host = req.get('host');
 
@@ -403,7 +403,27 @@ class Server {
       })
       .catch(e => {
 
-        console.error(chalk.red("Server errer"), e);
+        console.error(chalk.red("Server error"), e, e.stack);
+        console.error(chalk.red("Server error message"), e.message);
+
+        const {
+          networkError,
+        } = e;
+
+        if (networkError) {
+
+          const {
+            errors,
+          } = networkError.result || {};
+
+          if(errors && errors.length){
+            errors.map(error => {
+              console.error(chalk.red("Server networkError.errors error"), error);
+            });
+          }
+
+        }
+
 
         res.writeHead(500, {
           'Content-Type': 'text/html; charset=utf-8',
