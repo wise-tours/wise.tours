@@ -1,0 +1,11 @@
+
+input EthTransactionCreateInput {
+  privateKey: String!
+  type: EthTransactionTypes!
+  params: Json
+}
+
+type EthTransactionSubscriptionPayload {
+  mutation: MutationType!
+  node: EthTransaction
+}

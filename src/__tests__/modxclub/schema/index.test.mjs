@@ -55,6 +55,8 @@ const requiredTypes = [
         "Imports",
         "Tags",
         "ResourceTags",
+        "LettersCreated",
+        "EthAccounts",
       ],
       prisma: [
       ],

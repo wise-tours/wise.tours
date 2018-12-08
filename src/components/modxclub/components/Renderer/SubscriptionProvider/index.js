@@ -73,8 +73,6 @@ export default class SubscriptionProvider extends Component {
       }
     `;
 
-
-
     const userSub = await client
       .subscribe({
         query: subscribeUser,
@@ -94,10 +92,6 @@ export default class SubscriptionProvider extends Component {
 
     subscriptions.push(userSub);
 
-    this.setState({
-      subscriptions,
-    });
-
 
     const subscribeResource = gql`
       subscription resource{
@@ -109,8 +103,6 @@ export default class SubscriptionProvider extends Component {
         }
       }
     `;
-
-
 
     const resourceSub = await client
       .subscribe({
@@ -131,10 +123,42 @@ export default class SubscriptionProvider extends Component {
 
     subscriptions.push(resourceSub);
 
+
+    const subscribeEthTransaction = gql`
+      subscription ethTransaction{
+        ethTransaction{
+          mutation
+          node{
+            id
+          }
+        }
+      }
+    `;
+
+    const ethTransactionSub = await client
+      .subscribe({
+        query: subscribeEthTransaction,
+        variables: {
+        },
+      })
+      .subscribe({
+        next: async (data) => {
+
+          await client.reFetchObservableQueries();
+
+        },
+        error(error) {
+          console.error('subscribeCalls callback with error: ', error)
+        },
+      });
+
+    subscriptions.push(ethTransactionSub);
+
+
+
     this.setState({
       subscriptions,
     });
-
 
   }
 

@@ -83,6 +83,7 @@ class ModxclubModule extends PrismaModule {
 
     let apiSchema = super.getApiSchema(types, [
       // "Mutation",
+      "User",
 
       "UserCreateInput",
       "UserUpdateInput",
@@ -153,6 +154,8 @@ class ModxclubModule extends PrismaModule {
       "ProjectSubscriptionPayload",
       "TimerSubscriptionPayload",
 
+      "EthTransactionCreateInput",
+      "EthTransactionSubscriptionPayload",
 
     ]);
 
@@ -225,6 +228,9 @@ class ModxclubModule extends PrismaModule {
         log,
         logs,
         logsConnection,
+        import: importNull,
+        imports,
+        importsConnection,
 
         ...Query
       },
@@ -256,6 +262,7 @@ class ModxclubModule extends PrismaModule {
       updateTimerProcessor,
 
       // ethUnlockPersonalAccount,
+      createEthTransactionProcessor,
     } = Mutation;
 
 
@@ -281,6 +288,7 @@ class ModxclubModule extends PrismaModule {
       updateTimerProcessor,
 
       // ethUnlockPersonalAccount,
+      createEthTransactionProcessor,
     };
 
     // for(var i in AllowedMutations){

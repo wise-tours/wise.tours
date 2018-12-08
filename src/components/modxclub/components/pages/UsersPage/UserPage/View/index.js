@@ -4,209 +4,58 @@ import PropTypes from 'prop-types'
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 
-// import EditableView from 'apollo-cms/lib/DataView/Object/Editable';
 
 import PrismaCmsUserPageView from "@prisma-cms/front/lib/modules/pages/UsersPage/UserPage/View";
-
-// import UserAvatar from './Avatar';
-
-// import UserView from "@modxclub/old/view/profile";
-
-
-
-// let propTypes = { ...EditableView.propTypes }
-// let contextTypes = { ...EditableView.contextTypes }
-
-
-// Object.assign(propTypes, {
-//   // user: PropTypes.object.isRequired,
-// });
-
-// Object.assign(contextTypes, {
-//   loadApiData: PropTypes.func.isRequired,
-//   setPageMeta: PropTypes.func.isRequired,
-// });
 
 
 import NotificationTypes from "./NotificationTypes";
 import { Typography } from 'material-ui';
 
+
+import EthWallet from "./EthWallet";
+
+
 export default class UserPageView extends PrismaCmsUserPageView {
 
-  // static propTypes = propTypes;
 
-  // static contextTypes = contextTypes;
-
-
-  // setPageMeta() {
-
-  //   const {
-  //     setPageMeta,
-  //   } = this.context;
-
-  //   setPageMeta({
-  //     title: this.getTitle(),
-  //   });
-
-  // }
-
-  // componentWillMount() {
-
-  //   this.setPageMeta();
-  // }
-
-
-  // componentDidUpdate() {
-
-  //   this.setPageMeta();
-
-  //   super.componentDidUpdate && super.componentDidUpdate();
-  // }
-
-
-
-
-  // getTitle() {
-
-  //   const draftObject = this.getObjectWithMutations();
-
-  //   const {
-  //     username,
-  //     fullname,
-  //   } = draftObject || {};
-
-  //   return fullname || username;
-  // }
-
-
-
-  // renderAvatar() {
-
-  //   const draftObject = this.getObjectWithMutations();
-
-  //   return <UserAvatar
-  //     user={draftObject}
-  //     updateUser={this.onUpdateAvatar}
-  //     inEditMode={this.isInEditMode()}
-  //   />
-  // }
-
-
-  // canEdit() {
-
-  //   return false;
-  // }
-
-
-  // async save() {
-
-
-  //   const result = await super.save()
-  //     .then(r => {
-
-  //       // console.log("onSave", r);
-
-  //       const {
-  //         loadApiData,
-  //       } = this.context;
-
-  //       loadApiData();
-
-  //       return r;
-  //     })
-  //     .catch(e => {
-  //       console.error(e);
-  //     });
-
-  //   return result;
-
-  // }
-
-
-  // onUpdateAvatar = (file) => {
-
-  //   console.log("onUpdateAvatar", file);
-
-  //   if (file) {
-
-  //     const {
-  //       id,
-  //       path,
-  //       mimetype,
-  //     } = file;
-
-  //     if (!path) {
-
-  //       this.addError("File URL is empty");
-
-  //       return;
-  //     }
-
-  //     if (!mimetype) {
-
-  //       this.addError("Wrong file type");
-
-  //     }
-  //     else if (!mimetype.match(/image/)) {
-
-  //       this.addError("Only images allow");
-
-  //     }
-  //     else {
-
-  //       let image = path;
-
-  //       this.updateObject({
-  //         image,
-  //       });
-
-  //     }
-
-  //   }
-  //   else {
-
-  //     this.addError("File did not received");
-
-  //   }
-
-
-  // }
-
-
-  // state = {
-  //   ...super.state,
-  // }
-
-  getEthWallet() {
+  getWalletAddress() {
 
     const object = this.getObjectWithMutations();
 
     let {
       ethWallet,
-      EthAccounts,
     } = object;
 
     const {
       address,
-    } = EthAccounts && EthAccounts[0] || {};
+    } = this.getEthAccount() || {}
 
     return ethWallet || address;
   }
 
 
-  renderDefaultView() {
+  getEthAccount() {
 
-    // return <UserView 
-    //   {...this.props}
-    // />
+    const object = this.getObjectWithMutations();
+
+    let {
+      EthAccounts,
+    } = object;
+
+    return EthAccounts && EthAccounts[0] || null;
+
+  }
+
+
+  renderDefaultView() {
 
     const object = this.getObjectWithMutations();
     const inEditMode = this.isInEditMode();
 
     let {
-      id,
-      username,
-      fullname,
+      id: userId,
+      // username,
+      // fullname,
       EthAccounts,
     } = object;
 
@@ -219,19 +68,22 @@ export default class UserPageView extends PrismaCmsUserPageView {
     } = this.context;
 
 
-    const {
-      balance,
-    } = EthAccounts && EthAccounts[0] || {};
+    const ethAccount = this.getEthAccount();
+
+    // const {
+    //   balance,
+    // } = EthAccounts && EthAccounts[0] || {};
 
 
-    const {
-      changePassword,
-    } = this.state;
+    // const {
+    //   changePassword,
+    // } = this.state;
 
     const {
+      id: currentUserId,
     } = currentUser || {}
 
-    const ethWallet = this.getEthWallet();
+    // const ethWallet = this.getWalletAddress();
 
     return <Grid
       container
@@ -263,28 +115,13 @@ export default class UserPageView extends PrismaCmsUserPageView {
           >
 
 
-            {ethWallet ?
-              <Fragment>
-                <Grid
-                  item
-                  xs={12}
-                >
+            {ethAccount || (currentUserId && currentUserId === userId) ?
 
-                  <Typography>
-                    Кошелек: <a
-                      href={`https://etherscan.io/address/${ethWallet}`}
-                      target="_blank"
-                    >
-                      {ethWallet}
-                    </a>
-                  </Typography>
-
-                  <Typography>
-                    Баланс Eth: {balance}
-                  </Typography>
-
-                </Grid>
-              </Fragment>
+              <EthWallet
+                // ethAccount={ethAccount}
+                user={object}
+                currentUser={currentUser}
+              />
               : null
             }
 
@@ -348,7 +185,7 @@ export default class UserPageView extends PrismaCmsUserPageView {
     const {
     } = currentUser || {}
 
-    const ethWallet = this.getEthWallet();
+    const ethWallet = this.getWalletAddress();
 
     return <Grid
       container

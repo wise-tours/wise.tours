@@ -3,4 +3,5 @@ type Letter {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
+  User: User @relation(name: "LettersCreatedBy")
 }

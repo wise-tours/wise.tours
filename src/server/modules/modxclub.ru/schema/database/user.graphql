@@ -1,4 +1,5 @@
 
 type User {
   oldID: Int @unique
+  LettersCreated: [Letter!]! @relation(name: "LettersCreatedBy")
 }

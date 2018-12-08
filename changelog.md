@@ -1,3 +1,7 @@
+2.7.1
+============================================
+- Added import/create ethereum wallets
+
 2.7.0
 ============================================
 - Added ethereum wallets

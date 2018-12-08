@@ -9,6 +9,7 @@ import UserModule, {
 import MergeSchema from 'merge-graphql-schemas';
 
 import path from 'path';
+import chalk from "chalk";
 
 const moduleURL = new URL(import.meta.url);
 
@@ -52,7 +53,8 @@ export class ModxclubUserProcessor extends UserPayload {
 
     let {
       data: {
-        ethWallet,
+        ethWalletPK: privateKey,
+        ethWalletPKSendEmail,
         ...data
       },
       where,
@@ -62,15 +64,42 @@ export class ModxclubUserProcessor extends UserPayload {
 
     const {
       db,
+      web3,
     } = this.ctx;
 
 
-    if (ethWallet && where) {
+    if (privateKey && where) {
+
+
+      let account;
+
+      if (!/^0x/.test(privateKey)) {
+        return this.addFieldError("ethWalletPK", "Приватный ключ должен начинаться с 0x");
+      }
+
+      try {
+        account = web3.eth.accounts.privateKeyToAccount(privateKey);
+      }
+      catch (error) {
+        console.error(chalk.red("privateKeyToAccount Error"), error);
+      }
+
+
+      // console.log("account", account);
+
+      if (!account) {
+        return this.addFieldError("ethWalletPK", "Приватный ключ не был дешифрован");
+      }
+
+      const {
+        address: ethWallet,
+      } = account;
 
       const user = await db.query.user({
         where,
       }, `{
         id
+        email,
         EthAccounts{
           id
           address
@@ -83,6 +112,7 @@ export class ModxclubUserProcessor extends UserPayload {
 
       const {
         EthAccounts,
+        email,
       } = user;
 
       /**
@@ -92,25 +122,60 @@ export class ModxclubUserProcessor extends UserPayload {
 
       if (EthAccounts && EthAccounts[0]) {
 
-        const {
-          id,
-        } = EthAccounts[0];
+        // const {
+        //   id,
+        // } = EthAccounts[0];
 
-        Object.assign(data, {
-          EthAccounts: {
-            update: {
-              where: {
-                id,
-              },
-              data: {
-                address: ethWallet,
-              },
-            },
-          },
-        });
+        // Object.assign(data, {
+        //   EthAccounts: {
+        //     update: {
+        //       where: {
+        //         id,
+        //       },
+        //       data: {
+        //         address: ethWallet,
+        //       },
+        //     },
+        //   },
+        // });
+
+        return this.addError("Нельзя менять кошелек");
 
       }
       else {
+
+
+
+        /**
+         * Если пользователь указал отправить ему уведомление с паролем, отправляем
+         */
+
+        let LettersCreated;
+
+        if (ethWalletPKSendEmail) {
+
+          LettersCreated = {
+            create: {
+              email,
+              subject: "Данные вашего кошелька",
+              message: `
+                <h3>
+                  Данные вашего кошелька
+                </h3>
+
+                <p>
+                  <strong>Адрес:</strong> ${ethWallet}
+                </p>
+
+                <p>
+                  <strong>Приватный ключ:</strong> ${privateKey}
+                </p>
+              `,
+            },
+          }
+
+        }
+
 
         Object.assign(data, {
           EthAccounts: {
@@ -118,6 +183,7 @@ export class ModxclubUserProcessor extends UserPayload {
               address: ethWallet,
             },
           },
+          LettersCreated,
         });
 
       }

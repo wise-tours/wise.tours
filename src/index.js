@@ -19,6 +19,11 @@ ReactDOM.render(<PrismaCms
     apiQuery: `{
       user:me{
         ...UserNoNesting
+        EthAccounts {
+          id
+          address
+          balance(convert:ether)
+        }
       } 
     }
     ${UserNoNestingFragment}
