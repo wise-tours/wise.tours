@@ -1,3 +1,7 @@
+2.7.2
+============================================
+- Added ether wallets on users pages
+
 2.7.1
 ============================================
 - Added import/create ethereum wallets

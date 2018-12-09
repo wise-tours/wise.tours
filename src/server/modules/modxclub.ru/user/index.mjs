@@ -156,6 +156,7 @@ export class ModxclubUserProcessor extends UserPayload {
 
           LettersCreated = {
             create: {
+              rank: 100,
               email,
               subject: "Данные вашего кошелька",
               message: `
