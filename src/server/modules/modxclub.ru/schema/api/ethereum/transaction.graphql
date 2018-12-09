@@ -2,7 +2,10 @@
 input EthTransactionCreateInput {
   privateKey: String!
   type: EthTransactionTypes!
-  params: Json
+  to: String
+  amount: Float
+  gasPrice: Int
+  contractSourceId: ID
 }
 
 type EthTransactionSubscriptionPayload {

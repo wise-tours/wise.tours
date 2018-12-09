@@ -100,7 +100,11 @@ export class ModxclubUserProcessor extends UserPayload {
       }, `{
         id
         email,
-        EthAccounts{
+        EthAccounts(
+          where: {
+            type: Contract
+          }
+        ){
           id
           address
         },
@@ -177,11 +181,14 @@ export class ModxclubUserProcessor extends UserPayload {
 
         }
 
+        const chainId = await web3.eth.net.getId();
 
         Object.assign(data, {
           EthAccounts: {
             create: {
               address: ethWallet,
+              type: "Contract",
+              chainId,
             },
           },
           LettersCreated,

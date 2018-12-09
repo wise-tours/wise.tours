@@ -144,6 +144,8 @@ export default class SubscriptionProvider extends Component {
       .subscribe({
         next: async (data) => {
 
+          await loadApiData();
+
           await client.reFetchObservableQueries();
 
         },

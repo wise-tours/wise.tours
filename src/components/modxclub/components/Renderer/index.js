@@ -32,6 +32,9 @@ import TaskCreatePage from "../pages/cooperation/Tasks/Task/Create";
 import TimersPage from "../pages/cooperation/Timers";
 import TimerPage from "../pages/cooperation/Timers/Timer";
 
+import TransactionsPage from "../pages/ethereum/Transactions";
+import TransactionPage from "../pages/ethereum/Transactions/Transaction";
+
 import SubscriptionProvider from "./SubscriptionProvider";
 
 
@@ -39,6 +42,7 @@ import {
   UserLink,
   ProjectLink,
   TaskLink,
+  TransactionLink,
 } from "@modxclub/ui"
 
 
@@ -99,6 +103,7 @@ export class Renderer extends PrismaRendererCmsRenderer {
     UserLink: PropTypes.func,
     ProjectLink: PropTypes.func,
     TaskLink: PropTypes.func,
+    TransactionLink: PropTypes.func,
   }
 
 
@@ -109,6 +114,7 @@ export class Renderer extends PrismaRendererCmsRenderer {
       UserLink,
       ProjectLink,
       TaskLink,
+      TransactionLink,
     }
   }
 
@@ -373,6 +379,21 @@ export class Renderer extends PrismaRendererCmsRenderer {
             {...props}
           />
         }
+      },
+      {
+        exact: true,
+        path: "/eth-transactions",
+        render: props => <TransactionsPage
+          {...props}
+          where={{}}
+          first={10}
+          orderBy="createdAt_DESC"
+        />
+      },
+      {
+        exact: true,
+        path: "/eth-transactions/:transactionId",
+        component: TransactionPage,
       },
       // {
       //   path: "*",

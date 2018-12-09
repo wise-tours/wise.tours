@@ -1,4 +1,5 @@
 
+ 
 
 type User implements Node {
   id: ID!
@@ -27,10 +28,8 @@ type User implements Node {
   NotificationTypesCreated(where: NotificationTypeWhereInput, orderBy: NotificationTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NotificationType!]
   Tags(where: TagWhereInput, orderBy: TagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tag!]
   ResourceTags(where: ResourceTagWhereInput, orderBy: ResourceTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ResourceTag!]
-  EthContractsCreated(where: EthContractWhereInput, orderBy: EthContractOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EthContract!]
-  EthContractsDeployed(where: EthDeployedContractWhereInput, orderBy: EthDeployedContractOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EthDeployedContract!]
+  EthContractSourcesCreated(where: EthContractSourceWhereInput, orderBy: EthContractSourceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EthContractSource!]
   EthAccounts(where: EthAccountWhereInput, orderBy: EthAccountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EthAccount!]
-  EthTransactions(where: EthTransactionWhereInput, orderBy: EthTransactionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EthTransaction!]
   # files(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File!]
   Teams(where: TeamMemberWhereInput, orderBy: TeamMemberOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TeamMember!]
   TeamsCreated(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team!]
@@ -41,9 +40,14 @@ type User implements Node {
   # Imports(where: ImportWhereInput, orderBy: ImportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Import!]
   # oldID: Int
   # LettersCreated(where: LetterWhereInput, orderBy: LetterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Letter!]
+}
+
+# Custom
+type User {
   hasEmail: Boolean!
   hasPhone: Boolean!
 }
+
 
 
 input UserCreateInput {

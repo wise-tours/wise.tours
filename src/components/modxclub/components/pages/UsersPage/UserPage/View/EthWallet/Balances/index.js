@@ -29,11 +29,12 @@ export const styles = theme => {
   return {
     root: {
       padding: 10,
+      border: "2px solid transparent",
       "&.success": {
-        border: "2px solid green",
+        borderColor: "green",
       },
       "&.failure": {
-        border: "2px solid red",
+        borderColor: "red",
       },
     },
     icon: {
@@ -83,9 +84,10 @@ export class WalletBalances extends PrismaCmsComponent {
     ethWalletPKSendEmail: true,
     showInfo: false,
     checkStatus: null,
-    showSendEthForm: true,
+    showSendEthForm: false,
     sendEthInRequest: false,
     amount: null,
+    sendPrivateKey: "",
     sendSuccessTransaction: null,
   }
 
@@ -247,6 +249,7 @@ export class WalletBalances extends PrismaCmsComponent {
     const {
       amount,
       sendEthInRequest,
+      sendPrivateKey: privateKey,
     } = this.state;
 
 
@@ -272,11 +275,9 @@ export class WalletBalances extends PrismaCmsComponent {
       variables: {
         data: {
           type: "SendEth",
-          privateKey: "0x71ff1d913dff53ea7c688437ae0b89bfb3027622ea2e7afc3d8012864bbec9b5",
-          params: [
-            address,
-            amount,
-          ],
+          privateKey: privateKey || "",
+          to: address,
+          amount: parseFloat(amount),
         }
       },
     })
@@ -301,6 +302,8 @@ export class WalletBalances extends PrismaCmsComponent {
             this.setState({
               sendSuccessTransaction: transaction,
               amount: null,
+              showSendEthForm: false,
+              sendPrivateKey: "",
             });
 
           }
@@ -355,6 +358,7 @@ export class WalletBalances extends PrismaCmsComponent {
       checkStatus,
       showSendEthForm,
       amount,
+      sendPrivateKey,
       sendEthInRequest,
       sendSuccessTransaction,
     } = this.state;
@@ -523,37 +527,37 @@ export class WalletBalances extends PrismaCmsComponent {
         }
         else {
 
-          if (showSendEthForm) {
+          if (sendSuccessTransaction) {
 
-            if (sendSuccessTransaction) {
+            const {
+              id,
+            } = sendSuccessTransaction;
 
-              const {
-                id,
-              } = sendSuccessTransaction;
+            actions.push(<div
+              key="ethSendedSuccess"
+            >
 
-              actions.push(<div
-                key="ethSendedSuccess"
+              <Typography
+                className={classes.textSuccess}
               >
+                Перевод успешно выполнен.
+              </Typography>
 
-                <Typography
-                  className={classes.textSuccess}
+              <Typography
+              >
+                Посмотреть данные транзакции можно <TransactionLink
+                  object={sendSuccessTransaction}
                 >
-                  Перевод успешно выполнен.
-                </Typography>
+                  здесь
+                </TransactionLink>.
+              </Typography>
 
-                <Typography
-                >
-                  Посмотреть данные транзакции можно <TransactionLink
-                    object={sendSuccessTransaction}
-                  >
-                    здесь
-                  </TransactionLink>.
-                </Typography>
+            </div>);
 
-              </div>);
+          }
+          else if (showSendEthForm) {
 
-            }
-            else if (currentUserEthAccount) {
+            if (currentUserEthAccount) {
 
               /**
                * Проверяем достаточно ли баланса
@@ -576,12 +580,17 @@ export class WalletBalances extends PrismaCmsComponent {
               let error;
               let helperText = "Внимательно перепроверьте сумму";
 
+              let fieldProps = {};
+
               if (!currentUserBalance || currentUserBalance < amount) {
                 error = true;
                 helperText = "Недостаточно баланса. Пополните свой кошелек.";
+
+                fieldProps.error = error;
               }
 
               const disabled = error || !amount ? true : false;
+
 
               actions.push(<div
                 key="sendEthForm"
@@ -593,25 +602,8 @@ export class WalletBalances extends PrismaCmsComponent {
 
                   <Grid
                     item
-                    xs
+                    xs={12}
                   >
-                    {/* {this.renderField(<TextField
-                      label="Сумма в Eth"
-                      name="amount"
-                      helperText={helperText}
-                      fullWidth
-                      error={error}
-                      onChange={event => {
-                        const {
-                          name,
-                          value,
-                        } = event.target;
-                        this.setState({
-                          [name]: value,
-                        });
-                      }}
-                      value={amount || ""}
-                    />)} */}
 
                     {this.renderField(<NumberFormat
                       customInput={TextField}
@@ -619,7 +611,6 @@ export class WalletBalances extends PrismaCmsComponent {
                       name="amount"
                       helperText={helperText}
                       fullWidth
-                      error={error}
                       onChange={event => {
                         const {
                           name,
@@ -630,6 +621,29 @@ export class WalletBalances extends PrismaCmsComponent {
                         });
                       }}
                       value={amount || ""}
+                      {...fieldProps}
+                    />)}
+                  </Grid>
+
+                  <Grid
+                    item
+                    xs
+                  >
+                    {this.renderField(<TextField
+                      label="Приватный ключ"
+                      name="privateKey"
+                      helperText="Ключ должен начинаться с 0x"
+                      fullWidth
+                      onChange={event => {
+                        const {
+                          name,
+                          value,
+                        } = event.target;
+                        this.setState({
+                          sendPrivateKey: value,
+                        });
+                      }}
+                      value={sendPrivateKey || ""}
                     />)}
                   </Grid>
 
@@ -678,6 +692,7 @@ export class WalletBalances extends PrismaCmsComponent {
             key="sendEth"
             onClick={event => this.setState({
               showSendEthForm: !showSendEthForm,
+              sendSuccessTransaction: null,
             })}
           >
             {showSendEthForm ? "Отмена" : "Отправить Eth"}

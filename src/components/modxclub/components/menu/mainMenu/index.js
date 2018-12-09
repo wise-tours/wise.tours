@@ -161,6 +161,19 @@ export class MainMenu extends Component {
             <Grid
               item
             >
+              <Link
+                to="/eth-transactions"
+              >
+                <Typography>
+                  Ethereum
+                </Typography>
+              </Link>
+
+            </Grid>
+
+            <Grid
+              item
+            >
               <a
                 href="/graphql-voyager"
                 rel="noindex,nofollow"
