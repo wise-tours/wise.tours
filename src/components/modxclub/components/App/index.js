@@ -52,7 +52,8 @@ export const getTheme = function (uiTheme) {
       // },
     },
     typography: {
-      fontFamily: "'Open Sans', sans-serif,Tahoma, Helvetica",
+      // fontFamily: "'Open Sans', sans-serif,Tahoma, Helvetica",
+      fontFamily: "sans-serif,Tahoma, Helvetica",
       fontSize: 14,
       display1: {
         color: "#222",
