@@ -273,7 +273,7 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
                     ],
                   },
                   NotificationTypes_some: {
-                    name_in: ["new_comment", "new_reply"],
+                    name_in: ["new_comment", "new_reply", "new_comments_in_my_topics"],
                   },
                 }
 
