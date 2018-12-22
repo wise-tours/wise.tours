@@ -31,6 +31,7 @@ export default class PageLayout extends PrismaCmsPageLayout {
   }
 
   static defaultProps = {
+    ...PrismaCmsPageLayout.defaultProps,
     UserLink,
     TaskLink,
     Editor,

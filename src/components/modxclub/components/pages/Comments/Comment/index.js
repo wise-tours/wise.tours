@@ -52,15 +52,16 @@ class CommentPage extends Page {
 
     const {
       CommentTarget: Topic,
+      name,
     } = comment;
 
     const {
-      name,
+      name: topicName,
       longtitle,
     } = Topic || {};
 
     return super.setPageMeta({
-      title: `Комментарий к топику ${longtitle || name}`,
+      title: `${name ? `${name} | ` : ''}Комментарий к топику ${longtitle || topicName}`,
       ...meta,
     });
 

@@ -19,10 +19,10 @@ export class UsersPage extends PrismaCmsUsersPage {
   }
 
 
-  setPageMeta(meta = {}) {
+  setPageMeta(meta) {
 
-    return super.setPageMeta({
-      title: "Users",
+    return super.setPageMeta(meta || {
+      title: "Участники",
     });
 
   }
