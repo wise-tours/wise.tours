@@ -16,19 +16,17 @@ import ResourceModule from "./resource";
 import BlogModule from "./blog";
 import CooperationModule from "./cooperation";
 
-import MergeSchema from 'merge-graphql-schemas';
 
 import chalk from 'chalk';
 
+
+import MergeSchema from 'merge-graphql-schemas';
 import path from 'path';
-
 const moduleURL = new URL(import.meta.url);
-
 const __dirname = path.dirname(moduleURL.pathname);
-
 const { fileLoader, mergeTypes } = MergeSchema;
-
 import { parse, print } from "graphql";
+
 
 class ModxclubModule extends PrismaModule {
 
