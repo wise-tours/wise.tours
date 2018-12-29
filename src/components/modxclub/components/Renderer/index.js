@@ -185,7 +185,7 @@ export class Renderer extends PrismaRendererCmsRenderer {
       },
       {
         exact: true,
-        path: "/comments/comment-:oldID(\\d+).html",
+        path: "/comments/comment-:commentOldID(\\d+).html",
         render: (props) => {
 
           // console.log("props", props);
@@ -193,15 +193,15 @@ export class Renderer extends PrismaRendererCmsRenderer {
           const {
             match: {
               params: {
-                oldID,
+                commentOldID,
               },
             },
           } = props;
 
           return <CommentPage
-            key={oldID}
+            key={commentOldID}
             where={{
-              oldID: parseInt(oldID),
+              commentOldID: parseInt(commentOldID),
             }}
             {...props}
           />

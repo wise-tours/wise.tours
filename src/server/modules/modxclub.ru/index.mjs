@@ -65,12 +65,26 @@ class ModxclubModule extends PrismaModule {
     });
 
 
-    if (schema) {
-      types = types.concat(schema);
-    }
+    // if (schema) {
+    //   types = types.concat(schema);
+    // }
+
+    // console.log("schema", schema);
 
 
     let typesArray = super.getSchema(types);
+
+    // typesArray = mergeTypes([typesArray.concat(schema)], { all: true });
+    typesArray = mergeTypes([typesArray].concat(schema), { all: true });
+
+    // typesArray = mergeTypes([typesArray].concat(`
+    //   type Resource {
+    //     type: ResourceType!
+    //   }
+    // `), { all: true });
+
+
+    // console.log("typesArray", typesArray);
 
     return typesArray;
 
@@ -99,6 +113,7 @@ class ModxclubModule extends PrismaModule {
     let apiSchema = super.getApiSchema(types.concat(baseSchema), [
       // "Mutation",
       "User",
+      "Resource",
 
       "UserCreateInput",
       "UserUpdateInput",

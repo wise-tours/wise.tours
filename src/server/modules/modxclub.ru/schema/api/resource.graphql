@@ -1,4 +1,58 @@
 
+enum ResourceType {
+  Blog
+  Comment
+  PersonalBlog
+  Project
+  Resource
+  Service
+  Team
+  Topic
+}
+
+type Resource implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  # type: ID!
+  name: String!
+  longtitle: String
+  content: Json
+  contentText: String
+  published: Boolean!
+  deleted: Boolean!
+  hidemenu: Boolean!
+  searchable: Boolean!
+  uri: String!
+  isfolder: Boolean!
+  CreatedBy(where: UserWhereInput): User!
+  Parent(where: ResourceWhereInput): Resource
+  Childs(where: ResourceWhereInput, orderBy: ResourceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Resource!]
+  Image(where: FileWhereInput): File
+  rating: Float!
+  positiveVotesCount: Int!
+  negativeVotesCount: Int!
+  neutralVotesCount: Int!
+  CommentTarget(where: ResourceWhereInput): Resource
+  Comments(where: ResourceWhereInput, orderBy: ResourceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Resource!]
+  Votes(where: VoteWhereInput, orderBy: VoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vote!]
+  Tags(where: ResourceTagWhereInput, orderBy: ResourceTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ResourceTag!]
+  oldID: Int
+  commentOldID: Int
+  Topics(where: ResourceWhereInput, orderBy: ResourceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Resource!]
+  Blog(where: ResourceWhereInput): Resource
+  Service(where: ServiceWhereInput): Service
+  Project(where: ProjectWhereInput): Project
+  Team(where: TeamWhereInput): Team
+  class_key: String
+  template: Int
+  mockUpdate: DateTime
+}
+
+type Resource {
+  type: ResourceType!
+}
+
 input ResourceCreateInput {
   type: ID
   name: String
