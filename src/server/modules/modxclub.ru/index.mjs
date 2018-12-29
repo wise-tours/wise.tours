@@ -1,4 +1,5 @@
 
+import fs from "fs";
 
 import PrismaModule from "@prisma-cms/prisma-module";
 
@@ -44,10 +45,10 @@ class ModxclubModule extends PrismaModule {
       EthereumModule,
       ImportModule,
       
-      /**
-       * Важно кастомные классы в последнюю очередь использовать.
-       * Но надо будет вообще вывести базовые кслассы в отдельный загрузчик
-       */
+      // /**
+      //  * Важно кастомные классы в последнюю очередь использовать.
+      //  * Но надо будет вообще вывести базовые кслассы в отдельный загрузчик
+      //  */
       ResourceModule,
       BlogModule,
       CooperationModule,
@@ -78,8 +79,24 @@ class ModxclubModule extends PrismaModule {
 
   getApiSchema(types = []) {
 
+    let baseSchema = [];
 
-    let apiSchema = super.getApiSchema(types, [
+    let schemaFile = __dirname + "/../../../schema/generated/prisma.graphql";
+
+    if (fs.existsSync(schemaFile)) {
+      baseSchema = fs.readFileSync(schemaFile, "utf-8");
+
+      baseSchema = this.cleanupApiSchema(baseSchema, [
+        "TeamMemberCreateInput",
+      ]);
+
+    }
+    else {
+      console.error(chalk.red(`Schema file ${schemaFile} did not loaded`));
+    }
+
+
+    let apiSchema = super.getApiSchema(types.concat(baseSchema), [
       // "Mutation",
       "User",
 
