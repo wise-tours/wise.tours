@@ -55,6 +55,7 @@ export class ProjectPage extends Page {
     
     const {
       Project: project,
+      uri,
     } = Resource || {};
 
 
@@ -68,6 +69,7 @@ export class ProjectPage extends Page {
 
     return super.setPageMeta({
       title: `Проект ${name}`,
+      canonical: uri,
       ...meta,
     });
 

@@ -184,6 +184,30 @@ export class Renderer extends PrismaRendererCmsRenderer {
         component: CommentsPage,
       },
       {
+        exact: true,
+        path: "/comments/comment-:oldID(\\d+).html",
+        render: (props) => {
+
+          // console.log("props", props);
+
+          const {
+            match: {
+              params: {
+                oldID,
+              },
+            },
+          } = props;
+
+          return <CommentPage
+            key={oldID}
+            where={{
+              oldID: parseInt(oldID),
+            }}
+            {...props}
+          />
+        }
+      },
+      {
         exact: false,
         path: "/comments/(.+)",
         render: (props) => {

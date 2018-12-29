@@ -46,10 +46,12 @@ export class TopicPage extends Page {
     const {
       name,
       longtitle,
+      uri,
     } = topic;
 
     return super.setPageMeta({
       title: longtitle || name,
+      canonical: uri,
       ...meta,
     });
 

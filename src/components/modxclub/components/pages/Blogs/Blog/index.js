@@ -42,10 +42,12 @@ export class BlogPage extends Page {
 
     const {
       name: blogName,
+      uri,
     } = blog;
 
     return super.setPageMeta({
       title: `Топики в блоге "${blogName}"`,
+      canonical: uri,
     });
 
   }

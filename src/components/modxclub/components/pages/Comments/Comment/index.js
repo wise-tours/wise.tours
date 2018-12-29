@@ -37,7 +37,7 @@ class CommentPage extends Page {
 
 
 
-  setPageMeta(meta = {}) {
+  setPageMeta(meta) {
 
     const {
       data: {
@@ -53,6 +53,7 @@ class CommentPage extends Page {
     const {
       CommentTarget: Topic,
       name,
+      uri,
     } = comment;
 
     const {
@@ -62,6 +63,7 @@ class CommentPage extends Page {
 
     return super.setPageMeta({
       title: `${name ? `${name} | ` : ''}Комментарий к топику ${longtitle || topicName}`,
+      canonical: uri,
       ...meta,
     });
 
