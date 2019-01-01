@@ -194,7 +194,7 @@ class ModxclubModule extends PrismaModule {
       recursive: true,
     });
 
-    apiSchema = mergeTypes([apiSchema.concat(schema)], { all: true });
+    apiSchema = mergeTypes(schema.concat(apiSchema), { all: true });
 
     // console.log(chalk.green("Modxclub apiSchema"), apiSchema);
 

@@ -37,6 +37,7 @@ import TransactionPage from "../pages/ethereum/Transactions/Transaction";
 
 import SubscriptionProvider from "./SubscriptionProvider";
 
+import ReactLesson1 from "../pages/lessons/react/lesson1";
 
 import {
   UserLink,
@@ -418,6 +419,10 @@ export class Renderer extends PrismaRendererCmsRenderer {
         exact: true,
         path: "/eth-transactions/:transactionId",
         component: TransactionPage,
+      },
+      {
+        path: "/react-lessons/lesson1",
+        component: ReactLesson1,
       },
       // {
       //   path: "*",

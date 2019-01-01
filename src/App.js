@@ -30,4 +30,10 @@
 
 import App from "./components/modxclub/components/App";
 
+import * as queryFragments from "./schema/generated/api.fragments";
+
+export {
+  queryFragments,
+}
+
 export default App;

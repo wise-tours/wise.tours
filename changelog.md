@@ -1,3 +1,9 @@
+2.7.8
+============================================
+- Fix App::queryFragments
+- Added react-lesson1
+- Added default values for some queries
+
 2.7.7
 ============================================
 - Fix import comments
