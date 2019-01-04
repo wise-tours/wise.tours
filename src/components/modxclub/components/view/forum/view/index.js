@@ -126,11 +126,11 @@ class ForumView extends TableView {
           Tags && Tags.map(tag => {
 
             const {
-              id,
               Tag,
             } = tag;
-
+            
             const {
+              id,
               name,
             } = Tag;
 
@@ -352,4 +352,6 @@ export {
 }
 
 
-export default withStyles(customStyles)(ForumView);
+export default withStyles(customStyles)(props => <ForumView
+  {...props}
+/>);

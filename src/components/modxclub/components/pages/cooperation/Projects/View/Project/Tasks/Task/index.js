@@ -83,4 +83,6 @@ class TaskView extends CooperatorTaskView {
 }
 
 
-export default processors(withStyles(styles)(TaskView));
+export default processors(withStyles(styles)(props => <TaskView 
+  {...props}
+/>));

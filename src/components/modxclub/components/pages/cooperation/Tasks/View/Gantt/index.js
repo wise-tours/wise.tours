@@ -312,4 +312,6 @@ class GanttView extends PrismaCooperationGanttView {
 
 // )(withStyles(styles)(GanttView));
 
-export default processors(withStyles(styles)(GanttView));
+export default processors(withStyles(styles)(props => <GanttView
+  {...props}
+/>));

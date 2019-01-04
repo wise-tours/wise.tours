@@ -91,12 +91,12 @@ export const styles = theme => {
 
 export class Renderer extends PrismaRendererCmsRenderer {
 
-  static contextTypes = {
-    ...PrismaRendererCmsRenderer.contextTypes,
-    getQueryFragment: PropTypes.func.isRequired,
-    client: PropTypes.object.isRequired,
-    loadApiData: PropTypes.func.isRequired,
-  }
+  // static contextTypes = {
+  //   ...PrismaRendererCmsRenderer.contextTypes,
+  //   getQueryFragment: PropTypes.func.isRequired,
+  //   client: PropTypes.object.isRequired,
+  //   loadApiData: PropTypes.func.isRequired,
+  // }
 
 
   static childContextTypes = {
@@ -463,4 +463,6 @@ export class Renderer extends PrismaRendererCmsRenderer {
 
 }
 
-export default withStyles(styles)(Renderer);
+export default withStyles(styles)(props => <Renderer
+  {...props}
+/>);

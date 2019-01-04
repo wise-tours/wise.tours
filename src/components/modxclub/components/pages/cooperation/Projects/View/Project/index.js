@@ -88,10 +88,10 @@ export class ProjectView extends PrismaCmsCooperationProjectView {
     showDetails: false,
   };
 
-  static contextTypes = {
-    ...PrismaCmsCooperationProjectView.contextTypes,
-    openLoginForm: PropTypes.func.isRequired,
-  };
+  // static contextTypes = {
+  //   ...PrismaCmsCooperationProjectView.contextTypes,
+  //   openLoginForm: PropTypes.func.isRequired,
+  // };
 
 
   renderHeader() {
@@ -517,13 +517,16 @@ export class ProjectView extends PrismaCmsCooperationProjectView {
             : null
           }
 
-          <img
-            className={classes.thumb}
-            src={thumb}
-            onClick={event => {
-              this.handleOpen(image);
-            }}
-          />
+          {thumb ?
+            <img
+              className={classes.thumb}
+              src={thumb}
+              onClick={event => {
+                this.handleOpen(image);
+              }}
+            />
+            : null
+          }
         </div>
 
 
@@ -685,4 +688,6 @@ export class ProjectView extends PrismaCmsCooperationProjectView {
 }
 
 
-export default withStyles(styles)(ProjectView);
+export default withStyles(styles)(props => <ProjectView
+  {...props}
+/>);

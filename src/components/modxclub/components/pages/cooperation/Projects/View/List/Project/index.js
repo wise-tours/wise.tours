@@ -79,4 +79,6 @@ class ProjectView extends BaseProjectView {
 
 }
 
-export default withStyles(styles)(ProjectView);
+export default withStyles(styles)(props => <ProjectView 
+  {...props}
+/>);

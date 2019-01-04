@@ -40,10 +40,10 @@ class TimerView extends EditableView {
     ...EditableView.defaultProps,
   };
 
-  static contextTypes = {
-    ...EditableView.contextTypes,
-    openLoginForm: PropTypes.func.isRequired,
-  };
+  // static contextTypes = {
+  //   ...EditableView.contextTypes,
+  //   openLoginForm: PropTypes.func.isRequired,
+  // };
 
 
   canEdit() {
@@ -373,4 +373,6 @@ class TimerView extends EditableView {
 }
 
 
-export default withStyles(styles)(TimerView);
+export default withStyles(styles)(props => <TimerView
+  {...props}
+/>);

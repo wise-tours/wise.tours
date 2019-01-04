@@ -70,10 +70,10 @@ export class TaskView extends EditableView {
     showDetails: false,
   };
 
-  static contextTypes = {
-    ...EditableView.contextTypes,
-    openLoginForm: PropTypes.func.isRequired,
-  };
+  // static contextTypes = {
+  //   ...EditableView.contextTypes,
+  //   openLoginForm: PropTypes.func.isRequired,
+  // };
 
 
   canEdit() {
@@ -659,4 +659,6 @@ export {
   processors,
 }
 
-export default processors(withStyles(styles)(TaskView));
+export default processors(withStyles(styles)(props => <TaskView
+  {...props}
+/>));
