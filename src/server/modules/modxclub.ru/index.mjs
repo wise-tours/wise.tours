@@ -44,7 +44,7 @@ class ModxclubModule extends PrismaModule {
       SocietyModule,
       EthereumModule,
       ImportModule,
-      
+
       // /**
       //  * Важно кастомные классы в последнюю очередь использовать.
       //  * Но надо будет вообще вывести базовые кслассы в отдельный загрузчик
@@ -102,6 +102,19 @@ class ModxclubModule extends PrismaModule {
 
       baseSchema = this.cleanupApiSchema(baseSchema, [
         "TeamMemberCreateInput",
+        "TeamMemberUpdatenput",
+
+        "ChatRoomCreateInput",
+        "ChatRoomUpdateInput",
+        "UserCreateManyWithoutRoomsInput",
+        "UserUpdateManyWithoutRoomsInput",
+
+        "ChatMessageCreateInput",
+        "ChatMessageUpdateInput",
+        "ChatRoomCreateOneWithoutMessagesInput",
+
+        "ChatMessageReadedCreateInput",
+        "ChatMessageCreateOneWithoutReadedByInput",
       ]);
 
     }
@@ -293,6 +306,12 @@ class ModxclubModule extends PrismaModule {
 
       // ethUnlockPersonalAccount,
       createEthTransactionProcessor,
+
+      createChatRoomProcessor,
+      updateChatRoomProcessor,
+      createChatMessageProcessor,
+      updateChatMessageProcessor,
+      deleteNotice,
     } = Mutation;
 
 
@@ -319,6 +338,12 @@ class ModxclubModule extends PrismaModule {
 
       // ethUnlockPersonalAccount,
       createEthTransactionProcessor,
+
+      createChatRoomProcessor,
+      updateChatRoomProcessor,
+      createChatMessageProcessor,
+      updateChatMessageProcessor,
+      deleteNotice,
     };
 
     // for(var i in AllowedMutations){
