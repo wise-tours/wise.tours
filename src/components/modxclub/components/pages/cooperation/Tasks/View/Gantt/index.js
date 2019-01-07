@@ -310,7 +310,7 @@ class GanttView extends PrismaCooperationGanttView {
 //     name: "updateTask",
 //   }),
 
-// )(withStyles(styles)(GanttView));
+// )(withStyles(styles)(props => <GanttView {...props}/>));
 
 export default processors(withStyles(styles)(props => <GanttView
   {...props}

@@ -967,4 +967,4 @@ export class WalletBalances extends PrismaCmsComponent {
 }
 
 
-export default withStyles(styles)(WalletBalances);
+export default withStyles(styles)(props => <WalletBalances {...props}/>);

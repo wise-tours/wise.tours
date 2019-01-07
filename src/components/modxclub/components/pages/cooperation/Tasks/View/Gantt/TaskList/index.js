@@ -96,7 +96,7 @@ class TaskListCustom extends TaskList {
 }
 
 
-// export default withStyles(styles)(TaskListCustom);
+// export default withStyles(styles)(props => <TaskListCustom {...props}/>);
 
 
 export default compose(
@@ -108,4 +108,4 @@ export default compose(
     // name: "updateTask",
   }),
 
-)(withStyles(styles)(TaskListCustom));
+)(withStyles(styles)(props => <TaskListCustom {...props}/>));

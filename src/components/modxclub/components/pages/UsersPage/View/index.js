@@ -59,4 +59,4 @@ export class UsersPageView extends PrismaCmsUsersPageView {
 }
 
 
-export default withStyles(styles)(UsersPageView);
+export default withStyles(styles)(props => <UsersPageView {...props}/>);

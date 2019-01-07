@@ -192,4 +192,4 @@ export default compose(
     name: "updateTimer",
   }),
 
-)(withStyles(styles)(DataTaskCustom));
+)(withStyles(styles)(props => <DataTaskCustom {...props}/>));

@@ -356,4 +356,4 @@
 // }
 
 
-// export default withStyles(styles)(CommentView);
+// export default withStyles(styles)(props => <CommentView {...props}/>);
