@@ -9,11 +9,15 @@ import Button from 'material-ui/Button';
 
 import { Grid } from '@modxclub/ui';
 
-// import MenuIcon from 'material-ui-icons/Menu';
+import CreateIcon from 'material-ui-icons/Create';
 
 import UserItem from "./User";
 
 import { Link } from "react-router-dom";
+import { Notifications } from '@prisma-cms/society';
+import { IconButton } from 'material-ui';
+
+import Context from "@prisma-cms/context";
 
 export const styles = theme => {
 
@@ -27,8 +31,9 @@ export const styles = theme => {
 
   return {
     root: {
-      flexGrow: 1,
+      // flexGrow: 1,
       backgroundColor,
+      position: "relative",
     },
     flex: {
       flex: 1,
@@ -42,11 +47,7 @@ export const styles = theme => {
 
 export class MainMenu extends Component {
 
-  static contextTypes = {
-    openLoginForm: PropTypes.func.isRequired,
-    logout: PropTypes.func.isRequired,
-    user: PropTypes.object,
-  }
+  static contextType = Context;
 
   render() {
 
@@ -59,8 +60,10 @@ export class MainMenu extends Component {
     const {
       user: currentUser,
       logout,
+      router: {
+        history,
+      },
     } = this.context;
-
 
     const {
       id: userId,
@@ -68,7 +71,7 @@ export class MainMenu extends Component {
 
     return (
       <AppBar
-        position="static"
+        // position="static"
         color="default"
         className={classes.root}
       >
@@ -222,23 +225,40 @@ export class MainMenu extends Component {
             >
             </Grid>
 
+            {currentUser ?
+              <Grid
+                key="notifications"
+                item
+              >
+                <Notifications
+                  key={userId}
+                  user={currentUser}
+                  classes={{
+                    icon: classes.link,
+                  }}
+                />
+              </Grid>
+              : null
+            }
+
+            <Grid
+              key="write"
+              item
+            >
+              <IconButton
+                onClick={event => {
+                  history.push("/add-topic.html");
+                }}
+              >
+                <CreateIcon />
+              </IconButton>
+
+            </Grid>
 
             {currentUser
               ?
               <Fragment>
-                <Grid
-                  key="write"
-                  item
-                >
-                  <Link
-                    to="/add-topic.html"
-                  >
-                    <Typography>
-                      Создать топик
-                    </Typography>
-                  </Link>
 
-                </Grid>
                 <Grid
                   key="user"
                   item
@@ -304,4 +324,6 @@ MainMenu.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MainMenu);
+export default withStyles(styles)(props => <MainMenu
+  {...props}
+/>);
