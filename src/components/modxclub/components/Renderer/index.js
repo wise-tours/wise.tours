@@ -37,6 +37,7 @@ import TransactionPage from "../pages/ethereum/Transactions/Transaction";
 
 import ChatRoomsPage from "../pages/society/ChatRooms";
 import ChatRoomPage from "../pages/society/ChatRooms/ChatRoom";
+import CreateChatRoomPage from "../pages/society/ChatRooms/ChatRoom/Create";
 
 import ChatMessagesPage from "../pages/society/ChatMessages";
 import ChatMessagePage from "../pages/society/ChatMessages/ChatMessage";
@@ -449,6 +450,33 @@ export class Renderer extends PrismaRendererCmsRenderer {
       },
       {
         exact: true,
+        path: "/chat-rooms/create",
+        component: CreateChatRoomPage,
+      },
+      {
+        exact: true,
+        path: "/chat-rooms/:id",
+        render: props => {
+
+          const {
+            match: {
+              params: {
+                id,
+              },
+            },
+          } = props;
+
+          return <ChatRoomPage
+            key={id}
+            where={{
+              id,
+            }}
+            {...props}
+          />
+        },
+      },
+      {
+        exact: true,
         path: "/chat-messages",
         component: ChatMessagesPage,
       },
@@ -466,28 +494,6 @@ export class Renderer extends PrismaRendererCmsRenderer {
           } = props;
 
           return <ChatMessagePage
-            key={id}
-            where={{
-              id,
-            }}
-            {...props}
-          />
-        },
-      },
-      {
-        exact: true,
-        path: "/chat-rooms/:id",
-        render: props => {
-
-          const {
-            match: {
-              params: {
-                id,
-              },
-            },
-          } = props;
-
-          return <ChatRoomPage
             key={id}
             where={{
               id,
