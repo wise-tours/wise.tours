@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
-import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 
 
@@ -14,6 +13,7 @@ import { Typography } from 'material-ui';
 
 import EthWallet from "./EthWallet";
 
+import ChatRooms from "./ChatRooms";
 
 export default class UserPageView extends PrismaCmsUserPageView {
 
@@ -65,6 +65,7 @@ export default class UserPageView extends PrismaCmsUserPageView {
 
     const {
       user: currentUser,
+      Grid,
     } = this.context;
 
 
@@ -111,22 +112,35 @@ export default class UserPageView extends PrismaCmsUserPageView {
           <Grid
             item
             xs={12}
-            md={6}
+          // md={6}
           >
 
+            <ChatRooms
+              user={object}
+              currentUser={currentUser}
+            />
 
-            {ethAccount || (currentUserId && currentUserId === userId) ?
+
+          </Grid>
+
+
+
+          {ethAccount || (currentUserId && currentUserId === userId) ?
+            <Grid
+              item
+              xs={12}
+              md={6}
+            >
 
               <EthWallet
                 // ethAccount={ethAccount}
                 user={object}
                 currentUser={currentUser}
               />
-              : null
-            }
+            </Grid>
+            : null
+          }
 
-
-          </Grid>
 
           <Grid
             item
@@ -175,6 +189,7 @@ export default class UserPageView extends PrismaCmsUserPageView {
 
     const {
       user: currentUser,
+      Grid,
     } = this.context;
 
 

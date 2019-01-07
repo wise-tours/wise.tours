@@ -4,12 +4,16 @@ import { Typography } from 'material-ui';
 
 import Balances from "./Balances";
 
+import Context from "@prisma-cms/context";
+
 class UserEthWallet extends Component {
 
   static propTypes = {
     user: PropTypes.object.isRequired,
     currentUser: PropTypes.object,
   };
+
+  static contextType = Context;
 
   render() {
 
@@ -23,6 +27,9 @@ class UserEthWallet extends Component {
       return null;
     }
 
+    const {
+      Grid,
+    } = this.context;
 
     const ethAccount = user.EthAccounts && user.EthAccounts[0] || null;
 
@@ -57,9 +64,9 @@ class UserEthWallet extends Component {
         ownWallet = <Balances
           ethAccount={currentUserEthAccount}
           user={currentUser}
-          style={{
-            marginTop: 20,
-          }}
+          // style={{
+          //   marginTop: 20,
+          // }}
         >
 
         </Balances>
@@ -74,18 +81,38 @@ class UserEthWallet extends Component {
     }
 
 
-    return <Fragment>
+    return <Grid
+      container
+      spacing={8}
+    >
 
-      <Balances
-        ethAccount={ethAccount}
-        user={user}
+      <Grid
+        item
+        xs={12}
+        // md={6}
       >
-        {actions}
-      </Balances>
+        <Balances
+          ethAccount={ethAccount}
+          user={user}
+        >
+          {actions}
+        </Balances>
 
-      {ownWallet}
+      </Grid>
 
-    </Fragment>;
+      <Grid
+        item
+        xs={12}
+        // md={6}
+      >
+
+        {ownWallet}
+
+      </Grid>
+
+
+
+    </Grid>;
   }
 }
 
