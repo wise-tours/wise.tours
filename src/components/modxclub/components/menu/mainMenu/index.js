@@ -123,6 +123,21 @@ export class MainMenu extends Component {
               item
             >
               <Link
+                to="/chat-rooms"
+              >
+                <Typography
+                  component="span"
+                  className={classes.link}
+                >
+                  Чаты
+                </Typography>
+              </Link>
+            </Grid>
+
+            <Grid
+              item
+            >
+              <Link
                 to="/projects"
               >
                 <Typography>
@@ -161,19 +176,6 @@ export class MainMenu extends Component {
             <Grid
               item
             >
-              <Link
-                to="/eth-transactions"
-              >
-                <Typography>
-                  Ethereum
-                </Typography>
-              </Link>
-
-            </Grid>
-
-            <Grid
-              item
-            >
               <a
                 href="/graphql-voyager"
                 rel="noindex,nofollow"
@@ -197,6 +199,19 @@ export class MainMenu extends Component {
                   API
                 </Typography>
               </a>
+
+            </Grid>
+
+            <Grid
+              item
+            >
+              <Link
+                to="/eth-transactions"
+              >
+                <Typography>
+                  Eth
+                </Typography>
+              </Link>
 
             </Grid>
 

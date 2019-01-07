@@ -35,6 +35,12 @@ import TimerPage from "../pages/cooperation/Timers/Timer";
 import TransactionsPage from "../pages/ethereum/Transactions";
 import TransactionPage from "../pages/ethereum/Transactions/Transaction";
 
+import ChatRoomsPage from "../pages/society/ChatRooms";
+import ChatRoomPage from "../pages/society/ChatRooms/ChatRoom";
+
+import ChatMessagesPage from "../pages/society/ChatMessages";
+import ChatMessagePage from "../pages/society/ChatMessages/ChatMessage";
+
 import SubscriptionProvider from "./SubscriptionProvider";
 
 import ReactLesson1 from "../pages/lessons/react/lesson1";
@@ -45,6 +51,12 @@ import {
   TaskLink,
   TransactionLink,
 } from "@modxclub/ui"
+
+
+import {
+  ContextProvider as SocietyContextProvider,
+  SubscriptionProvider as SocietySubscriptionProvider,
+} from "@prisma-cms/society";
 
 
 export const styles = theme => {
@@ -69,9 +81,15 @@ export const styles = theme => {
       fontSize,
       color: primary,
 
-      height: "100vh",
+      height: "100%",
       display: "flex",
       flexDirection: "column",
+
+      "& #Renderer--body": {
+        flex: 1,
+        overflow: "auto",
+        width: "100%",
+      },
     },
 
     header: {
@@ -424,6 +442,60 @@ export class Renderer extends PrismaRendererCmsRenderer {
         path: "/react-lessons/lesson1",
         component: ReactLesson1,
       },
+      {
+        exact: true,
+        path: "/chat-rooms",
+        component: ChatRoomsPage,
+      },
+      {
+        exact: true,
+        path: "/chat-messages",
+        component: ChatMessagesPage,
+      },
+      {
+        exact: true,
+        path: "/chat-messages/:id",
+        render: props => {
+
+          const {
+            match: {
+              params: {
+                id,
+              },
+            },
+          } = props;
+
+          return <ChatMessagePage
+            key={id}
+            where={{
+              id,
+            }}
+            {...props}
+          />
+        },
+      },
+      {
+        exact: true,
+        path: "/chat-rooms/:id",
+        render: props => {
+
+          const {
+            match: {
+              params: {
+                id,
+              },
+            },
+          } = props;
+
+          return <ChatRoomPage
+            key={id}
+            where={{
+              id,
+            }}
+            {...props}
+          />
+        },
+      },
       // {
       //   path: "*",
       //   render: props => this.renderOtherPages(props),
@@ -444,6 +516,17 @@ export class Renderer extends PrismaRendererCmsRenderer {
   }
 
 
+  renderWrapper() {
+
+    return <SocietyContextProvider>
+      <SocietySubscriptionProvider>
+        {super.renderWrapper()}
+      </SocietySubscriptionProvider>
+    </SocietyContextProvider>
+
+  }
+
+
   render() {
 
     const {
@@ -452,13 +535,30 @@ export class Renderer extends PrismaRendererCmsRenderer {
       loadApiData,
     } = this.context;
 
-    return <SubscriptionProvider
-      user={currentUser}
-      client={client}
-      loadApiData={loadApiData}
+    const {
+      classes,
+    } = this.props;
+
+    return <div
+      className={classes.root}
     >
-      {super.render()}
-    </SubscriptionProvider>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            html, body, #root {
+              height: 100%;
+            }
+          `,
+        }}
+      />
+      <SubscriptionProvider
+        user={currentUser}
+        client={client}
+        loadApiData={loadApiData}
+      >
+        {super.render()}
+      </SubscriptionProvider>
+    </div>
   }
 
 }

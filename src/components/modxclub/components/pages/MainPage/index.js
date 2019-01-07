@@ -1,19 +1,54 @@
 
 
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
+import PropTypes from "prop-types";
 
 import Page from '../layout';
 
 
 import Forum from "../../view/forum"
-import { Grid, Link } from '@modxclub/ui';
-import { Typography } from 'material-ui';
+import { Typography, Tabs, Tab } from 'material-ui';
 
 import Comments from "./Comments";
 import Tasks from "./Tasks";
+import { withStyles } from 'material-ui';
+
+import {
+	ChatRoom,
+} from "@prisma-cms/society";
+
+const styles = theme => {
+
+	return {
+		root: {
+			// border: "1px solid blue",
+			height: "100%",
+			width: "100%",
+			overflow: "hidden",
+			display: "flex",
+			flexDirection: "column",
+		},
+		content: {
+			flex: 1,
+			overflow: "auto",
+		},
+	}
+}
 
 export class MainPage extends Page {
+
+
+	static propTypes = {
+		...Page.propTypes,
+		classes: PropTypes.object.isRequired,
+	}
+
+
+	state = {
+		...super.state,
+		tabIndex: 0,
+	}
 
 
 	setPageMeta(meta = {}) {
@@ -25,18 +60,21 @@ export class MainPage extends Page {
 	}
 
 
-	render() {
+	renderOld() {
 
 		const {
+			classes,
 			...other
 		} = this.props;
 
-
 		const {
 			getQueryFragment,
+			Grid,
+			Link,
 		} = this.context;
 
-		return super.render(<Grid
+
+		return <Grid
 			container
 			spacing={16}
 		>
@@ -46,7 +84,7 @@ export class MainPage extends Page {
 				lg={8}
 			>
 
-				<Link
+				{/* <Link
 					to="/topics"
 					title="Комментарии"
 				>
@@ -54,7 +92,7 @@ export class MainPage extends Page {
 						variant="subheading"
 					>
 						Публикации
-					</Typography>
+				</Typography>
 				</Link>
 
 				<div
@@ -66,7 +104,9 @@ export class MainPage extends Page {
 						getQueryFragment={getQueryFragment}
 						{...other}
 					/>
-				</div>
+				</div> */}
+
+				{this.renderTopics()}
 			</Grid>
 			<Grid
 				item
@@ -86,7 +126,9 @@ export class MainPage extends Page {
 						lg={12}
 					>
 
-						<Link
+						{this.renderTimers()}
+
+						{/* <Link
 							to="/tasks"
 							title="Задачи"
 						>
@@ -94,10 +136,10 @@ export class MainPage extends Page {
 								variant="subheading"
 							>
 								Активные задачи
-							</Typography>
+						</Typography>
 						</Link>
 
-						<Tasks />
+						<Tasks /> */}
 
 					</Grid>
 
@@ -108,7 +150,9 @@ export class MainPage extends Page {
 						lg={12}
 					>
 
-						<Link
+						{this.renderComments()}
+
+						{/* <Link
 							to="/comments"
 							title="Комментарии"
 						>
@@ -116,10 +160,10 @@ export class MainPage extends Page {
 								variant="subheading"
 							>
 								Последние комментарии
-							</Typography>
+						</Typography>
 						</Link>
 
-						<Comments />
+						<Comments /> */}
 
 					</Grid>
 
@@ -127,9 +171,209 @@ export class MainPage extends Page {
 
 
 			</Grid>
-		</Grid>)
+		</Grid>;
+	}
+
+
+	renderTopics() {
+
+		const {
+			Link,
+			getQueryFragment,
+		} = this.context;
+
+
+		const {
+			classes,
+			...other
+		} = this.props;
+
+		return <Fragment>
+			<Link
+				to="/topics"
+				title="Комментарии"
+			>
+				<Typography
+					variant="subheading"
+				>
+					Публикации
+				</Typography>
+			</Link>
+
+			<div
+				style={{
+					overflow: "auto",
+				}}
+			>
+				<Forum
+					getQueryFragment={getQueryFragment}
+					{...other}
+				/>
+			</div>
+		</Fragment>;
+	}
+
+
+	renderComments() {
+
+		const {
+			Link,
+		} = this.context;
+
+		return <Fragment>
+			<Link
+				to="/comments"
+				title="Комментарии"
+			>
+				<Typography
+					variant="subheading"
+				>
+					Последние комментарии
+				</Typography>
+			</Link>
+
+			<Comments />
+		</Fragment>
+	}
+
+
+	renderTimers() {
+
+		const {
+			Link,
+		} = this.context;
+
+		return <Fragment>
+			<Link
+				to="/tasks"
+				title="Задачи"
+			>
+				<Typography
+					variant="subheading"
+				>
+					Активные задачи
+				</Typography>
+			</Link>
+
+			<Tasks />
+		</Fragment>
+	}
+
+
+	renderMainChat() {
+
+		return <ChatRoom
+			where={{
+				code: "public",
+			}}
+		/>
+	}
+
+
+	render() {
+
+		const {
+			classes,
+			...other
+		} = this.props;
+
+
+		const {
+			Grid,
+		} = this.context;
+
+		const {
+			tabIndex,
+		} = this.state;
+
+
+		let tabContent;
+
+		switch (tabIndex) {
+
+			case 0:
+
+				tabContent = this.renderMainChat();
+
+				break;
+
+
+			case 1:
+
+				tabContent = this.renderTopics();
+
+				break;
+
+
+			case 2:
+
+				tabContent = this.renderComments();
+
+				break;
+
+
+			case 3:
+
+				tabContent = this.renderTimers();
+
+				break;
+
+			case 4:
+
+				tabContent = this.renderOld();
+
+				break;
+
+		}
+
+		let content = <div
+			className={classes.root}
+		>
+
+			<Tabs
+				value={tabIndex}
+				onChange={(event, tabIndex) => {
+					this.setState({
+						tabIndex,
+					});
+				}}
+				scrollable
+				scrollButtons="auto"
+			>
+				<Tab
+					value={0}
+					label="Чат"
+				/>
+				<Tab
+					value={1}
+					label="Публикации"
+				/>
+				<Tab
+					value={2}
+					label="Комментарии"
+				/>
+				<Tab
+					value={3}
+					label="Активные задачи"
+				/>
+				<Tab
+					value={4}
+					label="Старая главная"
+				/>
+			</Tabs>
+
+			<div
+				className={classes.content}
+			>
+				{tabContent}
+			</div>
+		</div>
+
+		return super.render(content)
 	}
 
 }
 
-export default MainPage;
+export default withStyles(styles)(props => <MainPage
+	{...props}
+/>);
