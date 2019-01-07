@@ -14,7 +14,7 @@ import CreateIcon from 'material-ui-icons/Create';
 import UserItem from "./User";
 
 import { Link } from "react-router-dom";
-import { Notifications } from '@prisma-cms/society';
+import { Notices } from '@prisma-cms/society';
 import { IconButton } from 'material-ui';
 
 import Context from "@prisma-cms/context";
@@ -230,7 +230,7 @@ export class MainMenu extends Component {
                 key="notifications"
                 item
               >
-                <Notifications
+                <Notices
                   key={userId}
                   user={currentUser}
                   classes={{

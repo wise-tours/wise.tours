@@ -59,6 +59,8 @@ import {
   SubscriptionProvider as SocietySubscriptionProvider,
 } from "@prisma-cms/society";
 
+import Context from "@prisma-cms/context";
+
 
 export const styles = theme => {
 
@@ -526,7 +528,18 @@ export class Renderer extends PrismaRendererCmsRenderer {
 
     return <SocietyContextProvider>
       <SocietySubscriptionProvider>
-        {super.renderWrapper()}
+        <Context.Consumer>
+          {context => <Context.Provider
+            value={Object.assign(context, {
+              UserLink,
+              ProjectLink,
+              TaskLink,
+              TransactionLink,
+            })}
+          >
+            {super.renderWrapper()}
+          </Context.Provider>}
+        </Context.Consumer>
       </SocietySubscriptionProvider>
     </SocietyContextProvider>
 
