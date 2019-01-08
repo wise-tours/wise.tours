@@ -5,7 +5,7 @@ input TopicCreateInput {
   content: Json!
   published: Boolean
   topic_tags: [String!]
-  # blogID: ID!
+  blogID: ID
 }
 
 input TopicUpdateInput {

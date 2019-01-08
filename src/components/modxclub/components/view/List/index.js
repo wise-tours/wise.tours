@@ -10,13 +10,12 @@ import withStyles from "material-ui/styles/withStyles";
 import Typography from "material-ui/Typography";
 import Grid from "material-ui/Grid";
 
-import Pagination from "../Pagination";
-
-import Header from "./header";
+// import Header from "./header";
 
 const customStyles = theme => {
 
   return {
+    ...styles,
     root: {
 
       "#root &": {
@@ -89,6 +88,10 @@ class ObjectsListView extends TableView {
 
 
   render() {
+
+    const {
+      Pagination,
+    } = this.context;
 
     const {
       page,

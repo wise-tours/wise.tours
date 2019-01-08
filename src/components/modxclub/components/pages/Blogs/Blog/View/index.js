@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import EditableView from 'apollo-cms/lib/DataView/Object/Editable';
 
 import Forum from "../../../../view/forum"
+import { Typography } from 'material-ui';
 
 class BlogView extends EditableView {
 
@@ -33,14 +34,15 @@ class BlogView extends EditableView {
 
   getTitle() {
 
-    const object = this.getObjectWithMutations();
+    // const object = this.getObjectWithMutations();
 
-    const {
-      name,
-    } = object || {};
+    // const {
+    //   name,
+    // } = object || {};
 
-    return name && `Топики в блоге "${name}"` || null;
+    // return name && `Топики в блоге "${name}"` || null;
 
+    return null;
   }
 
 
@@ -63,6 +65,8 @@ class BlogView extends EditableView {
 
     const {
       id: blogId,
+      name,
+      type,
     } = this.getObjectWithMutations();
 
 
@@ -70,12 +74,25 @@ class BlogView extends EditableView {
 
     if (blogId) {
       forum = <Forum
+        title={name && <Typography
+          variant="subheading"
+        >
+          {`Топики в блоге "${name}"`}
+        </Typography> || undefined}
         where={{
           Blog: {
             id: blogId,
           },
         }}
         {...other}
+        addObject={type === "Blog" ? () => {
+          const {
+            router: {
+              history,
+            },
+          } = this.context;
+          history.push(`/add-topic.html?blogID=${blogId}`);
+        } : undefined}
       />
     }
 

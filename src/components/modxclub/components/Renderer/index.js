@@ -20,6 +20,7 @@ import TopicsPage from "../pages/Topics";
 import TopicPage from "../pages/Topics/Topic";
 import TopicCreatePage from "../pages/Topics/Topic/Create";
 import TagPage from "../pages/Tags/Tag";
+import BlogsPage from "../pages/Blogs";
 import BlogPage from "../pages/Blogs/Blog";
 import CommentsPage from "../pages/Comments";
 import CommentPage from "../pages/Comments/Comment";
@@ -46,20 +47,20 @@ import SubscriptionProvider from "./SubscriptionProvider";
 
 import ReactLesson1 from "../pages/lessons/react/lesson1";
 
-import {
-  UserLink,
-  ProjectLink,
-  TaskLink,
-  TransactionLink,
-} from "@modxclub/ui"
+import Context from "@prisma-cms/context";
 
+
+import {
+  ContextProvider as ResourceContextProvider,
+  SubscriptionProvider as ResourceSubscriptionProvider,
+} from "@prisma-cms/resource";
 
 import {
   ContextProvider as SocietyContextProvider,
   SubscriptionProvider as SocietySubscriptionProvider,
 } from "@prisma-cms/society";
 
-import Context from "@prisma-cms/context";
+import ContextProvider from "./ContextProvider";
 
 
 export const styles = theme => {
@@ -120,25 +121,32 @@ export class Renderer extends PrismaRendererCmsRenderer {
   // }
 
 
-  static childContextTypes = {
-    ...PrismaRendererCmsRenderer.childContextTypes,
-    UserLink: PropTypes.func,
-    ProjectLink: PropTypes.func,
-    TaskLink: PropTypes.func,
-    TransactionLink: PropTypes.func,
-  }
+  // static childContextTypes = {
+  //   ...PrismaRendererCmsRenderer.childContextTypes,
+  //   UserLink: PropTypes.func,
+  //   ProjectLink: PropTypes.func,
+  //   TaskLink: PropTypes.func,
+  //   TransactionLink: PropTypes.func,
+  // }
 
 
-  getChildContext() {
+  // getChildContext() {
 
-    return {
-      ...super.getChildContext(),
-      UserLink,
-      ProjectLink,
-      TaskLink,
-      TransactionLink,
-    }
-  }
+  //   const {
+  //     UserLink,
+  //     ProjectLink,
+  //     TaskLink,
+  //     TransactionLink,
+  //   } = UI;
+
+  //   return {
+  //     ...super.getChildContext(),
+  //     UserLink,
+  //     ProjectLink,
+  //     TaskLink,
+  //     TransactionLink,
+  //   }
+  // }
 
 
   getRoutes() {
@@ -285,6 +293,11 @@ export class Renderer extends PrismaRendererCmsRenderer {
             {...props}
           />
         }
+      },
+      {
+        exact: true,
+        path: "/blogs",
+        component: BlogsPage,
       },
       {
         exact: false,
@@ -526,22 +539,17 @@ export class Renderer extends PrismaRendererCmsRenderer {
 
   renderWrapper() {
 
-    return <SocietyContextProvider>
-      <SocietySubscriptionProvider>
-        <Context.Consumer>
-          {context => <Context.Provider
-            value={Object.assign(context, {
-              UserLink,
-              ProjectLink,
-              TaskLink,
-              TransactionLink,
-            })}
-          >
-            {super.renderWrapper()}
-          </Context.Provider>}
-        </Context.Consumer>
-      </SocietySubscriptionProvider>
-    </SocietyContextProvider>
+    return <ResourceContextProvider>
+      <ResourceSubscriptionProvider>
+        <SocietyContextProvider>
+          <SocietySubscriptionProvider>
+            <ContextProvider>
+              {super.renderWrapper()}
+            </ContextProvider>
+          </SocietySubscriptionProvider>
+        </SocietyContextProvider>
+      </ResourceSubscriptionProvider>
+    </ResourceContextProvider>
 
   }
 

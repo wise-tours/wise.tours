@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 
 import { graphql, compose } from 'react-apollo';
 
-import { TopicPage } from '../';
+import Context from "@prisma-cms/context";
 
+import { TopicPage } from '../';
 
 import {
   createTopicProcessor,
@@ -131,15 +132,19 @@ export class TopicCreatePage extends TopicPage {
 export class CreatePage extends Component {
 
 
-  static contextTypes = {
-    user: PropTypes.object,
-  }
+  static contextType = Context;
 
   render() {
 
     const {
       user: currentUser,
+      uri,
     } = this.context;
+
+
+    const {
+      blogID,
+    } = uri.query(true);
 
 
     return <TopicCreatePage
@@ -153,6 +158,7 @@ export class CreatePage extends Component {
         name: "",
         topic_tags: [],
         content: [],
+        blogID,
       }}
     />;
 

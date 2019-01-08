@@ -1,6 +1,6 @@
 {
   "name": "@modxclub/modxclub.ru",
-  "version": "2.9.3",
+  "version": "2.9.4",
   "description": "modxclub.ru",
   "private": false,
   "scripts": {
@@ -32,6 +32,7 @@
     "@prisma-cms/mail-module": "latest",
     "@prisma-cms/prisma-module": "latest",
     "@prisma-cms/prisma-processor": "latest",
+    "@prisma-cms/resource": "latest",
     "@prisma-cms/resource-module": "latest",
     "@prisma-cms/router-module": "latest",
     "@prisma-cms/server": "latest",

@@ -13,7 +13,7 @@ import Header from "./header";
 import {
   styles,
   TableView,
-} from "@modxclub/ui/src/list-view";
+} from "../../List";
 
 import {
   BlogLink,
@@ -72,7 +72,7 @@ class ForumView extends TableView {
     title: "",
     columnData: [],
     // Header,
-    Toolbar: () => (null),
+    // Toolbar: () => (null),
   }
 
 

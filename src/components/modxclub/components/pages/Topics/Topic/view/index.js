@@ -30,6 +30,7 @@ import { Typography } from 'material-ui';
 import Grid from "@prisma-cms/front/lib/modules/ui/Grid";
 
 import CommentsView from "./Comments";
+import Blog from "./Blog";
 
 const styles = {
   root: {
@@ -175,19 +176,57 @@ class TopicView extends EditableView {
           item
           xs={12}
         >
-          <Typography
-            variant="display1"
-            component="h1"
+
+          <Grid
+            container
+            spacing={16}
+            alignItems="center"
           >
-            {this.getTitle()} {this.getButtons()}
 
-          </Typography>
+            <Grid
+              item
+              xs
+            >
 
-          {inEditMode ? this.getTextField({
-            name: "name",
-            label: "Название топика",
-            helperText: "Укажите название топика",
-          }) : null}
+
+              {inEditMode ? this.getTextField({
+                name: "name",
+                label: "Название топика",
+                helperText: "Укажите название топика",
+              }) :
+                <Typography
+                  variant="display1"
+                  component="h1"
+                >
+                  {this.getTitle()}
+
+                </Typography>
+              }
+
+            </Grid>
+
+            <Grid
+              item
+            >
+
+              <Blog
+                Topic={object}
+                updateObject={data => this.updateObject(data)}
+                inEditMode={inEditMode}
+              />
+
+            </Grid>
+
+            <Grid
+              item
+            >
+              {this.getButtons()}
+
+            </Grid>
+
+
+          </Grid>
+
 
           {/* {inEditMode && !topicId ? this.getTextField({
             name: "topic_tags",
@@ -209,6 +248,7 @@ class TopicView extends EditableView {
           }) : null} */}
 
         </Grid>
+
 
       </Grid>
     </div>

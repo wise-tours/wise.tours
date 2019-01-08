@@ -3,16 +3,15 @@ import PropTypes from 'prop-types';
 
 
 import { Typography } from 'material-ui';
+ 
 
-import {
-  Pagination,
-  Link,
-  Grid,
-} from "@modxclub/ui"
+import Context from "@prisma-cms/context";
 
 import ProjectsList from "./List";
 
 class ProjectsView extends Component {
+
+  static contextType = Context;
 
   static propTypes = {
 
@@ -21,6 +20,12 @@ class ProjectsView extends Component {
   
   render() {
 
+    const  {
+      Pagination,
+      Link,
+      Grid,
+    } = this.context;
+    
     const {
       page,
     } = this.props;

@@ -11,6 +11,9 @@ import { Grid } from '@modxclub/ui';
 
 import CreateIcon from 'material-ui-icons/Create';
 
+
+// import UserItem from "@prisma-cms/front/lib/components/App/Renderer/MainMenu/User";
+import {styles as defaultStyles} from "@prisma-cms/front/lib/components/App/Renderer/MainMenu";
 import UserItem from "./User";
 
 import { Link } from "react-router-dom";
@@ -30,6 +33,7 @@ export const styles = theme => {
   } = theme;
 
   return {
+    ...defaultStyles,
     root: {
       // flexGrow: 1,
       backgroundColor,
@@ -87,6 +91,8 @@ export class MainMenu extends Component {
           >
             <Grid
               item
+              xs={12}
+              sm
             >
               <Typography
                 variant="title"
@@ -102,21 +108,28 @@ export class MainMenu extends Component {
 
             </Grid>
 
-            <Grid
-              item
-              xs
-            >
-            </Grid>
-
 
             <Grid
               item
             >
               <Link
-                to="/people"
+                to="/topics"
               >
                 <Typography>
-                  Участники
+                  Топики
+                </Typography>
+              </Link>
+
+            </Grid>
+
+            <Grid
+              item
+            >
+              <Link
+                to="/blogs"
+              >
+                <Typography>
+                  Блоги
                 </Typography>
               </Link>
 
@@ -135,6 +148,19 @@ export class MainMenu extends Component {
                   Чаты
                 </Typography>
               </Link>
+            </Grid>
+
+            <Grid
+              item
+            >
+              <Link
+                to="/people"
+              >
+                <Typography>
+                  Участники
+                </Typography>
+              </Link>
+
             </Grid>
 
             <Grid
@@ -266,6 +292,7 @@ export class MainMenu extends Component {
                   <UserItem
                     key={userId}
                     user={currentUser}
+                    classes={classes}
                   />
                 </Grid>
                 <Grid

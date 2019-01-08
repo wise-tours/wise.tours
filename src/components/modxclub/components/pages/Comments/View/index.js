@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 
 import CommentsList from "@modxclub/ui/src/Comments/List";
 
-import { Pagination } from '@modxclub/ui';
 import { Typography } from 'material-ui';
 
-import { Grid } from "@modxclub/ui"
+import Context from "@prisma-cms/context";
 
 class CommentsView extends Component {
+
+  static contextType = Context;
 
   static propTypes = {
     pagination: PropTypes.number,
@@ -31,6 +32,10 @@ class CommentsView extends Component {
 
   render() {
 
+    const {
+      Pagination,
+      Grid,
+    } = this.context;
 
     const {
       page,

@@ -40,7 +40,7 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
 
     let {
       data: {
-        // blogID,
+        blogID,
         topicID,
         parent,
         topic_tags,
@@ -76,14 +76,24 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
 
           const uri = `/topics/${name}`;
 
+          let connect;
+
+          if (blogID) {
+            connect = {
+              id: blogID,
+            }
+          }
+          else {
+            connect = {
+              oldID: 637,
+            };
+          }
+
           Object.assign(data, {
             uri,
             isfolder: false,
             Blog: {
-              connect: {
-                // id: blogID,
-                oldID: 637,
-              },
+              connect,
             },
           });
 

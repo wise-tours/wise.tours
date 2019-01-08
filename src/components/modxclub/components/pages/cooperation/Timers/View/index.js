@@ -1,14 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-
 import { Typography } from 'material-ui';
 
-import { Grid, Pagination } from "@modxclub/ui"
+import Context from "@prisma-cms/context";
 
 import TimersList from "./List";
 
 class TimersView extends Component {
+
+  static contextType = Context;
 
   static propTypes = {
 
@@ -16,6 +17,10 @@ class TimersView extends Component {
 
   render() {
 
+    const {
+      Grid,
+      Pagination,
+    } = this.context;
 
     const {
       page,

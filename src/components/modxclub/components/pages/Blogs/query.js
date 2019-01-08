@@ -13,6 +13,7 @@ export const blogFieldsFragment = `
     name
     longtitle
     uri
+    type
   }
 `;
 
