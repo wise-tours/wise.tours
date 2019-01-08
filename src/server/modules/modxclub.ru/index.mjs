@@ -312,6 +312,8 @@ class ModxclubModule extends PrismaModule {
       createChatMessageProcessor,
       updateChatMessageProcessor,
       deleteNotice,
+      deleteManyNotices,
+      markAsReadedChatMessage,
     } = Mutation;
 
 
@@ -344,6 +346,8 @@ class ModxclubModule extends PrismaModule {
       createChatMessageProcessor,
       updateChatMessageProcessor,
       deleteNotice,
+      deleteManyNotices,
+      markAsReadedChatMessage,
     };
 
     // for(var i in AllowedMutations){

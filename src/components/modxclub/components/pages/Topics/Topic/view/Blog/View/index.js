@@ -67,6 +67,10 @@ export default class TopicBlogView extends Component {
     let displayValue = (opened && name_contains) || object && object.name || value;
 
     return <Autocomplete
+      inputProps={{
+        label: "Блог",
+        helperText: "Укажите в какой блог публикуете",
+      }}
       onChange={(event, value) => {
         // console.log("onChange", value);
         // this.setState({
