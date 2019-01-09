@@ -314,6 +314,9 @@ class ModxclubModule extends PrismaModule {
       deleteNotice,
       deleteManyNotices,
       markAsReadedChatMessage,
+      inviteChatRoomProcessor,
+      leaveChatRoom,
+      joinChatRoom,
     } = Mutation;
 
 
@@ -348,6 +351,9 @@ class ModxclubModule extends PrismaModule {
       deleteNotice,
       deleteManyNotices,
       markAsReadedChatMessage,
+      inviteChatRoomProcessor,
+      leaveChatRoom,
+      joinChatRoom,
     };
 
     // for(var i in AllowedMutations){

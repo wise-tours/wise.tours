@@ -1,3 +1,9 @@
+2.9.6
+============================================
+- Added inviteChatRoomProcessor
+- Added leaveChatRoom
+- Added joinChatRoom
+
 2.9.5
 ============================================
 - Added markAsReadedChatMessage
