@@ -60,10 +60,6 @@ class ModxclubModule extends PrismaModule {
 
   getSchema(types = []) {
 
-    let schema = fileLoader(__dirname + '/schema/database/', {
-      recursive: true,
-    });
-
 
     // if (schema) {
     //   types = types.concat(schema);
@@ -73,6 +69,16 @@ class ModxclubModule extends PrismaModule {
 
 
     let typesArray = super.getSchema(types);
+
+
+    typesArray = this.cleanupApiSchema(typesArray, [
+      "ResourceType",
+    ]);
+    
+
+    let schema = fileLoader(__dirname + '/schema/database/', {
+      recursive: true,
+    });
 
     // typesArray = mergeTypes([typesArray.concat(schema)], { all: true });
     typesArray = mergeTypes([typesArray].concat(schema), { all: true });
