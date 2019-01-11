@@ -47,7 +47,7 @@ export class MainPage extends Page {
 
 	state = {
 		...super.state,
-		tabIndex: 0,
+		tabIndex: 1,
 	}
 
 
@@ -188,29 +188,34 @@ export class MainPage extends Page {
 			...other
 		} = this.props;
 
-		return <Fragment>
-			<Link
-				to="/topics"
-				title="Комментарии"
-			>
-				<Typography
-					variant="subheading"
-				>
-					Публикации
-				</Typography>
-			</Link>
+		return <Forum
+			getQueryFragment={getQueryFragment}
+			{...other}
+		/>;
 
-			<div
-				style={{
-					overflow: "auto",
-				}}
-			>
-				<Forum
-					getQueryFragment={getQueryFragment}
-					{...other}
-				/>
-			</div>
-		</Fragment>;
+		// return <Fragment>
+		// 	<Link
+		// 		to="/topics"
+		// 		title="Комментарии"
+		// 	>
+		// 		<Typography
+		// 			variant="subheading"
+		// 		>
+		// 			Публикации
+		// 		</Typography>
+		// 	</Link>
+
+		// 	<div
+		// 		style={{
+		// 			overflow: "auto",
+		// 		}}
+		// 	>
+		// 		<Forum
+		// 			getQueryFragment={getQueryFragment}
+		// 			{...other}
+		// 		/>
+		// 	</div>
+		// </Fragment>;
 	}
 
 
@@ -220,20 +225,22 @@ export class MainPage extends Page {
 			Link,
 		} = this.context;
 
-		return <Fragment>
-			<Link
-				to="/comments"
-				title="Комментарии"
-			>
-				<Typography
-					variant="subheading"
-				>
-					Последние комментарии
-				</Typography>
-			</Link>
+		return <Comments />;
 
-			<Comments />
-		</Fragment>
+		// return <Fragment>
+		// 	<Link
+		// 		to="/comments"
+		// 		title="Комментарии"
+		// 	>
+		// 		<Typography
+		// 			variant="subheading"
+		// 		>
+		// 			Последние комментарии
+		// 		</Typography>
+		// 	</Link>
+
+		// 	<Comments />
+		// </Fragment>
 	}
 
 
@@ -341,10 +348,6 @@ export class MainPage extends Page {
 				scrollButtons="auto"
 			>
 				<Tab
-					value={0}
-					label="Чат"
-				/>
-				<Tab
 					value={1}
 					label="Публикации"
 				/>
@@ -353,13 +356,17 @@ export class MainPage extends Page {
 					label="Комментарии"
 				/>
 				<Tab
+					value={0}
+					label="Чат"
+				/>
+				<Tab
 					value={3}
 					label="Активные задачи"
 				/>
-				<Tab
+				{/* <Tab
 					value={4}
 					label="Старая главная"
-				/>
+				/> */}
 			</Tabs>
 
 			<div

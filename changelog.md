@@ -1,3 +1,8 @@
+2.9.7
+============================================
+- Upgrade modules
+- Update MainPage
+
 2.9.6
 ============================================
 - Added inviteChatRoomProcessor

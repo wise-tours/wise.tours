@@ -1,4 +1,15 @@
 
+enum ResourceType {
+  Blog
+  Comment
+  PersonalBlog
+  Project
+  Resource
+  Service
+  Team
+  Topic
+}
+
 type Resource {
   oldID: Int @unique
   Topics: [Resource!]! @relation(name: "BlogTopics")

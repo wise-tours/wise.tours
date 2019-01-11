@@ -13,7 +13,7 @@ import CreateIcon from 'material-ui-icons/Create';
 
 
 // import UserItem from "@prisma-cms/front/lib/components/App/Renderer/MainMenu/User";
-import {styles as defaultStyles} from "@prisma-cms/front/lib/components/App/Renderer/MainMenu";
+import { styles as defaultStyles } from "@prisma-cms/front/lib/components/App/Renderer/MainMenu";
 import UserItem from "./User";
 
 import { Link } from "react-router-dom";
@@ -52,6 +52,10 @@ export const styles = theme => {
 export class MainMenu extends Component {
 
   static contextType = Context;
+
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
 
   render() {
 
@@ -347,9 +351,6 @@ export class MainMenu extends Component {
   }
 }
 
-MainMenu.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(props => <MainMenu
   {...props}
