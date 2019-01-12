@@ -55,7 +55,7 @@ class ChatRoomsByUser extends Component {
 
     let sendMessage;
 
-    if (currentUserId && currentUserId !== userId) {
+    if (!currentUserId || (currentUserId !== userId)) {
 
       sendMessage = <div>
 
@@ -66,6 +66,7 @@ class ChatRoomsByUser extends Component {
         </Typography>
 
         <NewMessage
+          cacheKey={`newMessage_${userId}`}
           data={{
             Room: {
               to: userId,
