@@ -112,23 +112,25 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
 
           let connect;
 
+          let Blog;
+
           if (blogID) {
-            connect = {
-              id: blogID,
+            Blog = {
+              connect: {
+                id: blogID,
+              },
             }
           }
-          else {
-            connect = {
-              oldID: 637,
-            };
-          }
+          // else {
+          //   connect = {
+          //     oldID: 637,
+          //   };
+          // }
 
           Object.assign(data, {
             uri,
             isfolder: false,
-            Blog: {
-              connect,
-            },
+            Blog,
           });
 
 
