@@ -83,6 +83,14 @@ class BlogsPage extends ListPage {
       }}
       {...this.getPaginationParams()}
       {...other}
+        addObject={() => {
+          const {
+            router: {
+              history,
+            },
+          } = this.context;
+          history.push(`/blogs/create`);
+        }}
     />
   }
 }

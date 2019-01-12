@@ -41,6 +41,12 @@ type Mutation {
     data: BlogCreateInput!
   ): ResourceResponse!
 
+  updateBlogProcessor(
+    data: BlogUpdateInput!
+    where: ResourceWhereUniqueInput!
+  ): ResourceResponse!
+
+
   createTopicProcessor(
     data: TopicCreateInput!
   ): ResourceResponse!
@@ -50,6 +56,7 @@ type Mutation {
     where: ResourceWhereUniqueInput!
   ): ResourceResponse!
 
+
   createCommentProcessor(
     data: CommentCreateInput!
   ): ResourceResponse!
@@ -58,6 +65,7 @@ type Mutation {
     data: CommentUpdateInput!
     where: ResourceWhereUniqueInput!
   ): ResourceResponse!
+  
 
   startImportProcessor(
     sourceDbConfig: ImportDbConfig!

@@ -12,6 +12,7 @@ import PageNotFound from "../../404";
 import { BlogConnector } from "../query";
 
 import View from "./View";
+import gql from 'graphql-tag';
 
 export class BlogPage extends Page {
 
@@ -53,6 +54,24 @@ export class BlogPage extends Page {
   }
 
 
+
+  mutate = (options) => {
+
+    const {
+      query: {
+        updateBlogProcessor
+      },
+      client,
+    } = this.context;
+
+    return client.mutate({
+      mutation: gql(updateBlogProcessor),
+      ...options,
+    });
+
+  }
+
+
   render() {
 
     const {
@@ -76,7 +95,7 @@ export class BlogPage extends Page {
         output = null;
       }
       else {
-        return <PageNotFound 
+        return <PageNotFound
           title="Блог не найден"
         />
       }
@@ -85,6 +104,8 @@ export class BlogPage extends Page {
     else {
       output = <View
         data={data}
+        onSave={this.onSave}
+        mutate={this.mutate}
         {...other}
       />
     }

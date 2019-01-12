@@ -128,8 +128,6 @@ export class ModxclubProjectProcessor extends ProjectProcessor {
 
   async mutate(method, args, info) {
 
-    // this.addFieldError("sdfdsF", "Test dsfdsfdsf");
-
     // console.log(chalk.green("CreateProject args.data"), args.data);
 
     const {

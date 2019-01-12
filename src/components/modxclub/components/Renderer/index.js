@@ -22,6 +22,7 @@ import TopicCreatePage from "../pages/Topics/Topic/Create";
 import TagPage from "../pages/Tags/Tag";
 import BlogsPage from "../pages/Blogs";
 import BlogPage from "../pages/Blogs/Blog";
+import BlogCreatePage from "../pages/Blogs/Blog/Create";
 import CommentsPage from "../pages/Comments";
 import CommentPage from "../pages/Comments/Comment";
 import ProjectsPage from "../pages/cooperation/Projects";
@@ -298,6 +299,11 @@ export class Renderer extends PrismaRendererCmsRenderer {
         exact: true,
         path: "/blogs",
         component: BlogsPage,
+      },
+      {
+        exact: true,
+        path: "/blogs/create",
+        component: BlogCreatePage,
       },
       {
         exact: false,

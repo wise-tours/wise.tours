@@ -60,6 +60,40 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
 
     switch (type) {
 
+      case "Blog":
+
+        {
+
+          const {
+            contentText,
+          } = this.prepareContent(args, data, method) || {};
+
+          // if (!contentText) {
+          //   // this.addFieldError("content", "Не заполнен текст");
+          //   this.addError("Не заполнен текст");
+          //   return;
+          // }
+
+          const uri = `/blogs/${name}`;
+
+
+          Object.assign(data, {
+            uri,
+            isfolder: true,
+          });
+
+
+          Object.assign(args, {
+            data,
+          });
+
+          const result = await super.create(method, args, info);
+
+          return result;
+        }
+
+        break;
+
       case "Topic":
 
         {
@@ -569,6 +603,10 @@ class ModxclubTopicModule extends ResourceModule {
           return this.getProcessor(ctx).updateWithResponse("Resource", args, info);
         },
         updateTopicProcessor: (source, args, ctx, info) => {
+
+          return this.getProcessor(ctx).updateWithResponse("Resource", args, info);
+        },
+        updateBlogProcessor: (source, args, ctx, info) => {
 
           return this.getProcessor(ctx).updateWithResponse("Resource", args, info);
         },

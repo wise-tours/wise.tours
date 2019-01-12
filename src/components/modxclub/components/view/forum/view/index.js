@@ -333,11 +333,11 @@ class ForumView extends TableView {
       if (loading) {
         return null;
       }
-      else {
-        return <PageNotFound
-          title="Топики не были получены"
-        />
-      }
+      // else {
+      //   return <PageNotFound
+      //     title="Топики не были получены"
+      //   />
+      // }
     }
 
     return super.render();

@@ -5,25 +5,22 @@ import gql from "graphql-tag";
 
 import { graphql } from "react-apollo";
 
-
-
-export const blogFieldsFragment = `
-  fragment blogFields on Resource{
-    id
-    name
-    longtitle
-    uri
-    type
-  }
-`;
+import {
+  UserNoNestingFragment,
+  ResourceNoNestingFragment,
+} from "../../../../../schema/generated/api.fragments";
 
 
 
 export const blogFragment = `
   fragment blogFragment on Resource{
-    ...blogFields
+    ...ResourceNoNesting
+    CreatedBy{
+      ...UserNoNesting
+    }
   }
-  ${blogFieldsFragment}
+  ${ResourceNoNestingFragment}
+  ${UserNoNestingFragment}
 `;
 
 

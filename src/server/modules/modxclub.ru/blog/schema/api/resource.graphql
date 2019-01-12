@@ -2,7 +2,7 @@
 input BlogCreateInput {
   name: String!
   longtitle: String
-  content: Json!
+  content: Json
   published: Boolean
 }
 

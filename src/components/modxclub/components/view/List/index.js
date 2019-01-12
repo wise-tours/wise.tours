@@ -115,17 +115,17 @@ class ObjectsListView extends TableView {
       count = 0,
     } = aggregate || {};
 
+
     if (!edges || !edges.length) {
 
       if (loading) {
         return null;
       }
-      else {
-        return <Typography>
-          Данные не были получены
-        </Typography>
-      }
-
+      // else {
+      //   content = <Typography>
+      //     Данные не были получены
+      //   </Typography>
+      // }
 
     }
 
