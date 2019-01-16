@@ -50,7 +50,8 @@ const customStyles = theme => {
 
     },
     loading: {
-      opacity: 0.5,
+      // https://modxclub.ru/tasks/cjquq4m5o2eah0989chqx3m3d/
+      // opacity: 0.5,
     },
   }
 }
