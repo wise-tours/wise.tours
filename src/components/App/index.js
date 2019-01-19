@@ -1,5 +1,5 @@
 
-import "../../../../styles/less/styles.css";
+import "../../styles/less/styles.css";
 
 import { Component } from "react";
 
@@ -7,7 +7,7 @@ import { App as PrismaApp } from "@prisma-cms/front";
 
 import Renderer from "../Renderer";
 
-import * as queryFragments from "../../../../schema/generated/api.fragments";
+import * as queryFragments from "../../schema/generated/api.fragments";
 
 
 import { createMuiTheme } from 'material-ui/styles';

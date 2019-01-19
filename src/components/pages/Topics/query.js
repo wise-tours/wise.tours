@@ -9,7 +9,7 @@ import { graphql, compose } from "react-apollo";
 import {
   ResourceNoNestingFragment,
   UserNoNestingFragment,
-} from "../../../../../schema/generated/api.fragments";
+} from "../../../schema/generated/api.fragments";
 
 
 export const topicFragment = `

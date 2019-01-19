@@ -4,7 +4,7 @@ import React from "react";
 import {
   ResourceNoNestingFragment,
   UserNoNestingFragment,
-} from "../../../../../schema/generated/api.fragments";
+} from "../../../schema/generated/api.fragments";
 
 import gql from "graphql-tag";
 

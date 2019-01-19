@@ -8,7 +8,7 @@ import { graphql } from "react-apollo";
 import {
   UserNoNestingFragment,
   ResourceNoNestingFragment,
-} from "../../../../../schema/generated/api.fragments";
+} from "../../../schema/generated/api.fragments";
 
 
 

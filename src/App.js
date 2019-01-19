@@ -4,7 +4,7 @@
 
 // import {App as PrismaApp} from "@prisma-cms/front";
 
-// import Renderer from "./components/modxclub/components/Renderer";
+// import Renderer from "./components/Renderer";
 
 // import * as queryFragments from "./schema/generated/api.fragments";
 
@@ -28,7 +28,7 @@
 
 // }
 
-import App from "./components/modxclub/components/App";
+import App from "./components/App";
 
 import * as queryFragments from "./schema/generated/api.fragments";
 

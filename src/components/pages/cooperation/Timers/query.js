@@ -11,7 +11,7 @@ import {
   UserNoNestingFragment,
   TaskNoNestingFragment,
   ProjectNoNestingFragment,
-} from "../../../../../../schema/generated/api.fragments";
+} from "../../../../schema/generated/api.fragments";
 
 
 export const createTimerProcessor = gql`
