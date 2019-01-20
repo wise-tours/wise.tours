@@ -29,10 +29,10 @@ type Resource implements Node {
   Parent(where: ResourceWhereInput): Resource
   Childs(where: ResourceWhereInput, orderBy: ResourceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Resource!]
   Image(where: FileWhereInput): File
-  rating: Float!
-  positiveVotesCount: Int!
-  negativeVotesCount: Int!
-  neutralVotesCount: Int!
+  rating: Float
+  positiveVotesCount: Int
+  negativeVotesCount: Int
+  neutralVotesCount: Int
   CommentTarget(where: ResourceWhereInput): Resource
   Comments(where: ResourceWhereInput, orderBy: ResourceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Resource!]
   Votes(where: VoteWhereInput, orderBy: VoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vote!]
@@ -50,7 +50,7 @@ type Resource implements Node {
 }
 
 type Resource {
-  type: ResourceType!
+  type: ResourceType
 }
 
 input ResourceCreateInput {

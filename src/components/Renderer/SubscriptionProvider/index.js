@@ -62,99 +62,99 @@ export default class SubscriptionProvider extends Component {
 
 
 
-    const subscribeUser = gql`
-      subscription user{
-        user{
-          mutation
-          node{
-            id
-          }
-        }
-      }
-    `;
+    // const subscribeUser = gql`
+    //   subscription user{
+    //     user{
+    //       mutation
+    //       node{
+    //         id
+    //       }
+    //     }
+    //   }
+    // `;
 
-    const userSub = await client
-      .subscribe({
-        query: subscribeUser,
-        variables: {
-        },
-      })
-      .subscribe({
-        next: async (data) => {
+    // const userSub = await client
+    //   .subscribe({
+    //     query: subscribeUser,
+    //     variables: {
+    //     },
+    //   })
+    //   .subscribe({
+    //     next: async (data) => {
 
-          await client.reFetchObservableQueries();
+    //       await client.reFetchObservableQueries();
 
-        },
-        error(error) {
-          console.error('subscribeCalls callback with error: ', error)
-        },
-      });
+    //     },
+    //     error(error) {
+    //       console.error('subscribeCalls callback with error: ', error)
+    //     },
+    //   });
 
-    subscriptions.push(userSub);
-
-
-    const subscribeResource = gql`
-      subscription resource{
-        resource{
-          mutation
-          node{
-            id
-          }
-        }
-      }
-    `;
-
-    const resourceSub = await client
-      .subscribe({
-        query: subscribeResource,
-        variables: {
-        },
-      })
-      .subscribe({
-        next: async (data) => {
-
-          await client.reFetchObservableQueries();
-
-        },
-        error(error) {
-          console.error('subscribeCalls callback with error: ', error)
-        },
-      });
-
-    subscriptions.push(resourceSub);
+    // subscriptions.push(userSub);
 
 
-    const subscribeEthTransaction = gql`
-      subscription ethTransaction{
-        ethTransaction{
-          mutation
-          node{
-            id
-          }
-        }
-      }
-    `;
+    // const subscribeResource = gql`
+    //   subscription resource{
+    //     resource{
+    //       mutation
+    //       node{
+    //         id
+    //       }
+    //     }
+    //   }
+    // `;
 
-    const ethTransactionSub = await client
-      .subscribe({
-        query: subscribeEthTransaction,
-        variables: {
-        },
-      })
-      .subscribe({
-        next: async (data) => {
+    // const resourceSub = await client
+    //   .subscribe({
+    //     query: subscribeResource,
+    //     variables: {
+    //     },
+    //   })
+    //   .subscribe({
+    //     next: async (data) => {
 
-          await loadApiData();
+    //       await client.reFetchObservableQueries();
 
-          await client.reFetchObservableQueries();
+    //     },
+    //     error(error) {
+    //       console.error('subscribeCalls callback with error: ', error)
+    //     },
+    //   });
 
-        },
-        error(error) {
-          console.error('subscribeCalls callback with error: ', error)
-        },
-      });
+    // subscriptions.push(resourceSub);
 
-    subscriptions.push(ethTransactionSub);
+
+    // const subscribeEthTransaction = gql`
+    //   subscription ethTransaction{
+    //     ethTransaction{
+    //       mutation
+    //       node{
+    //         id
+    //       }
+    //     }
+    //   }
+    // `;
+
+    // const ethTransactionSub = await client
+    //   .subscribe({
+    //     query: subscribeEthTransaction,
+    //     variables: {
+    //     },
+    //   })
+    //   .subscribe({
+    //     next: async (data) => {
+
+    //       await loadApiData();
+
+    //       await client.reFetchObservableQueries();
+
+    //     },
+    //     error(error) {
+    //       console.error('subscribeCalls callback with error: ', error)
+    //     },
+    //   });
+
+    // subscriptions.push(ethTransactionSub);
 
 
 

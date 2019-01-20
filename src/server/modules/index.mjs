@@ -74,7 +74,7 @@ class CoreModule extends PrismaModule {
     typesArray = this.cleanupApiSchema(typesArray, [
       "ResourceType",
     ]);
-    
+
 
     let schema = fileLoader(__dirname + '/schema/database/', {
       recursive: true,
@@ -107,15 +107,42 @@ class CoreModule extends PrismaModule {
       baseSchema = fs.readFileSync(schemaFile, "utf-8");
 
       baseSchema = this.cleanupApiSchema(baseSchema, [
-        "ProjectMemberCreateInput",
-        
-        "TeamMemberCreateInput",
-        "TeamMemberUpdatenput",
+        // Cooperation
+        "ProjectCreateInput",
+        "ProjectUpdateInput",
+        "TaskCreateInput",
+        "TaskUpdateInput",
+        "TimerCreateInput",
+        "TimerUpdateInput",
 
-        "ChatRoomCreateInput",
-        "ChatRoomUpdateInput",
-        "UserCreateManyWithoutRoomsInput",
-        "UserUpdateManyWithoutRoomsInput",
+        "ProjectMemberCreateInput",
+        "ProjectMemberUpdateInput",
+        "ProjectCreateOneWithoutMembersInput",
+        "UserCreateOneWithoutProjectsInput",
+        "ServiceCreateManyWithoutProjectsInput",
+        "ServiceUpdateManyWithoutProjectsInput",
+
+        "TeamCreateInput",
+        "TeamUpdateInput",
+        "TeamCreateOneWithoutChildsInput",
+        "TeamCreateManyWithoutParentInput",
+        "TeamMemberCreateManyWithoutTeamInput",
+        "ProjectCreateManyWithoutTeamInput",
+        "TeamUpdateOneWithoutChildsInput",
+        "TeamUpdateManyWithoutParentInput",
+        "TeamMemberUpdateManyWithoutTeamInput",
+        "ProjectUpdateManyWithoutTeamInput",
+
+        "TeamMemberCreateInput",
+        "TeamMemberUpdateInput",
+        "TeamCreateOneWithoutMembersInput",
+        "UserCreateOneWithoutTeamsInput",
+
+        "PositionCreateInput",
+        "PositionUpdateInput",
+        "UserCreateManyWithoutPositionsInput",
+        "UserUpdateManyWithoutPositionsInput",
+        // Eof Cooperation
 
         "ChatMessageCreateInput",
         "ChatMessageUpdateInput",

@@ -61,6 +61,11 @@ import {
   SubscriptionProvider as SocietySubscriptionProvider,
 } from "@prisma-cms/society";
 
+import {
+  ContextProvider as EthereumContextProvider,
+  SubscriptionProvider as EthereumSubscriptionProvider,
+} from "@prisma-cms/ethereum";
+
 import ContextProvider from "./ContextProvider";
 
 
@@ -549,9 +554,13 @@ export class Renderer extends PrismaCmsRenderer {
       <ResourceSubscriptionProvider>
         <SocietyContextProvider>
           <SocietySubscriptionProvider>
-            <ContextProvider>
-              {super.renderWrapper()}
-            </ContextProvider>
+            <EthereumContextProvider>
+              <EthereumSubscriptionProvider>
+                <ContextProvider>
+                  {super.renderWrapper()}
+                </ContextProvider>
+              </EthereumSubscriptionProvider>
+            </EthereumContextProvider>
           </SocietySubscriptionProvider>
         </SocietyContextProvider>
       </ResourceSubscriptionProvider>
