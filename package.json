@@ -1,6 +1,6 @@
 {
   "name": "@modxclub/modxclub.ru",
-  "version": "2.10.1",
+  "version": "2.11.0",
   "description": "modxclub.ru",
   "private": false,
   "scripts": {
@@ -27,6 +27,7 @@
     "@prisma-cms/editor": "latest",
     "@prisma-cms/ethereum": "latest",
     "@prisma-cms/ethereum-module": "latest",
+    "@prisma-cms/context": "latest",
     "@prisma-cms/front": "latest",
     "@prisma-cms/log-module": "latest",
     "@prisma-cms/mail-module": "latest",
@@ -56,8 +57,9 @@
     "node-sass-chokidar": "^1.1.0",
     "prisma-binding": "^2.1.6",
     "react-apollo": "^2.2.3",
-    "react-number-format": "^4.0.5",
+    "react-number-format": "^4.0.6",
     "urijs": "^1.19.1",
+    "web3": "^1.0.0-beta.37",
     "xml-writer": "^1.7.0"
   },
   "devDependencies": {
