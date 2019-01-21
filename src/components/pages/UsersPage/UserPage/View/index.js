@@ -242,6 +242,7 @@ export default class UserPageView extends PrismaCmsUserPageView {
                 helperText: "Сменить ethereum кошелек",
                 label: "Адрес кошелька",
                 value: ethWallet || "",
+                disabled: true,
               })}
 
             </Grid>
