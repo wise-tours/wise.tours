@@ -124,46 +124,46 @@ export class ModxclubUserProcessor extends UserPayload {
        * Если нету, создаем новый
        */
 
-      if (EthAccounts && EthAccounts[0]) {
+      // if (EthAccounts && EthAccounts[0]) {
 
-        // const {
-        //   id,
-        // } = EthAccounts[0];
+      //   // const {
+      //   //   id,
+      //   // } = EthAccounts[0];
 
-        // Object.assign(data, {
-        //   EthAccounts: {
-        //     update: {
-        //       where: {
-        //         id,
-        //       },
-        //       data: {
-        //         address: ethWallet,
-        //       },
-        //     },
-        //   },
-        // });
+      //   // Object.assign(data, {
+      //   //   EthAccounts: {
+      //   //     update: {
+      //   //       where: {
+      //   //         id,
+      //   //       },
+      //   //       data: {
+      //   //         address: ethWallet,
+      //   //       },
+      //   //     },
+      //   //   },
+      //   // });
 
-        return this.addError("Нельзя менять кошелек");
+      //   return this.addError("Нельзя менять кошелек");
 
-      }
-      else {
+      // }
+      // else {
 
 
 
-        /**
-         * Если пользователь указал отправить ему уведомление с паролем, отправляем
-         */
+      /**
+       * Если пользователь указал отправить ему уведомление с паролем, отправляем
+       */
 
-        let LettersCreated;
+      let LettersCreated;
 
-        if (ethWalletPKSendEmail) {
+      if (ethWalletPKSendEmail && email) {
 
-          LettersCreated = {
-            create: {
-              rank: 100,
-              email,
-              subject: "Данные вашего кошелька",
-              message: `
+        LettersCreated = {
+          create: {
+            rank: 100,
+            email,
+            subject: "Данные вашего кошелька",
+            message: `
                 <h3>
                   Данные вашего кошелька
                 </h3>
@@ -176,25 +176,25 @@ export class ModxclubUserProcessor extends UserPayload {
                   <strong>Приватный ключ:</strong> ${privateKey}
                 </p>
               `,
-            },
-          }
-
+          },
         }
 
-        const chainId = await web3.eth.net.getId();
-
-        Object.assign(data, {
-          EthAccounts: {
-            create: {
-              address: ethWallet,
-              type: "Contract",
-              chainId,
-            },
-          },
-          LettersCreated,
-        });
-
       }
+
+      const chainId = await web3.eth.net.getId();
+
+      Object.assign(data, {
+        EthAccounts: {
+          create: {
+            address: ethWallet,
+            type: "Contract",
+            chainId,
+          },
+        },
+        LettersCreated,
+      });
+
+      // }
 
     }
 

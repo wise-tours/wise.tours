@@ -15,7 +15,7 @@ import MainMenu from "../menu/mainMenu";
 import MainPage from "../pages/MainPage";
 // import UsersPage from "@prisma-cms/front/lib/modules/pages/UsersPage";
 import UsersPage from "../pages/UsersPage/";
-import UserPage from "../pages/UsersPage/UserPage";
+import UserPage from "./pages/UsersPage/UserPage";
 import TopicsPage from "../pages/Topics";
 import TopicPage from "../pages/Topics/Topic";
 import TopicCreatePage from "../pages/Topics/Topic/Create";
