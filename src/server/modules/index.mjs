@@ -144,6 +144,11 @@ class CoreModule extends PrismaModule {
         "UserUpdateManyWithoutPositionsInput",
         // Eof Cooperation
 
+        "ChatRoomCreateInput",
+        "ChatRoomUpdateInput",
+        "UserCreateManyWithoutRoomsInput",
+        "UserUpdateManyWithoutRoomsInput",
+        
         "ChatMessageCreateInput",
         "ChatMessageUpdateInput",
         "ChatRoomCreateOneWithoutMessagesInput",
