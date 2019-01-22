@@ -34,5 +34,5 @@ ReactDOM.render(<PrismaCms
   queryFragments={queryFragments}
 />, document.getElementById('root'));
 
-serviceWorker.unregister();
+serviceWorker.register();
 
