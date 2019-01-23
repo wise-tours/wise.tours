@@ -12,12 +12,12 @@
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
-    // [::1] is the IPv6 localhost address.
-    window.location.hostname === '[::1]' ||
-    // 127.0.0.1/8 is considered localhost for IPv4.
-    window.location.hostname.match(
-      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-    )
+  // [::1] is the IPv6 localhost address.
+  window.location.hostname === '[::1]' ||
+  // 127.0.0.1/8 is considered localhost for IPv4.
+  window.location.hostname.match(
+    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+  )
 );
 
 export function register(config) {
@@ -43,7 +43,7 @@ export function register(config) {
         navigator.serviceWorker.ready.then(() => {
           console.log(
             'This web app is being served cache-first by a service ' +
-              'worker. To learn more, visit http://bit.ly/CRA-PWA'
+            'worker. To learn more, visit http://bit.ly/CRA-PWA'
           );
         });
       } else {
@@ -55,47 +55,116 @@ export function register(config) {
 }
 
 function registerValidSW(swUrl, config) {
+
+  // navigator.serviceWorker
+  //   .register(swUrl)
+  //   .then(registration => {
+  //     registration.onupdatefound = () => {
+  //       const installingWorker = registration.installing;
+  //       if (installingWorker == null) {
+  //         return;
+  //       }
+  //       installingWorker.onstatechange = () => {
+  //         if (installingWorker.state === 'installed') {
+  //           if (navigator.serviceWorker.controller) {
+  //             // At this point, the updated precached content has been fetched,
+  //             // but the previous service worker will still serve the older
+  //             // content until all client tabs are closed.
+  //             console.log(
+  //               'New content is available and will be used when all ' +
+  //               'tabs for this page are closed. See http://bit.ly/CRA-PWA.'
+  //             );
+
+  //             // Execute callback
+  //             if (config && config.onUpdate) {
+  //               config.onUpdate(registration);
+  //             }
+  //           } else {
+  //             // At this point, everything has been precached.
+  //             // It's the perfect time to display a
+  //             // "Content is cached for offline use." message.
+  //             console.log('Content is cached for offline use.');
+
+  //             // Execute callback
+  //             if (config && config.onSuccess) {
+  //               config.onSuccess(registration);
+  //             }
+  //           }
+  //         }
+  //       };
+  //     };
+  //   })
+  //   .catch(error => {
+  //     console.error('Error during service worker registration:', error);
+  //   });
+
   navigator.serviceWorker
-    .register(swUrl)
+    .register("push.worker.js")
     .then(registration => {
-      registration.onupdatefound = () => {
-        const installingWorker = registration.installing;
-        if (installingWorker == null) {
-          return;
+      console.log("registered push.worker.js", registration);
+
+      function urlB64ToUint8Array(base64String) {
+        const padding = '='.repeat((4 - base64String.length % 4) % 4);
+        const base64 = (base64String + padding)
+          .replace(/\-/g, '+')
+          .replace(/_/g, '/');
+
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+
+        for (let i = 0; i < rawData.length; ++i) {
+          outputArray[i] = rawData.charCodeAt(i);
         }
-        installingWorker.onstatechange = () => {
-          if (installingWorker.state === 'installed') {
-            if (navigator.serviceWorker.controller) {
-              // At this point, the updated precached content has been fetched,
-              // but the previous service worker will still serve the older
-              // content until all client tabs are closed.
-              console.log(
-                'New content is available and will be used when all ' +
-                  'tabs for this page are closed. See http://bit.ly/CRA-PWA.'
-              );
+        return outputArray;
+      }
 
-              // Execute callback
-              if (config && config.onUpdate) {
-                config.onUpdate(registration);
-              }
-            } else {
-              // At this point, everything has been precached.
-              // It's the perfect time to display a
-              // "Content is cached for offline use." message.
-              console.log('Content is cached for offline use.');
 
-              // Execute callback
-              if (config && config.onSuccess) {
-                config.onSuccess(registration);
-              }
-            }
+      function subscribeUser() {
+
+        const applicationServerPublicKey = "BDDjn9yst9WhHLgEYbhFjP8HNXwLXhW6tdlr37gjedk_2Gbnzdq9NrlMLDuQIMw25ZM3VTiSaepr0JLAvMDmTlU";
+
+        const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+        registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: applicationServerKey
+        })
+          .then(function (subscription) {
+            console.log('User is subscribed.');
+
+            // updateSubscriptionOnServer(subscription);
+
+            // isSubscribed = true;
+
+            // updateBtn();
+          })
+          .catch(function (err) {
+            console.log('Failed to subscribe the user: ', err);
+            // updateBtn();
+          });
+      }
+
+      console.log("subscribeUser", subscribeUser);
+
+      registration.pushManager.getSubscription()
+        .then(function (subscription) {
+          const isSubscribed = !(subscription === null);
+
+          // updateSubscriptionOnServer(subscription);
+
+          if (isSubscribed) {
+            console.log('User IS subscribed.');
+          } else {
+            console.log('User is NOT subscribed.');
           }
-        };
-      };
+
+          // updateBtn();
+        });
+
     })
     .catch(error => {
-      console.error('Error during service worker registration:', error);
+      console.error('Error during service push.worker.js registration:', error);
     });
+
 }
 
 function checkValidServiceWorker(swUrl, config) {
