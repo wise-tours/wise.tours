@@ -22,6 +22,10 @@ import { IconButton } from 'material-ui';
 
 import Context from "@prisma-cms/context";
 
+import {
+  CallRequestButtons,
+} from "@prisma-cms/webrtc";
+
 export const styles = theme => {
 
   const {
@@ -254,6 +258,21 @@ export class MainMenu extends Component {
               xs
             >
             </Grid>
+
+            {currentUser ?
+              <Grid
+                key="callRequests"
+                item
+              >
+                <CallRequestButtons
+                  key={userId}
+                  classes={{
+                    icon: classes.link,
+                  }}
+                />
+              </Grid>
+              : null
+            }
 
             {currentUser ?
               <Grid

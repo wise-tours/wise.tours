@@ -11,6 +11,7 @@ import LogModule from "@prisma-cms/log-module";
 import MailModule from "@prisma-cms/mail-module";
 import UploadModule from "@prisma-cms/upload-module";
 import RouterModule from "@prisma-cms/router-module";
+import WebrtcModule from "@prisma-cms/webrtc-module";
 
 import UserModule from "./user";
 import ResourceModule from "./resource";
@@ -44,6 +45,7 @@ class CoreModule extends PrismaModule {
       SocietyModule,
       EthereumModule,
       ImportModule,
+      WebrtcModule,
 
       // /**
       //  * Важно кастомные классы в последнюю очередь использовать.
@@ -371,6 +373,8 @@ class CoreModule extends PrismaModule {
       inviteChatRoomProcessor,
       leaveChatRoom,
       joinChatRoom,
+      createCallRequestProcessor,
+      updateCallRequest,
     } = Mutation;
 
 
@@ -409,6 +413,8 @@ class CoreModule extends PrismaModule {
       inviteChatRoomProcessor,
       leaveChatRoom,
       joinChatRoom,
+      createCallRequestProcessor,
+      updateCallRequest,
     };
 
     // for(var i in AllowedMutations){

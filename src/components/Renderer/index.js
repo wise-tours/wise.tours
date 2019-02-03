@@ -66,6 +66,12 @@ import {
   SubscriptionProvider as EthereumSubscriptionProvider,
 } from "@prisma-cms/ethereum";
 
+import {
+  ContextProvider as WebrtcContextProvider,
+  SubscriptionProvider as WebrtcSubscriptionProvider,
+  WebRtcChatProvider,
+} from "@prisma-cms/webrtc";
+
 import ContextProvider from "./ContextProvider";
 
 
@@ -556,9 +562,15 @@ export class Renderer extends PrismaCmsRenderer {
           <SocietySubscriptionProvider>
             <EthereumContextProvider>
               <EthereumSubscriptionProvider>
-                <ContextProvider>
-                  {super.renderWrapper()}
-                </ContextProvider>
+                <WebrtcContextProvider>
+                  <WebrtcSubscriptionProvider>
+                    <WebRtcChatProvider>
+                      <ContextProvider>
+                        {super.renderWrapper()}
+                      </ContextProvider>
+                    </WebRtcChatProvider>
+                  </WebrtcSubscriptionProvider>
+                </WebrtcContextProvider>
               </EthereumSubscriptionProvider>
             </EthereumContextProvider>
           </SocietySubscriptionProvider>
