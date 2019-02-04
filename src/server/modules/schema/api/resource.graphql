@@ -14,7 +14,7 @@ type Resource implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  # type: ID!
+  type: ResourceType
   name: String!
   longtitle: String
   content: Json

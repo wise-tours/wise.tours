@@ -163,13 +163,23 @@ class CoreModule extends PrismaModule {
         "ChatRoomUpdateInput",
         "UserCreateManyWithoutRoomsInput",
         "UserUpdateManyWithoutRoomsInput",
-        
+
         "ChatMessageCreateInput",
         "ChatMessageUpdateInput",
         "ChatRoomCreateOneWithoutMessagesInput",
 
         "ChatMessageReadedCreateInput",
         "ChatMessageCreateOneWithoutReadedByInput",
+
+        // "CallRequestCreateInput",
+        "CallRequestUpdateDataInput",
+        "ChatRoomCreateOneWithoutCallRequestsInput",
+        "ChatRoomUpdateOneWithoutCallRequestsInput",
+
+        "EthContractSourceCreateInput",
+        "EthContractSourceUpdateInput",
+        "EthTransactionCreateInput",
+        "EthTransactionSubscriptionPayload",
       ]);
 
     }
