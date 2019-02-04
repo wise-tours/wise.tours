@@ -16,8 +16,8 @@ module.exports = function (app) {
     ws: true,
   }));
 
-  app.get("/media/whatsapp.mp3", (req, res, next) => {
-    res.sendFile(`${cwd}/node_modules/@prisma-cms/webrtc/public/media/whatsapp.mp3`);
+  app.get("/media/call.mp3", (req, res, next) => {
+    res.sendFile(`${cwd}/node_modules/@prisma-cms/webrtc/public/media/call.mp3`);
   });
 
   PrismaProxy(app);
