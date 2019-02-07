@@ -13,7 +13,8 @@ import { withStyles } from 'material-ui';
 import {
   styles,
   GanttView as PrismaCooperationGanttView,
-  processors,
+  // processors,
+  GanttPageConnector,
 } from "@prisma-cms/cooperation/lib/components/pages/Tasks/View/Gantt";
 
 // import * as Gannt from "@prisma-cms/cooperation/lib/components/pages/Tasks/View/Gantt";
@@ -312,6 +313,11 @@ class GanttView extends PrismaCooperationGanttView {
 
 // )(withStyles(styles)(props => <GanttView {...props}/>));
 
-export default processors(withStyles(styles)(props => <GanttView
+// export default processors(withStyles(styles)(props => <GanttView
+//   {...props}
+// />));
+
+export default withStyles(styles)(props => <GanttPageConnector
+  View={GanttView}
   {...props}
-/>));
+/>);

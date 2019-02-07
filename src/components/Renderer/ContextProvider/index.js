@@ -46,6 +46,8 @@ class ContextProvider extends Component {
     return {
       ...this.prepareUserQuery(),
       ...this.prepareResourcesQuery(),
+      ...this.prepareTaskQuery(),
+      ...this.prepareProjectQuery(),
     }
 
   }
@@ -312,12 +314,423 @@ class ContextProvider extends Component {
 
       ${blogFragment}
     `;
- 
+
 
     return {
       createBlogProcessor,
       updateBlogProcessor,
     }
+  }
+
+
+  prepareTaskQuery() {
+
+
+    const {
+      queryFragments,
+    } = this.context;
+
+
+    const {
+      TaskNoNestingFragment,
+      UserNoNestingFragment,
+      TimerNoNestingFragment,
+      ProjectNoNestingFragment,
+    } = queryFragments;
+
+
+    const TaskFragment = `
+      fragment Task on Task{
+        ...TaskNoNesting
+
+        CreatedBy{
+          ...UserNoNesting
+        }
+
+        Timers(
+          orderBy: createdAt_DESC
+        ){
+          ...TimerNoNesting
+          CreatedBy{
+            ...UserNoNesting
+          }
+        }
+
+        Project{
+          ...ProjectNoNesting
+          CreatedBy{
+            ...UserNoNesting
+          }
+          Resource{
+            id
+            name
+            uri
+          }
+        }
+
+        RelatedTo{
+          ...TaskNoNesting
+        }
+        
+      }
+      
+      ${TaskNoNestingFragment}
+      ${UserNoNestingFragment}
+      ${TimerNoNestingFragment}
+      ${ProjectNoNestingFragment}
+    `
+
+
+    const tasksConnection = `
+      query tasksConnection (
+        $where: TaskWhereInput
+        $orderBy: TaskOrderByInput
+        $skip: Int
+        $after: String
+        $before: String
+        $first: Int
+        $last: Int
+      ){
+        objectsConnection: tasksConnection (
+          where: $where
+          orderBy: $orderBy
+          skip: $skip
+          after: $after
+          before: $before
+          first: $first
+          last: $last
+        ){
+          aggregate{
+            count
+          }
+          edges{
+            node{
+              ...Task
+            }
+          }
+        }
+      }
+
+      ${TaskFragment}
+    `;
+
+
+    const tasks = `
+      query tasks (
+        $where: TaskWhereInput
+        $orderBy: TaskOrderByInput
+        $skip: Int
+        $after: String
+        $before: String
+        $first: Int
+        $last: Int
+      ){
+        objects: tasks (
+          where: $where
+          orderBy: $orderBy
+          skip: $skip
+          after: $after
+          before: $before
+          first: $first
+          last: $last
+        ){
+          ...Task
+        }
+      }
+
+      ${TaskFragment}
+    `;
+
+
+    const task = `
+      query task (
+        $where: TaskWhereUniqueInput!
+      ){
+        object: task (
+          where: $where
+        ){
+          ...Task
+        }
+      }
+
+      ${TaskFragment}
+    `;
+
+
+    const createTaskProcessor = `
+      mutation createTaskProcessor(
+        $data: TaskCreateInput!
+      ) {
+        response: createTaskProcessor(
+          data: $data
+        ){
+          success
+          message
+          errors{
+            key
+            message
+          }
+          data{
+            ...Task
+          }
+        }
+      }
+
+      ${TaskFragment}
+    `;
+
+
+    const updateTaskProcessor = `
+      mutation updateTaskProcessor(
+        $data: TaskUpdateInput!
+        $where: TaskWhereUniqueInput!
+      ) {
+        response: updateTaskProcessor(
+          data: $data
+          where: $where
+        ){
+          success
+          message
+          errors{
+            key
+            message
+          }
+          data{
+            ...Task
+          }
+        }
+      }
+
+      ${TaskFragment}
+    `;
+
+
+    const taskStatusEnum = `
+      query {
+        objects: __type(
+          name: "TaskStatus"
+        ){
+          values: enumValues{
+            name
+            description
+          }
+        }
+      }
+    `;
+
+    return {
+      tasksConnection,
+      tasks,
+      task,
+      createTaskProcessor,
+      updateTaskProcessor,
+      taskStatusEnum,
+    }
+
+  }
+
+
+  prepareProjectQuery() {
+
+
+    const {
+      queryFragments,
+    } = this.context;
+
+
+    const {
+      ProjectNoNestingFragment,
+      UserNoNestingFragment,
+      TaskNoNestingFragment,
+      TimerNoNestingFragment,
+    } = queryFragments;
+
+
+    const ProjectFragment = `fragment Project on Project {
+      ...ProjectNoNesting
+
+      CreatedBy{
+        ...UserNoNesting
+      }
+  
+      Members{
+        id
+        User{
+          ...UserNoNesting
+        }
+      }
+      
+      Tasks{
+        ...TaskNoNesting
+        Timers(
+          where:{
+            stopedAt: null
+          }
+        ){
+          ...TimerNoNesting
+          CreatedBy{
+            ...UserNoNesting
+          }
+        }
+        CreatedBy{
+          ...UserNoNesting
+        }
+        Parent {
+          ...TaskNoNesting
+        }
+      }
+      
+      Resource{
+        id
+        uri
+        Image{
+          id
+          path
+        }
+      }
+
+    }
+    
+      ${ProjectNoNestingFragment}
+      ${UserNoNestingFragment}
+      ${TaskNoNestingFragment}
+      ${TimerNoNestingFragment}
+    `;
+
+
+    const projectsConnection = `
+      query projectsConnection (
+        $where: ProjectWhereInput
+        $orderBy: ProjectOrderByInput
+        $skip: Int
+        $after: String
+        $before: String
+        $first: Int
+        $last: Int
+      ){
+        objectsConnection: projectsConnection (
+          where: $where
+          orderBy: $orderBy
+          skip: $skip
+          after: $after
+          before: $before
+          first: $first
+          last: $last
+        ){
+          aggregate{
+            count
+          }
+          edges{
+            node{
+              ...Project
+            }
+          }
+        }
+      }
+
+      ${ProjectFragment}
+    `;
+
+
+    const projects = `
+      query projects (
+        $where: ProjectWhereInput
+        $orderBy: ProjectOrderByInput
+        $skip: Int
+        $after: String
+        $before: String
+        $first: Int
+        $last: Int
+      ){
+        objects: projects (
+          where: $where
+          orderBy: $orderBy
+          skip: $skip
+          after: $after
+          before: $before
+          first: $first
+          last: $last
+        ){
+          ...Project
+        }
+      }
+
+      ${ProjectFragment}
+    `;
+
+
+    const project = `
+      query project (
+        $where: ProjectWhereUniqueInput!
+      ){
+        object: project (
+          where: $where
+        ){
+          ...Project
+        }
+      }
+
+      ${ProjectFragment}
+    `;
+
+
+    const createProjectProcessor = `
+      mutation createProjectProcessor(
+        $data: ProjectCreateInput!
+      ) {
+        response: createProjectProcessor(
+          data: $data
+        ){
+          success
+          message
+          errors{
+            key
+            message
+          }
+          data{
+            ...Project
+          }
+        }
+      }
+
+      ${ProjectFragment}
+    `;
+
+
+    const updateProjectProcessor = `
+      mutation updateProjectProcessor(
+        $data: ProjectUpdateInput!
+        $where: ProjectWhereUniqueInput!
+      ) {
+        response: updateProjectProcessor(
+          data: $data
+          where: $where
+        ){
+          success
+          message
+          errors{
+            key
+            message
+          }
+          data{
+            ...Project
+          }
+        }
+      }
+
+      ${ProjectFragment}
+    `;
+
+
+
+    return {
+      projectsConnection,
+      projects,
+      project,
+      createProjectProcessor,
+      updateProjectProcessor,
+    }
+
   }
 
 }

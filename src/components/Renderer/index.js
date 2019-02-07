@@ -72,6 +72,11 @@ import {
   WebRtcChatProvider,
 } from "@prisma-cms/webrtc";
 
+import {
+  ContextProvider as CooperationContextProvider,
+  SubscriptionProvider as CooperationSubscriptionProvider,
+} from "@prisma-cms/cooperation"
+
 import ContextProvider from "./ContextProvider";
 
 
@@ -565,9 +570,13 @@ export class Renderer extends PrismaCmsRenderer {
                 <WebrtcContextProvider>
                   <WebrtcSubscriptionProvider>
                     <WebRtcChatProvider>
-                      <ContextProvider>
-                        {super.renderWrapper()}
-                      </ContextProvider>
+                      <CooperationContextProvider>
+                        <CooperationSubscriptionProvider>
+                          <ContextProvider>
+                            {super.renderWrapper()}
+                          </ContextProvider>
+                        </CooperationSubscriptionProvider>
+                      </CooperationContextProvider>
                     </WebRtcChatProvider>
                   </WebrtcSubscriptionProvider>
                 </WebrtcContextProvider>

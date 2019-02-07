@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import gql from "graphql-tag";
 
-import CooperationSubscriptionProvider from "@prisma-cms/cooperation/lib/components/SubscriptionProvider";
+// import CooperationSubscriptionProvider from "@prisma-cms/cooperation/lib/components/SubscriptionProvider";
 
 export default class SubscriptionProvider extends Component {
 
@@ -204,15 +204,7 @@ export default class SubscriptionProvider extends Component {
       ...other
     } = this.props;
 
-    return <CooperationSubscriptionProvider
-      user={user}
-      client={client}
-    >
-      {children ? <children.type
-        {...children.props}
-        {...other}
-      /> : null}
-    </CooperationSubscriptionProvider>
+    return children || null
 
   }
 
