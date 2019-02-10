@@ -569,7 +569,13 @@ export class Renderer extends PrismaCmsRenderer {
               <EthereumSubscriptionProvider>
                 <WebrtcContextProvider>
                   <WebrtcSubscriptionProvider>
-                    <WebRtcChatProvider>
+                    <WebRtcChatProvider
+                      iceServers={[{
+                        'urls': [
+                          'stun:coturn.modxclub.ru:443'
+                        ],
+                      }]}
+                    >
                       <CooperationContextProvider>
                         <CooperationSubscriptionProvider>
                           <ContextProvider>
