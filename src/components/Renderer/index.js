@@ -561,6 +561,28 @@ export class Renderer extends PrismaCmsRenderer {
 
   renderWrapper() {
 
+    let iceServers = [];
+
+    iceServers.push({
+      'urls': [
+        // 'stun:coturn.modxclub.ru:443'
+        'stun:modxclub.ru:3478'
+      ],
+      'username': 'test',
+      'credential': 'test',
+    });
+
+    iceServers.push({
+      'urls': [
+        // 'stun:coturn.modxclub.ru:443'
+        'turn:modxclub.ru:3478'
+      ],
+      'username': 'test',
+      'credential': 'test',
+
+    });
+
+
     return <ResourceContextProvider>
       <ResourceSubscriptionProvider>
         <SocietyContextProvider>
@@ -570,11 +592,9 @@ export class Renderer extends PrismaCmsRenderer {
                 <WebrtcContextProvider>
                   <WebrtcSubscriptionProvider>
                     <WebRtcChatProvider
-                      iceServers={[{
-                        'urls': [
-                          'stun:coturn.modxclub.ru:443'
-                        ],
-                      }]}
+                      connectionProps={{
+                        iceServers,
+                      }}
                     >
                       <CooperationContextProvider>
                         <CooperationSubscriptionProvider>
