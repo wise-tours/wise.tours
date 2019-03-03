@@ -1,6 +1,6 @@
 {
-  "name": "@prisma-cms/boilerplate",
-  "version": "2.5.2",
+  "name": "@modxclub/modxclub.ru",
+  "version": "2.13.0",
   "description": "Opensource framework CMS powered by GraphQL, Prisma, MySQL, React & Apollo GraphQL",
   "private": false,
   "scripts": {

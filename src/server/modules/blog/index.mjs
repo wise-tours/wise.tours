@@ -44,22 +44,7 @@ class ModxclubBlogModule extends ResourceModule {
 
   getApiSchema(types = []) {
 
-
-    let apiSchema = super.getApiSchema(types, [
-    ]);
-
-
-    let schema = fileLoader(__dirname + '/schema/api/', {
-      recursive: true,
-    });
-
-    // console.log("schema", schema);
-
-    apiSchema = mergeTypes([apiSchema.concat(schema)], { all: true });
-
-    // console.log("apiSchema", apiSchema);
-
-    return apiSchema;
+    return;
 
   }
 

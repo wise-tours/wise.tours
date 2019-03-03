@@ -1,3 +1,8 @@
+2.13.0
+============================================
+- Upgrade boilerplate
+- Fix Resource schema
+
 2.12.4
 ============================================
 - Added stun/turn servers
