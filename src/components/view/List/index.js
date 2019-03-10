@@ -119,9 +119,9 @@ class ObjectsListView extends TableView {
 
     if (!edges || !edges.length) {
 
-      if (loading) {
-        return null;
-      }
+      // if (loading) {
+      //   return null;
+      // }
       // else {
       //   content = <Typography>
       //     Данные не были получены

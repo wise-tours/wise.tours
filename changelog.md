@@ -1,3 +1,8 @@
+2.14.0
+============================================
+- Added @prisma-cms/filters
+- Added topics filters
+
 2.13.0
 ============================================
 - Upgrade boilerplate

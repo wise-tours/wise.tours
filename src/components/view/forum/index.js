@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 
 // import PrismaCmsComponent from "@prisma-cms/component";
+import Context from "@prisma-cms/context";
 
 
 // import gql from "graphql-tag";
@@ -25,7 +26,7 @@ export class ForumConnector extends Component {
     first: PropTypes.number.isRequired,
     orderBy: PropTypes.string.isRequired,
     tagName: PropTypes.string,
-    where: PropTypes.object.isRequired,
+    where: PropTypes.object,
     getCommentsText: PropTypes.bool.isRequired,
   };
 
@@ -33,33 +34,81 @@ export class ForumConnector extends Component {
   static defaultProps = {
     View,
     first: 12,
-    where: {
-    },
+    // where: null,
     orderBy: "updatedAt_DESC",
     getCommentsText: false,
   }
 
 
-  static contextTypes = {
-    uri: PropTypes.object.isRequired,
-  }
+  static contextType = Context;
 
 
-  constructor(props){
+  constructor(props) {
 
     super(props);
 
   }
 
 
+  setFilters(filters) {
+
+    const {
+      uri,
+      router: {
+        history,
+      },
+    } = this.context;
+
+    // console.log("setFilters", filters);
+
+    let newUri = uri.clone();
+
+    try {
+
+      filters = filters ? JSON.stringify(filters) : undefined;
+    }
+    catch (error) {
+      console.error(error);
+    }
+
+    if (filters) {
+
+      if (newUri.hasQuery) {
+        newUri = newUri.setQuery({
+          filters,
+        });
+      }
+      else {
+        newUri = newUri.addQuery({
+          filters,
+        });
+      }
+
+    }
+    else {
+
+      newUri.removeQuery("filters");
+
+    }
+
+    newUri.removeQuery("page");
+
+
+    const url = newUri.resource();
+
+    // console.log("setFilters uri", newUri, url);
+
+    history.push(url);
+
+  }
+
+
   render() {
 
-    let {
+    const {
       first,
       tagName,
-      where: {
-        ...where
-      },
+      where: propsWhere,
       ...other
     } = this.props;
 
@@ -70,26 +119,50 @@ export class ForumConnector extends Component {
 
     let {
       page,
+      filters,
     } = uri.query(true);
+
+    try {
+      filters = filters && JSON.parse(filters) || null;
+    }
+    catch (error) {
+      console.error(console.error(error));
+    }
 
     let skip;
 
     page = page && parseInt(page) || 0;
 
-    if(first && page > 1){
+    if (first && page > 1) {
       skip = (page - 1) * first;
     }
 
-    where = {
-      ...where,
-      type: "Topic",
+    let AND = [];
+
+    if (propsWhere) {
+      AND.push(propsWhere);
     }
 
-    if(tagName){
-      Object.assign(where, {
+
+    if (tagName) {
+      AND.push({
         tag: tagName,
       });
     }
+
+    if (filters) {
+      AND.push(filters);
+    }
+
+
+    let where = {
+      type: "Topic",
+      AND,
+    }
+
+    // console.log("where filters", filters);
+
+    // console.log("where", where);
 
     return (
       <TopicsConnector
@@ -97,158 +170,13 @@ export class ForumConnector extends Component {
         skip={skip}
         page={page}
         where={where}
+        filters={filters || {}}
+        setFilters={filters => this.setFilters(filters)}
         {...other}
       />
     );
   }
 }
-
-// export class ForumConnector extends PrismaCmsComponent {
-
-
-//   static propTypes = {
-//     ...PrismaCmsComponent.propTypes,
-//     getQueryFragment: PropTypes.func.isRequired,
-//     View: PropTypes.func.isRequired,
-//     first: PropTypes.number.isRequired,
-//     orderBy: PropTypes.string.isRequired,
-//   };
-
-
-//   static defaultProps = {
-//     ...PrismaCmsComponent.defaultProps,
-//     View,
-//     first: 12,
-//     // where: {
-//     //   id: 796,
-//     // },
-//     orderBy: "createdAt_DESC",
-//   }
-
-
-//   componentWillMount() {
-
-//     this.prepareQuery();
-
-//     super.componentWillMount && super.componentWillMount()
-//   }
-
-
-//   prepareQuery() {
-
-//     const {
-//       View,
-//     } = this.props;
-
-//     let query = gql`
-
-//       query topicsConnection(
-//         $first:Int!
-//         $skip:Int
-//         $where: TopicWhereInput
-//         $orderBy: TopicOrderByInput!
-//       ){
-//         objectsConnection: topicsConnection(
-//           orderBy: $orderBy
-//           first: $first
-//           skip: $skip
-//           where: $where
-//         ){
-//           aggregate{
-//             count
-//           }
-//           edges{
-//             node{
-//               ...topicsConnectionFields
-//             }
-//           }
-//         }
-//       }
-
-//       fragment topicsConnectionFields on Topic{
-//         id
-//         name
-//         longtitle
-//         uri
-//         thread_id
-//         createdAt
-//         updatedAt
-//         CreatedBy{
-//           ...TopicUserNoNesting
-//         }
-//         Comments(
-//           orderBy: id_DESC
-//         ){
-//           id
-//           createdAt
-//           CreatedBy{
-//             ...TopicUserNoNesting
-//           }
-//         }
-//         Blog{
-//           id
-//           name
-//           longtitle
-//           uri
-//         }
-//         Thread{
-//           id
-//           rating
-//           Votes{
-//             ...VoteNoNesting
-//           }
-//         }
-//         Tags{
-//           id
-//           name
-//         }
-//       }
-
-
-//       fragment TopicUserNoNesting on User {
-//         id
-//         username
-//         fullname
-//         image
-//       }
-
-//       fragment VoteNoNesting on Vote {
-//         id
-//         target_id
-//         target_class
-//         thread_id
-//         user_id
-//         direction
-//         value
-//         createdAt
-//       }
-
-//     `;
-
-
-//     this.Query = graphql(query)(View);
-
-//   }
-
-
-//   render() {
-
-
-//     const {
-//       Query,
-//     } = this;
-
-//     const {
-//       ...other
-//     } = this.props;
-
-//     return (
-//       <Query
-//         {...other}
-//       />
-//     );
-//   }
-// }
 
 
 export default ForumConnector;

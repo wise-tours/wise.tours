@@ -24,6 +24,8 @@ import {
 
 import PageNotFound from "../../../pages/404";
 
+import Filters from "@prisma-cms/filters";
+
 let customStyles = theme => {
 
   const {
@@ -63,9 +65,11 @@ let customStyles = theme => {
 class ForumView extends TableView {
 
 
-  // static propTypes = {
-
-  // };
+  static propTypes = {
+    ...TableView.propTypes,
+    filters: PropTypes.object,
+    setFilters: PropTypes.func,
+  };
 
   static defaultProps = {
     ...TableView.defaultProps,
@@ -81,6 +85,7 @@ class ForumView extends TableView {
 
   //   super(props);
 
+  //   console.log("ForumView constructor", props);
 
   // }
 
@@ -128,7 +133,7 @@ class ForumView extends TableView {
             const {
               Tag,
             } = tag;
-            
+
             const {
               id,
               name,
@@ -315,6 +320,21 @@ class ForumView extends TableView {
     super.componentDidMount && super.componentDidMount();
   }
 
+
+  renderFilters() {
+
+    const {
+      filters,
+      setFilters,
+    } = this.props;
+
+    return filters && setFilters ? <Filters
+      queryName="resources"
+      filters={filters}
+      setFilters={setFilters}
+    /> : null;
+  }
+
   render() {
 
 
@@ -330,9 +350,9 @@ class ForumView extends TableView {
     } = data;
 
     if (!objectsConnection || !objectsConnection.edges.length) {
-      if (loading) {
-        return null;
-      }
+      // if (loading) {
+      //   return null;
+      // }
       // else {
       //   return <PageNotFound
       //     title="Топики не были получены"
