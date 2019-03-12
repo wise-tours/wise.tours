@@ -1,3 +1,8 @@
+2.14.1
+============================================
+- Upgarde TasksPage
+- Upgarde TimersPage
+
 2.14.0
 ============================================
 - Added @prisma-cms/filters

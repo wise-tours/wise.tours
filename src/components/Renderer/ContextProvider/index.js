@@ -47,6 +47,7 @@ class ContextProvider extends Component {
       ...this.prepareUserQuery(),
       ...this.prepareResourcesQuery(),
       ...this.prepareTaskQuery(),
+      ...this.prepareTimerQuery(),
       ...this.prepareProjectQuery(),
     }
 
@@ -525,6 +526,186 @@ class ContextProvider extends Component {
       createTaskProcessor,
       updateTaskProcessor,
       taskStatusEnum,
+    }
+
+  }
+
+
+  prepareTimerQuery() {
+
+
+    const {
+      queryFragments,
+    } = this.context;
+
+
+    const {
+      TimerNoNestingFragment,
+      UserNoNestingFragment,
+      TaskNoNestingFragment,
+      ProjectNoNestingFragment,
+      ResourceNoNestingFragment,
+    } = queryFragments;
+
+    const TimerFragment = `
+      fragment Timer on Timer{
+        ...TimerNoNesting
+    
+        CreatedBy{
+          ...UserNoNesting
+        }
+    
+        Task {
+          ...TaskNoNesting
+    
+          Project{
+            ...ProjectNoNesting
+            Resource{
+              ...ResourceNoNesting
+            }
+          }
+        }
+        
+      }
+      
+      ${TimerNoNestingFragment}
+      ${UserNoNestingFragment}
+      ${TaskNoNestingFragment}
+      ${ProjectNoNestingFragment}
+      ${ResourceNoNestingFragment}
+    `
+
+    const timersConnection = `
+      query timersConnection (
+        $where: TimerWhereInput
+        $orderBy: TimerOrderByInput
+        $skip: Int
+        $after: String
+        $before: String
+        $first: Int
+        $last: Int
+      ){
+        objectsConnection: timersConnection (
+          where: $where
+          orderBy: $orderBy
+          skip: $skip
+          after: $after
+          before: $before
+          first: $first
+          last: $last
+        ){
+          aggregate{
+            count
+          }
+          edges{
+            node{
+              ...Timer
+            }
+          }
+        }
+      }
+
+      ${TimerFragment}
+    `;
+
+
+    const timers = `
+      query timers (
+        $where: TimerWhereInput
+        $orderBy: TimerOrderByInput
+        $skip: Int
+        $after: String
+        $before: String
+        $first: Int
+        $last: Int
+      ){
+        objects: timers (
+          where: $where
+          orderBy: $orderBy
+          skip: $skip
+          after: $after
+          before: $before
+          first: $first
+          last: $last
+        ){
+          ...Timer
+        }
+      }
+
+      ${TimerFragment}
+    `;
+
+
+    const timer = `
+      query timer (
+        $where: TimerWhereUniqueInput!
+      ){
+        object: timer (
+          where: $where
+        ){
+          ...Timer
+        }
+      }
+
+      ${TimerFragment}
+    `;
+
+
+    const createTimerProcessor = `
+      mutation createTimerProcessor(
+        $data: TimerCreateInput!
+      ) {
+        response: createTimerProcessor(
+          data: $data
+        ){
+          success
+          message
+          errors{
+            key
+            message
+          }
+          data{
+            ...Timer
+          }
+        }
+      }
+
+      ${TimerFragment}
+    `;
+
+
+    const updateTimerProcessor = `
+      mutation updateTimerProcessor(
+        $data: TimerUpdateInput!
+        $where: TimerWhereUniqueInput!
+      ) {
+        response: updateTimerProcessor(
+          data: $data
+          where: $where
+        ){
+          success
+          message
+          errors{
+            key
+            message
+          }
+          data{
+            ...Timer
+          }
+        }
+      }
+
+      ${TimerFragment}
+    `;
+
+
+
+    return {
+      timersConnection,
+      timers,
+      timer,
+      createTimerProcessor,
+      updateTimerProcessor,
     }
 
   }
