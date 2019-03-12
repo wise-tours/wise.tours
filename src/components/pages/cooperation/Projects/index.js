@@ -37,12 +37,64 @@ class ProjectsPage extends Page {
 
   }
 
+  setFilters(filters) {
+
+    const {
+      uri,
+      router: {
+        history,
+      },
+    } = this.context;
+
+    // console.log("setFilters", filters);
+
+    let newUri = uri.clone();
+
+    try {
+
+      filters = filters ? JSON.stringify(filters) : undefined;
+    }
+    catch (error) {
+      console.error(error);
+    }
+
+    if (filters) {
+
+      if (newUri.hasQuery) {
+        newUri = newUri.setQuery({
+          filters,
+        });
+      }
+      else {
+        newUri = newUri.addQuery({
+          filters,
+        });
+      }
+
+    }
+    else {
+
+      newUri.removeQuery("filters");
+
+    }
+
+    newUri.removeQuery("page");
+
+
+    const url = newUri.resource();
+
+    // console.log("setFilters uri", newUri, url);
+
+    history.push(url);
+
+  }
+
 
   render() {
 
     let {
       first,
-      where,
+      where: propsWhere,
       ...other
     } = this.props;
 
@@ -53,8 +105,33 @@ class ProjectsPage extends Page {
 
     let {
       page,
+      filters,
     } = uri.query(true);
 
+
+    try {
+      filters = filters && JSON.parse(filters) || null;
+    }
+    catch (error) {
+      console.error(console.error(error));
+    }
+
+
+    let AND = [];
+
+    if (propsWhere) {
+      AND.push(propsWhere);
+    }
+
+
+    if (filters) {
+      AND.push(filters);
+    }
+
+
+    let where = {
+      AND,
+    }
 
 
     let skip;
@@ -71,6 +148,8 @@ class ProjectsPage extends Page {
         first={first}
         skip={skip}
         page={page ? parseInt(page) : undefined}
+        filters={filters || {}}
+        setFilters={filters => this.setFilters(filters)}
         {...other}
       />
     );

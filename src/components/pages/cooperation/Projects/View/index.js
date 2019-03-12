@@ -6,6 +6,7 @@ import { Typography } from 'material-ui';
  
 
 import Context from "@prisma-cms/context";
+import Filters from "@prisma-cms/filters";
 
 import ProjectsList from "./List";
 
@@ -13,10 +14,28 @@ class ProjectsView extends Component {
 
   static contextType = Context;
 
-  static propTypes = {
 
+  static propTypes = {
+    filters: PropTypes.object,
+    setFilters: PropTypes.func,
   };
- 
+
+
+  renderFilters() {
+
+    const {
+      filters,
+      setFilters,
+    } = this.props;
+
+    return filters && setFilters ? <Filters
+      queryName="projects"
+      filters={filters}
+      setFilters={setFilters}
+    /> : null;
+  }
+
+
   
   render() {
 
@@ -98,8 +117,17 @@ class ProjectsView extends Component {
 
     let content = <Grid
       container
-      spacing={0}
+      spacing={8}
     >
+
+      <Grid
+        item
+        xs={12}
+
+      >
+        {this.renderFilters()}
+      </Grid>
+
       <Grid
         item
         xs={12}

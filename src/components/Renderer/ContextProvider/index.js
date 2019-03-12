@@ -64,6 +64,9 @@ class ContextProvider extends Component {
       UserNoNestingFragment,
       EthAccountNoNestingFragment,
       NotificationTypeNoNestingFragment,
+      ProjectNoNestingFragment,
+      ProjectMemberNoNestingFragment,
+      ResourceNoNestingFragment,
       BatchPayloadNoNestingFragment,
     } = queryFragments;
 
@@ -77,11 +80,29 @@ class ContextProvider extends Component {
         NotificationTypes{
           ...NotificationTypeNoNesting
         }
+        Projects{
+          ...ProjectMemberNoNesting
+          Project{
+            ...ProjectNoNesting
+            Resource{
+              ...ResourceNoNesting
+            }
+          }
+        }
+        ProjectsCreated{
+          ...ProjectNoNesting
+          Resource{
+            ...ResourceNoNesting
+          }
+        }
       }
 
       ${UserNoNestingFragment}
       ${EthAccountNoNestingFragment}
       ${NotificationTypeNoNestingFragment}
+      ${ProjectNoNestingFragment}
+      ${ProjectMemberNoNestingFragment}
+      ${ResourceNoNestingFragment}
     `;
 
 

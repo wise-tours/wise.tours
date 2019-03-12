@@ -1,3 +1,8 @@
+2.14.2
+============================================
+- Added projects filters
+- Added users filters
+
 2.14.1
 ============================================
 - Upgarde TasksPage

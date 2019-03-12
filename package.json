@@ -1,6 +1,6 @@
 {
   "name": "@modxclub/modxclub.ru",
-  "version": "2.14.1",
+  "version": "2.14.2",
   "description": "Opensource framework CMS powered by GraphQL, Prisma, MySQL, React & Apollo GraphQL",
   "private": false,
   "scripts": {
