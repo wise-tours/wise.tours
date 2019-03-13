@@ -117,6 +117,11 @@ class CoreModule extends PrismaModule {
         "TimerCreateInput",
         "TimerUpdateInput",
 
+        "TaskReactionCreateInput",
+        "TaskReactionUpdateInput",
+        "TaskCreateOneInput",
+        "TaskUpdateOneInput",
+
         "ProjectMemberCreateInput",
         "ProjectMemberUpdateInput",
         "ProjectCreateOneWithoutMembersInput",
@@ -367,6 +372,8 @@ class CoreModule extends PrismaModule {
       updateProjectProcessor,
       createTaskProcessor,
       updateTaskProcessor,
+      createTaskReactionProcessor,
+      deleteTaskReaction,
       createTimerProcessor,
       updateTimerProcessor,
 
@@ -407,6 +414,8 @@ class CoreModule extends PrismaModule {
       updateProjectProcessor,
       createTaskProcessor,
       updateTaskProcessor,
+      createTaskReactionProcessor,
+      deleteTaskReaction,
       createTimerProcessor,
       updateTimerProcessor,
 

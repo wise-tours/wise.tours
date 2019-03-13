@@ -355,6 +355,7 @@ class ContextProvider extends Component {
 
     const {
       TaskNoNestingFragment,
+      TaskReactionNoNestingFragment,
       UserNoNestingFragment,
       TimerNoNestingFragment,
       ProjectNoNestingFragment,
@@ -393,10 +394,18 @@ class ContextProvider extends Component {
         RelatedTo{
           ...TaskNoNesting
         }
+
+        Reactions{
+          ...TaskReactionNoNesting
+          CreatedBy{
+            ...UserNoNesting
+          }
+        }
         
       }
       
       ${TaskNoNestingFragment}
+      ${TaskReactionNoNestingFragment}
       ${UserNoNestingFragment}
       ${TimerNoNestingFragment}
       ${ProjectNoNestingFragment}
