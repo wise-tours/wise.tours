@@ -5,7 +5,7 @@ import PrismaModule from "@prisma-cms/prisma-module";
 
 import SocietyModule from "@prisma-cms/society-module";
 import EthereumModule from "@prisma-cms/ethereum-module";
-import ImportModule from "@modxclub/import-old-site";
+// import ImportModule from "@modxclub/import-old-site";
 
 import LogModule from "@prisma-cms/log-module";
 import MailModule from "@prisma-cms/mail-module";
@@ -44,7 +44,7 @@ class CoreModule extends PrismaModule {
       RouterModule,
       SocietyModule,
       EthereumModule,
-      ImportModule,
+      // ImportModule,
       WebrtcModule,
 
       // /**

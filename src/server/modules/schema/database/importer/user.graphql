@@ -1,0 +1,10 @@
+
+type User {
+  id: ID! @unique
+  Imports: [Import!]! @relation(name: "UserImports")
+  oldID: Int @unique
+  sudo: Boolean @default(value: false)
+  # username: String @unique
+  # email: String @unique
+  # fullname: String
+}
