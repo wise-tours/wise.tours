@@ -408,7 +408,7 @@ class CoreModule extends PrismaModule {
       updateCommentProcessor,
       singleUpload,
       multipleUpload,
-      startImportProcessor,
+      // startImportProcessor,
       resetPassword,
       createProjectProcessor,
       updateProjectProcessor,
