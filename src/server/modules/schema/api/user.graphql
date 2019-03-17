@@ -71,13 +71,3 @@ input UserUpdateInput {
   ethWalletPKSendEmail: Boolean
   NotificationTypes: NotificationTypeUpdateManyWithoutUsersInput
 }
-
-
-input NotificationTypeUpdateManyWithoutUsersInput {
-  connect: [NotificationTypeWhereUniqueInput!]
-  disconnect: [NotificationTypeWhereUniqueInput!]
-}
-
-input UserCreateOneWithoutResourcesInput {
-  connect: UserWhereUniqueInput
-}
