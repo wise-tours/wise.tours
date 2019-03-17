@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// import {
+//   TaskPage,
+// } from "../";
+
 import {
   TaskPage,
-} from "../";
+} from "@prisma-cms/cooperation/lib/components/pages/Tasks/Task";
 
 class CreateTaskPage extends Component {
 
