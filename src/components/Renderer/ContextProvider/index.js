@@ -594,6 +594,10 @@ class ContextProvider extends Component {
               ...ResourceNoNesting
             }
           }
+    
+          CreatedBy{
+            ...UserNoNesting
+          }
         }
         
       }
