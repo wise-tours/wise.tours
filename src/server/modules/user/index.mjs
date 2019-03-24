@@ -21,7 +21,7 @@ const { fileLoader, mergeTypes } = MergeSchema;
 export class ModxclubUserProcessor extends UserPayload {
 
 
-  async signup(source, args, ctx, info) {
+  async signup(args, info) {
 
     let {
       data: {
@@ -45,7 +45,7 @@ export class ModxclubUserProcessor extends UserPayload {
     }
 
 
-    return super.signup(null, source, args, ctx, info);
+    return super.signup(args, info);
   }
 
 
@@ -194,8 +194,6 @@ export class ModxclubUserProcessor extends UserPayload {
         LettersCreated,
       });
 
-      // }
-
     }
 
 
@@ -271,7 +269,7 @@ class ModxclubUserModule extends UserModule {
         ...Mutation,
         signup: (source, args, ctx, info) => {
 
-          return new ModxclubUserProcessor(ctx).signup(source, args, ctx, info);
+          return new ModxclubUserProcessor(ctx).signup(args, info);
         },
         updateUserProcessor: (source, args, ctx, info) => {
 

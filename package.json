@@ -1,6 +1,6 @@
 {
   "name": "@modxclub/modxclub.ru",
-  "version": "2.14.6",
+  "version": "2.15.0",
   "description": "Opensource framework CMS powered by GraphQL, Prisma, MySQL, React & Apollo GraphQL",
   "private": false,
   "scripts": {
@@ -42,6 +42,7 @@
     "@prisma-cms/ui": "latest",
     "@prisma-cms/upload-module": "latest",
     "@prisma-cms/user-module": "latest",
+    "@prisma-cms/sms-module": "latest",
     "@prisma-cms/webrtc": "latest",
     "@prisma-cms/webrtc-module": "latest",
     "@prisma-cms/filters": "latest",
