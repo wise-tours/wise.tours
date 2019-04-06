@@ -78,6 +78,7 @@ import {
 } from "@prisma-cms/cooperation"
 
 import ContextProvider from "./ContextProvider";
+import PromoPage from "../pages/PromoPage";
 
 
 export const styles = theme => {
@@ -196,7 +197,8 @@ export class Renderer extends PrismaCmsRenderer {
       {
         exact: true,
         path: "/",
-        component: MainPage,
+        // component: MainPage,
+        component: PromoPage,
       },
       {
         exact: true,
