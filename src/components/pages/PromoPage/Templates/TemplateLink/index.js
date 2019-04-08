@@ -1,0 +1,136 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import EditorComponent from '@prisma-cms/front-editor/lib/components/App/components/';
+import { ObjectContext } from '@prisma-cms/front-editor/lib/components/App/components/public/Connector/ListView';
+
+
+
+class TemplateLink extends EditorComponent {
+
+
+  static Name = "TemplateLink"
+
+  renderPanelView() {
+
+    const {
+      classes,
+    } = this.context;
+
+    return super.renderPanelView(<div
+      className={classes.panelButton}
+    >
+      TemplateLink
+    </div>);
+  }
+
+
+  prepareNewItem() {
+
+    let newItem = super.prepareNewItem();
+
+    Object.assign(newItem, {
+      components: [
+        {
+          "name": "Grid",
+          "props": {
+            "container": true,
+            "alignItems": "flex-end"
+          },
+          "components": [
+            {
+              "name": "Grid",
+              "props": {
+                "item": true,
+                "xs": 12,
+                "sm": true
+              },
+              "components": [
+                {
+                  "name": "CreatedBy",
+                  "props": {},
+                  "components": []
+                }
+              ]
+            },
+            {
+              "name": "Grid",
+              "props": {
+                "xs": 12,
+                "item": true
+              },
+              "components": [
+                {
+                  "name": "Typography",
+                  "props": {},
+                  "components": [
+                    {
+                      "name": "NamedField",
+                      "props": {
+                        "name": "name"
+                      },
+                      "components": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+    });
+
+    return newItem;
+  }
+
+
+
+  renderChildren() {
+
+    const {
+      // TemplateLink: PrismaCmsTemplateLink,
+      Link,
+    } = this.context;
+
+    return <span
+      {...this.getRenderProps()}
+    >
+      <ObjectContext.Consumer>
+        {context => {
+
+          const {
+            object,
+            ...other
+          } = context;
+
+          if (!object) {
+            return null;
+          }
+
+          const {
+            id: objectId,
+            name,
+          } = object;
+
+          return <Link
+            to={`/?templateId=${objectId}`}
+            {...other}
+          >
+            {super.renderChildren()}
+          </Link>
+
+          {/* return <PrismaCmsTemplateLink
+            object={object}
+            {...other}
+          >
+            {super.renderChildren()}
+          </PrismaCmsTemplateLink> */}
+
+        }}
+      </ObjectContext.Consumer>
+    </span>;
+  }
+
+}
+
+export default TemplateLink;

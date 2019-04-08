@@ -1,3 +1,9 @@
+2.16.1
+============================================
+- Fix FrontEditor
+- Added @prisma-cms/front-editor
+- Added @prisma-cms/marketplace-module
+
 2.16.0
 ============================================
 - Added FrontEditor

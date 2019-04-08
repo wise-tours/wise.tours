@@ -7,9 +7,16 @@ import { Button } from 'material-ui';
 import { withStyles } from 'material-ui';
 
 // import { FrontEditor } from "@prisma-cms/front";
-import FrontEditor from "@prisma-cms/front/lib/components/FrontEditor";
+import FrontEditor from "@prisma-cms/front-editor/lib/components/App";
+import TemplatePage from "@prisma-cms/front-editor/lib/dev/Renderer/pages/Templates/Template";
+
+import gql from 'graphql-tag';
 import TopicsConnection from './Topics';
 import TopicLink from './Topics/TopicLink';
+
+import PrismaCmsComponent from "@prisma-cms/component";
+import TemplateLink from './Templates/TemplateLink';
+import Template from './Templates/Template';
 
 export const styles = {
   root: {
@@ -31,176 +38,495 @@ export const styles = {
   },
 }
 
-class FrontEditorPage extends Component {
+class FrontEditorPage extends PrismaCmsComponent {
 
-  static contextType = Context;
+  // static contextType = Context;
 
   static propTypes = {
+    ...PrismaCmsComponent.propTypes,
     classes: PropTypes.object.isRequired,
   };
 
-  state = {
-    inEditMode: true,
-    components: [
-      {
-        "type": "Page",
+
+  static defaultProps = {
+    ...PrismaCmsComponent.defaultProps,
+    CustomComponents: [
+      TemplateLink,
+      TopicsConnection,
+      TopicLink,
+      Template,
+    ],
+  }
+
+
+  constructor(props) {
+
+    super(props)
+
+    this.state = {
+      ...this.state,
+      inEditMode: false,
+    }
+
+  }
+
+  async saveTemplate(props) {
+
+
+
+    const {
+      query: {
+        createTemplateProcessor,
+      },
+    } = this.context;
+
+    let mutation = gql(createTemplateProcessor);
+
+    return this.mutate({
+      mutation,
+      ...props,
+    });
+
+  }
+
+
+  render() {
+
+    const {
+      // FrontEditor,
+      Grid,
+      uri,
+      Link,
+    } = this.context;
+
+    const {
+      components,
+      inEditMode,
+    } = this.state;
+
+    const {
+      classes,
+      CustomComponents,
+    } = this.props;
+
+
+    const {
+      templateId,
+    } = uri.query(true);
+
+
+
+    // return "SDfsdf";
+
+    const templatesList = <FrontEditor
+      inEditMode={false}
+      debug={false}
+      CustomComponents={CustomComponents}
+      data={{
+        object: {
+          "name": "Connector",
+          "props": {
+            "orderBy": "createdAt_DESC",
+            "skip": null,
+            "first": 12,
+            "last": null,
+            "query": "templatesConnection",
+            "filtersname": "templatesFilters",
+            "pagevariable": "templatesPage"
+          },
+          "components": [
+            {
+              "name": "Grid",
+              "props": {
+                "container": true,
+                "spacing": 8,
+                alignItems: "center",
+              },
+              "components": [
+                {
+                  "name": "Grid",
+                  "props": {
+                    "item": true,
+                    "xs": 12,
+                  },
+                  "components": [
+                    {
+                      "name": "Typography",
+                      "props": {
+                        "text": "Посмотрите другие шаблоны",
+                        "variant": "title",
+                        "color": "primary"
+                      },
+                      "components": []
+                    }
+                  ],
+                },
+                {
+                  "name": "Grid",
+                  "props": {
+                    "item": true,
+                    "xs": 12
+                  },
+                  "components": [
+                    {
+                      "name": "ListView",
+                      "components": [
+                        {
+                          "name": "Grid",
+                          "props": {
+                            "item": true,
+                            // xs: true,
+                          },
+                          "components": [
+                            {
+                              "name": "Grid",
+                              "props": {
+                                "container": true,
+                                "alignItems": "center",
+                                spacing: 8,
+                              },
+                              "components": [
+                                {
+                                  "name": "Grid",
+                                  "props": {
+                                    "item": true,
+                                    "xs": 12,
+                                    "sm": true
+                                  },
+                                  "components": [
+                                    {
+                                      "name": "CreatedBy",
+                                      "props": {},
+                                      "components": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Grid",
+                                  "props": {
+                                    "item": true
+                                  },
+                                  "components": [
+                                    {
+                                      "name": "TemplateLink",
+                                      "props": {},
+                                      components: [
+                                        {
+                                          "name": "Typography",
+                                          "props": {
+                                            "variant": "subheading",
+                                            "color": "primary",
+                                            "text": "",
+                                          },
+                                          "components": [
+                                            {
+                                              "name": "NamedField",
+                                              "props": {
+                                                "name": "name"
+                                              },
+                                              "components": []
+                                            }
+                                          ],
+                                        },
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Grid",
+                  "props": {
+                    "item": true,
+                    "xs": 12
+                  },
+                  "components": [
+                    {
+                      "name": "Pagination"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "first": 12
+        },
+      }}
+    />
+
+    let toolbar = <Grid
+      container
+      spacing={8}
+    >
+      <Grid
+        item
+        xs={12}
+      >
+        {templatesList}
+      </Grid>
+
+      {!templateId || true ?
+        <Grid
+          item
+          xs={12}
+        >
+          <Button
+            size="small"
+            // color="action"
+            variant="raised"
+            onClick={event => {
+              this.setState({
+                inEditMode: !inEditMode,
+              })
+            }}
+          >
+            {!inEditMode ? "Редактировать этот шаблон" : "Отмена"}
+          </Button>
+        </Grid> :
+        null
+      }
+
+      {/* <Grid
+        item
+        xs={12}
+      >
+        <Link
+          to="/templates/create"
+        >
+          Создать свой шаблон
+        </Link>
+      </Grid> */}
+
+    </Grid>
+
+
+    let editor;
+
+    if (templateId) {
+
+      editor = <TemplatePage
+        inEditMode={inEditMode}
+        where={{
+          id: templateId,
+        }}
+        CustomComponents={CustomComponents}
+      />
+
+    }
+    else {
+
+      const object = {
+        name: "Page",
         "components": [
           {
-            "type": "Section",
+            "name": "Section",
             "components": [
               {
-                "type": "Grid",
+                "name": "Grid",
                 "container": true,
                 "components": [
                   {
-                    "type": "Grid",
-                    "xs": 12,
-                    "item": true,
+                    "name": "Grid",
+                    props: {
+                      "xs": 12,
+                      "item": true,
+                    },
                     "components": [
                       {
-                        "type": "Typography",
-                        "variant": "title",
-                        "text": "Здесь всем можно редактировать",
-                        "color": "secondary"
+                        "name": "Typography",
+                        props: {
+                          "variant": "title",
+                          "text": "Здесь все можно редактировать",
+                          "color": "secondary"
+                        },
                       }
                     ]
                   },
-                  {
-                    "type": "Grid",
-                    "xs": 12,
-                    "item": true,
-                    "components": [
-                      {
-                        "type": "Typography",
-                        "text": "Пока поиграйтесь (с телефона неудобно), а вечером я напишу статью",
-                        "variant": "subheading",
-                        "color": "primary"
-                      }
-                    ]
-                  }
+                  // {
+                  //   "name": "Grid",
+                  //   props: {
+                  //     "xs": 12,
+                  //     "item": true,
+                  //   },
+                  //   "components": [
+                  //     {
+                  //       "name": "Typography",
+                  //       props: {
+                  //         "text": "Пока поиграйтесь (с телефона неудобно), а вечером я напишу статью",
+                  //         "variant": "subheading",
+                  //         "color": "primary"
+                  //       },
+                  //     }
+                  //   ]
+                  // }
                 ]
               },
             ],
 
           },
           {
-            "type": "Section",
+            "name": "Section",
             "components": [
               {
-                "type": "TopicsConnection",
-                "first": 4,
+                "name": "TopicsConnection",
+                props: {
+                  "first": 4,
+                  "query": "resourcesConnection",
+                  "where": {
+                    "type": "Topic"
+                  },
+                  "orderBy": "createdAt_DESC",
+                  "pagevariable": "topicsPage",
+                  "filtersname": "topicsFilters"
+                },
                 "components": [
                   {
-                    "type": "Typography",
-                    "text": "Последние топики",
-                    "displayType": "div",
-                    "display": "block",
-                    "variant": "subheading",
-                    "color": "primary"
+                    "name": "Typography",
+                    props: {
+                      "text": "Последние топики",
+                      "displayType": "div",
+                      "display": "block",
+                      "variant": "subheading",
+                      "color": "primary"
+                    },
                   },
                   {
-                    "type": "Filters",
+                    "name": "Filters",
                   },
                   {
-                    "type": "ListView",
+                    "name": "ListView",
                     "components": [
                       {
-                        "type": "Grid",
-                        "item": true,
-                        "xs": 12,
+                        "name": "Grid",
+                        props: {
+                          "item": true,
+                          "xs": 12,
+                        },
                         "components": [
                           {
-                            "type": "Section",
+                            "name": "Section",
                             "components": [
                               {
-                                "type": "Grid",
-                                "container": true,
-                                "alignItems": "center",
-                                "spacing": 8,
+                                "name": "Grid",
+                                props: {
+                                  "container": true,
+                                  "alignItems": "center",
+                                  "spacing": 8,
+                                },
                                 "components": [
                                   {
-                                    "type": "Grid",
-                                    "item": true,
-                                    "xs": 12,
-                                    "md": 3,
+                                    "name": "Grid",
+                                    props: {
+                                      "item": true,
+                                      "xs": 12,
+                                      "md": 3,
+                                    },
                                     "components": [
                                       {
-                                        "type": "Typography",
-                                        "text": "Название:",
-                                        "variant": "caption"
+                                        "name": "Typography",
+                                        props: {
+                                          "text": "Название:",
+                                          "variant": "caption"
+                                        },
                                       }
                                     ]
                                   },
                                   {
-                                    "type": "Grid",
-                                    "xs": true,
-                                    "item": true,
+                                    "name": "Grid",
+                                    props: {
+                                      "xs": true,
+                                      "item": true,
+                                    },
                                     "components": [
                                       {
-                                        "type": "TopicLink"
+                                        "name": "TopicLink"
                                       }
                                     ]
                                   }
                                 ]
                               },
                               {
-                                "type": "Grid",
-                                "container": true,
-                                "alignItems": "center",
-                                "spacing": 8,
+                                "name": "Grid",
+                                props: {
+                                  "container": true,
+                                  "alignItems": "center",
+                                  "spacing": 8,
+                                },
                                 "components": [
                                   {
-                                    "type": "Grid",
-                                    "item": true,
-                                    "xs": 12,
-                                    "md": 3,
+                                    "name": "Grid",
+                                    props: {
+                                      "item": true,
+                                      "xs": 12,
+                                      "md": 3,
+                                    },
                                     "components": [
                                       {
-                                        "type": "Typography",
-                                        "text": "Дата создания:",
-                                        "variant": "caption"
+                                        "name": "Typography",
+                                        props: {
+                                          "text": "Дата создания:",
+                                          "variant": "caption"
+                                        },
                                       }
                                     ]
                                   },
                                   {
-                                    "type": "Grid",
-                                    "xs": true,
-                                    "item": true,
+                                    "name": "Grid",
+                                    props: {
+                                      "xs": true,
+                                      "item": true,
+                                    },
                                     "components": [
                                       {
-                                        "type": "NamedField",
-                                        "name": "createdAt"
+                                        "name": "NamedField",
+                                        props: {
+                                          "name": "createdAt"
+                                        },
                                       }
                                     ]
                                   }
                                 ]
                               },
                               {
-                                "type": "Grid",
-                                "container": true,
-                                "alignItems": "center",
-                                "spacing": 8,
+                                "name": "Grid",
+                                props: {
+                                  "container": true,
+                                  "alignItems": "center",
+                                  "spacing": 8,
+                                },
                                 "components": [
                                   {
-                                    "type": "Grid",
-                                    "item": true,
-                                    "xs": 12,
-                                    "md": 3,
+                                    "name": "Grid",
+                                    props: {
+                                      "item": true,
+                                      "xs": 12,
+                                      "md": 3,
+                                    },
                                     "components": [
                                       {
-                                        "type": "Typography",
-                                        "text": "Кем написан:",
-                                        "variant": "caption"
+                                        "name": "Typography",
+                                        props: {
+                                          "text": "Кем написан:",
+                                          "variant": "caption"
+                                        },
                                       }
                                     ]
                                   },
                                   {
-                                    "type": "Grid",
-                                    "xs": true,
-                                    "item": true,
+                                    "name": "Grid",
+                                    props: {
+                                      "xs": true,
+                                      "item": true,
+                                    },
                                     "components": [
                                       {
-                                        "type": "CreatedBy"
+                                        "name": "CreatedBy"
                                       }
                                     ]
                                   }
@@ -213,81 +539,133 @@ class FrontEditorPage extends Component {
                     ]
                   },
                   {
-                    "type": "Pagination"
+                    "name": "Pagination"
                   }
                 ],
-                "query": "resourcesConnection",
-                "where": {
-                  "type": "Topic"
-                },
-                "orderBy": "createdAt_DESC",
-                "pagevariable": "topicsPage",
-                "filtersname": "topicsFilters"
               }
             ]
           },
           {
-            "type": "Section",
+            "name": "Section",
             "components": [
               {
-                "type": "Typography",
-                "text": "Все пользователи",
-                "displayType": "div",
-                "display": "block",
-                "variant": "subheading",
-                "color": "primary"
+                "name": "Typography",
+                props: {
+                  "text": "Все пользователи",
+                  "displayType": "div",
+                  "display": "block",
+                  "variant": "subheading",
+                  "color": "primary"
+                },
               },
               {
-                "type": "UsersGrid",
-                "first": 10
+                "name": "UsersGrid",
+                props: {
+                  "first": 10
+                },
               }
             ]
           }
         ]
-      }
-    ],
-  }
+      };
 
-  render() {
+      editor = <FrontEditor
+        inEditMode={inEditMode}
+        CustomComponents={CustomComponents}
+        debug={false}
+        data={{
+          object,
+        }}
+        mutate={(data) => this.saveTemplate(data)}
+        _dirty={object}
+        onSave={result => {
 
-    const {
-      // FrontEditor,
-      Grid,
-    } = this.context;
+          const {
+            response,
+          } = result.data || {};
 
-    const {
-      components,
-      inEditMode,
-    } = this.state;
+          const {
+            id,
+          } = response && response.data || {}
 
-    const {
-      classes,
-    } = this.props;
+          if (id) {
 
-    let toolbar = <Grid
-      container
-      spacing={8}
-    >
-      <Grid
-        item
-      >
-        <Button
-          onClick={event => this.setState({
-            inEditMode: !inEditMode,
-          })}
-          size="small"
-          color={inEditMode ? "secondary" : "primary"}
-        >
-          {inEditMode ? "Завершить редактирование" : "Начать редактирование"}
-        </Button>
-      </Grid>
-    </Grid>
+            const {
+              router: {
+                history,
+              },
+            } = this.context;
 
-    // console.log("FrontEditor", FrontEditor, this.context);
+            history.push(`/?templateId=${id}`);
 
-    // return "SDfsdf";
+          }
 
-    return (
+        }}
+      />
+
+
+
+      // editor = <FrontEditor
+      //   inEditMode={false}
+      //   // inEditMode={true}
+      //   // inEditMode={inEditMode}
+      //   CustomComponents={CustomComponents}
+      //   debug={false}
+      //   data={{
+      //     object: {
+      //       "name": "Connector",
+      //       // mutate: (props) => {
+
+      //       // },
+      //       props: {
+      //         query: "templatesConnection",
+      //         first: 1,
+      //         orderBy: "updatedAt_DESC",
+      //         where: {
+      //           CreatedBy: {
+      //             username: "Fi1osof",
+      //           },
+      //         },
+      //         // mutate: (props) => {
+
+      //         // },
+      //       },
+      //       "components": [
+      //         {
+      //           name: "ListView",
+      //           components: [
+      //             {
+      //               name: "NamedField",
+      //               props: {
+      //                 name: "name",
+      //               },
+      //             }, {
+      //               name: "CreatedBy",
+      //             },
+      //             {
+      //               name: "Template",
+      //               // mutate: (props) => {
+
+      //               // },
+      //             },
+      //           ],
+      //         }
+      //       ]
+      //     },
+      //   }}
+      //   mutate={(data) => this.saveTemplate(data)}
+      // // _dirty={{
+      // //   name: "Page",
+      // //   components: [],
+      // //   props: {},
+      // // }}
+      // />
+
+    }
+
+
+
+    return super.render(
       <div
         className={[classes.root, inEditMode ? "inEditMode" : ""].join(" ")}
       >
@@ -297,21 +675,7 @@ class FrontEditorPage extends Component {
         <div
           className={classes.editorWrapper}
         >
-          <FrontEditor
-            inEditMode={inEditMode}
-            components={components}
-            onChange={components => {
-
-              this.setState({
-                components,
-              })
-            }}
-            CustomComponents={[
-              TopicsConnection,
-              TopicLink,
-            ]}
-            debug={true}
-          />
+          {editor}
         </div>
       </div>
     );

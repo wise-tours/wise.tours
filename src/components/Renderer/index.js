@@ -77,6 +77,11 @@ import {
   SubscriptionProvider as CooperationSubscriptionProvider,
 } from "@prisma-cms/cooperation"
 
+import {
+  ContextProvider as FrontEditorContextProvider,
+  SubscriptionProvider as FrontEditorSubscriptionProvider,
+} from "@prisma-cms/front-editor"
+
 import ContextProvider from "./ContextProvider";
 import PromoPage from "../pages/PromoPage";
 
@@ -591,23 +596,27 @@ export class Renderer extends PrismaCmsRenderer {
           <SocietySubscriptionProvider>
             <EthereumContextProvider>
               <EthereumSubscriptionProvider>
-                <WebrtcContextProvider>
-                  <WebrtcSubscriptionProvider>
-                    <WebRtcChatProvider
-                      connectionProps={{
-                        iceServers,
-                      }}
-                    >
-                      <CooperationContextProvider>
-                        <CooperationSubscriptionProvider>
-                          <ContextProvider>
-                            {super.renderWrapper()}
-                          </ContextProvider>
-                        </CooperationSubscriptionProvider>
-                      </CooperationContextProvider>
-                    </WebRtcChatProvider>
-                  </WebrtcSubscriptionProvider>
-                </WebrtcContextProvider>
+                <FrontEditorContextProvider>
+                  <FrontEditorSubscriptionProvider>
+                    <WebrtcContextProvider>
+                      <WebrtcSubscriptionProvider>
+                        <WebRtcChatProvider
+                          connectionProps={{
+                            iceServers,
+                          }}
+                        >
+                          <CooperationContextProvider>
+                            <CooperationSubscriptionProvider>
+                              <ContextProvider>
+                                {super.renderWrapper()}
+                              </ContextProvider>
+                            </CooperationSubscriptionProvider>
+                          </CooperationContextProvider>
+                        </WebRtcChatProvider>
+                      </WebrtcSubscriptionProvider>
+                    </WebrtcContextProvider>
+                  </FrontEditorSubscriptionProvider>
+                </FrontEditorContextProvider>
               </EthereumSubscriptionProvider>
             </EthereumContextProvider>
           </SocietySubscriptionProvider>

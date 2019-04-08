@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import EditorComponent from '@prisma-cms/front/lib/components/FrontEditor/components/';
-import { ObjectContext } from '@prisma-cms/front/lib/components/FrontEditor/components/Connector/ListView';
+import EditorComponent from '@prisma-cms/front-editor/lib/components/App/components/';
+import { ObjectContext } from '@prisma-cms/front-editor/lib/components/App/components/public/Connector/ListView';
 
 
 
@@ -26,35 +26,35 @@ class TopicLink extends EditorComponent {
   }
 
 
-  renderMainView() {
+  renderChildren() {
 
     const {
       TopicLink: PrismaCmsTopicLink,
     } = this.context;
 
-    return <span
-      {...this.getRenderProps()}
-    >
-      <ObjectContext.Consumer>
-        {context => {
+    return <ObjectContext.Consumer>
+      {context => {
 
-          const {
-            object,
-            ...other
-          } = context;
+        const {
+          object,
+          ...other
+        } = context;
 
-          if (!object) {
-            return null;
-          }
 
-          return <PrismaCmsTopicLink
+
+        if (!object) {
+          return null;
+        }
+
+        return <span>
+          <PrismaCmsTopicLink
             object={object}
             {...other}
           />
+        </span>
 
-        }}
-      </ObjectContext.Consumer>
-    </span>;
+      }}
+    </ObjectContext.Consumer>;
   }
 
 }

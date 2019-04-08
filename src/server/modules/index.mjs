@@ -7,6 +7,7 @@ import SocietyModule from "@prisma-cms/society-module";
 import EthereumModule from "@prisma-cms/ethereum-module";
 // import ImportModule from "@modxclub/import-old-site";
 
+import MarketplaceModule from "@prisma-cms/marketplace-module";
 import LogModule from "@prisma-cms/log-module";
 import MailModule from "@prisma-cms/mail-module";
 import UploadModule from "@prisma-cms/upload-module";
@@ -38,6 +39,7 @@ class CoreModule extends PrismaModule {
     super(options);
 
     this.mergeModules([
+      MarketplaceModule,
       LogModule,
       MailModule,
       UploadModule,
@@ -392,6 +394,8 @@ class CoreModule extends PrismaModule {
       joinChatRoom,
       createCallRequestProcessor,
       updateCallRequest,
+      createTemplateProcessor,
+      updateTemplateProcessor,
     } = Mutation;
 
 
@@ -435,6 +439,8 @@ class CoreModule extends PrismaModule {
       joinChatRoom,
       createCallRequestProcessor,
       updateCallRequest,
+      createTemplateProcessor,
+      updateTemplateProcessor,
     };
 
     // for(var i in AllowedMutations){
