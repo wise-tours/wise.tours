@@ -25,7 +25,7 @@ startServer({
   typeDefs: 'src/schema/generated/api.graphql',
   resolvers,
   MailerProps: {
-    mailSender: "no-reply@modxclub.ru",
+    mailSender: "no-reply@prisma-cms.com",
   },
   contextOptions: {
     web3,

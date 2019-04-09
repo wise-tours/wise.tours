@@ -38,6 +38,17 @@ export const styles = {
   },
 }
 
+
+export const locales = {
+  ru: {
+    values: {
+      "Try another templates": "Посмотрите другие шаблоны",
+      "Edit this template": "Редактировать этот шаблон",
+    },
+  },
+}
+
+
 class FrontEditorPage extends PrismaCmsComponent {
 
   // static contextType = Context;
@@ -56,6 +67,7 @@ class FrontEditorPage extends PrismaCmsComponent {
       TopicLink,
       Template,
     ],
+    locales,
   }
 
 
@@ -153,7 +165,7 @@ class FrontEditorPage extends PrismaCmsComponent {
                     {
                       "name": "Typography",
                       "props": {
-                        "text": "Посмотрите другие шаблоны",
+                        "text": this.lexicon("Try another templates"),
                         "variant": "title",
                         "color": "primary"
                       },
@@ -286,7 +298,7 @@ class FrontEditorPage extends PrismaCmsComponent {
               })
             }}
           >
-            {!inEditMode ? "Редактировать этот шаблон" : "Отмена"}
+            {!inEditMode ? this.lexicon("Edit this template") : this.lexicon("Cancel")}
           </Button>
         </Grid> :
         null
