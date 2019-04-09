@@ -59,6 +59,7 @@ export const locales = {
   ru: {
     values: {
       "Signin": "Войти",
+      "Signout": "Выйти",
       "Chats": "Чаты",
       "Users": "Участники",
       "Ethereum": "Ethereum",
@@ -357,7 +358,7 @@ export class MainMenu extends PrismaCmsComponent {
                     href="javascript:;"
                     onClick={() => logout()}
                   >
-                    Выход
+                    {this.lexicon("Signout")}
                   </a>
 
                 </Grid>
@@ -381,7 +382,7 @@ export class MainMenu extends PrismaCmsComponent {
                   <Typography
                     component="span"
                   >
-                    Войти
+                    {this.lexicon("Signin")}
                   </Typography>
                 </Button>
 
