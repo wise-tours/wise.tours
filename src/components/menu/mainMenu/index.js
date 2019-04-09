@@ -14,13 +14,14 @@ import CreateIcon from 'material-ui-icons/Create';
 
 // import UserItem from "@prisma-cms/front/lib/components/App/Renderer/MainMenu/User";
 import { styles as defaultStyles } from "@prisma-cms/front/lib/components/App/Renderer/MainMenu";
+import Language from "@prisma-cms/front/lib/components/Language";
 import UserItem from "./User";
 
 import { Link } from "react-router-dom";
 import { Notices } from '@prisma-cms/society';
 import { IconButton } from 'material-ui';
 
-import Context from "@prisma-cms/context";
+import PrismaCmsComponent from "@prisma-cms/component";
 
 import {
   CallRequestButtons,
@@ -53,13 +54,39 @@ export const styles = theme => {
   }
 };
 
-export class MainMenu extends Component {
 
-  static contextType = Context;
+export const locales = {
+  ru: {
+    values: {
+      "Signin": "Войти",
+      "Chats": "Чаты",
+      "Users": "Участники",
+      "Ethereum": "Ethereum",
+      "API Schema": "API схема",
+      "Topics": "Топики",
+      "Blogs": "Блоги",
+      "Chats": "Чаты",
+      "Projects": "Проекты",
+      "Tasks": "Задачи",
+      "Timers": "Таймеры",
+    }
+  },
+};
+
+
+export class MainMenu extends PrismaCmsComponent {
+
 
   static propTypes = {
+    ...PrismaCmsComponent.propTypes,
     classes: PropTypes.object.isRequired,
   };
+
+
+  static defaultProps = {
+    ...PrismaCmsComponent.defaultProps,
+    locales,
+  }
 
   render() {
 
@@ -110,7 +137,7 @@ export class MainMenu extends Component {
                 <Link
                   to="/"
                 >
-                  MODXCLUB
+                  PrismaCMS
                 </Link>
               </Typography>
 
@@ -124,7 +151,7 @@ export class MainMenu extends Component {
                 to="/topics"
               >
                 <Typography>
-                  Топики
+                  {this.lexicon("Topics")}
                 </Typography>
               </Link>
 
@@ -137,7 +164,7 @@ export class MainMenu extends Component {
                 to="/blogs"
               >
                 <Typography>
-                  Блоги
+                  {this.lexicon("Blogs")}
                 </Typography>
               </Link>
 
@@ -153,7 +180,7 @@ export class MainMenu extends Component {
                   component="span"
                   className={classes.link}
                 >
-                  Чаты
+                  {this.lexicon("Chats")}
                 </Typography>
               </Link>
             </Grid>
@@ -165,7 +192,7 @@ export class MainMenu extends Component {
                 to="/people"
               >
                 <Typography>
-                  Участники
+                  {this.lexicon("Users")}
                 </Typography>
               </Link>
 
@@ -178,7 +205,7 @@ export class MainMenu extends Component {
                 to="/projects"
               >
                 <Typography>
-                  Проекты
+                  {this.lexicon("Projects")}
                 </Typography>
               </Link>
 
@@ -191,7 +218,7 @@ export class MainMenu extends Component {
                 to="/tasks?status_in=New&status_in=Accepted&status_in=Progress&status_in=Paused&status_in=RevisionsRequired&status_in=Discuss&status_in=Approved&status_in=Done"
               >
                 <Typography>
-                  Задачи
+                  {this.lexicon("Tasks")}
                 </Typography>
               </Link>
 
@@ -204,11 +231,12 @@ export class MainMenu extends Component {
                 to="/timers"
               >
                 <Typography>
-                  Выполнение
+                  {this.lexicon("Timers")}
                 </Typography>
               </Link>
 
             </Grid>
+
 
             <Grid
               item
@@ -217,7 +245,7 @@ export class MainMenu extends Component {
                 to="/eth-transactions"
               >
                 <Typography>
-                  Ethereum
+                  {this.lexicon("Ethereum")}
                 </Typography>
               </Link>
 
@@ -231,11 +259,12 @@ export class MainMenu extends Component {
                 rel="noindex,nofollow"
               >
                 <Typography>
-                  Схема
+                  {this.lexicon("API Schema")}
                 </Typography>
               </a>
 
             </Grid>
+
 
             <Grid
               item
@@ -246,7 +275,7 @@ export class MainMenu extends Component {
                 target="_blank"
               >
                 <Typography>
-                  API
+                  {this.lexicon("API")}
                 </Typography>
               </a>
 
@@ -258,6 +287,8 @@ export class MainMenu extends Component {
               xs
             >
             </Grid>
+
+            <Language />
 
             {currentUser ?
               <Grid
