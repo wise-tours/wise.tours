@@ -123,7 +123,7 @@ export class MainMenu extends PrismaCmsComponent {
           <Grid
             container
             alignItems="center"
-            spacing={8}
+            spacing={16}
           >
             <Grid
               item
@@ -271,7 +271,7 @@ export class MainMenu extends PrismaCmsComponent {
               item
             >
               <a
-                href="https://api.modxclub.ru"
+                href="https://api.prisma-cms.com"
                 rel="noindex,nofollow"
                 target="_blank"
               >

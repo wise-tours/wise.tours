@@ -154,7 +154,7 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
            */
           if (topicID) {
 
-            const siteUrl = "https://modxclub.ru";
+            const siteUrl = "https://prisma-cms.com";
 
             let subject = `Новый топик ${topicName}`;
             let message = `<p>
@@ -293,7 +293,7 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
                  * отправляем уведомления
                  */
 
-                const siteUrl = "https://modxclub.ru";
+                const siteUrl = "https://prisma-cms.com";
 
                 let subject = `Новый комментарий в топике ${topicName}`;
                 let message = `<p>
