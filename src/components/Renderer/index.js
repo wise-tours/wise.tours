@@ -134,7 +134,7 @@ export const styles = theme => {
 }
 
 
-export class Renderer extends PrismaCmsRenderer {
+export class BoilerplateRenderer extends PrismaCmsRenderer {
 
   // static contextTypes = {
   //   ...PrismaCmsRenderer.contextTypes,
@@ -573,7 +573,7 @@ export class Renderer extends PrismaCmsRenderer {
     iceServers.push({
       'urls': [
         // 'stun:coturn.modxclub.ru:443'
-        'stun:modxclub.ru:3478'
+        'stun:prisma-cms.com:3478'
       ],
       'username': 'test',
       'credential': 'test',
@@ -582,7 +582,7 @@ export class Renderer extends PrismaCmsRenderer {
     iceServers.push({
       'urls': [
         // 'stun:coturn.modxclub.ru:443'
-        'turn:modxclub.ru:3478'
+        'turn:prisma-cms.com:3478'
       ],
       'username': 'test',
       'credential': 'test',
@@ -663,6 +663,6 @@ export class Renderer extends PrismaCmsRenderer {
 
 }
 
-export default withStyles(styles)(props => <Renderer
+export default withStyles(styles)(props => <BoilerplateRenderer
   {...props}
 />);

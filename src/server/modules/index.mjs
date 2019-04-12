@@ -7,12 +7,12 @@ import SocietyModule from "@prisma-cms/society-module";
 import EthereumModule from "@prisma-cms/ethereum-module";
 // import ImportModule from "@modxclub/import-old-site";
 
-import MarketplaceModule from "@prisma-cms/marketplace-module";
 import LogModule from "@prisma-cms/log-module";
 import MailModule from "@prisma-cms/mail-module";
 import UploadModule from "@prisma-cms/upload-module";
 import RouterModule from "@prisma-cms/router-module";
 import WebrtcModule from "@prisma-cms/webrtc-module";
+// import MarketplaceModule from "@prisma-cms/marketplace-module";
 
 import UserModule from "./user";
 import ResourceModule from "./resource";
@@ -39,11 +39,10 @@ class CoreModule extends PrismaModule {
     super(options);
 
     this.mergeModules([
-      MarketplaceModule,
+      // MarketplaceModule,
       LogModule,
       MailModule,
       UploadModule,
-      RouterModule,
       SocietyModule,
       EthereumModule,
       // ImportModule,
@@ -57,6 +56,7 @@ class CoreModule extends PrismaModule {
       BlogModule,
       CooperationModule,
       UserModule,
+      RouterModule,
     ]);
 
   }
@@ -280,7 +280,7 @@ class CoreModule extends PrismaModule {
 
     apiSchema = mergeTypes(schema.concat(apiSchema), { all: true });
 
-    // console.log(chalk.green("Modxclub apiSchema"), apiSchema);
+    // console.log(chalk.green("apiSchema"), apiSchema);
 
 
     /**
