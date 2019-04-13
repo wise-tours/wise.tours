@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';
 
 
-import PrismaCmsUserPageView from "@prisma-cms/front/lib/modules/pages/UsersPage/UserPage/View";
+import PrismaCmsUserPageView from "@prisma-cms/front/lib/components/pages/UsersPage/UserPage/View";
 
 
 import NotificationTypes from "./NotificationTypes";

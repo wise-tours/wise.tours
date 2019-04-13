@@ -7,7 +7,7 @@ import { withStyles } from 'material-ui/styles';
 import {
   styles,
   UsersPageView as PrismaCmsUsersPageView,
-} from '@prisma-cms/front/lib/modules/pages/UsersPage/View';
+} from '@prisma-cms/front/lib/components/pages/UsersPage/View';
 
 import Filters from "@prisma-cms/filters";
 

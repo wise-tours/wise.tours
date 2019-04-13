@@ -7,7 +7,7 @@ import Page from "../layout";
 import View from './View';
 
 
-import PrismaCmsUsersPage from '@prisma-cms/front/lib/modules/pages/UsersPage';
+import PrismaCmsUsersPage from '@prisma-cms/front/lib/components/pages/UsersPage';
 
 
 export class UsersPage extends PrismaCmsUsersPage {

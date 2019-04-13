@@ -13,7 +13,7 @@ import MainMenu from "../menu/mainMenu";
 
 
 import MainPage from "../pages/MainPage";
-// import UsersPage from "@prisma-cms/front/lib/modules/pages/UsersPage";
+// import UsersPage from "@prisma-cms/front/lib/components/pages/UsersPage";
 import UsersPage from "../pages/UsersPage/";
 import UserPage from "./pages/UsersPage/UserPage";
 import TopicsPage from "../pages/Topics";
@@ -80,10 +80,12 @@ import {
 import {
   ContextProvider as FrontEditorContextProvider,
   SubscriptionProvider as FrontEditorSubscriptionProvider,
+  // FrontEditorRoot,
 } from "@prisma-cms/front-editor"
+import RootPage from "./pages/Root";
 
 import ContextProvider from "./ContextProvider";
-import PromoPage from "../pages/PromoPage";
+// import PromoPage from "../pages/PromoPage";
 
 
 export const styles = theme => {
@@ -199,12 +201,6 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
 
 
     let routes = [
-      {
-        exact: true,
-        path: "/",
-        // component: MainPage,
-        component: PromoPage,
-      },
       {
         exact: true,
         path: "/people",
@@ -546,6 +542,13 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
           />
         },
       },
+      {
+        exact: false,
+        path: "*",
+        // component: MainPage,
+        // component: PromoPage,
+        component: RootPage,
+      },
       // {
       //   path: "*",
       //   render: props => this.renderOtherPages(props),
@@ -564,6 +567,119 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
 
     return <MainMenu />;
   }
+
+  // getRoutes() {
+
+  //   const {
+  //     getQueryFragment,
+  //   } = this.context;
+
+  //   let routers = [
+  //     {
+  //       exact: true,
+  //       path: "/users/:userId",
+  //       render: (props) => {
+  //         const {
+  //           params,
+  //         } = props.match;
+
+  //         const {
+  //           userId,
+  //         } = params || {};
+
+  //         return <UserPage
+  //           key={userId}
+  //           getQueryFragment={getQueryFragment}
+  //           where={{
+  //             id: userId,
+  //           }}
+  //           {...props}
+  //         />
+  //       }
+  //     },
+  //     {
+  //       exact: true,
+  //       path: "/",
+  //       component: ChatRoomsPage,
+  //     },
+  //     {
+  //       exact: true,
+  //       path: "/chat-rooms",
+  //       component: ChatRoomsPage,
+  //     },
+  //     {
+  //       exact: true,
+  //       path: "/chat-rooms/create",
+  //       component: CreateChatRoomPage,
+  //     },
+  //     {
+  //       exact: true,
+  //       path: "/chat-rooms/:id",
+  //       render: props => {
+
+  //         const {
+  //           match: {
+  //             params: {
+  //               id,
+  //             },
+  //           },
+  //         } = props;
+
+  //         return <ChatRoomPage
+  //           key={id}
+  //           where={{
+  //             id,
+  //           }}
+  //           {...props}
+  //         />
+  //       },
+  //     },
+  //     {
+  //       exact: true,
+  //       path: "/chat-messages",
+  //       component: ChatMessagesPage,
+  //     },
+  //     {
+  //       exact: true,
+  //       path: "/chat-messages/:id",
+  //       render: props => {
+
+  //         const {
+  //           match: {
+  //             params: {
+  //               id,
+  //             },
+  //           },
+  //         } = props;
+
+  //         return <ChatMessagePage
+  //           key={id}
+  //           where={{
+  //             id,
+  //           }}
+  //           {...props}
+  //         />
+  //       },
+  //     },
+  //     {
+  //       exact: true,
+  //       path: "/eth-transactions",
+  //       render: props => <TransactionsPage
+  //         {...props}
+  //         where={{}}
+  //         first={10}
+  //         orderBy="createdAt_DESC"
+  //       />
+  //     },
+  //     {
+  //       exact: true,
+  //       path: "/eth-transactions/:transactionId",
+  //       component: TransactionPage,
+  //     },
+  //   ].concat(super.getRoutes());
+
+  //   return routers;
+  // }
 
 
   renderWrapper() {
