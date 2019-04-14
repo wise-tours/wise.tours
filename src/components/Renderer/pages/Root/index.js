@@ -121,43 +121,50 @@ class RootPage extends PrismaCmsComponent {
       PrismaCmsTemplateId,
     } = global.localStorage || {};
 
-    let where;
+    let props = {
+
+    }
+
 
     if (PrismaCmsTemplateId) {
+
+      let where;
+
       where = {
         id: PrismaCmsTemplateId,
       }
+
+      Object.assign(props, {
+        where,
+      });
+
     }
 
 
     let content = null;
 
-    if (true) {
 
-      content = <RootConnector
-        CustomComponents={CustomComponents.concat([
-          UserPage,
-          PageHeader,
-          OldPages,
-          SwitchTemplateLink,
-        ])}
-        where={where}
-        {...other}
-        // _dirty={{
-        //   name: "Page",
-        //   components: [],
-        //   props: {},
-        //   Parent: {
-        //     connect: {
-        //       id: "cjug5g5ws01fp0917yyi6xe65",
-        //     },
-        //   },
-        // }}
-      />
-    }
-    else {
-      content = "Sdfdsf"
-    }
+    content = <RootConnector
+      CustomComponents={CustomComponents.concat([
+        UserPage,
+        PageHeader,
+        OldPages,
+        SwitchTemplateLink,
+      ])}
+      // where={where}
+      {...props}
+      {...other}
+    // _dirty={{
+    //   name: "Page",
+    //   components: [],
+    //   props: {},
+    //   Parent: {
+    //     connect: {
+    //       id: "cjug5g5ws01fp0917yyi6xe65",
+    //     },
+    //   },
+    // }}
+    />
 
     return <Fragment>
       {PrismaCmsTemplateId ? <div>
