@@ -8,7 +8,7 @@ const coreModule = new CoreModule({
 });
 
 const resolvers = coreModule.getResolvers();
-// console.log("resolvers", resolvers);
+
 
 const GethServer = process.env.GethServer || "http://localhost:8545";
 

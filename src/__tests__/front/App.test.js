@@ -63,7 +63,7 @@ describe('@prisma-cms/boilerplate test', () => {
       {testText}
     </TestApp>, node, () => {
 
-      console.log(chalk.green("TestComponentFiltersSetted result node"), node.innerHTML);
+
 
       const item = node.querySelector("#test");
 

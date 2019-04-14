@@ -74,7 +74,7 @@ export const verifyTypes = function (types, requiredTypes, verbose = false) {
         value: name,
       } = nameDef || {}
 
-      console.log(chalk.bgGreen.black("Type name"), name);
+
 
       fields && fields.map(field => {
 
@@ -84,7 +84,7 @@ export const verifyTypes = function (types, requiredTypes, verbose = false) {
           },
         } = field;
 
-        console.log(chalk.bgWhite.blue("Type filed name"), fieldName);
+
 
       });
 
@@ -136,7 +136,7 @@ export const verifyTypes = function (types, requiredTypes, verbose = false) {
             } = definition;
 
             finded = fields && fields.findIndex(n => {
-              // console.log("n.kind", n.kind);
+
               return ([
                 "FieldDefinition",
                 "InputValueDefinition",
@@ -190,7 +190,7 @@ export const verifySchema = function (schema, requiredTypes) {
 
   let types = definitions.filter(n => {
 
-    // console.log(chalk.bgRed("definitions.filter"), n.kind);
+
 
     return [
       "ObjectTypeDefinition",

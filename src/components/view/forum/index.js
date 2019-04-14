@@ -59,7 +59,7 @@ export class ForumConnector extends Component {
       },
     } = this.context;
 
-    // console.log("setFilters", filters);
+
 
     let newUri = uri.clone();
 
@@ -96,7 +96,7 @@ export class ForumConnector extends Component {
 
     const url = newUri.resource();
 
-    // console.log("setFilters uri", newUri, url);
+
 
     history.push(url);
 
@@ -160,9 +160,9 @@ export class ForumConnector extends Component {
       AND,
     }
 
-    // console.log("where filters", filters);
 
-    // console.log("where", where);
+
+
 
     return (
       <TopicsConnector

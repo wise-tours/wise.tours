@@ -66,7 +66,7 @@ class TaskListRow extends EditableView {
       name,
     } = object;
 
-    // console.log("renderTaskRow object", object);
+
 
     const inEditMode = this.isInEditMode();
 

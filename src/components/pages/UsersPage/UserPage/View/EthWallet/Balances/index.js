@@ -25,7 +25,7 @@ import Web3 from "web3";
 
 export const styles = theme => {
 
-  // console.log(theme);
+
   return {
     root: {
       padding: 10,
@@ -148,7 +148,7 @@ export class WalletBalances extends PrismaCmsComponent {
 
     const account = web3.eth.accounts.create(web3.utils.randomHex(32));
 
-    // console.log("account", account);
+
 
     if (!account) {
       this.addError("Не удалось создать кошелек");
@@ -283,7 +283,7 @@ export class WalletBalances extends PrismaCmsComponent {
     })
       .then(result => {
 
-        console.log("result", result);
+
 
         const {
           response,

@@ -84,7 +84,7 @@ class ChatRoomsByUser extends Component {
           }}
           onSave={result => {
 
-            // console.log("result", result);
+
 
             const {
               response,

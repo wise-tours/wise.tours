@@ -100,7 +100,7 @@ class TopicView extends EditableView {
 
   addMessage = () => {
 
-    console.log("addMessage");
+
 
   }
 
@@ -264,7 +264,7 @@ class TopicView extends EditableView {
       return null;
     }
 
-    // console.log("renderDefaultView", object);
+
 
     const {
       classes,
@@ -338,8 +338,8 @@ class TopicView extends EditableView {
           fullView={true}
           allow_edit={allow_edit}
           onChange={(rawContent) => {
-            // console.log("onChange newState", state);
-            // console.log("onChange rawContent", rawContent);
+
+
 
             this.updateObject({
               content: rawContent,

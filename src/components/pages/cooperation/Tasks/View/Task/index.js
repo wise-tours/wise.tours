@@ -153,7 +153,7 @@ export class TaskView extends EditableView {
       return e;
     });
 
-    // console.log("result 333", result);
+
 
     return result;
 

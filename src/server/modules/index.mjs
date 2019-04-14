@@ -69,7 +69,7 @@ class CoreModule extends PrismaModule {
     //   types = types.concat(schema);
     // }
 
-    // console.log("schema", schema);
+
 
 
     let typesArray = super.getSchema(types);
@@ -94,7 +94,7 @@ class CoreModule extends PrismaModule {
     // `), { all: true });
 
 
-    // console.log("typesArray", typesArray);
+
 
     return typesArray;
 
@@ -280,7 +280,7 @@ class CoreModule extends PrismaModule {
 
     apiSchema = mergeTypes(schema.concat(apiSchema), { all: true });
 
-    // console.log(chalk.green("apiSchema"), apiSchema);
+
 
 
     /**
@@ -306,7 +306,7 @@ class CoreModule extends PrismaModule {
       } = n;
 
       n.fields = fields.filter(field => {
-        // console.log(chalk.green("field"), field);
+
         return resolvers[operationName][field.name.value] ? true : false;
       });
 
@@ -326,7 +326,7 @@ class CoreModule extends PrismaModule {
 
     let resolvers = super.getResolvers();
 
-    // console.log("resolvers", resolvers);
+
 
     const {
       Query: {
@@ -467,7 +467,7 @@ class CoreModule extends PrismaModule {
     //   }
     // }
 
-    // console.log("resolvers other", other);
+
 
 
     // const {
@@ -483,8 +483,8 @@ class CoreModule extends PrismaModule {
 
       //     const result = await resource(source, args, ctx, info);
 
-      //     console.log("args where", args.where);
-      //     console.log("result", result);
+
+
 
       //     return result;
       //   },

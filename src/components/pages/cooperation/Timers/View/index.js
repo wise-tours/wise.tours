@@ -26,7 +26,7 @@ class TimersView extends Component {
       page,
     } = this.props;
 
-    // console.log("this.defaultProps", this.defaultProps);
+
 
     const {
       objectsConnection,

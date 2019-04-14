@@ -38,9 +38,9 @@ class UserPage extends EditorComponent {
       ...other
     } = this.getComponentProps(this);
 
-    // console.log("getComponentProps this", { ...this });
 
-    // console.log("getComponentProps props", { ...other });
+
+
 
     const {
       parent,
@@ -56,7 +56,7 @@ class UserPage extends EditorComponent {
       },
     } = parent;
 
-    // console.log("getComponentProps match", { ...match });
+
 
     const {
       params: where,

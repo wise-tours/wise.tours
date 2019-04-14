@@ -28,7 +28,7 @@ import {
 //   updateTaskProcessor,
 // } from "../../query";
 
-// console.log("Gannt", Gannt);
+
 
 // const UpdateTask = graphql(updateTaskProcessor)(TaskView);
 // const CreateTask = graphql(createTaskProcessor)(TaskView);

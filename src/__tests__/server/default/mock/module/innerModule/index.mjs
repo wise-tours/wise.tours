@@ -23,7 +23,7 @@ class InnerModule extends PrismaModule {
     });
 
 
-    console.log(chalk.green("schema"), schema);
+
 
 
     if(schema){

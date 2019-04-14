@@ -85,7 +85,7 @@ class ForumView extends TableView {
 
   //   super(props);
 
-  //   console.log("ForumView constructor", props);
+
 
   // }
 
@@ -114,7 +114,7 @@ class ForumView extends TableView {
         className: classes.topicColumn,
         renderer: (value, record) => {
 
-          // console.log("Topic record", record);
+
 
           const {
             id: topicId,
@@ -126,7 +126,7 @@ class ForumView extends TableView {
 
           let tagsList = [];
 
-          // console.log("Topic Tags", Tags);
+
 
           Tags && Tags.map(tag => {
 

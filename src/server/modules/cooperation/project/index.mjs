@@ -42,7 +42,7 @@ export class ModxclubProjectProcessor extends ProjectProcessor {
     });
 
 
-    // console.log(chalk.green("resourceUriData"), resourceUriData);
+
 
     const Resource = {
       create: {
@@ -128,7 +128,7 @@ export class ModxclubProjectProcessor extends ProjectProcessor {
 
   async mutate(method, args, info) {
 
-    // console.log(chalk.green("CreateProject args.data"), args.data);
+
 
     const {
       db,

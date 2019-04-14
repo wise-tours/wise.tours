@@ -258,6 +258,7 @@ export class MainMenu extends PrismaCmsComponent {
               <a
                 href="/graphql-voyager"
                 rel="noindex,nofollow"
+                target="_blank"
               >
                 <Typography>
                   {this.lexicon("API Schema")}

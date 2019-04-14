@@ -1,5 +1,7 @@
+2.16.4
 ============================================
-- Upgrade boilerplate
+- Upgrade @prisma-cms/front-editor
+- Added oldPages
 
 2.16.3
 ============================================

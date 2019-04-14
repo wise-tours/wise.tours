@@ -70,6 +70,6 @@ app.listen(port, (err) => {
     console.error(err);
 	}
   // logger.appStarted(port);
-  console.log("Server started");
+
 });
 

@@ -42,7 +42,7 @@ class TopicComments extends Component {
       Comments,
     } = topic;
 
-    // console.log("topic", topic, Comments);
+
 
 
     let comments = Comments && Comments.map(n => {

@@ -85,7 +85,7 @@ export class ModxclubUserProcessor extends UserPayload {
       }
 
 
-      // console.log("account", account);
+
 
       if (!account) {
         return this.addFieldError("ethWalletPK", "Приватный ключ не был дешифрован");

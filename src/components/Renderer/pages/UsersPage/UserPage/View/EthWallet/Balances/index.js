@@ -20,7 +20,7 @@ import gql from 'graphql-tag';
 
 export const styles = theme => {
 
-  // console.log(theme);
+
   return {
     root: {
       padding: 10,
@@ -206,14 +206,14 @@ export class WalletBalances extends PrismaCmsComponent {
 
   async createWallet() {
 
-    // console.log("Web3.givenProvider", Web3.givenProvider);
-    // console.log("Web3", Web3);
+
+
 
     const web3 = new Web3(Web3.givenProvider);
 
     const account = web3.eth.accounts.create(web3.utils.randomHex(32));
 
-    // console.log("account", account);
+
 
     if (!account) {
       this.addError(this.lexicon("Error while creating wallet"));
@@ -354,7 +354,7 @@ export class WalletBalances extends PrismaCmsComponent {
     })
       .then(result => {
 
-        console.log("result", result);
+
 
         const {
           response,

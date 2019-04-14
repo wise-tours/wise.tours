@@ -60,7 +60,7 @@
 
 //   //   super(props);
 
-//   //   console.log("CommentView constructor", this);
+
 
 //   // }
 
@@ -256,8 +256,8 @@
 //       fullView={true}
 //       allow_edit={allow_edit}
 //       onChange={(state, rawContent) => {
-//         // console.log("onChange newState", state);
-//         // console.log("onChange rawContent", rawContent);
+
+
 
 //         this.updateObject({
 //           text: rawContent,

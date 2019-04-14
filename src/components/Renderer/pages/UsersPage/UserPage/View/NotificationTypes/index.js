@@ -87,7 +87,7 @@ class UserNotificationTypes extends Component {
               checked,
             } = event.target;
 
-            // console.log("checked", checked);
+
 
             const {
               mutate,

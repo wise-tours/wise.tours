@@ -11,6 +11,7 @@ import withStyles from "material-ui/styles/withStyles";
 import MainMenu from "../menu/mainMenu";
 
 
+import GraphqlVoyagerPage from "@prisma-cms/front/lib/components/pages/GraphqlVoyager";
 
 import MainPage from "../pages/MainPage";
 // import UsersPage from "@prisma-cms/front/lib/components/pages/UsersPage";
@@ -90,7 +91,7 @@ import ContextProvider from "./ContextProvider";
 
 export const styles = theme => {
 
-  // console.log("theme", theme);
+
 
   const {
     typography: {
@@ -174,7 +175,7 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
   // }
 
 
-  getRoutes() {
+  getRoutes__() {
 
 
     const {
@@ -238,7 +239,7 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
         path: "/comments/comment-:commentOldID(\\d+).html",
         render: (props) => {
 
-          // console.log("props", props);
+
 
           const {
             match: {
@@ -391,8 +392,8 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
             },
           } = props;
 
-          // console.log("props", props);
-          // console.log("props.location", props.location);
+
+
 
           return <ProjectPage
             key={pathname}
@@ -542,12 +543,69 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
           />
         },
       },
+      // {
+      //   exact: false,
+      //   path: "*",
+      //   // component: MainPage,
+      //   // component: PromoPage,
+      //   component: RootPage,
+      // },
+      // {
+      //   path: "*",
+      //   render: props => this.renderOtherPages(props),
+      // },
+    ].concat(baseRoutes);
+
+
+
+
+
+    return routes;
+  }
+
+  getRoutes() {
+
+
+    const {
+      getQueryFragment,
+    } = this.context;
+
+
+    let baseRoutes = super.getRoutes();
+
+    let mainPageIndex = baseRoutes.findIndex(n => n.path === "/");
+    if (mainPageIndex) {
+      baseRoutes.splice(mainPageIndex, 1);
+    }
+
+
+
+    var routeIndex;
+
+    while ((routeIndex = baseRoutes.findIndex(n => n.path.startsWith("/user"))) !== -1) {
+
+      baseRoutes.splice(routeIndex, 1);
+
+    };
+
+
+
+    let routes = [
+      {
+        exact: true,
+        path: "/graphql-voyager",
+        component: GraphqlVoyagerPage,
+      },
       {
         exact: false,
         path: "*",
         // component: MainPage,
         // component: PromoPage,
         component: RootPage,
+        // render: props => <RootPage
+        //   {...props}
+        //   oldRoutes={this.getRoutes__()}
+        // />
       },
       // {
       //   path: "*",
@@ -557,7 +615,7 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
 
 
 
-    // console.log("routes", routes);
+
 
     return routes;
   }
@@ -724,7 +782,15 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
                           <CooperationContextProvider>
                             <CooperationSubscriptionProvider>
                               <ContextProvider>
-                                {super.renderWrapper()}
+                                <Context.Consumer>
+                                  {context => <Context.Provider
+                                    value={Object.assign(context, {
+                                      oldRoutes: this.getRoutes__(),
+                                    })}
+                                  >
+                                    {super.renderWrapper()}
+                                  </Context.Provider>}
+                                </Context.Consumer>
                               </ContextProvider>
                             </CooperationSubscriptionProvider>
                           </CooperationContextProvider>

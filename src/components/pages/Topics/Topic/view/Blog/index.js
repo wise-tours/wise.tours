@@ -97,7 +97,7 @@ export default class TopicBlog extends PrismaCmsComponent {
         }}
         orderBy="name_ASC"
       // onChange={(event, value) => {
-      //   console.log("onChange", value, event.target.value);
+
       //   this.setFilters({
       //     name_contains: value && value.trim() || undefined,
       //   })

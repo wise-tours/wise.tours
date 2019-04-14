@@ -226,7 +226,7 @@ class Server {
             decodeEntities: false,
           })
 
-          // console.log(chalk.green("$"), $);
+
 
           /**
            * Remove noscript notifi
@@ -260,7 +260,7 @@ class Server {
             }
 
 
-            // console.log(chalk.green("meta"), meta);
+
 
             meta.attr("content", description);
           }

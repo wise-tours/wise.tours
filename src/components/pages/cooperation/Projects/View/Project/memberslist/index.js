@@ -163,7 +163,7 @@ export default class MembersListEditor extends Component {
 
 		let services = member.services;
 
-		// console.log('updateMemberServices services', services);
+
 
 		// return;
 
@@ -239,7 +239,7 @@ export default class MembersListEditor extends Component {
 			return;
 		}
 
-		// console.log('item', item);
+
 
 		let {
 			members,

@@ -43,7 +43,7 @@ export default class extends Page {
       },
     } = this.context;
 
-    // console.log("setFilters", filters);
+
 
     let newUri = uri.clone();
 
@@ -80,7 +80,7 @@ export default class extends Page {
 
     const url = newUri.resource();
 
-    // console.log("setFilters uri", newUri, url);
+
 
     history.push(url);
 

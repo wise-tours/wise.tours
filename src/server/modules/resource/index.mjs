@@ -259,7 +259,7 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
                 id: commentId,
               } = result || {};
 
-              // console.log(chalk.green("result"), result, commentId);
+
 
               /**
                * Если был создан комментарий, 
@@ -450,7 +450,7 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
       const result = await processor(data, user)
         .catch(error => {
 
-          console.log(chalk.red("getProcessor error"), error);
+
 
           this.error(error);
           return error;
@@ -554,8 +554,8 @@ class ModxclubTopicModule extends ResourceModule {
 
       //     const result = await resource(source, args, ctx, info);
 
-      //     console.log("args where", args.where);
-      //     console.log("result", result);
+
+
 
       //     return result;
       //   },

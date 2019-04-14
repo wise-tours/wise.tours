@@ -26,7 +26,7 @@ export class TopicCreatePage extends TopicPage {
 
   onSave = (result) => {
 
-    // console.log("onSave", result);
+
 
     if (result && result.data) {
 

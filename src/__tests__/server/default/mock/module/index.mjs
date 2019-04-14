@@ -57,11 +57,11 @@ class TestModule extends CmsModule {
      */
     // let baseSchema = this.getSchema();
 
-    // console.log("baseSchema", baseSchema);
+
 
     let apiSchema = super.getApiSchema(types.concat(excludeTypes), []);
 
-    // console.log(chalk.green("TestModule apiSchema"), apiSchema);
+
 
 
     let schema = fileLoader(__dirname + '/schema/api/', {

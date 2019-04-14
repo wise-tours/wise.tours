@@ -167,7 +167,7 @@ export class ProjectView extends PrismaCmsCooperationProjectView {
   };
 
   handleClose = () => {
-    // console.log('handleClose', this);
+
     this.setState({
       open: false,
       openedImage: undefined,
@@ -189,7 +189,7 @@ export class ProjectView extends PrismaCmsCooperationProjectView {
     } = r.data;
 
 
-    // console.log("onUpload", singleUpload);
+
 
     const {
       path: image,
