@@ -46,6 +46,7 @@ type User implements Node {
 type User {
   hasEmail: Boolean!
   hasPhone: Boolean!
+  marketplaceToken: String
 }
 
 
@@ -58,6 +59,7 @@ input UserCreateInput {
   fullname: String
   image: String
   address: String
+  marketplaceToken: String
 }
 
 input UserUpdateInput {
@@ -70,4 +72,5 @@ input UserUpdateInput {
   ethWalletPK: String
   ethWalletPKSendEmail: Boolean
   NotificationTypes: NotificationTypeUpdateManyWithoutUsersInput
+  marketplaceToken: String
 }

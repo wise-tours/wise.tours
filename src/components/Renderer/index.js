@@ -8,8 +8,6 @@ import { Renderer as PrismaCmsRenderer } from "@prisma-cms/front";
 
 import withStyles from "material-ui/styles/withStyles";
 
-import MainMenu from "../menu/mainMenu";
-
 
 import GraphqlVoyagerPage from "@prisma-cms/front/lib/components/pages/GraphqlVoyager";
 
@@ -67,6 +65,22 @@ import {
   SubscriptionProvider as EthereumSubscriptionProvider,
 } from "@prisma-cms/ethereum";
 
+import ContextProvider from "./ContextProvider";
+
+// import UserPage from './pages/UsersPage/UserPage';
+
+// import ChatRoomsPage from "./pages/society/ChatRooms";
+// import ChatRoomPage from "./pages/society/ChatRooms/ChatRoom";
+// import CreateChatRoomPage from "./pages/society/ChatRooms/ChatRoom/Create";
+
+// import ChatMessagesPage from "./pages/society/ChatMessages";
+// import ChatMessagePage from "./pages/society/ChatMessages/ChatMessage";
+
+// import TransactionsPage from "./pages/ethereum/Transactions";
+// import TransactionPage from "./pages/ethereum/Transactions/Transaction";
+
+import MainMenu from "./MainMenu";
+
 import {
   ContextProvider as WebrtcContextProvider,
   SubscriptionProvider as WebrtcSubscriptionProvider,
@@ -83,10 +97,12 @@ import {
   SubscriptionProvider as FrontEditorSubscriptionProvider,
   // FrontEditorRoot,
 } from "@prisma-cms/front-editor"
+
+import TemplatesPage from "@prisma-cms/front-editor/lib/components/pages/Templates/"
+import TemplatePage from "@prisma-cms/front-editor/lib/components/pages/Templates/Template"
+
 import RootPage from "./pages/Root";
 
-import ContextProvider from "./ContextProvider";
-// import PromoPage from "../pages/PromoPage";
 
 
 export const styles = theme => {
@@ -595,6 +611,38 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
         exact: true,
         path: "/graphql-voyager",
         component: GraphqlVoyagerPage,
+      },
+      {
+        exact: true,
+        path: "/templates",
+        component: TemplatesPage,
+      },
+      // {
+      //   exact: true,
+      //   path: "/templates/create",
+      //   component: TemplateCreatePage,
+      // },
+      {
+        exact: true,
+        path: "/templates/:id",
+        render: props => {
+
+          const {
+            match: {
+              params: {
+                id,
+              },
+            },
+          } = props;
+
+          return <TemplatePage
+            key={id}
+            where={{
+              id,
+            }}
+            {...props}
+          />
+        },
       },
       {
         exact: false,
