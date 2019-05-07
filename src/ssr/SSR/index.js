@@ -139,6 +139,12 @@ class Server {
       // referer,
     } = req.headers;
 
+    const host = req.get('host');
+
+    const uri = new URI(`${protocol}//${host}${req.url}`);
+
+    // console.log("SSR uri", uri);
+    // console.log("SSR uri.toString()", uri.toString());
 
     let assetsUrl;
 
@@ -188,6 +194,7 @@ class Server {
             <MainApp
               sheetsManager={new Map()}
               queryFragments={queryFragments}
+              uri={uri}
             />
           </StaticRouter>
         </ApolloProvider>
