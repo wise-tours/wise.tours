@@ -13,6 +13,7 @@ import UploadModule from "@prisma-cms/upload-module";
 import RouterModule from "@prisma-cms/router-module";
 import WebrtcModule from "@prisma-cms/webrtc-module";
 import MarketplaceModule from "@prisma-cms/marketplace-module";
+// import CooperationModule from "@prisma-cms/cooperation-module";
 
 import UserModule from "./user";
 import ResourceModule from "./resource";
@@ -39,6 +40,8 @@ class CoreModule extends PrismaModule {
     super(options);
 
     this.mergeModules([
+      MarketplaceModule,
+      // CooperationModule,
       LogModule,
       MailModule,
       UploadModule,
@@ -56,7 +59,6 @@ class CoreModule extends PrismaModule {
       CooperationModule,
       UserModule,
       RouterModule,
-      MarketplaceModule,
     ]);
 
   }
