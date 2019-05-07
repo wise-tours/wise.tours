@@ -1,4 +1,5 @@
-
-type Project {
-  oldId: Int @unique
+type Project{
+  oldID: Int @unique
+  Image: File
+  Resource: Resource @relation(name: "ProjectResource")
 }

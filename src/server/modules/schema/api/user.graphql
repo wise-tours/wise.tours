@@ -40,6 +40,7 @@ type User implements Node {
   # Imports(where: ImportWhereInput, orderBy: ImportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Import!]
   # oldID: Int
   # LettersCreated(where: LetterWhereInput, orderBy: LetterOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Letter!]
+  PrismaProjects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
 }
 
 # Custom

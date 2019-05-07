@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import PrismaCmsComponent from "@prisma-cms/component";
 import RootConnector, { FrontEditorRoot } from '@prisma-cms/front-editor/lib/components/Root';
 import UserPage from './components/pages/Users/User';
-import PageHeader from './components/PageHeader';
+import OldPageHeader from './components/OldPageHeader';
 import OldPages from './components/pages/OldPages';
 import SwitchTemplateLink from './components/Link/SwitchTemplate';
 
@@ -147,7 +147,7 @@ class RootPage extends PrismaCmsComponent {
     content = <RootConnector
       CustomComponents={CustomComponents.concat([
         UserPage,
-        PageHeader,
+        OldPageHeader,
         OldPages,
         SwitchTemplateLink,
       ])}

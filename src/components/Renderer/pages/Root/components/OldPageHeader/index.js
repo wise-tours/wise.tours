@@ -5,13 +5,13 @@ import MainMenu from '../../../../../menu/mainMenu';
 
 import EditorComponent from "@prisma-cms/front-editor/lib/components/App/components/";
 
-class PageHeader extends EditorComponent {
+class OldPageHeader extends EditorComponent {
 
   static defaultProps = {
     ...EditorComponent.defaultProps,
   }
 
-  static Name = "PageHeader"
+  static Name = "OldPageHeader"
 
   renderPanelView() {
 
@@ -22,7 +22,7 @@ class PageHeader extends EditorComponent {
     return super.renderPanelView(<div
       className={classes.panelButton}
     >
-      Page Header
+      Old Page Header
     </div>);
   }
 
@@ -68,4 +68,4 @@ class PageHeader extends EditorComponent {
 
 }
 
-export default PageHeader;
+export default OldPageHeader;
