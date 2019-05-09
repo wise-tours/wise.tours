@@ -398,6 +398,7 @@ class CoreModule extends PrismaModule {
       updateCallRequest,
       createTemplateProcessor,
       updateTemplateProcessor,
+      deleteTemplate,
     } = Mutation;
 
 
@@ -443,6 +444,7 @@ class CoreModule extends PrismaModule {
       updateCallRequest,
       createTemplateProcessor,
       updateTemplateProcessor,
+      deleteTemplate,
     };
 
     // for(var i in AllowedMutations){
