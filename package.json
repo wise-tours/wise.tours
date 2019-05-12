@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/prisma-cms.com",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Opensource framework CMS powered by GraphQL, Prisma, MySQL, React & Apollo GraphQL",
   "private": false,
   "scripts": {
@@ -23,7 +23,6 @@
     "@modxclub/import-old-site": "latest",
     "@prisma-cms/component": "latest",
     "@prisma-cms/cooperation": "latest",
-    "@prisma-cms/cooperation-module": "latest",
     "@prisma-cms/editor": "latest",
     "@prisma-cms/context": "latest",
     "@prisma-cms/ethereum": "latest",
@@ -48,6 +47,7 @@
     "@prisma-cms/filters": "latest",
     "@prisma-cms/marketplace-module": "latest",
     "@prisma-cms/front-editor": "latest",
+    "@prisma-cms/cooperation-module": "latest",
     "apollo-cache-inmemory": "^1.3.7",
     "apollo-client": "^2.4.4",
     "apollo-link-http": "1.5.5",

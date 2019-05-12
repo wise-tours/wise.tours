@@ -139,12 +139,10 @@ class Server {
       // referer,
     } = req.headers;
 
-    const host = req.get('host');
+    // const host = req.get('host');
 
-    const uri = new URI(`${protocol}//${host}${req.url}`);
+    const uri = new URI(`${protocol}//${hostname}${req.url}`);
 
-    // console.log("SSR uri", uri);
-    // console.log("SSR uri.toString()", uri.toString());
 
     let assetsUrl;
 
@@ -271,6 +269,8 @@ class Server {
 
             meta.attr("content", description);
           }
+
+
 
           if (canonical) {
 
@@ -423,7 +423,7 @@ class Server {
             errors,
           } = networkError.result || {};
 
-          if(errors && errors.length){
+          if (errors && errors.length) {
             errors.map(error => {
               console.error(chalk.red("Server networkError.errors error"), error);
             });
