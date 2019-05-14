@@ -1,6 +1,6 @@
 {
   "name": "@prisma-cms/prisma-cms.com",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "Opensource framework CMS powered by GraphQL, Prisma, MySQL, React & Apollo GraphQL",
   "private": false,
   "scripts": {
@@ -65,6 +65,7 @@
     "prisma-binding": "^2.1.6",
     "react-apollo": "^2.2.3",
     "react-number-format": "^4.0.6",
+    "react-pdf": "^4.0.5",
     "urijs": "^1.19.1",
     "xml-writer": "^1.7.0"
   },
