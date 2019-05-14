@@ -31,6 +31,8 @@ const __dirname = path.dirname(moduleURL.pathname);
 const { fileLoader, mergeTypes } = MergeSchema;
 import { parse, print } from "graphql";
 
+import URI from "urijs";
+
 
 class CoreModule extends PrismaModule {
 
@@ -442,9 +444,163 @@ class CoreModule extends PrismaModule {
       joinChatRoom,
       createCallRequestProcessor,
       updateCallRequest,
-      createTemplateProcessor,
       updateTemplateProcessor,
       deleteTemplate,
+      createTemplateProcessor: async (source, args, ctx, info) => {
+
+        // console.log("createTemplateProcessor args", args);
+
+
+        /**
+         * При создании шаблона, если не был получен проект, создаем его
+         */
+
+        const {
+          data: {
+            component,
+            Parent,
+          },
+        } = args;
+
+        if (component === "Page" && !Parent) {
+
+
+          const {
+            getProjectFromRequest,
+            currentUser,
+          } = ctx;
+
+
+          const project = await getProjectFromRequest(ctx);
+
+
+          // console.log("createTemplateProcessor project", project);
+          // console.log("createTemplateProcessor currentUser", currentUser);
+
+
+          /**
+           * Если проекта нет и есть текущий пользователь, создаем новый проект
+           */
+          if (!project && currentUser) {
+
+            const {
+              id: currentUserId,
+              username,
+            } = currentUser;
+
+            const {
+              request: {
+                headers,
+              },
+              db,
+            } = ctx;
+
+
+            // console.log("headers", headers);
+
+            const {
+              origin,
+            } = headers;
+
+            if (!origin) {
+              return this.addError("Can not get request origin");
+            }
+
+            const uri = new URI(origin);
+
+            let domain = uri.hostname();
+            let subdomain = uri.subdomain();
+
+
+            if (!domain) {
+              return this.addError("Can not get request domain");
+            }
+
+            // console.log("subdomain", subdomain, subdomain.split("."));
+
+            /**
+             * Если это поддомен, проверяем на совпадение с пользователями
+             */
+
+            if (subdomain) {
+
+              const exists = await db.exists.User({
+                username_in: subdomain.split("."),
+                username_not: username,
+              });
+
+
+              // console.log("subdomain user exists", exists);
+
+              if (exists) {
+                return {
+                  success: false,
+                  message: "Can not create project with url match other user's username",
+                  errors: [],
+                }
+              }
+
+            }
+
+            // return {
+
+            // }
+
+
+            const projectResponse = await createProjectProcessor(null, {
+              data: {
+                // domain,
+                name: domain,
+                url: origin,
+                // CreatedBy: {
+                //   connect: {
+                //     id: currentUserId,
+                //   },
+                // },
+                PrismaUsers: {
+                  connect: {
+                    id: currentUserId,
+                  },
+                },
+              },
+            }, ctx);
+
+            const {
+              success,
+              data: project,
+            } = projectResponse || {};
+
+            // console.log("createTemplateProcessor project 2", project);
+
+
+            if (!success || !project) {
+
+
+              // return {
+              //   success: false,
+              //   message: "Can not create project",
+              //   errors: [],
+              // }
+
+              return projectResponse;
+
+            }
+
+
+          }
+
+        }
+
+        // return {
+        //   success: false,
+        //   message: "Debug",
+        //   errors: [],
+        // }
+
+
+        return createTemplateProcessor(source, args, ctx, info);
+
+      },
     };
 
     // for(var i in AllowedMutations){
@@ -522,6 +678,7 @@ class CoreModule extends PrismaModule {
     };
 
   }
+
 
 
 }
