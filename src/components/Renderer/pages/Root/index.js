@@ -8,6 +8,7 @@ import OldPageHeader from './components/OldPageHeader';
 import OldPages from './components/pages/OldPages';
 import SwitchTemplateLink from './components/Link/SwitchTemplate';
 import PdfView from './components/PdfView';
+import CreateUserPage from './components/pages/Users/User/Create';
 
 import URI from "urijs";
 
@@ -151,6 +152,7 @@ class RootPage extends PrismaCmsComponent {
         OldPageHeader,
         OldPages,
         SwitchTemplateLink,
+        CreateUserPage,
         PdfView,
       ])}
       // where={where}

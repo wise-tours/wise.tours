@@ -5,9 +5,9 @@ import EditorComponent from "@prisma-cms/front-editor/lib/components/App/compone
 
 // import Icon from "material-ui-icons/SettingsOverscan";
 
-import CustomUserPage from "../../../../../UsersPage/UserPage";
+import CustomCreateUserPage from "../../../../../../UsersPage/UserPage/Create";
 
-class UserPage extends EditorComponent {
+class CreateUserPage extends EditorComponent {
 
   // static defaultProps = {
   //   ...EditorComponent.defaultProps,
@@ -15,7 +15,7 @@ class UserPage extends EditorComponent {
   //   marginBottom: 10,
   // }
 
-  static Name = "UserPage"
+  static Name = "CreateUserPage"
 
   renderPanelView() {
 
@@ -27,47 +27,18 @@ class UserPage extends EditorComponent {
       className={classes.panelButton}
     >
       {/* <Icon />  */}
-      User page
+      Create User page
     </div>);
   }
 
 
   renderChildren() {
 
-    // const {
-    //   ...other
-    // } = this.getComponentProps(this);
-
-
-    const {
-      parent,
-    } = this.props;
-
-    if (!parent) {
-      return false;
-    }
-
-    const {
-      props: {
-        match,
-      },
-    } = parent;
-
-
-
-    const {
-      params: where,
-    } = match || {};
-
-    if (!where) {
-      return null;
-    }
-
-    return <CustomUserPage
-      where={where}
+    return <CustomCreateUserPage
     />;
   }
 
+
 }
 
-export default UserPage;
+export default CreateUserPage;

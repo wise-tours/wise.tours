@@ -1,3 +1,9 @@
+3.0.6
+============================================
+- Upgrade boilerplate
+- Added CreateUserPage
+- Added nested objects
+
 3.0.5
 ============================================
 - Added subdomains projects
