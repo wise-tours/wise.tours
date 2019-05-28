@@ -1,3 +1,9 @@
+3.0.7
+============================================
+- Upgrade boilerplate
+- Upgrade front-editor
+- Added Test object
+
 3.0.6
 ============================================
 - Upgrade boilerplate

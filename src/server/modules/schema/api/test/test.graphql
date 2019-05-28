@@ -1,0 +1,10 @@
+type TestResponse{
+  success: Boolean!
+  message: String
+  errors: [Error!]!
+  data: Test
+}
+
+input TestCreateInput {
+  name: String = null
+}

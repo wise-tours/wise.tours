@@ -1,0 +1,11 @@
+
+type Test {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String
+  text: String
+  quantity: Float
+  date: DateTime
+  CreatedBy: User
+}

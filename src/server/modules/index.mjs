@@ -19,6 +19,7 @@ import UserModule from "./user";
 import ResourceModule from "./resource";
 import BlogModule from "./blog";
 import CooperationModule from "./cooperation";
+import TestModule from "./test";
 
 
 import chalk from 'chalk';
@@ -51,7 +52,7 @@ class CoreModule extends PrismaModule {
       EthereumModule,
       // ImportModule,
       WebrtcModule,
-
+      
       // /**
       //  * Важно кастомные классы в последнюю очередь использовать.
       //  * Но надо будет вообще вывести базовые кслассы в отдельный загрузчик
@@ -59,6 +60,7 @@ class CoreModule extends PrismaModule {
       ResourceModule,
       BlogModule,
       CooperationModule,
+      TestModule,
       UserModule,
       RouterModule,
     ]);
@@ -401,6 +403,10 @@ class CoreModule extends PrismaModule {
       createTemplateProcessor,
       updateTemplateProcessor,
       deleteTemplate,
+      createTestProcessor,
+      updateTestProcessor,
+      deleteTest,
+      deleteManyTests,
     } = Mutation;
 
 
@@ -446,6 +452,10 @@ class CoreModule extends PrismaModule {
       updateCallRequest,
       updateTemplateProcessor,
       deleteTemplate,
+      createTestProcessor,
+      updateTestProcessor,
+      deleteTest,
+      deleteManyTests,
       createTemplateProcessor: async (source, args, ctx, info) => {
 
         // console.log("createTemplateProcessor args", args);
