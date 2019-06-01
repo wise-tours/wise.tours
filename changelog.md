@@ -1,10 +1,9 @@
-3.0.7
+3.1.0
 ============================================
 - Upgrade boilerplate
-- Upgrade front-editor
-- Added Test object
+- Added modifyArgs()
 
-3.0.6
+3.0.7
 ============================================
 - Upgrade boilerplate
 - Added CreateUserPage
