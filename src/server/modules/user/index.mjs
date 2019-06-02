@@ -307,16 +307,16 @@ class ModxclubUserModule extends UserModule {
       ...other
     } = where || {};
 
+    
+    let condition;
 
+    
     if (search !== undefined) {
 
       delete where.search;
 
-      let condition;
-
 
       if (search) {
-
 
         condition = {
           OR: [
@@ -332,9 +332,12 @@ class ModxclubUserModule extends UserModule {
           ],
         }
 
-
       }
 
+    }
+
+
+    if (condition) {
 
       /**
        * Если объект условия пустой, то во избежание лишней вложенности
