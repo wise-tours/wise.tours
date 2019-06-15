@@ -74,27 +74,55 @@ export class ResourceFields extends EditorComponent {
   }
 
 
-  // updateObject(data) {
+  updateObject(data) {
 
-  //   const {
-  //     inEditMode,
-  //   } = this.getEditorContext();
+    // const {
+    //   inEditMode,
+    // } = this.getEditorContext();
 
-  //   if (inEditMode) {
+    // if (inEditMode) {
 
-  //     console.log("updateObject data", data);
+    // console.log("updateObject data", data);
 
 
-  //     console.log("updateObject this", { ...this });
+    //   console.log("updateObject this", { ...this });
 
-  //     return super.updateObject(data);
+    //   return super.updateObject(data);
 
-  //   }
-  //   else {
-  //     this.forceUpdate();
-  //   }
+    // }
+    // else {
+    //   this.forceUpdate();
+    // }
 
-  // }
+    const {
+      objectContext,
+    } = this;
+
+    const {
+      updateObject,
+      getObjectWithMutations,
+    } = objectContext || {};
+
+
+    if (updateObject && getObjectWithMutations) {
+      // console.log("updateObject updateObject", updateObject);
+
+      const {
+        components,
+      } = getObjectWithMutations() || {}
+
+      if (components) {
+        updateObject({
+          components,
+        });
+      }
+
+    }
+
+
+    return super.updateObject(data);
+
+  }
 
 
 

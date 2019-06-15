@@ -18,6 +18,7 @@ import ResourceFields from './components/Resource/Fields';
 import ResourceContent from './components/Resource/Fields/Field/ResourceContent';
 import Comments from './components/Resource/Comments';
 import TopicBlog from './components/Resource/Topic/TopicBlog';
+import Youtube from './components/Resource/Fields/Field/Youtube';
 
 class RootPage extends PrismaCmsComponent {
 
@@ -160,10 +161,11 @@ class RootPage extends PrismaCmsComponent {
         CreateUserPage,
         PdfView,
         Topic,
-        ResourceFields,
-        ResourceContent,
         Comments,
         TopicBlog,
+        ResourceFields,
+        ResourceContent,
+        Youtube,
       ])}
       // where={where}
       {...props}

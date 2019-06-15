@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { EditableObjectContext } from '@prisma-cms/front-editor/lib/components/App/context';
-import { ObjectContext } from '@prisma-cms/front-editor/lib/components/App/components/public/Connectors/Connector/ListView';
+// import { ObjectContext } from '@prisma-cms/front-editor/lib/components/App/components/public/Connectors/Connector/ListView';
 import ResourceField from '..';
 
 
@@ -112,14 +112,14 @@ class ResourceContent extends ResourceField {
               content: value,
             });
 
-            const {
+            {/* const {
               components,
             } = getObjectWithMutations();
 
 
             updateObject({
               components,
-            });
+            }); */}
 
           }
         }) : super.renderChildren();

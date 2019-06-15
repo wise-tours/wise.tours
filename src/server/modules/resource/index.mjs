@@ -617,7 +617,7 @@ export class TopicProcessor extends PrismaCmsResourceProcessor {
 
         }
 
-        console.log(chalk.green("textLength"), textLength);
+        // console.log(chalk.green("textLength"), textLength);
 
         this.reduceBlocks(itemComponents, resourceBlocks, entityMap, textLength);
 
