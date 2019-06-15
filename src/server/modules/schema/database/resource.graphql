@@ -15,4 +15,5 @@ type Resource {
   Topics: [Resource!]! @relation(name: "BlogTopics")
   Blog: Resource @relation(name: "BlogTopics")
   mockUpdate: DateTime
+  components: Json
 }

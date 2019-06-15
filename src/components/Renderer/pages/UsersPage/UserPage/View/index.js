@@ -12,6 +12,11 @@ import Balances from "./EthWallet/Balances";
 class UserPageView extends UserPageViewProto {
 
 
+  canEdit() {
+
+    return true;
+  }
+
 
   getWalletAddress() {
 

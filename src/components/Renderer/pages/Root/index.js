@@ -13,6 +13,11 @@ import CreateUserPage from './components/pages/Users/User/Create';
 import URI from "urijs";
 
 import { Link } from "react-router-dom";
+import Topic from './components/Resource/Topic';
+import ResourceFields from './components/Resource/Fields';
+import ResourceContent from './components/Resource/Fields/Field/ResourceContent';
+import Comments from './components/Resource/Comments';
+import TopicBlog from './components/Resource/Topic/TopicBlog';
 
 class RootPage extends PrismaCmsComponent {
 
@@ -154,6 +159,11 @@ class RootPage extends PrismaCmsComponent {
         SwitchTemplateLink,
         CreateUserPage,
         PdfView,
+        Topic,
+        ResourceFields,
+        ResourceContent,
+        Comments,
+        TopicBlog,
       ])}
       // where={where}
       {...props}

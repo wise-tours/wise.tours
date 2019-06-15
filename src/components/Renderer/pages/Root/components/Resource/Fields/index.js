@@ -1,0 +1,331 @@
+import React, { Fragment } from 'react';
+
+import EditorComponent from '@prisma-cms/front-editor/lib/components/App/components/';
+import EditableObject from '@prisma-cms/front-editor/lib/components/App/components/public/form/EditableObject';
+import { EditableObjectContext, EditorContext } from '@prisma-cms/front-editor/lib/components/App/context';
+import Resource from '..';
+import ResourceField from './Field';
+import OldPageHeader from '../../OldPageHeader';
+import OldPages from '../../pages/OldPages';
+import { Button } from 'material-ui';
+
+
+
+export class ResourceFields extends EditorComponent {
+
+  static Name = 'ResourceFields';
+
+  static defaultProps = {
+    ...EditorComponent.defaultProps,
+  }
+
+
+  renderPanelView() {
+
+    const {
+      classes,
+    } = this.getEditorContext();
+
+    return super.renderPanelView(
+      <div
+        className={classes.panelButton}
+      >
+        ResourceFields
+      </div>
+    );
+  }
+
+
+  getRootElement() {
+
+    return super.getRootElement();
+  }
+
+
+  canBeParent(parent) {
+
+    return parent instanceof Resource && super.canBeParent(parent);
+  }
+
+
+  canBeChild(child) {
+
+    // return child instanceof ResourceField && super.canBeChild(child);
+
+    return !(child instanceof OldPageHeader)
+      && !(child instanceof OldPages)
+      && super.canBeChild(child);
+  }
+
+
+  renderMainView() {
+
+    return <EditableObjectContext.Consumer>
+      {context => {
+
+        Object.assign(this, {
+          objectContext: context,
+        });
+
+        return super.renderMainView();
+
+      }}
+    </EditableObjectContext.Consumer>;
+  }
+
+
+  // updateObject(data) {
+
+  //   const {
+  //     inEditMode,
+  //   } = this.getEditorContext();
+
+  //   if (inEditMode) {
+
+  //     console.log("updateObject data", data);
+
+
+  //     console.log("updateObject this", { ...this });
+
+  //     return super.updateObject(data);
+
+  //   }
+  //   else {
+  //     this.forceUpdate();
+  //   }
+
+  // }
+
+
+
+
+  addComponent(item) {
+
+
+    const {
+      inEditMode,
+    } = this.getEditorContext();
+
+
+
+    if (inEditMode) {
+      return super.addComponent(item);
+    }
+
+
+    const {
+      name,
+      component,
+    } = item;
+
+    if (!component) {
+      item.component = name;
+    }
+
+    this.addItem(item);
+
+  }
+
+  addItem(item) {
+
+
+    const {
+      objectContext: {
+        updateObject,
+        getObjectWithMutations,
+      },
+    } = this;
+
+
+    const {
+      components,
+    } = getObjectWithMutations() || {};
+
+    updateObject({
+      components: (components || []).concat([item]),
+    });
+
+  }
+
+
+
+  prepareNewItem(item) {
+
+    item = super.prepareNewItem(item);
+
+    if (!item) {
+      return;
+    }
+
+    const {
+      name,
+      component,
+    } = item;
+
+    if (!component) {
+      item.component = name;
+    }
+
+    /**
+     * Пока я не пофиксил багу с обновлением данных дочерних компонентов
+     * первого уровня, все добавляемые в корень компоненты оборачиваем в контейнер
+     */
+    let newItem = {
+      name: "Section",
+      component: "Section",
+      props: {},
+      components: [item],
+    };
+
+    return newItem;
+
+  }
+
+
+  getActiveParent() {
+
+    const {
+      inEditMode,
+    } = this.getEditorContext();
+
+    let parent;
+
+    if (inEditMode) {
+
+      parent = super.getActiveParent();
+
+    }
+    else {
+      parent = this;
+    }
+
+
+    return parent;
+
+  }
+
+
+
+  renderChildren() {
+
+    const {
+      Grid,
+    } = this.context;
+
+    const {
+      Components,
+      inEditMode,
+    } = this.getEditorContext();
+
+    let buttons;
+
+
+
+    const {
+      objectContext: {
+        // getEditor,
+        inEditMode: objectInEditMode,
+        // canEdit,
+        getObjectWithMutations,
+      },
+    } = this;
+
+
+    const {
+      components,
+    } = getObjectWithMutations() || {};
+
+
+    let customComponents;
+
+
+    if (!inEditMode && ((components && components.length) || objectInEditMode)) {
+
+      customComponents = <EditorContext.Consumer>
+        {context => {
+
+          let {
+            activeItem,
+            setActiveItem,
+          } = context;
+
+
+          if (objectInEditMode) {
+
+            activeItem = activeItem || this;
+
+            context = {
+              ...context,
+              inEditMode: true,
+              activeItem,
+              // activeItem: this,
+            };
+
+          }
+
+          return <EditorContext.Provider
+            value={context}
+          >
+
+
+            {components && components.map((n, index) => this.renderComponent(n, index))}
+
+            {!objectInEditMode
+              ? null
+              : activeItem === this ?
+                <Grid
+                  container
+                  spacing={8}
+                >
+                  {Components.map((Component, index) => {
+
+                    const name = Component.Name;
+
+                    return <Component
+                      key={`${name}-${index}`}
+                      mode="add_child"
+                      className={"add_child"}
+                      parent={this}
+                    />
+                  })}
+                </Grid>
+                :
+                <div
+                  style={{
+                    marginTop: 30,
+                  }}
+                >
+                  <Button
+                    onClick={event => {
+                      setActiveItem(this);
+                    }}
+                    size="small"
+                    variant="raised"
+                    color="primary"
+                  >
+                    Восстановить видимость
+                </Button>
+                </div>
+            }
+
+          </EditorContext.Provider>
+        }}
+      </EditorContext.Consumer>
+
+    }
+
+
+    return <Fragment>
+
+      {super.renderChildren()}
+
+      {customComponents}
+
+
+    </Fragment>
+
+  }
+
+}
+
+export default ResourceFields;

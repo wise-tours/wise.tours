@@ -18,6 +18,7 @@ type Resource implements Node {
   name: String!
   longtitle: String
   content: Json
+  components: Json
   contentText: String
   published: Boolean!
   deleted: Boolean!

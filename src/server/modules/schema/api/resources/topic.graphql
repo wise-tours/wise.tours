@@ -1,8 +1,9 @@
 
 input TopicCreateInput {
-  name: String!
+  name: String = null
   longtitle: String
-  content: Json!
+  content: Json
+  components: Json
   published: Boolean
   topic_tags: [String!]
   blogID: ID
@@ -12,6 +13,7 @@ input TopicUpdateInput {
   name: String
   longtitle: String
   content: Json
+  components: Json
   published: Boolean
   # hidemenu: Boolean
   # deleted: Boolean

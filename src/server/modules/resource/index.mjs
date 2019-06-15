@@ -18,7 +18,7 @@ const __dirname = path.dirname(moduleURL.pathname);
 const { fileLoader, mergeTypes } = MergeSchema;
 
 
-export class ModxclubResourceProcessor extends ResourceProcessor {
+export class PrismaCmsResourceProcessor extends ResourceProcessor {
 
 
   async create(method, args, info) {
@@ -499,7 +499,139 @@ export class ModxclubResourceProcessor extends ResourceProcessor {
 }
 
 
-class ModxclubTopicModule extends ResourceModule {
+export class TopicProcessor extends PrismaCmsResourceProcessor {
+
+
+  prepareContent(args, data, method) {
+
+    let {
+      data: {
+        content,
+        components,
+      },
+    } = args;
+
+
+    if (components !== undefined) {
+
+      let resourceBlocks = [];
+      let entityMap = {};
+
+
+
+      // if (components && components.length) {
+
+      //   components.map(n => {
+
+      //     const {
+      //       content,
+      //     } = n.props || {};
+
+      //     const {
+      //       blocks,
+      //     } = content || {};
+
+      //     if (blocks && blocks.length) {
+
+      //       resourceBlocks = resourceBlocks.concat(blocks);
+
+      //     }
+
+      //   });
+
+      // }
+
+      this.reduceBlocks(components, resourceBlocks, entityMap);
+
+
+      let newContent = null;
+
+
+      if (resourceBlocks.length) {
+
+        newContent = {
+          blocks: resourceBlocks,
+          entityMap,
+        }
+
+      }
+
+
+      Object.assign(data, {
+        content: newContent,
+        // contentText,
+      });
+
+      Object.assign(args.data, {
+        ...data,
+      });
+
+    }
+
+
+    data = super.prepareContent(args, data, method);
+
+
+    return data;
+  }
+
+
+  reduceBlocks(components, resourceBlocks, entityMap, textLength = 0) {
+
+    if (components && components.length) {
+
+      // console.log(chalk.green("components"), JSON.stringify(components, true, 2));
+
+
+      components.map(n => {
+
+        const {
+          components: itemComponents,
+          props,
+        } = n || {};
+
+        const {
+          content,
+        } = props || {};
+
+        const {
+          blocks,
+          entityMap: contentEntityMap,
+        } = content || {};
+
+        if (blocks && blocks.length) {
+
+          // resourceBlocks = resourceBlocks.concat(blocks);
+
+          blocks.map(block => {
+
+            const {
+              text,
+            } = block;
+
+            textLength += text ? text.length : 0;
+
+            resourceBlocks.push(block);
+
+          });
+
+        }
+
+        console.log(chalk.green("textLength"), textLength);
+
+        this.reduceBlocks(itemComponents, resourceBlocks, entityMap, textLength);
+
+      });
+
+    }
+
+  }
+
+
+}
+
+
+class TopicModule extends ResourceModule {
 
 
   // constructor() {
@@ -522,10 +654,28 @@ class ModxclubTopicModule extends ResourceModule {
   getApiSchema(types = []) {
 
 
-    return ;
+    return;
 
   }
 
+
+
+  injectWhereUnique(where) {
+
+    let {
+      uri,
+    } = where || {};
+
+    /**
+     * Если указан ури, но не начинается со слеша, то добавляем слеш
+     */
+    if (uri && !uri.startsWith("/")) {
+      where.uri = `/${uri}`;
+    }
+
+    return where;
+
+  }
 
 
   getResolvers() {
@@ -537,10 +687,11 @@ class ModxclubTopicModule extends ResourceModule {
       Mutation: {
         ...Mutation
       },
-      // Query: {
-      //   resource,
-      //   ...Query
-      // },
+      Query: {
+        resource,
+        ...Query
+      },
+      Resource,
       ...other
     } = resolvers;
 
@@ -548,18 +699,28 @@ class ModxclubTopicModule extends ResourceModule {
 
     return {
       ...other,
-      // Query: {
-      //   ...Query,
-      //   resource: async (source, args, ctx, info) => {
+      Query: {
+        ...Query,
+        resource: async (source, args, ctx, info) => {
 
-      //     const result = await resource(source, args, ctx, info);
+          const {
+            modifyArgs,
+          } = ctx;
 
+          const {
+            where,
+          } = args;
 
+          /**
+           * Во фронт-редакторе пока что недоработка с обработкой УРЛов (точнее запросов от роутера,
+           * нельзя задать path: ":uri", можно только path: "/:uri*"),
+           * поэтому приходится добавлять в начало слеш, если не указан.
+           */
+          modifyArgs(where, this.injectWhereUnique, info);
 
-
-      //     return result;
-      //   },
-      // },
+          return resource(source, args, ctx, info);
+        },
+      },
       Mutation: {
         ...Mutation,
         createBlogProcessor: (source, args, ctx, info) => {
@@ -576,7 +737,13 @@ class ModxclubTopicModule extends ResourceModule {
             type: "Topic",
           });
 
-          return this.getProcessor(ctx).createWithResponse("Resource", args, info);
+          // return this.getProcessor(ctx).createWithResponse("Resource", args, info);
+          return new TopicProcessor(ctx).createWithResponse("Resource", args, info);
+        },
+        updateTopicProcessor: (source, args, ctx, info) => {
+
+          // return this.getProcessor(ctx).updateWithResponse("Resource", args, info);
+          return new TopicProcessor(ctx).updateWithResponse("Resource", args, info);
         },
         createCommentProcessor: (source, args, ctx, info) => {
 
@@ -587,10 +754,6 @@ class ModxclubTopicModule extends ResourceModule {
           return this.getProcessor(ctx).createWithResponse("Resource", args, info);
         },
         updateCommentProcessor: (source, args, ctx, info) => {
-
-          return this.getProcessor(ctx).updateWithResponse("Resource", args, info);
-        },
-        updateTopicProcessor: (source, args, ctx, info) => {
 
           return this.getProcessor(ctx).updateWithResponse("Resource", args, info);
         },
@@ -607,16 +770,33 @@ class ModxclubTopicModule extends ResourceModule {
           },
         },
       },
+      Resource: {
+        ...Resource,
+
+        /**
+         * Так как ввели новое поле components, если оно заполнено, 
+         * то поле content не выводим в целях экономии ресурсов
+         */
+        content: (source, args, ctx, info) => {
+
+          const {
+            content,
+            components,
+          } = source || {};
+
+          return components ? null : Resource && Resource.content ? Resource.content(source, args, ctx, info) : content;
+        },
+      },
     };
 
   }
 
 
   getProcessorClass() {
-    return ModxclubResourceProcessor;
+    return PrismaCmsResourceProcessor;
   }
 
 }
 
 
-export default ModxclubTopicModule;
+export default TopicModule;
