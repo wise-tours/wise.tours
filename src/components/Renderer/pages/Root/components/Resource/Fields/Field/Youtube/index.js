@@ -218,30 +218,6 @@ class Youtube extends ResourceField {
           {settings}
         </div>
 
-        return getEditor ? getEditor({
-          key: objectId,
-          ...this.getComponentProps(this),
-          Editor,
-          readOnly,
-          value: content,
-          onChange: value => {
-
-            this.updateComponentProps({
-              content: value,
-            });
-
-            const {
-              components,
-            } = getObjectWithMutations();
-
-
-            updateObject({
-              components,
-            });
-
-          }
-        }) : super.renderChildren();
-
       }}
     </EditableObjectContext.Consumer>
 

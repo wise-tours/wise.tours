@@ -154,15 +154,24 @@ export class PrismaCmsResourceProcessor extends ResourceProcessor {
            */
           if (topicID) {
 
+            let content;
+
             const siteUrl = "https://prisma-cms.com";
+
+            if (contentText) {
+
+              content = `
+              <div>
+                ${contentText.substr(0, 3000)}
+              </div>
+              `;
+            }
 
             let subject = `Новый топик ${topicName}`;
             let message = `<p>
               <a href="${siteUrl}${topicUri}">${topicName}</a>.
             </p>
-              <div>
-                ${contentText.substr(0, 3000)}
-              </div>
+              ${content}
             `;
 
             const usersWhere = {

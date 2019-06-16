@@ -69,6 +69,7 @@ class ResourceContent extends ResourceField {
     } = this.getComponentProps(this);
 
 
+
     return <EditableObjectContext.Consumer>
       {context => {
 
@@ -85,7 +86,6 @@ class ResourceContent extends ResourceField {
         }
 
 
-        const readOnly = !inEditMode;
 
         const object = getObjectWithMutations();
 
@@ -94,23 +94,35 @@ class ResourceContent extends ResourceField {
           return null;
         }
 
-
         const {
+          activeItem,
+        } = this.getEditorContext();
+
+
+        const isActive = activeItem === this;
+
+        const readOnly = !inEditMode || !isActive ? true : false;
+
+        {/* console.log("ResourceContent content", JSON.stringify(content, true, 2));
+        console.log("ResourceContent isActive", isActive); */}
+
+
+        {/* const {
           id: objectId,
-        } = object || {};
+        } = object || {}; */}
 
 
         return getEditor ? getEditor({
-          key: objectId,
           ...this.getComponentProps(this),
           Editor,
           readOnly,
           value: content,
-          onChange: value => {
+          onChange: isActive ? value => {
 
             this.updateComponentProps({
               content: value,
             });
+
 
             {/* const {
               components,
@@ -121,7 +133,7 @@ class ResourceContent extends ResourceField {
               components,
             }); */}
 
-          }
+          } : undefined
         }) : super.renderChildren();
 
       }}
