@@ -15,25 +15,33 @@ import {
   UserNoNestingFragment,
 } from "./schema/generated/api.fragments";
 
-ReactDOM.render(<PrismaCms
-  App={App}
-  apolloOptions={{
-    // endpoint: "https://api.prisma-cms.com",
-    apiQuery: `{
-      user:me{
-        ...UserNoNesting
-        EthAccounts {
-          id
-          address
-          balance(convert:ether)
-        }
-      } 
-    }
-    ${UserNoNestingFragment}
-    `,
-  }}
-  queryFragments={queryFragments}
-/>, document.getElementById('root'));
 
-serviceWorker.register();
+const node = document.getElementById('root');
+
+if (node) {
+
+  ReactDOM.render(<PrismaCms
+    App={App}
+    apolloOptions={{
+      // endpoint: "https://api.prisma-cms.com",
+      apiQuery: `{
+        user:me{
+          ...UserNoNesting
+          EthAccounts {
+            id
+            address
+            balance(convert:ether)
+          }
+        } 
+      }
+      ${UserNoNestingFragment}
+      `,
+    }}
+    queryFragments={queryFragments}
+  />, document.getElementById('root'));
+
+  serviceWorker.register();
+
+}
+
 
