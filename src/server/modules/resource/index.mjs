@@ -637,6 +637,36 @@ export class TopicProcessor extends PrismaCmsResourceProcessor {
   }
 
 
+  async mutate(method, args, info) {
+
+    let {
+      blogID,
+      ...data
+    } = args.data || {};
+
+    let Blog;
+
+    if (blogID) {
+      Blog = {
+        connect: {
+          id: blogID,
+        },
+      }
+    }
+
+
+    Object.assign(data, {
+      Blog,
+    });
+
+
+    Object.assign(args, {
+      data,
+    });
+
+    return super.mutate(method, args, info);
+  }
+
 }
 
 

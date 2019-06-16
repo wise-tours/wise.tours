@@ -67,12 +67,6 @@ type Resource implements Node {
 #   isfolder: Boolean
 # }
 
-# input ResourceUpdateInput {
-#   name: String
-#   longtitle: String
-#   content: Json
-#   published: Boolean
-#   deleted: Boolean
-#   hidemenu: Boolean
-#   searchable: Boolean
-# }
+input ResourceUpdateInput {
+  blogID: ID
+}

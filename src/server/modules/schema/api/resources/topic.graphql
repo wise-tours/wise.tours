@@ -15,6 +15,7 @@ input TopicUpdateInput {
   content: Json
   components: Json
   published: Boolean
+  blogID: ID
   # hidemenu: Boolean
   # deleted: Boolean
   # hidemenu: Boolean
