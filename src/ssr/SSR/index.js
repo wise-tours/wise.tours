@@ -167,6 +167,7 @@ class Server {
       App: MainApp,
       props: {
         queryFragments,
+        rootSelector,
       },
     } = this;
 
@@ -255,7 +256,7 @@ class Server {
 
           $("noscript#react-noscript-notify").remove();
 
-          let root = $("#root");
+          let root = $(rootSelector);
 
 
           let head = $("head");
