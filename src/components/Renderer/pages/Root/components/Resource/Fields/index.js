@@ -76,9 +76,9 @@ export class ResourceFields extends EditorComponent {
 
   updateObject(data) {
 
-    // const {
-    //   inEditMode,
-    // } = this.getEditorContext();
+    const {
+      inEditMode,
+    } = this.getEditorContext();
 
     // if (inEditMode) {
 
@@ -94,33 +94,42 @@ export class ResourceFields extends EditorComponent {
     //   this.forceUpdate();
     // }
 
-    const {
-      objectContext,
-    } = this;
 
-    const {
-      updateObject,
-      getObjectWithMutations,
-    } = objectContext || {};
-
-
-    if (updateObject && getObjectWithMutations) {
-      // console.log("updateObject updateObject", updateObject);
+    if (inEditMode) {
+      return super.updateObject(data);
+    }
+    else {
 
       const {
-        components,
-      } = getObjectWithMutations() || {}
+        objectContext,
+      } = this;
 
-      if (components) {
-        updateObject({
+      const {
+        updateObject,
+        getObjectWithMutations,
+      } = objectContext || {};
+
+
+      if (updateObject && getObjectWithMutations) {
+        // console.log("updateObject updateObject", updateObject);
+
+        const {
           components,
-        });
+        } = getObjectWithMutations() || {}
+
+        if (components) {
+          updateObject({
+            components,
+          });
+        }
+
       }
 
     }
 
 
-    return super.updateObject(data);
+
+    return
 
   }
 

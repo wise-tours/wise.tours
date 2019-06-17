@@ -38,7 +38,7 @@ if (node) {
       `,
     }}
     queryFragments={queryFragments}
-  />, document.getElementById('root'));
+  />, node);
 
   serviceWorker.register();
 
