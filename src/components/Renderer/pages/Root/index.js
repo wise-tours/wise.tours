@@ -7,7 +7,7 @@ import UserPage from './components/pages/Users/User';
 import OldPageHeader from './components/OldPageHeader';
 import OldPages from './components/pages/OldPages';
 import SwitchTemplateLink from './components/Link/SwitchTemplate';
-import PdfView from './components/PdfView';
+// import PdfView from './components/PdfView';
 import CreateUserPage from './components/pages/Users/User/Create';
 import Topic from './components/Resource/Topic';
 import ResourceFields from './components/Resource/Fields';
@@ -23,7 +23,7 @@ export const CustomComponents = [
   OldPages,
   SwitchTemplateLink,
   CreateUserPage,
-  PdfView,
+  // PdfView,
   Topic,
   Comments,
   TopicBlog,
