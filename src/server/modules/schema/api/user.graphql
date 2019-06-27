@@ -48,6 +48,7 @@ type User {
   hasEmail: Boolean!
   hasPhone: Boolean!
   marketplaceToken: String
+  hidden: Boolean
 }
 
 
