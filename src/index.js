@@ -23,7 +23,7 @@ if (node) {
   ReactDOM.render(<PrismaCms
     App={App}
     apolloOptions={{
-      // endpoint: "https://api.prisma-cms.com",
+      // endpoint: "https://api.prisma-cms.com/",
       apiQuery: `{
         user:me{
           ...UserNoNesting
