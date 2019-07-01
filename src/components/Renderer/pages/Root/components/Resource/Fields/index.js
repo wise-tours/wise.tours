@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from "prop-types";
 
 import EditorComponent from '@prisma-cms/front-editor/lib/components/App/components/';
 import EditableObject from '@prisma-cms/front-editor/lib/components/App/components/public/form/EditableObject';
@@ -9,6 +10,42 @@ import OldPageHeader from '../../OldPageHeader';
 import OldPages from '../../pages/OldPages';
 import { Button } from 'material-ui';
 
+
+export class ResourceFieldsProxy extends EditorComponent {
+
+
+  static propTypes = {
+    objectContext: PropTypes.object.isRequired,
+  }
+
+  /**
+   * Обновление данных объекта.
+   * Так как компоненты рендерятся на основании передаваемых свойств,
+   * надо обновить данные абсолютного родителя, а не просто текущего элемента
+   */
+  updateObject(data) {
+
+    // console.log("ResourceFieldsProxy updateObject data", { ...data });
+
+    // const object = this.getObjectWithMutations();
+
+    const {
+      objectContext,
+    } = this.props;
+
+    // console.log("ResourceFieldsProxy updateObject objectContext", { ...objectContext });
+
+    const {
+      updateObject,
+    } = objectContext;
+
+
+
+    return updateObject(data);
+
+  }
+
+}
 
 
 export class ResourceFields extends EditorComponent {
@@ -82,7 +119,7 @@ export class ResourceFields extends EditorComponent {
 
     // if (inEditMode) {
 
-    // console.log("updateObject data", data);
+    console.log("ResourceFields updateObject data", data);
 
 
     //   console.log("updateObject this", { ...this });
@@ -259,14 +296,15 @@ export class ResourceFields extends EditorComponent {
 
 
     const {
-      objectContext: {
-        // getEditor,
-        inEditMode: objectInEditMode,
-        // canEdit,
-        getObjectWithMutations,
-      },
+      objectContext,
     } = this;
 
+    const {
+      // getEditor,
+      inEditMode: objectInEditMode,
+      // canEdit,
+      getObjectWithMutations,
+    } = objectContext;
 
     const {
       components,
@@ -294,7 +332,7 @@ export class ResourceFields extends EditorComponent {
             context = {
               ...context,
               inEditMode: true,
-              activeItem,
+              // activeItem,
               // activeItem: this,
             };
 
@@ -305,7 +343,24 @@ export class ResourceFields extends EditorComponent {
           >
 
 
-            {components && components.map((n, index) => this.renderComponent(n, index))}
+            {/* {components && components.map((n, index) => this.renderComponent(n, index))} */}
+
+            {/* {this.renderComponent({
+              name: "ResourceFieldsProxy",
+              component: "ResourceFieldsProxy",
+              props: {},
+              components,
+            })} */}
+
+            <ResourceFieldsProxy
+              object={{
+                props: {},
+                components,
+              }}
+              parent={this}
+              mode="main"
+              objectContext={objectContext}
+            />
 
             {!objectInEditMode
               ? null

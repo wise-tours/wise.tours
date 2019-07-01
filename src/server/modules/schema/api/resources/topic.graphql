@@ -1,6 +1,6 @@
 
 input TopicCreateInput {
-  name: String = null
+  name: String = ""
   longtitle: String
   content: Json
   components: Json
