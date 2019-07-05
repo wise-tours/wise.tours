@@ -1,3 +1,8 @@
+============================================
+- Upgrade boilerplate
+- Added EthAccount::Project
+- Added EthAccount::Resources
+
 3.4.1
 ============================================
 - Upgrade boilerplate

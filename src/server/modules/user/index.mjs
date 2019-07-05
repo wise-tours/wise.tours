@@ -187,7 +187,7 @@ export class ModxclubUserProcessor extends UserPayload {
         EthAccounts: {
           create: {
             address: ethWallet,
-            type: "Contract",
+            type: "Account",
             chainId,
           },
         },

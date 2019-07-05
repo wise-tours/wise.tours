@@ -3,14 +3,16 @@ import fs from "fs";
 
 import PrismaModule from "@prisma-cms/prisma-module";
 
-import SocietyModule from "@prisma-cms/society-module";
-import EthereumModule from "@prisma-cms/ethereum-module";
 // import ImportModule from "@modxclub/import-old-site";
 
 import LogModule from "@prisma-cms/log-module";
 import MailModule from "@prisma-cms/mail-module";
 import UploadModule from "@prisma-cms/upload-module";
 import RouterModule from "@prisma-cms/router-module";
+import SocietyModule from "@prisma-cms/society-module";
+import EthereumModule, {
+  Modules as EthereumModules,
+} from "@prisma-cms/ethereum-module";
 import WebrtcModule from "@prisma-cms/webrtc-module";
 import MarketplaceModule from "@prisma-cms/marketplace-module";
 // import CooperationModule from "@prisma-cms/cooperation-module";
@@ -63,7 +65,8 @@ class CoreModule extends PrismaModule {
       TestModule,
       UserModule,
       RouterModule,
-    ]);
+      // MarketplaceModule,
+    ].concat(EthereumModules));
 
   }
 
