@@ -194,6 +194,8 @@ class CoreModule extends PrismaModule {
         "EthContractSourceCreateInput",
         "EthContractSourceUpdateInput",
         "EthTransactionCreateInput",
+        "EthAccountCreateInput",
+        "EthAccountUpdateInput",
         "EthTransactionSubscriptionPayload",
       ]);
 
@@ -391,6 +393,9 @@ class CoreModule extends PrismaModule {
       // ethUnlockPersonalAccount,
       createEthTransactionProcessor,
       createEthAccountProcessor,
+      ethSigninOrSignup,
+      ethConnectAuthAccount,
+      ethRecoverPersonalSignature,
 
       createChatRoomProcessor,
       updateChatRoomProcessor,
@@ -442,6 +447,9 @@ class CoreModule extends PrismaModule {
       // ethUnlockPersonalAccount,
       createEthTransactionProcessor,
       createEthAccountProcessor,
+      ethSigninOrSignup,
+      ethConnectAuthAccount,
+      ethRecoverPersonalSignature,
 
       createChatRoomProcessor,
       updateChatRoomProcessor,

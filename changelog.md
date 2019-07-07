@@ -1,7 +1,11 @@
+3.5.0
 ============================================
 - Upgrade boilerplate
 - Added EthAccount::Project
 - Added EthAccount::Resources
+- Added User::ethSigninOrSignup()
+- Added User::ethConnectAuthAccount()
+- Added authorization via metamask
 
 3.4.1
 ============================================
