@@ -67,6 +67,12 @@ export class ModxclubUserProcessor extends UserPayload {
       },
     } = this.ctx;
 
+    const {
+      data: {
+        username,
+      },
+    } = args;
+
     let result;
 
     /**
@@ -172,6 +178,7 @@ export class ModxclubUserProcessor extends UserPayload {
         data: {
           password: await this.createPassword(generatedPassword),
           EthAccountAuthed,
+          username: username ? username : address.substr(2, 5) + address.substr(15, 5),
         },
       });
 
@@ -362,7 +369,7 @@ export class ModxclubUserProcessor extends UserPayload {
           result = this.prepareResponse();
         }
         else {
-          
+
           this.addError("Аккаунт уже используется другим пользователем");
         }
 
