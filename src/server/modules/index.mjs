@@ -390,6 +390,7 @@ class CoreModule extends PrismaModule {
 
       // ethUnlockPersonalAccount,
       createEthTransactionProcessor,
+      createEthAccountProcessor,
 
       createChatRoomProcessor,
       updateChatRoomProcessor,
@@ -440,6 +441,7 @@ class CoreModule extends PrismaModule {
 
       // ethUnlockPersonalAccount,
       createEthTransactionProcessor,
+      createEthAccountProcessor,
 
       createChatRoomProcessor,
       updateChatRoomProcessor,
