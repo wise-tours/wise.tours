@@ -568,7 +568,7 @@ export class ProjectView extends PrismaCmsCooperationProjectView {
           </Typography>
         }
 
-        {object.content}
+        {/* {object.content} */}
 
 
       </CardContent>
