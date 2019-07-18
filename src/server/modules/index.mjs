@@ -65,8 +65,8 @@ class CoreModule extends PrismaModule {
       TestModule,
       UserModule,
       RouterModule,
-      // MarketplaceModule,
-    ].concat(EthereumModules));
+    ]
+      .concat(EthereumModules));
 
   }
 
@@ -160,6 +160,8 @@ class CoreModule extends PrismaModule {
         "PositionUpdateInput",
         "UserCreateManyWithoutPositionsInput",
         "UserUpdateManyWithoutPositionsInput",
+
+        "ServiceCreateInput",
         // Eof Cooperation
 
         "ResourceCreateInput",
