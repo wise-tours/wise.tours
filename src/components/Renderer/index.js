@@ -103,7 +103,7 @@ import TemplatePage from "@prisma-cms/front-editor/lib/components/pages/Template
 
 import RootPage from "./pages/Root";
 
-
+import * as queryFragments from "../../schema/generated/api.fragments";
 
 export const styles = theme => {
 
@@ -811,9 +811,9 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
 
     });
 
-    const {
-      queryFragments,
-    } = this.props;
+    // const {
+    //   queryFragments,
+    // } = this.context;
 
     // console.log("queryFragments", queryFragments);
 
@@ -830,7 +830,7 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
           schema,
         } = context;
 
-        if (!schema) {
+        if (!schema || !queryFragments) {
           return null;
         }
 
