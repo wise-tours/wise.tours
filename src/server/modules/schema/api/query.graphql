@@ -43,24 +43,24 @@ type Query {
   ): UserConnection!
 
 
-  ethAccounts(
-    where: EthAccountWhereInput
-    orderBy: EthAccountOrderByInput
-    skip: Int
-    after: String
-    before: String
-    first: Int = 10
-    last: Int
-  ): [EthAccount!]!
+  # ethAccounts(
+  #   where: EthAccountWhereInput
+  #   orderBy: EthAccountOrderByInput
+  #   skip: Int
+  #   after: String
+  #   before: String
+  #   first: Int = 10
+  #   last: Int
+  # ): [EthAccount!]!
 
-  ethAccountsConnection(
-    where: EthAccountWhereInput
-    orderBy: EthAccountOrderByInput
-    skip: Int
-    after: String
-    before: String
-    first: Int = 10
-    last: Int
-  ): EthAccountConnection!
+  # ethAccountsConnection(
+  #   where: EthAccountWhereInput
+  #   orderBy: EthAccountOrderByInput
+  #   skip: Int
+  #   after: String
+  #   before: String
+  #   first: Int = 10
+  #   last: Int
+  # ): EthAccountConnection!
 
 }
