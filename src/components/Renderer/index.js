@@ -811,48 +811,77 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
 
     });
 
+    const {
+      queryFragments,
+    } = this.props;
 
-    return <ResourceContextProvider>
-      <ResourceSubscriptionProvider>
-        <SocietyContextProvider>
-          <SocietySubscriptionProvider>
-            <EthereumContextProvider>
-              <EthereumSubscriptionProvider>
-                <FrontEditorContextProvider>
-                  <FrontEditorSubscriptionProvider>
-                    <WebrtcContextProvider>
-                      <WebrtcSubscriptionProvider>
-                        <WebRtcChatProvider
-                          connectionProps={{
-                            iceServers,
-                          }}
-                        >
-                          <CooperationContextProvider>
-                            <CooperationSubscriptionProvider>
-                              <ContextProvider>
-                                <Context.Consumer>
-                                  {context => <Context.Provider
-                                    value={Object.assign(context, {
-                                      oldRoutes: this.getRoutes__(),
-                                    })}
-                                  >
-                                    {super.renderWrapper()}
-                                  </Context.Provider>}
-                                </Context.Consumer>
-                              </ContextProvider>
-                            </CooperationSubscriptionProvider>
-                          </CooperationContextProvider>
-                        </WebRtcChatProvider>
-                      </WebrtcSubscriptionProvider>
-                    </WebrtcContextProvider>
-                  </FrontEditorSubscriptionProvider>
-                </FrontEditorContextProvider>
-              </EthereumSubscriptionProvider>
-            </EthereumContextProvider>
-          </SocietySubscriptionProvider>
-        </SocietyContextProvider>
-      </ResourceSubscriptionProvider>
-    </ResourceContextProvider>
+    // console.log("queryFragments", queryFragments);
+
+    // return "sdfdsf";
+
+
+
+
+
+    return <Context.Consumer>
+      {context => {
+
+        const {
+          schema,
+        } = context;
+
+        if (!schema) {
+          return null;
+        }
+
+        return <Context.Provider
+          value={Object.assign(context, {
+            oldRoutes: this.getRoutes__(),
+            queryFragments,
+          })}
+        >
+
+          <ResourceContextProvider>
+            <ResourceSubscriptionProvider>
+              <SocietyContextProvider>
+                <SocietySubscriptionProvider>
+                  <EthereumContextProvider>
+                    <EthereumSubscriptionProvider>
+                      <FrontEditorContextProvider>
+                        <FrontEditorSubscriptionProvider>
+                          <WebrtcContextProvider>
+                            <WebrtcSubscriptionProvider>
+                              <WebRtcChatProvider
+                                connectionProps={{
+                                  iceServers,
+                                }}
+                              >
+                                <CooperationContextProvider>
+                                  <CooperationSubscriptionProvider>
+                                    <ContextProvider>
+                                      {super.renderWrapper()}
+
+
+                                    </ContextProvider>
+                                  </CooperationSubscriptionProvider>
+                                </CooperationContextProvider>
+                              </WebRtcChatProvider>
+                            </WebrtcSubscriptionProvider>
+                          </WebrtcContextProvider>
+                        </FrontEditorSubscriptionProvider>
+                      </FrontEditorContextProvider>
+                    </EthereumSubscriptionProvider>
+                  </EthereumContextProvider>
+                </SocietySubscriptionProvider>
+              </SocietyContextProvider>
+            </ResourceSubscriptionProvider>
+          </ResourceContextProvider>
+
+        </Context.Provider>
+      }}
+    </Context.Consumer>
+
+
 
   }
 
