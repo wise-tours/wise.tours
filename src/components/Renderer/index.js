@@ -815,13 +815,9 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
     //   queryFragments,
     // } = this.context;
 
-    // console.log("queryFragments", queryFragments);
-
-    // return "sdfdsf";
-
-
-
-
+    if(!queryFragments) {
+      return null;
+    }
 
     return <Context.Consumer>
       {context => {

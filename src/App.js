@@ -33,10 +33,4 @@ import "slick-carousel/slick/slick-theme.css";
 
 import App from "./components/App";
 
-import * as queryFragments from "./schema/generated/api.fragments";
-
-export {
-  queryFragments,
-}
-
 export default App;
