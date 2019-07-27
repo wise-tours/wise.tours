@@ -5,13 +5,12 @@ import PropTypes from "prop-types";
 
 
 import { Renderer as PrismaCmsRenderer } from "@prisma-cms/front";
+import GraphqlVoyagerPage from "@prisma-cms/front/lib/components/pages/GraphqlVoyager";
 
 import withStyles from "material-ui/styles/withStyles";
 
 
-import GraphqlVoyagerPage from "@prisma-cms/front/lib/components/pages/GraphqlVoyager";
-
-import MainPage from "../pages/MainPage";
+// import MainPage from "../pages/MainPage";
 // import UsersPage from "@prisma-cms/front/lib/components/pages/UsersPage";
 import UsersPage from "../pages/UsersPage/";
 import UserPage from "./pages/UsersPage/UserPage";
@@ -643,6 +642,11 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
             {...props}
           />
         },
+      },
+      {
+        exact: true,
+        path: "/graphql-voyager",
+        component: GraphqlVoyagerPage,
       },
       {
         exact: false,

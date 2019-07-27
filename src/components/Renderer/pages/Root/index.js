@@ -15,6 +15,8 @@ import ResourceContent, { RichTextCustom } from './components/Resource/Fields/Fi
 import Comments from './components/Resource/Comments';
 import TopicBlog from './components/Resource/Topic/TopicBlog';
 import Youtube from './components/Resource/Fields/Field/Youtube';
+import ChatRooms from './components/pages/ChatRooms';
+import ChatRoom from './components/pages/ChatRooms/ChatRoom';
 
 
 export const CustomComponents = [
@@ -31,6 +33,8 @@ export const CustomComponents = [
   ResourceContent,
   RichTextCustom,
   Youtube,
+  ChatRooms,
+  ChatRoom,
 ];
 
 
