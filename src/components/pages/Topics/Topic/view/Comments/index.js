@@ -25,6 +25,21 @@ class TopicComments extends Component {
     topic: PropTypes.object.isRequired,
   };
 
+
+  constructor(props) {
+
+    super(props);
+
+    this.state = {
+      ...this.state,
+      commentData: {
+        object: {},
+      },
+    };
+
+  }
+
+
   render() {
 
 
@@ -36,6 +51,10 @@ class TopicComments extends Component {
     if (!topic) {
       return null;
     }
+
+    const {
+      commentData,
+    } = this.state;
 
     const {
       id: topicId,
@@ -64,13 +83,12 @@ class TopicComments extends Component {
       {comments}
 
 
-      {topicId
+      {topicId && commentData
         ?
         <NewComment
-          key={comments.length + "__new"}
-          data={{
-            object: {},
-          }}
+          // key={comments.length + "__comment"}
+          cacheKey={`${topicId}_comment_new`}
+          data={commentData}
           _dirty={{
             content: {
               "blocks": [
@@ -86,6 +104,21 @@ class TopicComments extends Component {
               "entityMap": {}
             },
             topicID: topicId,
+          }}
+          onSave={result => {
+
+            console.log("result", result);
+
+            this.setState({
+              commentData: null,
+            }, () => {
+              this.setState({
+                commentData: {
+                  ...commentData,
+                },
+              });
+            });
+
           }}
         />
         :
