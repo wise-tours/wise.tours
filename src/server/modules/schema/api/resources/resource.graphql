@@ -1,14 +1,14 @@
 
-enum ResourceType {
-  Blog
-  Comment
-  PersonalBlog
-  Project
-  Resource
-  Service
-  Team
-  Topic
-}
+# enum ResourceType {
+#   Blog
+#   Comment
+#   PersonalBlog
+#   Project
+#   Resource
+#   Service
+#   Team
+#   Topic
+# }
 
 type Resource implements Node {
   id: ID!

@@ -93,9 +93,9 @@ class CoreModule extends PrismaModule {
     let typesArray = super.getSchema(types);
 
 
-    typesArray = this.cleanupApiSchema(typesArray, [
-      "ResourceType",
-    ]);
+    // typesArray = this.cleanupApiSchema(typesArray, [
+    //   "ResourceType",
+    // ]);
 
 
     let schema = fileLoader(__dirname + '/schema/database/', {

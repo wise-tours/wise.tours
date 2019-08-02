@@ -9,7 +9,7 @@ type Query {
     before: String
     first: Int = 10
     last: Int
-  ): [Resource!]!
+  ): [Resource]!
 
   resourcesConnection(
     where: ResourceWhereInput
@@ -30,7 +30,7 @@ type Query {
     before: String
     first: Int = 10
     last: Int
-  ): [User!]!
+  ): [User]!
 
   usersConnection(
     where: UserWhereInput

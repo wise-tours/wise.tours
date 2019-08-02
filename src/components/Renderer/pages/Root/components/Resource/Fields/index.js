@@ -223,37 +223,37 @@ export class ResourceFields extends EditorComponent {
 
 
 
-  prepareNewItem(item) {
+  // prepareNewItem(item) {
 
-    item = super.prepareNewItem(item);
+  //   item = super.prepareNewItem(item);
 
-    if (!item) {
-      return;
-    }
+  //   if (!item) {
+  //     return;
+  //   }
 
-    const {
-      name,
-      component,
-    } = item;
+  //   const {
+  //     name,
+  //     component,
+  //   } = item;
 
-    if (!component) {
-      item.component = name;
-    }
+  //   if (!component) {
+  //     item.component = name;
+  //   }
 
-    /**
-     * Пока я не пофиксил багу с обновлением данных дочерних компонентов
-     * первого уровня, все добавляемые в корень компоненты оборачиваем в контейнер
-     */
-    let newItem = {
-      name: "Section",
-      component: "Section",
-      props: {},
-      components: [item],
-    };
+  //   /**
+  //    * Пока я не пофиксил багу с обновлением данных дочерних компонентов
+  //    * первого уровня, все добавляемые в корень компоненты оборачиваем в контейнер
+  //    */
+  //   let newItem = {
+  //     name: "Section",
+  //     component: "Section",
+  //     props: {},
+  //     components: [item],
+  //   };
 
-    return newItem;
+  //   return newItem;
 
-  }
+  // }
 
 
   getActiveParent() {
