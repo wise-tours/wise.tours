@@ -1,3 +1,8 @@
+3.6.0-dev
+============================================
+- Added @prisma-cms/mc.js-module
+- Upgrade deps
+
 3.5.1
 ============================================
 - Upgrade boilerplate

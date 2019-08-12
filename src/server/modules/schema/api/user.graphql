@@ -49,6 +49,7 @@ type User {
   hasPhone: Boolean!
   marketplaceToken: String
   hidden: Boolean
+  EthAccountAuthed(where: EthAccountWhereInput): EthAccount
 }
 
 

@@ -1,0 +1,10 @@
+
+input SettingsCreateInput {
+  renderDistance: Int
+  # User: UserCreateOneWithoutSettingsInput!
+}
+
+input SettingsUpdateInput {
+  renderDistance: Int
+  # User: UserUpdateOneWithoutSettingsInput
+}

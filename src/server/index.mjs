@@ -1,6 +1,7 @@
 
-import startServer, {
+import {
   modifyArgs,
+  PrismaCmsServer,
 } from "@prisma-cms/server";
 
 import {
@@ -10,7 +11,9 @@ import CoreModule from "./modules";
 
 import Web3 from "web3";
 
-import URI from "urijs";
+// import URI from "urijs";
+
+import socketIO from '@prisma-cms/mc.js-module/src/modules/external/mc.js/server/src/lib/server/socketIO';
 
 const coreModule = new CoreModule({
 });
@@ -67,18 +70,58 @@ const web3 = new Web3(GethServer);
 // }
 
 
-startServer({
-  typeDefs: 'src/schema/generated/api.graphql',
-  resolvers,
-  MailerProps: {
-    mailSender: "no-reply@prisma-cms.com",
-  },
-  contextOptions: {
-    web3,
-    getProjectFromRequest,
-    modifyArgs,
+// startServer({
+//   typeDefs: 'src/schema/generated/api.graphql',
+//   resolvers,
+//   MailerProps: {
+//     mailSender: "no-reply@prisma-cms.com",
+//   },
+//   contextOptions: {
+//     web3,
+//     getProjectFromRequest,
+//     modifyArgs,
+//     resolvers,
+//   },
+// });
+
+
+class Server extends PrismaCmsServer {
+
+
+  async beforeStart() {
+
+    // console.log("this.db", this.db);
+
+    socketIO(this.db);
+
+    await super.beforeStart();
+
+  }
+
+}
+
+
+
+const startServer = async function () {
+
+  const server = new Server({
+    typeDefs: 'src/schema/generated/api.graphql',
     resolvers,
-  },
-});
+    MailerProps: {
+      mailSender: "no-reply@prisma-cms.com",
+    },
+    contextOptions: {
+      web3,
+      getProjectFromRequest,
+      modifyArgs,
+      resolvers,
+    },
+  });
+
+  await server.startServer();
+
+}
+
+startServer();
 
 

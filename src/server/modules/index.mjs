@@ -19,6 +19,8 @@ import WebrtcModule from "@prisma-cms/webrtc-module";
 import MarketplaceModule from "@prisma-cms/marketplace-module";
 // import CooperationModule from "@prisma-cms/cooperation-module";
 
+import McJSModule from "@prisma-cms/mc.js-module";
+
 import UserModule from "./user";
 import ResourceModule from "./resource";
 import BlogModule from "./blog";
@@ -47,6 +49,7 @@ class CoreModule extends PrismaModule {
     super(options);
 
     this.mergeModules([
+      McJSModule,
       MarketplaceModule,
       // CooperationModule,
       LogModule,
@@ -56,7 +59,7 @@ class CoreModule extends PrismaModule {
       EthereumModule,
       // ImportModule,
       WebrtcModule,
-      
+
       // /**
       //  * Важно кастомные классы в последнюю очередь использовать.
       //  * Но надо будет вообще вывести базовые кслассы в отдельный загрузчик
@@ -208,6 +211,10 @@ class CoreModule extends PrismaModule {
         "EthAccountCreateInput",
         "EthAccountUpdateInput",
         "EthTransactionSubscriptionPayload",
+
+        "PlayerCreateInput",
+        "SettingsCreateInput",
+        "SettingsUpdateInput",
       ]);
 
     }
@@ -427,6 +434,24 @@ class CoreModule extends PrismaModule {
       updateTestProcessor,
       deleteTest,
       deleteManyTests,
+
+      /**
+       * mc.js
+       */
+      login,
+      createSettings,
+      updateSettings,
+      createWorld,
+      createPlayer,
+      updateWorld,
+      updatePlayer,
+      // updateBlock,
+      deleteWorld,
+      runCommand,
+      // requestChunks,
+      /**
+       * Eof mc.js
+       */
     } = Mutation;
 
 
@@ -480,6 +505,23 @@ class CoreModule extends PrismaModule {
       updateTestProcessor,
       deleteTest,
       deleteManyTests,
+      /**
+       * mc.js
+       */
+      login,
+      createSettings,
+      updateSettings,
+      createWorld,
+      createPlayer,
+      updateWorld,
+      updatePlayer,
+      // updateBlock,
+      deleteWorld,
+      runCommand,
+      // requestChunks,
+      /**
+       * Eof mc.js
+       */
       createTemplateProcessor: async (source, args, ctx, info) => {
 
         // console.log("createTemplateProcessor args", args);
