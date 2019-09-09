@@ -104,8 +104,8 @@ export class PrismaCmsResourceProcessor extends ResourceProcessor {
 
           if (!contentText) {
             // this.addFieldError("content", "Не заполнен текст");
-            this.addError("Не заполнен текст");
-            return;
+            // this.addError("Не заполнен текст");
+            // return;
           }
 
           const uri = `/topics/${name}`;
