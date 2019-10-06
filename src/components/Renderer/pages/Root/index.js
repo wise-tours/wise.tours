@@ -18,6 +18,7 @@ import Youtube from './components/Resource/Fields/Field/Youtube';
 import ChatRooms from './components/pages/ChatRooms';
 import ChatRoom from './components/pages/ChatRooms/ChatRoom';
 import JoinUserTechnologyButton from './components/JoinUserTechnologyButton';
+import ViewIcon from './components/ViewIcon';
 
 
 export const CustomComponents = [
@@ -37,6 +38,7 @@ export const CustomComponents = [
   ChatRooms,
   ChatRoom,
   JoinUserTechnologyButton,
+  ViewIcon,
 ];
 
 

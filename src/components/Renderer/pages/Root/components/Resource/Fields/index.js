@@ -117,20 +117,6 @@ export class ResourceFields extends EditorComponent {
       inEditMode,
     } = this.getEditorContext();
 
-    // if (inEditMode) {
-
-    console.log("ResourceFields updateObject data", data);
-
-
-    //   console.log("updateObject this", { ...this });
-
-    //   return super.updateObject(data);
-
-    // }
-    // else {
-    //   this.forceUpdate();
-    // }
-
 
     if (inEditMode) {
       return super.updateObject(data);

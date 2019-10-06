@@ -1,7 +1,9 @@
+3.7.0-dev
 ============================================
 - Added Technology
 - Added UserTechnology
 - Added UserTechnologyStatus
+- Added ViewIcon
 
 3.6.0-dev
 ============================================

@@ -107,8 +107,6 @@ class TopicComments extends Component {
           }}
           onSave={result => {
 
-            console.log("result", result);
-
             this.setState({
               commentData: null,
             }, () => {
