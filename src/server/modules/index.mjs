@@ -27,6 +27,7 @@ import BlogModule from "./blog";
 import CooperationModule from "./cooperation";
 import TestModule from "./test";
 import Technology from "./technologies/Technology";
+import UserTechnology from "./technologies/UserTechnology";
 
 
 import chalk from 'chalk';
@@ -72,6 +73,7 @@ class CoreModule extends PrismaModule {
       UserModule,
       RouterModule,
       Technology,
+      UserTechnology,
     ]
       .concat(
         EthereumModules,
@@ -457,6 +459,8 @@ class CoreModule extends PrismaModule {
 
       createTechnologyProcessor,
       updateTechnologyProcessor,
+      createUserTechnologyProcessor,
+      updateUserTechnologyProcessor,
     } = Mutation;
 
 
@@ -530,6 +534,8 @@ class CoreModule extends PrismaModule {
       
       createTechnologyProcessor,
       updateTechnologyProcessor,
+      createUserTechnologyProcessor,
+      updateUserTechnologyProcessor,
 
       createTemplateProcessor: async (source, args, ctx, info) => {
 

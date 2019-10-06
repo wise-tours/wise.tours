@@ -2,21 +2,21 @@
 
 type Mutation {
  
-  createTechnologyProcessor(
-    data: TechnologyCreateInput!
-  ): TechnologyResponse!
+  createUserTechnologyProcessor(
+    data: UserTechnologyCreateInput!
+  ): UserTechnologyResponse!
 
-  updateTechnologyProcessor(
-    data: TechnologyUpdateInput!
-    where: TechnologyWhereUniqueInput!
-  ): TechnologyResponse!
+  updateUserTechnologyProcessor(
+    data: UserTechnologyUpdateInput!
+    where: UserTechnologyWhereUniqueInput!
+  ): UserTechnologyResponse!
 
 }
 
 
-type TechnologyResponse{
+type UserTechnologyResponse{
   success: Boolean!
   message: String
   errors: [Error!]!
-  data: Technology
+  data: UserTechnology
 }

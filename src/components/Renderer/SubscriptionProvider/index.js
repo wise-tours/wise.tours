@@ -187,6 +187,38 @@ export default class SubscriptionProvider extends Component {
     subscriptions.push(technologySub);
 
 
+
+    const subscribeUserTechnology = gql`
+      subscription userTechnology{
+        userTechnology{
+          mutation
+          node{
+            id
+          }
+        }
+      }
+    `;
+
+    const userTechnologySub = await client
+      .subscribe({
+        query: subscribeUserTechnology,
+        variables: {
+        },
+      })
+      .subscribe({
+        next: async (data) => {
+
+          await this.resetStore();
+
+        },
+        error(error) {
+          console.error('subscribeCalls callback with error: ', error)
+        },
+      });
+
+    subscriptions.push(userTechnologySub);
+
+
     this.setState({
       subscriptions,
     });

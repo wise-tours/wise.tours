@@ -11,4 +11,7 @@ type Technology {
   """Ссылка на официальный сайт"""
   site_url: String
   CreatedBy: User
+
+  """Пользователи, использующие данную технологию"""
+  UserTechnologies: [UserTechnology!]!
 }

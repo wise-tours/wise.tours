@@ -1,0 +1,10 @@
+"""
+  Связка Пользователь-Технология
+"""
+type UserTechnology {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  CreatedBy: User
+  Technology: Technology!
+}
