@@ -1,6 +1,7 @@
 ============================================
 - Added Technology
 - Added UserTechnology
+- Added UserTechnologyStatus
 
 3.6.0-dev
 ============================================

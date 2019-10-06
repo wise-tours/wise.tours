@@ -2,6 +2,7 @@
 import PrismaModule from "@prisma-cms/prisma-module";
 import PrismaProcessor from "@prisma-cms/prisma-processor";
 
+import moment from "moment";
 
 export class UserTechnologyProcessor extends PrismaProcessor {
 
@@ -63,9 +64,22 @@ export class UserTechnologyProcessor extends PrismaProcessor {
 
       let {
         Technology,
+        date_from,
+        date_till,
         ...data
       } = args.data;
 
+
+      const {
+        where,
+      } = args;
+
+
+      const userTechnology_old = where ? await db.query.userTechnology({
+        where,
+      }) : null;
+
+      // console.log("userTechnology_old", userTechnology_old);
 
       if (Technology !== undefined) {
 
@@ -99,8 +113,54 @@ export class UserTechnologyProcessor extends PrismaProcessor {
       }
 
 
+      if (date_from !== undefined || date_till !== undefined) {
+
+        const {
+          date_from: date_from_old = null,
+          date_till: date_till_old = null,
+        } = userTechnology_old || {};
+
+
+        const date_from_value = date_from !== undefined ? date_from : date_from_old;
+        const date_till_value = date_till !== undefined ? date_till : date_till_old;
+
+
+        // console.log("date_from_value", date_from_value);
+        // console.log("date_till_value", date_till_value);
+
+
+        if (date_from && moment(new Date(date_from)) > moment()) {
+
+          this.addFieldError("date_from", "Дата С не может быть больше текущей даты");
+
+        }
+
+
+        if (date_till && moment(new Date(date_till)) > moment()) {
+
+          this.addFieldError("date_till", "Дата До не может быть больше текущей даты");
+
+        }
+
+
+        if (date_from_value && date_till_value && moment(new Date(date_from_value)) > moment(new Date(date_till_value))) {
+
+          this.addFieldError("date_from", "Дата С не может быть больше даты До");
+          this.addFieldError("date_till", "Дата С не может быть больше даты До");
+          
+        }
+        else if (date_till && !date_from_value) {
+          this.addFieldError("date_till", "Не заполнена дата С");
+          this.addFieldError("date_from", "Не заполнена дата С");
+        }
+
+      }
+
+
       Object.assign(data, {
         Technology,
+        date_from,
+        date_till,
       });
 
       args.data = data;

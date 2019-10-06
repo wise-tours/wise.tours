@@ -170,7 +170,7 @@ export class JoinUserTechnologyButton extends EditorComponent {
 
           }}
         >
-          Использовать
+          Использую
         </Button>
       }}
 

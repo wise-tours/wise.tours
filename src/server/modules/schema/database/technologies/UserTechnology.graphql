@@ -7,4 +7,39 @@ type UserTechnology {
   updatedAt: DateTime!
   CreatedBy: User
   Technology: Technology!
+
+  """Описание"""
+  components: Json
+
+  """Используется С"""
+  date_from: DateTime
+
+  """Используется По. Если не заполнено, то по сей день"""
+  date_till: DateTime
+
+  """Статус использования технологии"""
+  status: UserTechnologyStatus
+}
+
+
+enum UserTechnologyStatus {
+
+  """Планирую изучать"""
+  PlanToStudy
+
+  """Отказался изучать"""
+  RefusedToStudy
+
+  """Изучаю"""
+  Study
+
+  """Иногда использую"""
+  RarelyUse
+
+  """Активно использую"""
+  ActiveUse
+
+  """Больше не использую"""
+  NoLongerUse
+
 }

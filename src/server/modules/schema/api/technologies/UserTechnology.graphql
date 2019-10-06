@@ -20,3 +20,27 @@ type TechnologyResponse{
   errors: [Error!]!
   data: Technology
 }
+
+
+
+enum UserTechnologyStatus {
+
+  """Планирую изучать"""
+  PlanToStudy
+
+  """Отказался изучать"""
+  RefusedToStudy
+
+  """Изучаю"""
+  Study
+
+  """Иногда использую"""
+  RarelyUse
+
+  """Активно использую"""
+  ActiveUse
+
+  """Больше не использую"""
+  NoLongerUse
+
+}
