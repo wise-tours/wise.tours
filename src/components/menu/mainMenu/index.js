@@ -70,6 +70,7 @@ export const locales = {
       "Projects": "Проекты",
       "Tasks": "Задачи",
       "Timers": "Таймеры",
+      "Technologies": "Технологии",
     }
   },
 };
@@ -144,12 +145,24 @@ export class MainMenu extends PrismaCmsComponent {
 
             </Grid>
 
+            <Grid
+              item
+            >
+              <Link
+                to="/technologies/"
+              >
+                <Typography>
+                  {this.lexicon("Technologies")}
+                </Typography>
+              </Link>
+
+            </Grid>
 
             <Grid
               item
             >
               <Link
-                to="/topics"
+                to="/topics/"
               >
                 <Typography>
                   {this.lexicon("Topics")}
@@ -162,7 +175,7 @@ export class MainMenu extends PrismaCmsComponent {
               item
             >
               <Link
-                to="/blogs"
+                to="/blogs/"
               >
                 <Typography>
                   {this.lexicon("Blogs")}
@@ -175,7 +188,7 @@ export class MainMenu extends PrismaCmsComponent {
               item
             >
               <Link
-                to="/chat-rooms"
+                to="/chat-rooms/"
               >
                 <Typography
                   component="span"
@@ -190,7 +203,7 @@ export class MainMenu extends PrismaCmsComponent {
               item
             >
               <Link
-                to="/people"
+                to="/people/"
               >
                 <Typography>
                   {this.lexicon("Users")}
@@ -203,7 +216,7 @@ export class MainMenu extends PrismaCmsComponent {
               item
             >
               <Link
-                to="/projects"
+                to="/projects/"
               >
                 <Typography>
                   {this.lexicon("Projects")}
@@ -216,7 +229,7 @@ export class MainMenu extends PrismaCmsComponent {
               item
             >
               <Link
-                to="/tasks?status_in=New&status_in=Accepted&status_in=Progress&status_in=Paused&status_in=RevisionsRequired&status_in=Discuss&status_in=Approved&status_in=Done"
+                to="/tasks/?status_in=New&status_in=Accepted&status_in=Progress&status_in=Paused&status_in=RevisionsRequired&status_in=Discuss&status_in=Approved&status_in=Done"
               >
                 <Typography>
                   {this.lexicon("Tasks")}
@@ -229,7 +242,7 @@ export class MainMenu extends PrismaCmsComponent {
               item
             >
               <Link
-                to="/timers"
+                to="/timers/"
               >
                 <Typography>
                   {this.lexicon("Timers")}
@@ -238,7 +251,7 @@ export class MainMenu extends PrismaCmsComponent {
 
             </Grid>
 
-
+            {/* 
             <Grid
               item
             >
@@ -250,13 +263,13 @@ export class MainMenu extends PrismaCmsComponent {
                 </Typography>
               </Link>
 
-            </Grid>
+            </Grid> */}
 
             <Grid
               item
             >
               <a
-                href="/graphql-voyager"
+                href="/graphql-voyager/"
                 rel="noindex,nofollow"
                 target="_blank"
               >

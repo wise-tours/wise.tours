@@ -1,0 +1,14 @@
+"""
+  Технология. Например, React, Javascript, MODX
+"""
+type Technology {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String
+  description: String
+
+  """Ссылка на официальный сайт"""
+  site_url: String
+  CreatedBy: User
+}

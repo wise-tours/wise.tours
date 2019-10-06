@@ -6,7 +6,7 @@ import RootConnector from '@prisma-cms/front-editor/lib/components/Root';
 import UserPage from './components/pages/Users/User';
 import OldPageHeader from './components/OldPageHeader';
 import OldPages from './components/pages/OldPages';
-import SwitchTemplateLink from './components/Link/SwitchTemplate';
+// import SwitchTemplateLink from './components/Link/SwitchTemplate';
 // import PdfView from './components/PdfView';
 import CreateUserPage from './components/pages/Users/User/Create';
 import Topic from './components/Resource/Topic';
@@ -23,7 +23,7 @@ export const CustomComponents = [
   UserPage,
   OldPageHeader,
   OldPages,
-  SwitchTemplateLink,
+  // SwitchTemplateLink,
   CreateUserPage,
   // PdfView,
   Topic,

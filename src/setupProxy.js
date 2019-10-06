@@ -15,6 +15,10 @@ module.exports = function (app) {
     res.sendFile(`${cwd}/node_modules/@prisma-cms/graphql-voyager/dist/voyager.worker.js`);
   });
 
+  app.get("/graphql-voyager/voyager.worker.js", (req, res, next) => {
+    res.sendFile(`${cwd}/node_modules/@prisma-cms/graphql-voyager/dist/voyager.worker.js`);
+  });
+
   app.use(proxy('/socket.io/', {
     target: 'http://localhost:9001',
     ws: true,

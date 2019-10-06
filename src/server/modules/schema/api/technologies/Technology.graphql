@@ -1,0 +1,22 @@
+
+
+type Mutation {
+ 
+  createTechnologyProcessor(
+    data: TechnologyCreateInput!
+  ): TechnologyResponse!
+
+  updateTechnologyProcessor(
+    data: TechnologyUpdateInput!
+    where: TechnologyWhereUniqueInput!
+  ): TechnologyResponse!
+
+}
+
+
+type TechnologyResponse{
+  success: Boolean!
+  message: String
+  errors: [Error!]!
+  data: Technology
+}

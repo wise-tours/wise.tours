@@ -156,6 +156,35 @@ export default class SubscriptionProvider extends Component {
 
     // subscriptions.push(ethTransactionSub);
 
+    const subscribeTechnology = gql`
+      subscription technology{
+        technology{
+          mutation
+          node{
+            id
+          }
+        }
+      }
+    `;
+
+    const technologySub = await client
+      .subscribe({
+        query: subscribeTechnology,
+        variables: {
+        },
+      })
+      .subscribe({
+        next: async (data) => {
+
+          await this.resetStore();
+
+        },
+        error(error) {
+          console.error('subscribeCalls callback with error: ', error)
+        },
+      });
+
+    subscriptions.push(technologySub);
 
 
     this.setState({
@@ -190,6 +219,24 @@ export default class SubscriptionProvider extends Component {
       resolve();
 
     });
+
+  }
+
+
+  async resetStore() {
+
+    const {
+      client,
+    } = this.props;
+
+    if (!client.queryManager.fetchQueryRejectFns.size) {
+
+      return await client.resetStore()
+        .catch(error => {
+          console.error(error);
+        });
+
+    }
 
   }
 

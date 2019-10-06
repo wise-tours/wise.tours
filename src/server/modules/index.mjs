@@ -26,6 +26,7 @@ import ResourceModule from "./resource";
 import BlogModule from "./blog";
 import CooperationModule from "./cooperation";
 import TestModule from "./test";
+import Technology from "./technologies/Technology";
 
 
 import chalk from 'chalk';
@@ -70,6 +71,7 @@ class CoreModule extends PrismaModule {
       TestModule,
       UserModule,
       RouterModule,
+      Technology,
     ]
       .concat(
         EthereumModules,
@@ -452,6 +454,9 @@ class CoreModule extends PrismaModule {
       /**
        * Eof mc.js
        */
+
+      createTechnologyProcessor,
+      updateTechnologyProcessor,
     } = Mutation;
 
 
@@ -522,6 +527,10 @@ class CoreModule extends PrismaModule {
       /**
        * Eof mc.js
        */
+      
+      createTechnologyProcessor,
+      updateTechnologyProcessor,
+
       createTemplateProcessor: async (source, args, ctx, info) => {
 
         // console.log("createTemplateProcessor args", args);

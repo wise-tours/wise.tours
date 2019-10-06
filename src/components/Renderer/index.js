@@ -608,8 +608,11 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
     let routes = [
       {
         exact: true,
-        path: "/graphql-voyager",
-        component: GraphqlVoyagerPage,
+        path: "/graphql-voyager/",
+        component: props => {
+          // console.log("schema", { ...this.context.schema });
+          return this.context.schema ? <GraphqlVoyagerPage /> : null;
+        },
       },
       {
         exact: true,
@@ -819,7 +822,7 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
     //   queryFragments,
     // } = this.context;
 
-    if(!queryFragments) {
+    if (!queryFragments) {
       return null;
     }
 
