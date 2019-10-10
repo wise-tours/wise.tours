@@ -1,3 +1,6 @@
+============================================
+- Added connect all notificationTypes on signup
+
 3.7.0-dev
 ============================================
 - Added Technology

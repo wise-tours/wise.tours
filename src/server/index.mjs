@@ -25,7 +25,10 @@ const coreModule = new CoreModule({
 const resolvers = coreModule.getResolvers();
 
 
-const GethServer = process.env.GethServer || "http://localhost:8545";
+const {
+  SIGNUP_SET_NOTIFICATIONS,
+  GethServer = "http://localhost:8545",
+} = process.env;
 
 if (!GethServer) {
   throw ("Env GethServer required");
@@ -119,6 +122,7 @@ const startServer = async function () {
       getProjectFromRequest,
       modifyArgs,
       resolvers,
+      SIGNUP_SET_NOTIFICATIONS,
     },
   });
 

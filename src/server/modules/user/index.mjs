@@ -28,8 +28,15 @@ export class ModxclubUserProcessor extends UserPayload {
         username,
         email,
         password,
+        ...data
       },
     } = args;
+
+
+    const {
+      SIGNUP_SET_NOTIFICATIONS,
+      db,
+    } = this.ctx;
 
 
     if (!username) {
@@ -44,6 +51,36 @@ export class ModxclubUserProcessor extends UserPayload {
       this.addFieldError("password", "Не указан пароль");
     }
 
+
+    /**
+     * Connect all notificationTypes
+     */
+    if (SIGNUP_SET_NOTIFICATIONS === "true") {
+
+      await db.query.notificationTypes()
+        .then(notificationTypes => {
+
+          Object.assign(data, {
+            NotificationTypes: {
+              connect: notificationTypes.map(n => ({
+                id: n.id,
+              })),
+            }
+          });
+
+        })
+        .catch(console.error);
+
+    }
+
+
+    Object.assign(data, {
+      username,
+      email,
+      password,
+    });
+
+    args.data = data;
 
     return super.signup(args, info);
   }
