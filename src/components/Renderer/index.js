@@ -14,7 +14,7 @@ import withStyles from "material-ui/styles/withStyles";
 // import UsersPage from "@prisma-cms/front/lib/components/pages/UsersPage";
 import UsersPage from "../pages/UsersPage/";
 import UserPage from "./pages/UsersPage/UserPage";
-import TopicsPage from "../pages/Topics";
+// import TopicsPage from "../pages/Topics";
 import TopicPage from "../pages/Topics/Topic";
 import TopicCreatePage from "../pages/Topics/Topic/Create";
 import TagPage from "../pages/Tags/Tag";
@@ -301,11 +301,11 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
         path: "/add-topic.html",
         component: TopicCreatePage,
       },
-      {
-        exact: true,
-        path: "/topics",
-        component: TopicsPage,
-      },
+      // {
+      //   exact: true,
+      //   path: "/topics",
+      //   component: TopicsPage,
+      // },
       {
         exact: false,
         // path: "(/topics/.+|blog/.+[0-9].html)",

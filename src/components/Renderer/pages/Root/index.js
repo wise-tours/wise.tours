@@ -19,6 +19,7 @@ import ChatRooms from './components/pages/ChatRooms';
 import ChatRoom from './components/pages/ChatRooms/ChatRoom';
 import JoinUserTechnologyButton from './components/JoinUserTechnologyButton';
 import ViewIcon from './components/ViewIcon';
+import TopicsPage from './components/pages/TopicsPage';
 
 
 export const CustomComponents = [
@@ -27,6 +28,7 @@ export const CustomComponents = [
   OldPages,
   // SwitchTemplateLink,
   CreateUserPage,
+  TopicsPage,
   // PdfView,
   Topic,
   Comments,

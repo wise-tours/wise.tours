@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import withStyles from "material-ui/styles/withStyles";
 import Typography from "material-ui/Typography";
-import Grid from "material-ui/Grid";
-import Button from "material-ui/Button";
+// import Grid from "material-ui/Grid";
+// import Button from "material-ui/Button";
 
 import moment from "moment";
 
-import Header from "./header";
+// import Header from "./header";
 
 import {
   styles,
@@ -22,7 +22,7 @@ import {
   TagLink,
 } from "@modxclub/ui";
 
-import PageNotFound from "../../../pages/404";
+// import PageNotFound from "../../../pages/404";
 
 import Filters from "@prisma-cms/filters";
 
@@ -62,7 +62,7 @@ let customStyles = theme => {
 }
 
 
-class ForumView extends TableView {
+export class ForumView extends TableView {
 
 
   static propTypes = {
