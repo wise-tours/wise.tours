@@ -39,15 +39,15 @@ export class ModxclubUserProcessor extends UserPayload {
     } = this.ctx;
 
 
-    if (!username) {
+    if (username !== undefined && !username) {
       this.addFieldError("username", "Не указан логин");
     }
 
-    if (!email) {
+    if (email !== undefined && !email) {
       this.addFieldError("email", "Не указан емейл");
     }
 
-    if (!password) {
+    if (password !== undefined && !password) {
       this.addFieldError("password", "Не указан пароль");
     }
 
@@ -211,7 +211,7 @@ export class ModxclubUserProcessor extends UserPayload {
      */
     if (!result && EthAccountAuthed) {
 
-      result = await super.signup({
+      result = await this.signup({
         data: {
           password: await this.createPassword(generatedPassword),
           EthAccountAuthed,
@@ -639,11 +639,7 @@ export class ModxclubUserProcessor extends UserPayload {
       }, `{
         id
         email,
-        EthAccounts(
-          where: {
-            type: Contract
-          }
-        ){
+        EthAccounts{
           id
           address
         },
@@ -726,7 +722,7 @@ export class ModxclubUserProcessor extends UserPayload {
         EthAccounts: {
           create: {
             address: ethWallet,
-            type: "Contract",
+            type: "Account",
             // chainId,
           },
         },
@@ -970,6 +966,23 @@ class ModxclubUserModule extends UserModule {
       Mutation: {
         ...Mutation,
         signup: async (source, args, ctx, info) => {
+
+          let {
+            data: {
+              username = null,
+              email = null,
+              password = null,
+              ...data
+            },
+          } = args;
+
+
+          Object.assign(args.data, {
+            username,
+            email,
+            password,
+          });
+
 
           const result = await new ModxclubUserProcessor(ctx).signup(args, info);
 

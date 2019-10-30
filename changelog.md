@@ -1,6 +1,7 @@
 ============================================
 - Added connect all notificationTypes on signup
 - Added TopicsPage component
+- Added Career
 
 3.7.0-dev
 ============================================

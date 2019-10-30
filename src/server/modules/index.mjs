@@ -28,6 +28,7 @@ import CooperationModule from "./cooperation";
 import TestModule from "./test";
 import Technology from "./technologies/Technology";
 import UserTechnology from "./technologies/UserTechnology";
+import Career from "./technologies/Career";
 
 
 import chalk from 'chalk';
@@ -74,6 +75,7 @@ class CoreModule extends PrismaModule {
       RouterModule,
       Technology,
       UserTechnology,
+      Career,
     ]
       .concat(
         EthereumModules,
@@ -219,6 +221,8 @@ class CoreModule extends PrismaModule {
         "PlayerCreateInput",
         "SettingsCreateInput",
         "SettingsUpdateInput",
+        "CareerCreateInput",
+        "CareerUpdateInput",
       ]);
 
     }
@@ -461,6 +465,8 @@ class CoreModule extends PrismaModule {
       updateTechnologyProcessor,
       createUserTechnologyProcessor,
       updateUserTechnologyProcessor,
+      createCareerProcessor,
+      updateCareerProcessor,
     } = Mutation;
 
 
@@ -536,6 +542,8 @@ class CoreModule extends PrismaModule {
       updateTechnologyProcessor,
       createUserTechnologyProcessor,
       updateUserTechnologyProcessor,
+      createCareerProcessor,
+      updateCareerProcessor,
 
       createTemplateProcessor: async (source, args, ctx, info) => {
 

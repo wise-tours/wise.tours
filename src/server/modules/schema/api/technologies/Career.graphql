@@ -1,0 +1,44 @@
+
+
+type Mutation {
+ 
+  createCareerProcessor(
+    data: CareerCreateInput!
+  ): CareerResponse!
+
+  updateCareerProcessor(
+    data: CareerUpdateInput!
+    where: CareerWhereUniqueInput!
+  ): CareerResponse!
+
+}
+
+
+type CareerResponse{
+  success: Boolean!
+  message: String
+  errors: [Error!]!
+  data: Career
+}
+
+input CareerCreateInput {
+  name: String
+  description: String
+  # CreatedBy: UserCreateOneWithoutCareerInput
+
+  """
+    Дата начала карьеры
+  """
+  start_date: DateTime
+}
+
+input CareerUpdateInput {
+  name: String
+  description: String
+  # CreatedBy: UserUpdateOneWithoutCareerInput
+
+  """
+    Дата начала карьеры
+  """
+  start_date: DateTime
+}

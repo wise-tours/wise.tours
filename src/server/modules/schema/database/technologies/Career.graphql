@@ -1,0 +1,34 @@
+
+"""
+  Карьера
+"""
+type Career {
+  id: ID! @unique
+
+  """
+    Например, Программист
+  """
+  name: String
+  description: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  """
+    Дата начала карьеры
+  """
+  start_date: DateTime
+
+  """
+    Специалист
+  """
+  CreatedBy: User @relation(name: "CareerUser")
+}
+
+
+type User {
+
+  """
+    Карьера пользователя
+  """
+  Career: Career @relation(name: "CareerUser")
+}

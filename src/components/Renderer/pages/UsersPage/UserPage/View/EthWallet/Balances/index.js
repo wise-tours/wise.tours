@@ -79,7 +79,7 @@ export const locales = {
       "The address will be determined by the private key": "По приватному ключу будет получен адрес",
       "Send data to your email": "Отправить данные на ваш емейл",
       "If you don't know exactly what it is and how it works, you'd better not start it now, but try to get a better idea about this system.":
-        "Если вы не назнаете точно, что это такое и как работает, вам лучше не стоит его заводить сейчас, а попытаться получше узнать о этой системе.",
+        "Если вы не знаете точно, что это такое и как работает, вам лучше не стоит его заводить сейчас, а попытаться получше узнать о этой системе.",
       "We do not store your private keys. The key is needed only to get the address of your wallet and make sure that you have access to it. No key will be shown.":
         "Мы не храним ваши приватные ключи. Ключ нужен только для того, чтобы получить адрес вашего кошелька и убедиться, что у вас есть к нему доступ. Никому ключ не будет показан.",
       "Private key must start with 0x": "Приватный ключ должен начинаться с 0x",

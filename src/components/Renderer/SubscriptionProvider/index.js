@@ -44,13 +44,13 @@ export default class SubscriptionProvider extends Component {
 
     const {
       client,
-      loadApiData,
+      // loadApiData,
     } = this.props;
 
 
-    const {
-      localStorage,
-    } = this.context;
+    // const {
+    //   localStorage,
+    // } = this.context;
 
 
     await this.unsubscribe();
@@ -217,6 +217,38 @@ export default class SubscriptionProvider extends Component {
       });
 
     subscriptions.push(userTechnologySub);
+
+
+
+    const subscribeCareer = gql`
+      subscription career{
+        career{
+          mutation
+          node{
+            id
+          }
+        }
+      }
+    `;
+
+    const careerSub = await client
+      .subscribe({
+        query: subscribeCareer,
+        variables: {
+        },
+      })
+      .subscribe({
+        next: async (data) => {
+
+          await this.resetStore();
+
+        },
+        error(error) {
+          console.error('subscribeCalls callback with error: ', error)
+        },
+      });
+
+    subscriptions.push(careerSub);
 
 
     this.setState({
