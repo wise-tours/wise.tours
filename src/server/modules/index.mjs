@@ -33,15 +33,15 @@ import Career from "./technologies/Career";
 
 import chalk from 'chalk';
 
+import { parse, print } from "graphql";
+
+import URI from "urijs";
 
 import MergeSchema from 'merge-graphql-schemas';
 import path from 'path';
 const moduleURL = new URL(import.meta.url);
 const __dirname = path.dirname(moduleURL.pathname);
 const { fileLoader, mergeTypes } = MergeSchema;
-import { parse, print } from "graphql";
-
-import URI from "urijs";
 
 
 class CoreModule extends PrismaModule {
@@ -347,6 +347,7 @@ class CoreModule extends PrismaModule {
         return resolvers[operationName][field.name.value] ? true : false;
       });
 
+      return null;
     });
 
     apiSchema = print(parsed);
@@ -356,6 +357,22 @@ class CoreModule extends PrismaModule {
 
   }
 
+
+  renderApiSchema() {
+
+    let schemaFile = "src/schema/generated/api.graphql";
+
+    let baseSchema = "";
+
+    if (fs.existsSync(schemaFile)) {
+      baseSchema = fs.readFileSync(schemaFile, "utf-8");
+    }
+    // else {
+    //   console.log("file not exists");
+    // }
+
+    return baseSchema;
+  }
 
 
   getResolvers() {
@@ -404,7 +421,7 @@ class CoreModule extends PrismaModule {
       updateCommentProcessor,
       singleUpload,
       multipleUpload,
-      startImportProcessor,
+      // startImportProcessor,
       createResetPasswordProcessor,
       resetPasswordProcessor,
       createProjectProcessor,
@@ -735,19 +752,10 @@ class CoreModule extends PrismaModule {
 
     return {
       ...other,
-      Query,
-      // Query: {
-      //   ...Query,
-      //   resource: async (source, args, ctx, info) => {
-
-      //     const result = await resource(source, args, ctx, info);
-
-
-
-
-      //     return result;
-      //   },
-      // },
+      Query: {
+        ...Query,
+        apiSchema: this.renderApiSchema,
+      },
       Mutation: AllowedMutations,
       Log: {
         stack: () => null,

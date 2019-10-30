@@ -51,7 +51,7 @@ class Server {
 
     const {
       App,
-      ...other
+      // ...other
     } = props;
 
     this.App = App || MainApp;
@@ -141,9 +141,9 @@ class Server {
 
     // this.timeLog();
 
-    const {
-      page,
-    } = uri.query(true);
+    // const {
+    //   page,
+    // } = uri.query(true);
 
 
     const urlPath = uri.path();
@@ -226,16 +226,16 @@ class Server {
     const uri = new URI(`${protocol}//${hostname}${req.url}`);
 
 
-    let assetsUrl;
+    // let assetsUrl;
 
-    let js_src;
-    let css_src;
+    // let js_src;
+    // let css_src;
 
-    let inline_styles;
+    // let inline_styles;
 
-    let basePath = process.cwd() + "/";
+    // let basePath = process.cwd() + "/";
 
-    let buildPath = basePath + "build/";
+    // let buildPath = basePath + "build/";
 
 
 
@@ -244,6 +244,7 @@ class Server {
       props: {
         queryFragments,
         rootSelector,
+        apolloCaches,
       },
     } = this;
 
@@ -395,7 +396,7 @@ class Server {
 
 
           let head = $("head");
-          let body = $("body");
+          // let body = $("body");
 
           if (title) {
             head.find("title").html(title);
@@ -443,7 +444,7 @@ class Server {
           }
 
 
-          this.timeLog( "start add styles");
+          this.timeLog("start add styles");
 
           head.append(`<style
             id="server-side-jss"
@@ -451,7 +452,7 @@ class Server {
             ${sheets.toString()}
           </style>`);
 
-          this.timeLog( "end add styles");
+          this.timeLog("end add styles");
 
           // <script dangerouslySetInnerHTML={{
           //   __html: `window.__APOLLO_STATE__=${JSON.stringify(state).replace(/</g, '\\u003c')};`,
@@ -464,12 +465,32 @@ class Server {
           // </script>`);
 
 
-          let apolloState;
+          // let apolloState;
 
           if (state) {
-            apolloState = `<script type="text/javascript">
-            ${`window.__APOLLO_STATE__=${JSON.stringify(state).replace(/</g, '\\u003c')};`}
-            </script>`;
+
+            // apolloState = `<script type="text/javascript">
+            // ${`window.__APOLLO_STATE__=${JSON.stringify(state).replace(/</g, '\\u003c')};`}
+            // </script>`;
+
+
+
+
+            const apolloStateId = new Date().getTime() * Math.random();
+
+            // console.log("apolloStateId", apolloStateId);
+
+            root.after(`<script type="text/javascript">
+              ${`window.__APOLLO_STATE_ID__=${apolloStateId};`}
+            </script>`);
+
+            apolloCaches[apolloStateId] = state;
+
+
+            setTimeout(() => {
+              delete apolloCaches[apolloStateId]
+            }, 60 * 5 * 1000);
+
           }
 
 
@@ -504,7 +525,8 @@ class Server {
 
           // result = result.replace(`<body><div id="root"></div>`, `<body><div id="root">${content}</div>`);
           // result = result.replace(`<body><div id="root"></div>`, `<body><div id="root">${content}</div>${apiSchema}`);
-          result = result.replace(`<div id="root"></div>`, `<div id="root">${content || ""}</div>${apolloState || ""}${apiSchema || ""}`);
+          // result = result.replace(`<div id="root"></div>`, `<div id="root">${content || ""}</div>${apolloState || ""}${apiSchema || ""}`);
+          result = result.replace(`<div id="root"></div>`, `<div id="root">${content || ""}</div>`);
           // result = result.replace(`<div id="root"></div>`, `<div id="root">${"content" || ""}</div>${apolloState || ""}${apiSchema || ""}`);
           // result = result.replace(`<div id="root"></div>`, `<div id="root">${content || ""}</div>${"apolloState" || ""}${apiSchema || ""}`);
           // result = result.replace(`<div id="root"></div>`, `<div id="root">${content || ""}</div>${"apolloState" || ""}`);
@@ -533,65 +555,6 @@ class Server {
           // );
 
 
-          const response___ = (
-            <html>
-              <head>
-                <title>{title || "Prisma-CMS"}</title>
-
-                <base href="/" />
-
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="description" content={description || ""} />
-                <meta name="language" content="Russian" />
-                <meta http-equiv="content-language" content="ru" />
-
-                <link rel="shortcut icon" href="/favicon.ico" />
-
-                {canonical ? <link rel="canonical" href={canonical} /> : ""}
-
-                {css_src ? <link
-                  type="text/css"
-                  rel="stylesheet"
-                  href={css_src}
-                /> : null}
-
-                <style
-                  id="server-side-jss"
-                  key="server-side-jss"
-                  type="text/css"
-                  dangerouslySetInnerHTML={{ __html: sheets.toString() }}
-                />
-
-
-              </head>
-
-              <body>
-                <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
-                <script dangerouslySetInnerHTML={{
-                  __html: `window.__APOLLO_STATE__=${JSON.stringify(state).replace(/</g, '\\u003c')};`,
-                }} />
-
-                <script dangerouslySetInnerHTML={{
-                  __html: `
-                    setTimeout(() => {
-                      var script = document.createElement('script');
-
-                      script.setAttribute('src', '${js_src}');
-
-                      document.head.appendChild(script);
-
-
-                    }, 1000);
-                    `,
-                }} />
-
-              </body>
-            </html>
-          );
-
-
-
-          return response;
         }
 
 
@@ -669,7 +632,7 @@ class Server {
       case "main":
 
         return this.renderMainSitemap(req, res, uri);
-        break;
+        // break;
 
       default:
         return this.renderRootSitemap(req, res, uri);

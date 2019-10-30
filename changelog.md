@@ -2,6 +2,11 @@
 - Added connect all notificationTypes on signup
 - Added TopicsPage component
 - Added Career
+- Upgrade @prisma-cms/front
+- Fix SSR
+- Added public filder "shared"
+- Added apiSchema async loader
+- Added apollo state async loader
 
 3.7.0-dev
 ============================================
