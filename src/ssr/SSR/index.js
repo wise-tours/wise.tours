@@ -25,6 +25,7 @@ import URI from 'urijs';
 
 import cheerio from "cheerio";
 
+
 var XMLWriter = require('xml-writer');
 
 const { Prisma } = require('prisma-binding')
@@ -598,6 +599,7 @@ class Server {
           if (errors && errors.length) {
             errors.map(error => {
               console.error(chalk.red("Server networkError.errors error"), error);
+              return null;
             });
           }
 
@@ -632,7 +634,7 @@ class Server {
       case "main":
 
         return this.renderMainSitemap(req, res, uri);
-        // break;
+      // break;
 
       default:
         return this.renderRootSitemap(req, res, uri);
