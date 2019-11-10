@@ -1,0 +1,11 @@
+
+"""
+  Урок по технологии
+"""
+type TechnologyLesson{
+  Comments: [Comment!]! @relation(name: "TechnologyLessonComments")
+}
+
+type Comment {
+  TechnologyLesson: TechnologyLesson @relation(name: "TechnologyLessonComments")
+}

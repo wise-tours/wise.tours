@@ -10,6 +10,7 @@ import OldPages from './components/pages/OldPages';
 // import PdfView from './components/PdfView';
 import CreateUserPage from './components/pages/Users/User/Create';
 import Topic from './components/Resource/Topic';
+import Resource from './components/Resource';
 import ResourceFields from './components/Resource/Fields';
 import ResourceContent, { RichTextCustom } from './components/Resource/Fields/Field/ResourceContent';
 import Comments from './components/Resource/Comments';
@@ -20,6 +21,7 @@ import ChatRoom from './components/pages/ChatRooms/ChatRoom';
 import JoinUserTechnologyButton from './components/JoinUserTechnologyButton';
 import ViewIcon from './components/ViewIcon';
 import TopicsPage from './components/pages/TopicsPage';
+import AcceptTechnologyLesson from './components/society/technologies/AcceptTechnologyLesson';
 
 
 export const CustomComponents = [
@@ -33,6 +35,7 @@ export const CustomComponents = [
   Topic,
   Comments,
   TopicBlog,
+  Resource,
   ResourceFields,
   ResourceContent,
   RichTextCustom,
@@ -41,6 +44,7 @@ export const CustomComponents = [
   ChatRoom,
   JoinUserTechnologyButton,
   ViewIcon,
+  AcceptTechnologyLesson,
 ];
 
 

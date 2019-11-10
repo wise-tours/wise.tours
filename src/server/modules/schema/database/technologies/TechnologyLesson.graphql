@@ -1,0 +1,16 @@
+
+"""
+  Урок по технологии
+"""
+type TechnologyLesson{
+  id: ID! @unique
+  name: String
+
+  """
+    Описание
+  """
+  components: Json
+  Technology: Technology
+  CreatedBy: User
+  Users: [TechnologyLessonUser!]!
+}

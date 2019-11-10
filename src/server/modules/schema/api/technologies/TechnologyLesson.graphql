@@ -1,0 +1,22 @@
+
+
+type Mutation {
+ 
+  createTechnologyLessonProcessor(
+    data: TechnologyLessonCreateInput!
+  ): TechnologyLessonResponse!
+
+  updateTechnologyLessonProcessor(
+    data: TechnologyLessonUpdateInput!
+    where: TechnologyLessonWhereUniqueInput!
+  ): TechnologyLessonResponse!
+
+}
+
+
+type TechnologyLessonResponse{
+  success: Boolean!
+  message: String
+  errors: [Error!]!
+  data: TechnologyLesson
+}

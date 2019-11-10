@@ -1,3 +1,4 @@
+3.8.0-dev
 ============================================
 - Added connect all notificationTypes on signup
 - Added TopicsPage component
@@ -7,6 +8,8 @@
 - Added public filder "shared"
 - Added apiSchema async loader
 - Added apollo state async loader
+- Added Technologies
+- Added Comments
 
 3.7.0-dev
 ============================================

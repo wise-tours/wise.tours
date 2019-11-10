@@ -11,7 +11,7 @@ export class Resource extends EditorComponent {
 
   static defaultProps = {
     ...EditorComponent.defaultProps,
-
+    hide_wrapper_in_default_mode: true,
   }
 
   renderPanelView(content) {
@@ -39,7 +39,7 @@ export class Resource extends EditorComponent {
 
   canBeParent(parent) {
 
-    return parent instanceof EditableObject && super.canBeParent(parent);
+    return super.canBeParent(parent) && this.findInParent(parent, parent => parent instanceof EditableObject);
   }
 
 

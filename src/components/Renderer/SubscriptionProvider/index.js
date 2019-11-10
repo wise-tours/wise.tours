@@ -249,6 +249,37 @@ export default class SubscriptionProvider extends Component {
       });
 
     subscriptions.push(careerSub);
+    
+
+    const subscribeTechnologyLessonUser = gql`
+      subscription technologyLessonUser{
+        technologyLessonUser{
+          mutation
+          node{
+            id
+          }
+        }
+      }
+    `;
+
+    const technologyLessonUserSub = await client
+      .subscribe({
+        query: subscribeTechnologyLessonUser,
+        variables: {
+        },
+      })
+      .subscribe({
+        next: async (data) => {
+
+          await this.resetStore();
+
+        },
+        error(error) {
+          console.error('subscribeCalls callback with error: ', error)
+        },
+      });
+
+    subscriptions.push(technologyLessonUserSub);
 
 
     this.setState({

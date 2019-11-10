@@ -28,7 +28,10 @@ import CooperationModule from "./cooperation";
 import TestModule from "./test";
 import Technology from "./technologies/Technology";
 import UserTechnology from "./technologies/UserTechnology";
+import TechnologyLesson from "./technologies/TechnologyLesson";
 import Career from "./technologies/Career";
+import TechnologyLessonUser from "./technologies/TechnologyLessonUser";
+import Comment from "./Comment";
 
 
 import chalk from 'chalk';
@@ -74,8 +77,16 @@ class CoreModule extends PrismaModule {
       UserModule,
       RouterModule,
       Technology,
+      TechnologyLesson,
       UserTechnology,
+      TechnologyLessonUser,
       Career,
+
+      /**
+       * Конфликтный объект, потому что используются уже ресурсы-комментарии
+       * и инпуты CommentCreateInput и CommentUpdateInput
+       */
+      Comment,
     ]
       .concat(
         EthereumModules,
@@ -223,6 +234,9 @@ class CoreModule extends PrismaModule {
         "SettingsUpdateInput",
         "CareerCreateInput",
         "CareerUpdateInput",
+
+        "CommentCreateInput",
+        "CommentUpdateInput",
       ]);
 
     }
@@ -484,6 +498,13 @@ class CoreModule extends PrismaModule {
       updateUserTechnologyProcessor,
       createCareerProcessor,
       updateCareerProcessor,
+      createTechnologyLessonProcessor,
+      updateTechnologyLessonProcessor,
+
+      createTechnologyLessonCommentProcessor,
+      updateTechnologyLessonCommentProcessor,
+      createTechnologyLessonUserProcessor,
+      updateTechnologyLessonUserProcessor,
     } = Mutation;
 
 
@@ -561,6 +582,13 @@ class CoreModule extends PrismaModule {
       updateUserTechnologyProcessor,
       createCareerProcessor,
       updateCareerProcessor,
+      createTechnologyLessonProcessor,
+      updateTechnologyLessonProcessor,
+
+      createTechnologyLessonCommentProcessor,
+      updateTechnologyLessonCommentProcessor,
+      createTechnologyLessonUserProcessor,
+      updateTechnologyLessonUserProcessor,
 
       createTemplateProcessor: async (source, args, ctx, info) => {
 

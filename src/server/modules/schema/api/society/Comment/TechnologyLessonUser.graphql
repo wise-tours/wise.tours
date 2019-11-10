@@ -1,0 +1,20 @@
+type Mutation {
+ 
+  createTechnologyLessonUserProcessor(
+    data: TechnologyLessonUserCreateInput!
+  ): TechnologyLessonUserResponse!
+
+  updateTechnologyLessonUserProcessor(
+    data: TechnologyLessonUserUpdateInput!
+    where: TechnologyLessonUserWhereUniqueInput!
+  ): TechnologyLessonUserResponse!
+
+}
+
+
+type TechnologyLessonUserResponse{
+  success: Boolean!
+  message: String
+  errors: [Error!]!
+  data: TechnologyLessonUser
+}

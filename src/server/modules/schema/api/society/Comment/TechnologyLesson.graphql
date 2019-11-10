@@ -1,0 +1,36 @@
+
+
+type Mutation {
+ 
+  createTechnologyLessonCommentProcessor(
+    data: TechnologyLessonCommentCreateInput!
+  ): CommentResponse!
+
+  updateTechnologyLessonCommentProcessor(
+    data: TechnologyLessonCommentUpdateInput!
+    where: TechnologyLessonWhereUniqueInput!
+  ): CommentResponse!
+
+}
+
+
+type CommentResponse{
+  success: Boolean!
+  message: String
+  errors: [Error!]!
+  data: Comment
+}
+
+
+input TechnologyLessonCommentCreateInput {
+  components: Json
+  # CreatedBy: UserCreateOneInput
+  TechnologyLesson: TechnologyLessonCreateOneWithoutCommentsInput
+}
+
+
+input TechnologyLessonCommentUpdateInput {
+  components: Json
+  # CreatedBy: UserUpdateOneInput
+  # TechnologyLesson: TechnologyLessonUpdateOneWithoutCommentsInput
+}

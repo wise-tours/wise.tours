@@ -1,0 +1,16 @@
+
+"""
+  Кто выполняет урок
+"""
+type TechnologyLessonUser{
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  Lesson: TechnologyLesson!
+  CreatedBy: User
+  status: TechnologyLessonUserStatus @default(value: Accepted)
+}
+
+enum TechnologyLessonUserStatus {
+  Accepted
+}
