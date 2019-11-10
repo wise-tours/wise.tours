@@ -1,8 +1,4 @@
 
-import dotenv from "dotenv";
-
-dotenv.config();
-
 import {
   modifyArgs,
   PrismaCmsServer,
@@ -19,6 +15,13 @@ import Web3 from "web3";
 
 import socketIO from '@prisma-cms/mc.js-module/src/modules/external/mc.js/server/src/lib/server/socketIO';
 
+import dotenv from "dotenv";
+
+import * as helpers from "./helpers";
+
+dotenv.config();
+
+
 const coreModule = new CoreModule({
 });
 
@@ -31,7 +34,7 @@ const {
 } = process.env;
 
 if (!GethServer) {
-  throw ("Env GethServer required");
+  throw new Error("Env GethServer required");
 }
 
 const web3 = new Web3(GethServer);
@@ -118,6 +121,7 @@ const startServer = async function () {
       mailSender: "no-reply@prisma-cms.com",
     },
     contextOptions: {
+      ...helpers,
       web3,
       getProjectFromRequest,
       modifyArgs,

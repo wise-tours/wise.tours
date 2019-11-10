@@ -1,7 +1,7 @@
 
 import PrismaModule from "@prisma-cms/prisma-module";
 import PrismaProcessor from "@prisma-cms/prisma-processor";
-import chalk from "chalk";
+// import chalk from "chalk";
 
 
 export class CommentProcessor extends PrismaProcessor {
@@ -131,6 +131,12 @@ export class CommentProcessor extends PrismaProcessor {
 
 
   reduceComponents(components, text = "") {
+
+    return this.ctx.reduceContentComponents(components, text);
+  }
+  
+
+  reduceComponents__(components, text = "") {
 
     // let text = "";
 
