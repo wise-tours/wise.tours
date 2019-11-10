@@ -156,6 +156,37 @@ export default class SubscriptionProvider extends Component {
 
     // subscriptions.push(ethTransactionSub);
 
+    const subscribeComment = gql`
+      subscription comment{
+        comment{
+          mutation
+          node{
+            id
+          }
+        }
+      }
+    `;
+
+    const commentSub = await client
+      .subscribe({
+        query: subscribeComment,
+        variables: {
+        },
+      })
+      .subscribe({
+        next: async (data) => {
+
+          await this.resetStore();
+
+        },
+        error(error) {
+          console.error('subscribeCalls callback with error: ', error)
+        },
+      });
+
+    subscriptions.push(commentSub);
+
+
     const subscribeTechnology = gql`
       subscription technology{
         technology{
@@ -249,6 +280,37 @@ export default class SubscriptionProvider extends Component {
       });
 
     subscriptions.push(careerSub);
+
+
+    const subscribeTechnologyLesson = gql`
+      subscription technologyLesson{
+        technologyLesson{
+          mutation
+          node{
+            id
+          }
+        }
+      }
+    `;
+
+    const technologyLessonSub = await client
+      .subscribe({
+        query: subscribeTechnologyLesson,
+        variables: {
+        },
+      })
+      .subscribe({
+        next: async (data) => {
+
+          await this.resetStore();
+
+        },
+        error(error) {
+          console.error('subscribeCalls callback with error: ', error)
+        },
+      });
+
+    subscriptions.push(technologyLessonSub);
     
 
     const subscribeTechnologyLessonUser = gql`
