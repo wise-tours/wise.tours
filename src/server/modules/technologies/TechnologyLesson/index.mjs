@@ -64,6 +64,12 @@ export class TechnologyLessonProcessor extends PrismaProcessor {
 
       let {
         name,
+        components,
+
+        /**
+         * Этот параметр не должен передаваться
+         */
+        contentText,
         ...data
       } = args.data;
 
@@ -77,8 +83,22 @@ export class TechnologyLessonProcessor extends PrismaProcessor {
       }
 
 
+      if (components !== undefined) {
+
+        const contentText = this.reduceComponents(components, "");
+
+        // console.log("contentText", contentText);
+
+        Object.assign(data, {
+          contentText: contentText ? contentText : null,
+        });
+
+      }
+
+
       Object.assign(data, {
         name,
+        components,
       });
 
       args.data = data;
@@ -93,6 +113,12 @@ export class TechnologyLessonProcessor extends PrismaProcessor {
   async delete(method, args, info) {
 
     return super.delete(method, args);
+  }
+
+
+  reduceComponents(components, text = "") {
+
+    return this.ctx.reduceContentComponents(components, text);
   }
 }
 

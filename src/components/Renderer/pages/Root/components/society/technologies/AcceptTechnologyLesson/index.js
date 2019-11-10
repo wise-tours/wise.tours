@@ -119,6 +119,7 @@ export class AcceptTechnologyLesson extends EditorComponent {
         const {
           id: lessonId,
           Users,
+          CreatedBy,
           __typename,
         } = object || {};
 
@@ -127,22 +128,47 @@ export class AcceptTechnologyLesson extends EditorComponent {
           return null;
         }
 
+        let output = null;
+        let userLesson = null;
 
-        if (__typename !== "TechnologyLesson") {
+        /**
+          Поиск в списке пользователей урока
+         */
+        if (__typename === "TechnologyLesson") {
 
-          console.error("__typename !== TechnologyLesson");
+          userLesson = currentUserId && Users ? Users.find(n => n && n.CreatedBy && n.CreatedBy.id === currentUserId) : null;
+        }
+
+        /**
+        В конкретной связке Урок-Пользователь
+         */
+        else if (__typename === "TechnologyLessonUser") {
+
+          userLesson = currentUserId && CreatedBy && CreatedBy.id === currentUserId ? object : null;
+
+          /**
+            Если эта связка не принадлежит текущему пользователю, то возвращаем пусто
+           */
+          if (!userLesson) {
+
+            return null;
+          }
+        }
+
+        else {
 
           return null;
         }
 
 
-        const accepted = currentUserId && Users && Users.findIndex(n => n && n.CreatedBy && n.CreatedBy.id === currentUserId) !== -1 ? true : false;
+
+
+        // console.log("userLesson", userLesson);
 
         // return children;
 
-        let output = null;
 
-        if (!accepted) {
+        if (!userLesson) {
 
           output = <Button
             variant="raised"
@@ -164,8 +190,75 @@ export class AcceptTechnologyLesson extends EditorComponent {
               });
             }}
           >
-            Принять
+            Принять урок
           </Button>
+
+        }
+        else {
+
+          const {
+            id: userLessonId,
+            status,
+          } = userLesson;
+
+          const mutation = gql(`
+            mutation updateTechnologyLessonUserProcessor (
+              $data: TechnologyLessonUserUpdateInput!
+              $where: TechnologyLessonUserWhereUniqueInput!
+            ){
+              response: updateTechnologyLessonUserProcessor (
+                data: $data
+                where: $where
+              ){
+                success
+                message
+                errors{
+                  key
+                  message
+                }
+                data{
+                  id
+                  status
+                }
+              }
+            }
+            `);
+
+          switch (status) {
+
+            case "Accepted":
+
+              output = <Button
+                variant="raised"
+                size="small"
+                color="primary"
+                disabled={loading ? true : false}
+                onClick={event => {
+
+                  this.mutate({
+                    mutation,
+                    variables: {
+                      data: {
+                        status: "Completed",
+                      },
+                      where: {
+                        id: userLessonId,
+                      },
+                    },
+                  });
+                }}
+              >
+                Завершить
+              </Button>
+              break;
+
+            case "Completed":
+
+              break;
+
+            default: ;
+          }
+
 
         }
 

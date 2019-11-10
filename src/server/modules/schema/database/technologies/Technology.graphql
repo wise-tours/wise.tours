@@ -6,7 +6,14 @@ type Technology {
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String
-  description: String
+
+  """
+    Описание
+  """
+  components: Json
+
+  """Текстовое содержимое сообщения"""
+  contentText: String
 
   """Ссылка на официальный сайт"""
   site_url: String

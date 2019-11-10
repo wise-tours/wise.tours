@@ -1,5 +1,7 @@
+3.8.1
 ============================================
 - Added helper reduceContentComponents
+- Added TechnologyLessonUser
 
 3.8.0-dev
 ============================================

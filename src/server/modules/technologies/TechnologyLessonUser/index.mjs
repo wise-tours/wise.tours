@@ -104,8 +104,38 @@ export class TechnologyLessonUserProcessor extends PrismaProcessor {
     if (args.data) {
 
       let {
+        status,
+
+        /**
+         * Сбрасываем
+         */
+        completedAt,
+
         ...data
       } = args.data;
+
+
+      if (status) {
+
+        switch (status) {
+
+          case "Completed":
+
+            Object.assign(data, {
+              completedAt: new Date(),
+            });
+            break;
+
+          default: ;
+
+        }
+
+      }
+
+
+      Object.assign(data, {
+        status,
+      });
 
       args.data = data;
 

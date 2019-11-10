@@ -22,6 +22,7 @@ import JoinUserTechnologyButton from './components/JoinUserTechnologyButton';
 import ViewIcon from './components/ViewIcon';
 import TopicsPage from './components/pages/TopicsPage';
 import AcceptTechnologyLesson from './components/society/technologies/AcceptTechnologyLesson';
+import TechnologyLessonUser from './components/society/technologies/TechnologyLessonUser';
 
 
 export const CustomComponents = [
@@ -45,6 +46,7 @@ export const CustomComponents = [
   JoinUserTechnologyButton,
   ViewIcon,
   AcceptTechnologyLesson,
+  TechnologyLessonUser,
 ];
 
 

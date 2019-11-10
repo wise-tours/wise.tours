@@ -10,6 +10,10 @@ type TechnologyLesson{
     Описание
   """
   components: Json
+
+  """Текстовое содержимое сообщения"""
+  contentText: String
+  
   Technology: Technology
   CreatedBy: User
   Users: [TechnologyLessonUser!]!

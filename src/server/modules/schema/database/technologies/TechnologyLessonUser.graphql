@@ -9,8 +9,19 @@ type TechnologyLessonUser{
   Lesson: TechnologyLesson!
   CreatedBy: User
   status: TechnologyLessonUserStatus @default(value: Accepted)
+  completedAt: DateTime
 }
 
 enum TechnologyLessonUserStatus {
+
+  """
+    Принят
+  """
   Accepted
+
+  """
+    Завершен
+  """
+  Completed
+
 }
