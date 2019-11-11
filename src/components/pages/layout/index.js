@@ -44,6 +44,7 @@ export default class PageLayout extends PrismaCmsPageLayout {
       style={{
         padding: "20px 10px",
         maxWidth: 1260,
+        width: "100%",
         margin: "0 auto",
         height: "100%",
       }}

@@ -48,6 +48,7 @@ type Resource implements Node {
   class_key: String
   template: Int
   mockUpdate: DateTime
+  Galleries(where: GalleryWhereInput, orderBy: GalleryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Gallery!]
 }
 
 # type Resource {

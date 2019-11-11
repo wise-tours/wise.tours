@@ -32,6 +32,8 @@ import TechnologyLesson from "./technologies/TechnologyLesson";
 import Career from "./technologies/Career";
 import TechnologyLessonUser from "./technologies/TechnologyLessonUser";
 import Comment from "./Comment";
+import Gallery from "./Gallery";
+import GalleryFile from "./GalleryFile";
 
 
 import chalk from 'chalk';
@@ -87,6 +89,9 @@ class CoreModule extends PrismaModule {
        * и инпуты CommentCreateInput и CommentUpdateInput
        */
       Comment,
+
+      Gallery,
+      GalleryFile,
     ]
       .concat(
         EthereumModules,
@@ -401,7 +406,7 @@ class CoreModule extends PrismaModule {
         letter,
         letters,
         lettersConnection,
-        file,
+        // file,
         files,
         filesConnection,
         logedin,
@@ -505,6 +510,13 @@ class CoreModule extends PrismaModule {
       updateTechnologyLessonCommentProcessor,
       createTechnologyLessonUserProcessor,
       updateTechnologyLessonUserProcessor,
+
+      createGalleryProcessor,
+      updateGalleryProcessor,
+      deleteGallery,
+      createGalleryFileProcessor,
+      updateGalleryFileProcessor,
+      deleteGalleryFile,
     } = Mutation;
 
 
@@ -589,6 +601,13 @@ class CoreModule extends PrismaModule {
       updateTechnologyLessonCommentProcessor,
       createTechnologyLessonUserProcessor,
       updateTechnologyLessonUserProcessor,
+
+      createGalleryProcessor,
+      updateGalleryProcessor,
+      deleteGallery,
+      createGalleryFileProcessor,
+      updateGalleryFileProcessor,
+      deleteGalleryFile,
 
       createTemplateProcessor: async (source, args, ctx, info) => {
 
