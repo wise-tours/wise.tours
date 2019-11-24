@@ -242,6 +242,94 @@ class CoreModule extends PrismaModule {
 
         "CommentCreateInput",
         "CommentUpdateInput",
+
+        /**
+         * prisma-3.14
+         */
+        "ChatMessageReadedUpdateInput",
+        "ChatMessageReadedUpdateWithoutMessageDataInput",
+        "ChatMessageReadedUpdateWithoutUserDataInput",
+        "ChatRoomInvitationUpdateInput",
+        "ChatRoomInvitationUpdateWithoutChatRoomDataInput",
+        "ChatRoomInvitationUpdateWithoutNoticeDataInput",
+        "ChatRoomUpdateWithoutInvitationsDataInput",
+        "ChatRoomUpdateWithoutMembersDataInput",
+        "ChatRoomUpdateWithoutMessagesDataInput",
+        "ChatRoomUpdateWithoutProjectDataInput",
+        "ChatRoomUpdateWithoutTaskDataInput",
+        "FileUpdateInput",
+        "FileUpdateWithoutImageResourceDataInput",
+        "GameResultUpdateInput",
+        "LetsadsSmsMessageStatusUpdateInput",
+        "LogedInUpdateInput",
+        "NoticeUpdateInput",
+        "NoticeUpdateWithoutChatRoomInvitationDataInput",
+        "NotificationTypeUpdateInput",
+        "NotificationTypeUpdateWithoutUsersDataInput",
+        "PositionUpdateWithoutUsersDataInput",
+        "ProjectMemberUpdateWithoutProjectDataInput",
+        "ProjectMemberUpdateWithoutServicesDataInput",
+        "ProjectMemberUpdateWithoutUserDataInput",
+        "ProjectUpdateWithoutChatRoomDataInput",
+        "ProjectUpdateWithoutCustomersDataInput",
+        "ProjectUpdateWithoutMembersDataInput",
+        "ProjectUpdateWithoutPrismaResourcesDataInput",
+        "ProjectUpdateWithoutTasksDataInput",
+        "ProjectUpdateWithoutTeamDataInput",
+        "ResourceTagUpdateInput",
+        "ResourceTagUpdateWithoutCreatedByDataInput",
+        "ResourceTagUpdateWithoutResourceDataInput",
+        "ResourceTagUpdateWithoutTagDataInput",
+        "ResourceUpdateWithoutChildsDataInput",
+        "ResourceUpdateWithoutCommentsDataInput",
+        "ResourceUpdateWithoutCommentTargetDataInput",
+        "ResourceUpdateWithoutImageDataInput",
+        "ResourceUpdateWithoutParentDataInput",
+        "ResourceUpdateWithoutPrismaProjectDataInput",
+        "ResourceUpdateWithoutTagsDataInput",
+        "ResourceUpdateWithoutVotesDataInput",
+        "ServiceCategoryUpdateInput",
+        "ServiceCategoryUpdateWithoutChildsDataInput",
+        "ServiceCategoryUpdateWithoutParentDataInput",
+        "ServiceCategoryUpdateWithoutServicesDataInput",
+        "SmsMessageUpdateInput",
+        "SmsMessageUpdateWithoutStatusDataInput",
+        "TagUpdateInput",
+        "TagUpdateWithoutResourcesDataInput",
+        "TaskMemberUpdateInput",
+        "TaskMemberUpdateWithoutTaskDataInput",
+        "TaskMemberUpdateWithoutUserDataInput",
+        "TaskReactionUpdateWithoutCreatedByDataInput",
+        "TaskUpdateWithoutChatRoomDataInput",
+        "TaskUpdateWithoutChildsDataInput",
+        "TaskUpdateWithoutMembersDataInput",
+        "TaskUpdateWithoutParentDataInput",
+        "TaskUpdateWithoutProjectDataInput",
+        "TaskUpdateWithoutReactionsDataInput",
+        "TaskUpdateWithoutRelatedFromDataInput",
+        "TaskUpdateWithoutRelatedToDataInput",
+        "TaskUpdateWithoutTimersDataInput",
+        "TeamMemberUpdateWithoutTeamDataInput",
+        "TeamMemberUpdateWithoutUserDataInput",
+        "TeamUpdateDataInput",
+        "TeamUpdateWithoutChildsDataInput",
+        "TeamUpdateWithoutMembersDataInput",
+        "TeamUpdateWithoutOrderedProjectsDataInput",
+        "TeamUpdateWithoutParentDataInput",
+        "TeamUpdateWithoutProjectsDataInput",
+        "TimerUpdateWithoutCreatedByDataInput",
+        "TimerUpdateWithoutTaskDataInput",
+        "TourneyPlayerUpdateInput",
+        "TourneyPlayerUpdateWithoutTourneyDataInput",
+        "VoteUpdateInput",
+        "VoteUpdateWithoutResourceDataInput",
+        "VoteUpdateWithoutUserDataInput",
+        "TaskUpdateInput",
+
+        /**
+         * Eof prisma-3.14
+         */
+
       ]);
 
     }
@@ -589,7 +677,7 @@ class CoreModule extends PrismaModule {
       /**
        * Eof mc.js
        */
-      
+
       createTechnologyProcessor,
       updateTechnologyProcessor,
       createUserTechnologyProcessor,

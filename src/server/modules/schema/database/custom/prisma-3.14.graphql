@@ -1,9 +1,23 @@
+
+# type User {
+#   # settings: Settings @relation(link: INLINE)
+#   Career: Career @relation(link: INLINE)
+# }
+
+type Settings {
+  User: User! @relation(link: INLINE)
+}
+
 type Player {
   id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type World {
   id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Message {
@@ -24,10 +38,14 @@ type Inventory {
 
 type Import {
   id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Comment {
   id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type TechnologyLesson {
@@ -36,20 +54,45 @@ type TechnologyLesson {
 
 type Career {
   id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  CreatedBy: User @relation(link: INLINE)
 }
 
 type Technology {
   id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type TechnologyLessonUser {
   id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type UserTechnology {
   id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Test {
   id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Project {
+  Resource: Resource @relation(link: INLINE)
+}
+
+type Resource {
+  Service: Service @relation(link: INLINE)
+  Team: Team @relation(link: INLINE)
+}
+
+type Letter {
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
