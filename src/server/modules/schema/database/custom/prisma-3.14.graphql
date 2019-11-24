@@ -1,11 +1,10 @@
 
-# type User {
-#   # settings: Settings @relation(link: INLINE)
-#   Career: Career @relation(link: INLINE)
-# }
+type User {
+  settings: Settings @relation(name: "UserMiJsSettings")
+}
 
 type Settings {
-  User: User! @relation(link: INLINE)
+  User: User! @relation(name: "UserMiJsSettings" link: INLINE)
 }
 
 type Player {
