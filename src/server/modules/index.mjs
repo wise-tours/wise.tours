@@ -419,6 +419,8 @@ class CoreModule extends PrismaModule {
         imports,
         importsConnection,
 
+        resource,
+
         ...Query
       },
       Mutation,
@@ -802,6 +804,27 @@ class CoreModule extends PrismaModule {
       Query: {
         ...Query,
         apiSchema: this.renderApiSchema,
+        resource: async (source, args, ctx, info) => {
+
+          const {
+            where,
+          } = args;
+
+          let {
+            uri,
+          } = where || {};
+
+          /**
+           * Если указан ури, но не начинается со слеша, то добавляем слеш
+           */
+          if (uri && !uri.startsWith("/")) {
+            where.uri = `/${uri}`;
+
+            Object.assign(args, where);
+          }
+
+          return resource(source, args, ctx, info);
+        },
       },
       Mutation: AllowedMutations,
       Log: {
