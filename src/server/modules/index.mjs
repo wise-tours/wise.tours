@@ -158,12 +158,12 @@ class CoreModule extends PrismaModule {
         "ProjectCreateInput",
         "ProjectUpdateInput",
         "TaskCreateInput",
-        "TaskUpdateInput",
+        // "TaskUpdateInput",
         "TimerCreateInput",
         "TimerUpdateInput",
 
         "TaskReactionCreateInput",
-        "TaskReactionUpdateInput",
+        // "TaskReactionUpdateInput",
         "TaskCreateOneInput",
         "TaskUpdateOneInput",
 

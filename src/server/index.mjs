@@ -2,6 +2,7 @@
 import {
   modifyArgs,
   PrismaCmsServer,
+  paginationMiddleware,
 } from "@prisma-cms/server";
 
 import {
@@ -111,12 +112,16 @@ class Server extends PrismaCmsServer {
 }
 
 
+const middlewares = [
+  paginationMiddleware,
+];
 
 const startServer = async function () {
 
   const server = new Server({
     typeDefs: 'src/schema/generated/api.graphql',
     resolvers,
+    middlewares,
     MailerProps: {
       mailSender: "no-reply@prisma-cms.com",
     },

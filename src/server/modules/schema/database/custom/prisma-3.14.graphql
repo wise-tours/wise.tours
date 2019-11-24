@@ -1,0 +1,55 @@
+type Player {
+  id: ID! @id
+}
+
+type World {
+  id: ID! @id
+}
+
+type Message {
+  id: ID! @id
+}
+
+type Settings {
+  id: ID! @id
+}
+
+type Block {
+  id: ID! @id
+}
+
+type Inventory {
+  id: ID! @id
+}
+
+type Import {
+  id: ID! @id
+}
+
+type Comment {
+  id: ID! @id
+}
+
+type TechnologyLesson {
+  id: ID! @id
+}
+
+type Career {
+  id: ID! @id
+}
+
+type Technology {
+  id: ID! @id
+}
+
+type TechnologyLessonUser {
+  id: ID! @id
+}
+
+type UserTechnology {
+  id: ID! @id
+}
+
+type Test {
+  id: ID! @id
+}
