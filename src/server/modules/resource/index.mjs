@@ -825,6 +825,22 @@ class TopicModule extends ResourceModule {
 
           return components ? null : Resource && Resource.content ? Resource.content(source, args, ctx, info) : content;
         },
+        Comments: (source, args, ctx, info) => {
+
+          const {
+            id,
+            Comments,
+          } = source;
+
+          return id ? ctx.db.query.resources({
+            where: {
+              CommentTarget: {
+                id,
+              },
+            },
+          }, info)
+            : Comments;
+        },
       },
     };
 
