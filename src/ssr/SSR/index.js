@@ -66,9 +66,13 @@ class Server {
 
     if (!api) {
 
+      const {
+        API_ENDPOINT = 'http://localhost:4000',
+      } = this.props;
+
       api = new Prisma({
         typeDefs: 'src/schema/generated/api.graphql',
-        endpoint: 'http://localhost:4000',
+        endpoint: API_ENDPOINT,
         secret: 'mysecret123',
         debug: false,
         ...props,
@@ -246,6 +250,7 @@ class Server {
         queryFragments,
         rootSelector,
         apolloCaches,
+        API_ENDPOINT = `${protocol}//${hostname}/api/`,
       },
     } = this;
 
@@ -257,7 +262,7 @@ class Server {
       // Remember that this is the interface the SSR server will use to connect to the
       // API server, so we need to ensure it isn't firewalled, etc
       link: createHttpLink({
-        uri: `${protocol}//${hostname}/api/`,
+        uri: API_ENDPOINT,
         credentials: 'same-origin',
         headers: {
           cookie: req.header('Cookie'),
