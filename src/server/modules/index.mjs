@@ -110,40 +110,20 @@ class CoreModule extends PrismaModule {
 
   getSchema(types = []) {
 
+    let schema = super.getSchema(types);
 
-    // if (schema) {
-    //   types = types.concat(schema);
-    // }
-
-
-
-
-    let typesArray = super.getSchema(types);
-
-
-    // typesArray = this.cleanupApiSchema(typesArray, [
-    //   "ResourceType",
+    // schema = this.cleanupApiSchema(schema, [
     // ]);
 
-
-    let schema = fileLoader(__dirname + '/schema/database/', {
+    let customSchema = fileLoader(__dirname + '/schema/database/', {
       recursive: true,
     });
 
-    // typesArray = mergeTypes([typesArray.concat(schema)], { all: true });
-    typesArray = mergeTypes([typesArray].concat(schema), { all: true });
+    if (customSchema) {
+      schema = mergeTypes([schema].concat(customSchema), { all: true });
+    }
 
-    // typesArray = mergeTypes([typesArray].concat(`
-    //   type Resource {
-    //     type: ResourceType!
-    //   }
-    // `), { all: true });
-
-
-
-
-    return typesArray;
-
+    return schema;
   }
 
 

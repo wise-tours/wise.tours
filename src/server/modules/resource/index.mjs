@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 
 
 // import PrismaModule from "@prisma-cms/prisma-module";
@@ -6,17 +7,7 @@ import ResourceModule, {
   ResourceProcessor,
 } from "@prisma-cms/resource-module";
 
-import MergeSchema from 'merge-graphql-schemas';
-
-import path from 'path';
 import chalk from "chalk";
-
-const moduleURL = new URL(import.meta.url);
-
-const __dirname = path.dirname(moduleURL.pathname);
-
-const { fileLoader, mergeTypes } = MergeSchema;
-
 
 export class PrismaCmsResourceProcessor extends ResourceProcessor {
 
@@ -64,9 +55,7 @@ export class PrismaCmsResourceProcessor extends ResourceProcessor {
 
         {
 
-          const {
-            contentText,
-          } = this.prepareContent(args, data, method) || {};
+          this.prepareContent(args, data, method);
 
           // if (!contentText) {
           //   // this.addFieldError("content", "Не заполнен текст");
@@ -110,7 +99,7 @@ export class PrismaCmsResourceProcessor extends ResourceProcessor {
 
           const uri = `/topics/${name}`;
 
-          let connect;
+          // let connect;
 
           let Blog;
 
@@ -350,6 +339,7 @@ export class PrismaCmsResourceProcessor extends ResourceProcessor {
 
         break;
 
+      default: ;
     }
 
     // let uriData = await this.prepareUri(args);
@@ -375,7 +365,7 @@ export class PrismaCmsResourceProcessor extends ResourceProcessor {
 
     let {
       where,
-      ...other
+      // ...other
     } = args;
 
     const {
@@ -441,6 +431,7 @@ export class PrismaCmsResourceProcessor extends ResourceProcessor {
 
     const processor = this.getProcessor(data, users, this.writeEmail.bind(this));
 
+    // eslint-disable-next-line no-unused-vars
     for await (const result of processor) {
 
 
@@ -515,7 +506,7 @@ export class TopicProcessor extends PrismaCmsResourceProcessor {
 
     let {
       data: {
-        content,
+        // content,
         components,
       },
     } = args;
@@ -605,7 +596,7 @@ export class TopicProcessor extends PrismaCmsResourceProcessor {
 
         const {
           blocks,
-          entityMap: contentEntityMap,
+          // entityMap: contentEntityMap,
         } = content || {};
 
         if (blocks && blocks.length) {
@@ -622,6 +613,7 @@ export class TopicProcessor extends PrismaCmsResourceProcessor {
 
             resourceBlocks.push(block);
 
+            return null;
           });
 
         }
@@ -630,6 +622,7 @@ export class TopicProcessor extends PrismaCmsResourceProcessor {
 
         this.reduceBlocks(itemComponents, resourceBlocks, entityMap, textLength);
 
+        return null;
       });
 
     }
@@ -825,22 +818,22 @@ class TopicModule extends ResourceModule {
 
           return components ? null : Resource && Resource.content ? Resource.content(source, args, ctx, info) : content;
         },
-        Comments: (source, args, ctx, info) => {
+        // Comments: (source, args, ctx, info) => {
 
-          const {
-            id,
-            Comments,
-          } = source;
+        //   const {
+        //     id,
+        //     Comments,
+        //   } = source;
 
-          return id ? ctx.db.query.resources({
-            where: {
-              CommentTarget: {
-                id,
-              },
-            },
-          }, info)
-            : Comments;
-        },
+        //   return id ? ctx.db.query.resources({
+        //     where: {
+        //       CommentTarget: {
+        //         id,
+        //       },
+        //     },
+        //   }, info)
+        //     : Comments;
+        // },
       },
     };
 
