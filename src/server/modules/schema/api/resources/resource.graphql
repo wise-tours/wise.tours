@@ -34,7 +34,8 @@ type Resource implements Node {
   positiveVotesCount: Int
   negativeVotesCount: Int
   neutralVotesCount: Int
-  CommentTarget(where: ResourceWhereInput): Resource
+  CommentTarget: Resource
+  Topic: Resource
   Comments(where: ResourceWhereInput, orderBy: ResourceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Resource!]
   Votes(where: VoteWhereInput, orderBy: VoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vote!]
   Tags(where: ResourceTagWhereInput, orderBy: ResourceTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ResourceTag!]

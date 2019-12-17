@@ -239,7 +239,7 @@ export class PrismaCmsResourceProcessor extends ResourceProcessor {
                 uri: `/comments/${TopicUri}/${name}`,
                 isfolder: false,
 
-                CommentTarget: {
+                Topic: {
                   connect: {
                     id: topicID,
                   },
@@ -269,14 +269,10 @@ export class PrismaCmsResourceProcessor extends ResourceProcessor {
                  */
                 await db.mutation.updateResource({
                   data: {
-                    CommentTarget: {
-                      update: {
-                        mockUpdate: new Date(),
-                      },
-                    },
+                    mockUpdate: new Date(),
                   },
                   where: {
-                    id: commentId,
+                    id: topicID,
                   },
                 })
                   .catch(error => {
@@ -284,7 +280,7 @@ export class PrismaCmsResourceProcessor extends ResourceProcessor {
                      * Не обламываем процесс, если не получилось обновить дату топика
                      */
                     this.error(error);
-                    console.error(chalk.red("Update CommentTarget error"), error);
+                    console.error(chalk.red("Update Topic error"), error);
                   });
 
                 /**
@@ -310,7 +306,7 @@ export class PrismaCmsResourceProcessor extends ResourceProcessor {
                         id: topicID,
                       },
                       {
-                        CommentTarget: {
+                        Topic: {
                           id: topicID,
                         },
                       },
@@ -827,13 +823,49 @@ class TopicModule extends ResourceModule {
 
         //   return id ? ctx.db.query.resources({
         //     where: {
-        //       CommentTarget: {
+        //       Topic: {
         //         id,
         //       },
         //     },
         //   }, info)
         //     : Comments;
         // },
+
+        /**
+         * Для обратной совместимости, потому что CommentTarget переименовалось в Topic
+         */
+        CommentTarget: async (source, args, ctx, info) => {
+
+          const {
+            id: commentId,
+            CommentTarget,
+            // Topic,
+          } = source;
+
+          let result = null;
+
+          if (CommentTarget !== undefined) {
+            result = CommentTarget;
+          }
+
+          else if (commentId) {
+
+            const [topic] = await ctx.db.query.resources({
+              first: 1,
+              where: {
+                Comments_some: {
+                  id: commentId,
+                },
+              },
+            }, info);
+
+            result = topic;
+
+          }
+
+          return result;
+
+        },
       },
     };
 
