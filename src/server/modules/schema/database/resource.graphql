@@ -50,8 +50,8 @@ type Resource {
   positiveVotesCount: Int @default(value: 0)
   negativeVotesCount: Int @default(value: 0)
   neutralVotesCount: Int @default(value: 0)
-  # Topic: Resource @relation(name: "Topics")
-  # Comments: [Resource!]! @relation(name: "Topics")
+  Topic: Resource @relation(name: "Topics")
+  Comments: [Resource!]! @relation(name: "Topics")
   # CommentTarget: Resource @relation(name: "ResourceComments")
   # Comments: [Resource!]! @relation(name: "ResourceComments")
 
