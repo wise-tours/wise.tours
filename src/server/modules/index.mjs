@@ -7,7 +7,9 @@ import PrismaModule from "@prisma-cms/prisma-module";
 
 import LogModule from "@prisma-cms/log-module";
 import MailModule from "@prisma-cms/mail-module";
-import UploadModule from "@prisma-cms/upload-module";
+import UploadModule, {
+  Modules as UploadModules,
+} from "@prisma-cms/upload-module";
 import RouterModule from "@prisma-cms/router-module";
 import SocietyModule, {
   Modules as SocietyModules,
@@ -32,8 +34,8 @@ import TechnologyLesson from "./technologies/TechnologyLesson";
 import Career from "./technologies/Career";
 import TechnologyLessonUser from "./technologies/TechnologyLessonUser";
 import Comment from "./Comment";
-import Gallery from "./Gallery";
-import GalleryFile from "./GalleryFile";
+// import Gallery from "./Gallery";
+// import GalleryFile from "./GalleryFile";
 
 
 import chalk from 'chalk';
@@ -90,12 +92,13 @@ class CoreModule extends PrismaModule {
        */
       Comment,
 
-      Gallery,
-      GalleryFile,
+      // Gallery,
+      // GalleryFile,
     ]
       .concat(
         EthereumModules,
         SocietyModules,
+        UploadModules,
       )
       .concat([
         UserModule,
@@ -604,9 +607,9 @@ class CoreModule extends PrismaModule {
       createGalleryProcessor,
       updateGalleryProcessor,
       deleteGallery,
-      createGalleryFileProcessor,
-      updateGalleryFileProcessor,
-      deleteGalleryFile,
+      // createGalleryFileProcessor,
+      // updateGalleryFileProcessor,
+      // deleteGalleryFile,
     } = Mutation;
 
 
@@ -695,9 +698,9 @@ class CoreModule extends PrismaModule {
       createGalleryProcessor,
       updateGalleryProcessor,
       deleteGallery,
-      createGalleryFileProcessor,
-      updateGalleryFileProcessor,
-      deleteGalleryFile,
+      // createGalleryFileProcessor,
+      // updateGalleryFileProcessor,
+      // deleteGalleryFile,
 
       createTemplateProcessor: async (source, args, ctx, info) => {
 
