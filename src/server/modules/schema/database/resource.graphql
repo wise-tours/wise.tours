@@ -12,71 +12,9 @@ enum ResourceType {
 
 type Resource {
   oldID: Int @unique
-  Topics: [Resource!]! @relation(name: "BlogTopics")
-  Blog: Resource @relation(name: "BlogTopics")
+  # Topics: [Resource!]! @relation(name: "BlogTopics")
+  # Blog: Resource @relation(name: "BlogTopics")
   mockUpdate: DateTime
   components: Json
 }
 
-
-type Resource {
-  id: ID! @id @unique
-  code: ID @unique
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-  type: ResourceType @default(value: Resource)
-  name: String
-  longtitle: String
-  content: Json
-  """
-  Raw text from content
-  """
-  contentText: String
-  published: Boolean! @default(value: true)
-  deleted: Boolean! @default(value: false)
-  hidemenu: Boolean! @default(value: false)
-  searchable: Boolean! @default(value: true)
-  uri: String @unique
-  isfolder: Boolean! @default(value: true)
-  CreatedBy: User! @relation(name: "ResourceCreatedBy")
-  Parent: Resource @relation(name: "ResourceParent")
-  Childs: [Resource!]! @relation(name: "ResourceParent")
-  Image: File @relation(name: "ResourceImage")
-  """
-  Привязка ресурса к конкретному проекту
-  """
-  PrismaProject: Project @relation(name: "PrismaProjectResources")
-  rating: Float @default(value: 0)
-  positiveVotesCount: Int @default(value: 0)
-  negativeVotesCount: Int @default(value: 0)
-  neutralVotesCount: Int @default(value: 0)
-  Topic: Resource @relation(name: "Topics")
-  Comments: [Resource!]! @relation(name: "Topics")
-  # CommentTarget: Resource @relation(name: "ResourceComments")
-  # Comments: [Resource!]! @relation(name: "ResourceComments")
-
-  Votes: [Vote!]! @relation(name: "ResourceVotes")
-  Tags: [ResourceTag!]! @relation(name: "ResourcesTagsResource")
-  """
-  К какому кошельку была создана публикация
-  """
-  EthAccount: EthAccount @relation(name: "EthAccountResources")
-  Service: Service @relation(name: "ServiceResource", link: INLINE)
-  Team: Team @relation(name: "TeamResource", link: INLINE)
-  Galleries: [Gallery!]!
-  oldID: Int @unique
-  commentOldID: Int @unique
-  Topics: [Resource!]! @relation(name: "BlogTopics")
-  Blog: Resource @relation(name: "BlogTopics")
-  Project: Project @relation(name: "ProjectResource")
-  """
-  Будет удалено
-  """
-  class_key: String
-  """
-  Будет удалено
-  """
-  template: Int
-  mockUpdate: DateTime
-  components: Json
-}

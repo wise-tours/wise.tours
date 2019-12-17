@@ -3,8 +3,8 @@ type Resource {
   id: ID! @unique
   oldID: Int @unique
   commentOldID: Int @unique
-  Topics: [Resource!]! @relation(name: "BlogTopics")
-  Blog: Resource @relation(name: "BlogTopics")
+  # Topics: [Resource!]! @relation(name: "BlogTopics")
+  # Blog: Resource @relation(name: "BlogTopics")
   Service: Service @relation(name: "ServiceResource")
   Project: Project @relation(name: "ProjectResource")
   Team: Team @relation(name: "TeamResource")

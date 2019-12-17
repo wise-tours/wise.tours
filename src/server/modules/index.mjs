@@ -112,9 +112,9 @@ class CoreModule extends PrismaModule {
 
     let schema = super.getSchema(types);
 
-    schema = this.cleanupApiSchema(schema, [
-      'Resource',
-    ]);
+    // schema = this.cleanupApiSchema(schema, [
+    //   'Resource',
+    // ]);
 
     let customSchema = fileLoader(__dirname + '/schema/database/', {
       recursive: true,
