@@ -12,8 +12,9 @@ enum ResourceType {
 
 type Resource {
   oldID: Int @unique
+  # Topics исключаем, потому что иначе при установке связей устанавливается Blog::Blog
   # Topics: [Resource!]! @relation(name: "BlogTopics")
-  # Blog: Resource @relation(name: "BlogTopics")
+  Blog: Resource @relation(name: "BlogTopics")
   mockUpdate: DateTime
   components: Json
 }
