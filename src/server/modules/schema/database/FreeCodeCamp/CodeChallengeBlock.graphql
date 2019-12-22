@@ -1,0 +1,28 @@
+
+"""
+  FreeCodeCamp ChallengeBlock
+"""
+type CodeChallengeBlock {
+  id: ID! @id @unique
+
+  """
+    Unique block title
+  """
+  externalKey: String @unique
+
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+
+  name: String
+  
+  # Custom fields
+
+  rank: Int @default(value: 0)
+  
+  Parent: CodeChallengeBlock @relation(name: "CodeChallengeBlockParent")
+  Children: [CodeChallengeBlock!]! @relation(name: "CodeChallengeBlockParent")
+
+  CreatedBy: User @relation(name: "CodeChallengeBlockCreatedBy")
+
+  Challenges: [CodeChallenge!]! @relation(name: "CodeChallengeBlock")
+}

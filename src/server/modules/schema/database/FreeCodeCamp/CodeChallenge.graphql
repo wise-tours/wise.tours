@@ -1,0 +1,60 @@
+
+"""
+  FreeCodeCamp Challenge
+"""
+type CodeChallenge {
+  id: ID! @id @unique
+
+  """
+    Unique block title
+  """
+  externalKey: ID @unique
+
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+
+  name: String
+  dashedName: String @unique
+  localeTitle: String
+  description: String
+
+  challengeType: Int
+  forumTopicId: Int
+  translations: Json
+
+  tests: Json
+  solutions: Json
+  instructions: String
+  files: Json
+
+  videoUrl: String
+
+  order: Int @default(value: 0)
+  superOrder: Int @default(value: 0)
+  challengeOrder: Int @default(value: 0)
+
+
+  """
+    External files
+  """
+  required: Json
+
+  isRequired: Boolean @default(value: false)
+  isPrivate: Boolean @default(value: false)
+  isBeta: Boolean @default(value: false)
+  template: String
+
+  """
+    Hours only
+  """
+  time: String
+
+  CreatedBy: User @relation(name: "CodeChallengeCreatedBy")
+
+
+  # Custom fields
+
+  rank: Int @default(value: 0)
+
+  Block: CodeChallengeBlock! @relation(name: "CodeChallengeBlock")
+}

@@ -65,6 +65,7 @@
     "merge-graphql-schemas": "latest",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.23",
+    "mongodb": "^3.4.1",
     "node-less-chokidar": "^0.3.1",
     "node-sass-chokidar": "^1.1.0",
     "prisma-binding": "^2.1.6",

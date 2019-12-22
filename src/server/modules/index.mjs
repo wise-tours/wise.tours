@@ -36,6 +36,7 @@ import TechnologyLessonUser from "./technologies/TechnologyLessonUser";
 import Comment from "./Comment";
 // import Gallery from "./Gallery";
 // import GalleryFile from "./GalleryFile";
+import FreeModeCampModule from "./FreeModeCamp";
 
 
 import chalk from 'chalk';
@@ -94,6 +95,7 @@ class CoreModule extends PrismaModule {
 
       // Gallery,
       // GalleryFile,
+      FreeModeCampModule,
     ]
       .concat(
         EthereumModules,
@@ -591,6 +593,7 @@ class CoreModule extends PrismaModule {
       // createGalleryFileProcessor,
       // updateGalleryFileProcessor,
       // deleteGalleryFile,
+      fccImportChallengs,
     } = Mutation;
 
 
@@ -682,6 +685,7 @@ class CoreModule extends PrismaModule {
       // createGalleryFileProcessor,
       // updateGalleryFileProcessor,
       // deleteGalleryFile,
+      fccImportChallengs,
 
       createTemplateProcessor: async (source, args, ctx, info) => {
 

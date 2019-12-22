@@ -32,10 +32,15 @@ const resolvers = coreModule.getResolvers();
 const {
   SIGNUP_SET_NOTIFICATIONS,
   GethServer = "http://localhost:8545",
+  MONGODB_URL,
 } = process.env;
 
 if (!GethServer) {
   throw new Error("Env GethServer required");
+}
+
+if (!MONGODB_URL) {
+  throw new Error("Env MONGODB_URL required");
 }
 
 const web3 = new Web3(GethServer);
@@ -132,6 +137,7 @@ const startServer = async function () {
       modifyArgs,
       resolvers,
       SIGNUP_SET_NOTIFICATIONS,
+      MONGODB_URL,
     },
   });
 
