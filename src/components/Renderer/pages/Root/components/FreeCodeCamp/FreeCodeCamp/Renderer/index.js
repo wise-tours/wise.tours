@@ -32,7 +32,7 @@ class FreeCodeCampRenderer extends PureComponent {
           >
             {name}
 
-            <ul>
+            <div>
               {Children.map((nn, index2) => {
 
                 const {
@@ -41,7 +41,7 @@ class FreeCodeCampRenderer extends PureComponent {
                   Challenges,
                 } = nn;
 
-                return <li
+                return <div
                   key={id || index2}
                 >
                   <ChallengesRenderer
@@ -49,10 +49,10 @@ class FreeCodeCampRenderer extends PureComponent {
                     challenges={Challenges}
                   />
 
-                </li>
+                </div>
 
               })}
-            </ul>
+            </div>
           </li>
 
         })}

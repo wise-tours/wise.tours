@@ -44,7 +44,7 @@ class ChallengesRenderer extends PureComponent {
             cursor: "pointer",
           }}
         >
-          {name}
+          <i>⮱</i> {name}
         </p>
 
         {opened ? challenges.map((n, index) => {
