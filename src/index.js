@@ -13,6 +13,10 @@ import App, {
 
 import {
   UserNoNestingFragment,
+  TimerNoNestingFragment,
+  ProjectTaskNoNestingFragment,
+  TaskNoNestingFragment,
+  ProjectNoNestingFragment,
 } from "./schema/generated/api.fragments";
 
 const node = document.getElementById('root');
@@ -34,9 +38,30 @@ if (node) {
                 address
                 balance(convert:ether)
               }
+              Timers (
+                first: 1
+                where:{
+                  stopedAt: null
+                }
+              ){
+                ...TimerNoNesting
+                Task{
+                  ...TaskNoNesting
+                  TaskProjects{
+                    ...ProjectTaskNoNesting
+                    Project{
+                      ...ProjectNoNesting
+                    }
+                  }
+                }
+              }
             } 
           }
           ${UserNoNestingFragment}
+          ${TimerNoNestingFragment}
+          ${ProjectTaskNoNestingFragment}
+          ${TaskNoNestingFragment}
+          ${ProjectNoNestingFragment}
           `,
         }}
       // queryFragments={queryFragments}

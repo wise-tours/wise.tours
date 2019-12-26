@@ -3,7 +3,7 @@ import React from "react";
 
 import gql from "graphql-tag";
 
-import { graphql, compose } from "react-apollo";
+import { graphql } from "react-apollo";
 
 
 import {
@@ -11,6 +11,7 @@ import {
   UserNoNestingFragment,
   TaskNoNestingFragment,
   TimerNoNestingFragment,
+  ProjectTaskNoNestingFragment,
 } from "../../../../schema/generated/api.fragments";
 
 
@@ -88,26 +89,29 @@ export const projectFragment = `
       }
     }
     
-    Tasks{
-      ...TaskNoNesting
-      CreatedBy{
-        ...UserNoNesting
-      }
-      Timers(
-        where:{
-          stopedAt: null
-        }
-      ){
-        ...TimerNoNesting
+    ProjectTasks {
+      ...ProjectTaskNoNesting
+      Task{
+        ...TaskNoNesting
         CreatedBy{
           ...UserNoNesting
         }
-      }
-      CreatedBy{
-        ...UserNoNesting
-      }
-      Parent {
-        ...TaskNoNesting
+        Timers(
+          where:{
+            stopedAt: null
+          }
+        ){
+          ...TimerNoNesting
+          CreatedBy{
+            ...UserNoNesting
+          }
+        }
+        CreatedBy{
+          ...UserNoNesting
+        }
+        Parent {
+          ...TaskNoNesting
+        }
       }
     }
     Resource{
@@ -125,6 +129,7 @@ export const projectFragment = `
   ${UserNoNestingFragment}
   ${TaskNoNestingFragment}
   ${TimerNoNestingFragment}
+  ${ProjectTaskNoNestingFragment}
 `
 
 export const projectsListFragment = `

@@ -32,8 +32,14 @@ class ProjectView extends BaseProjectView {
 
     const {
       id: projectId,
-      Tasks,
+      ProjectTasks,
     } = this.getObjectWithMutations() || {};
+
+    // console.log('ProjectTasks', ProjectTasks);
+    
+    const Tasks = ProjectTasks ? ProjectTasks.map(({ Task }) => Task).filter(n => n) : [];
+
+    // console.log('Tasks', Tasks);
 
     const {
       tasksLimit,
@@ -41,30 +47,33 @@ class ProjectView extends BaseProjectView {
 
     const showDetails = false;
 
-    return Tasks && <CardContent>
+    return Tasks ?
+      <CardContent>
 
-      <Typography
-        variant="subheading"
-      >
-        Задачи в проекте
+        <Typography
+          variant="subheading"
+        >
+          Задачи в проекте
       </Typography>
 
-      <TasksListView
-        tasks={Tasks}
-        showDetails={showDetails}
-        tasksLimit={tasksLimit}
-      />
+        <TasksListView
+          tasks={Tasks}
+          showDetails={showDetails}
+          tasksLimit={tasksLimit}
+        />
 
-      <Link
-        to={`/tasks/create/${projectId}`}
-      >
-        <Typography
+        <Link
+          to={`/tasks/create/${projectId}`}
         >
-          Поставить задачу
+          <Typography
+          >
+            Поставить задачу
         </Typography>
-      </Link>
+        </Link>
 
-    </CardContent> || null;
+      </CardContent>
+      :
+      null;
 
   }
 
@@ -79,6 +88,6 @@ class ProjectView extends BaseProjectView {
 
 }
 
-export default withStyles(styles)(props => <ProjectView 
+export default withStyles(styles)(props => <ProjectView
   {...props}
 />);

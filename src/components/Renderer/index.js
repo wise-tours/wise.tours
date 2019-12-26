@@ -30,7 +30,7 @@ import TasksPage from "../pages/cooperation/Tasks";
 import TaskPage from "../pages/cooperation/Tasks/Task";
 import TaskCreatePage from "../pages/cooperation/Tasks/Task/Create";
 import TimersPage from "../pages/cooperation/Timers";
-import TimerPage from "../pages/cooperation/Timers/Timer";
+// import TimerPage from "../pages/cooperation/Timers/Timer";
 
 import TransactionsPage from "../pages/ethereum/Transactions";
 import TransactionPage from "../pages/ethereum/Transactions/Transaction";

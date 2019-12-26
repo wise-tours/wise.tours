@@ -362,6 +362,7 @@ class ContextProvider extends Component {
       UserNoNestingFragment,
       TimerNoNestingFragment,
       ProjectNoNestingFragment,
+      ProjectTaskNoNestingFragment,
     } = queryFragments;
 
 
@@ -382,15 +383,18 @@ class ContextProvider extends Component {
           }
         }
 
-        Project{
-          ...ProjectNoNesting
-          CreatedBy{
-            ...UserNoNesting
-          }
-          Resource{
-            id
-            name
-            uri
+        TaskProjects{
+          ...ProjectTaskNoNesting
+          Project{
+            ...ProjectNoNesting
+            CreatedBy{
+              ...UserNoNesting
+            }
+            Resource{
+              id
+              name
+              uri
+            }
           }
         }
 
@@ -412,6 +416,7 @@ class ContextProvider extends Component {
       ${UserNoNestingFragment}
       ${TimerNoNestingFragment}
       ${ProjectNoNestingFragment}
+      ${ProjectTaskNoNestingFragment}
     `
 
 
@@ -578,6 +583,7 @@ class ContextProvider extends Component {
       TaskNoNestingFragment,
       ProjectNoNestingFragment,
       ResourceNoNestingFragment,
+      ProjectTaskNoNestingFragment,
     } = queryFragments;
 
     const TimerFragment = `
@@ -590,13 +596,17 @@ class ContextProvider extends Component {
     
         Task {
           ...TaskNoNesting
-    
-          Project{
-            ...ProjectNoNesting
-            Resource{
-              ...ResourceNoNesting
+
+          TaskProjects {
+            ...ProjectTaskNoNesting
+            Project{
+              ...ProjectNoNesting
+              Resource{
+                ...ResourceNoNesting
+              }
             }
           }
+    
     
           CreatedBy{
             ...UserNoNesting
@@ -610,6 +620,7 @@ class ContextProvider extends Component {
       ${TaskNoNestingFragment}
       ${ProjectNoNestingFragment}
       ${ResourceNoNestingFragment}
+      ${ProjectTaskNoNestingFragment}
     `
 
     const timersConnection = `
@@ -761,6 +772,7 @@ class ContextProvider extends Component {
       UserNoNestingFragment,
       TaskNoNestingFragment,
       TimerNoNestingFragment,
+      ProjectTaskNoNestingFragment,
     } = queryFragments;
 
 
@@ -777,26 +789,30 @@ class ContextProvider extends Component {
           ...UserNoNesting
         }
       }
-      
-      Tasks{
-        ...TaskNoNesting
-        Timers(
-          where:{
-            stopedAt: null
+
+      ProjectTasks{
+        ...ProjectTaskNoNesting
+        Task{
+          ...TaskNoNesting
+          Timers(
+            where:{
+              stopedAt: null
+            }
+          ){
+            ...TimerNoNesting
+            CreatedBy{
+              ...UserNoNesting
+            }
           }
-        ){
-          ...TimerNoNesting
           CreatedBy{
             ...UserNoNesting
           }
-        }
-        CreatedBy{
-          ...UserNoNesting
-        }
-        Parent {
-          ...TaskNoNesting
+          Parent {
+            ...TaskNoNesting
+          }
         }
       }
+      
       
       Resource{
         id
@@ -813,6 +829,7 @@ class ContextProvider extends Component {
       ${UserNoNestingFragment}
       ${TaskNoNestingFragment}
       ${TimerNoNestingFragment}
+      ${ProjectTaskNoNestingFragment}
     `;
 
 

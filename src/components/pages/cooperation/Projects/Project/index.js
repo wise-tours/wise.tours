@@ -6,7 +6,7 @@
  * По этой причине получаем ресурс, а из него уже получает проект
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Page from "../../../layout";
@@ -24,7 +24,7 @@ import {
 
 import ProjectView from "../View/Project";
 
-import { Typography } from 'material-ui';
+// import { Typography } from 'material-ui';
 
 const UpdateProject = graphql(updateProjectProcessor)(ProjectView);
 const CreateProject = graphql(createProjectProcessor)(ProjectView);

@@ -1,4 +1,6 @@
-import React, { Component, Fragment } from 'react';
+/* eslint-disable no-script-url */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
@@ -9,7 +11,7 @@ import Button from 'material-ui/Button';
 
 import { Grid } from '@modxclub/ui';
 
-import CreateIcon from 'material-ui-icons/Create';
+// import CreateIcon from 'material-ui-icons/Create';
 
 
 // import UserItem from "@prisma-cms/front/lib/components/App/Renderer/MainMenu/User";
@@ -19,13 +21,15 @@ import UserItem from "./User";
 
 import { Link } from "react-router-dom";
 import { Notices } from '@prisma-cms/society';
-import { IconButton } from 'material-ui';
+// import { IconButton } from 'material-ui';
 
 import PrismaCmsComponent from "@prisma-cms/component";
 
 import {
   CallRequestButtons,
 } from "@prisma-cms/webrtc";
+
+import { Timer } from '@prisma-cms/cooperation';
 
 export const styles = theme => {
 
@@ -66,7 +70,6 @@ export const locales = {
       "API Schema": "API схема",
       "Topics": "Топики",
       "Blogs": "Блоги",
-      "Chats": "Чаты",
       "Projects": "Проекты",
       "Tasks": "Задачи",
       "Timers": "Таймеры",
@@ -94,21 +97,24 @@ export class MainMenu extends PrismaCmsComponent {
 
     const {
       classes,
-      ...other
+      // ...other
     } = this.props;
 
 
     const {
       user: currentUser,
       logout,
-      router: {
-        history,
-      },
+      // router: {
+      //   history,
+      // },
     } = this.context;
 
     const {
       id: userId,
+      Timers,
     } = currentUser || {}
+
+    const [ActiveTimer] = (Timers || []);
 
     return (
       <AppBar
@@ -286,7 +292,7 @@ export class MainMenu extends PrismaCmsComponent {
             >
               <a
                 href="https://api.prisma-cms.com"
-                rel="noindex,nofollow"
+                rel="noindex nofollow noopener noreferrer"
                 target="_blank"
               >
                 <Typography>
@@ -305,38 +311,7 @@ export class MainMenu extends PrismaCmsComponent {
 
             <Language />
 
-            {currentUser ?
-              <Grid
-                key="callRequests"
-                item
-              >
-                <CallRequestButtons
-                  key={userId}
-                  classes={{
-                    icon: classes.link,
-                  }}
-                />
-              </Grid>
-              : null
-            }
-
-            {currentUser ?
-              <Grid
-                key="notifications"
-                item
-              >
-                <Notices
-                  key={userId}
-                  user={currentUser}
-                  classes={{
-                    icon: classes.link,
-                  }}
-                />
-              </Grid>
-              : null
-            }
-
-            <Grid
+            {/* <Grid
               key="write"
               item
             >
@@ -348,11 +323,52 @@ export class MainMenu extends PrismaCmsComponent {
                 <CreateIcon />
               </IconButton>
 
-            </Grid>
+            </Grid> */}
+
 
             {currentUser
               ?
               <Fragment>
+
+
+                <Grid
+                  key="callRequests"
+                  item
+                >
+                  <CallRequestButtons
+                    key={userId}
+                    classes={{
+                      icon: classes.link,
+                    }}
+                  />
+                </Grid>
+
+                {ActiveTimer
+                  ?
+                  <Grid
+                    key="timer"
+                    item
+                  >
+                    <Timer
+                      timer={ActiveTimer}
+                      iconClassName={classes.link}
+                    />
+                  </Grid>
+                  : null
+                }
+
+                <Grid
+                  key="notifications"
+                  item
+                >
+                  <Notices
+                    key={userId}
+                    user={currentUser}
+                    classes={{
+                      icon: classes.link,
+                    }}
+                  />
+                </Grid>
 
                 <Grid
                   key="user"

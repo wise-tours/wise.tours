@@ -1,9 +1,0 @@
-
-input ProjectMemberCreateManyInput {
-  connect: [ProjectMemberWhereUniqueInput!]
-}
-
-input ProjectMemberUpdateManyInput {
-  connect: [ProjectMemberWhereUniqueInput!]
-  disconnect: [ProjectMemberWhereUniqueInput!]
-}
