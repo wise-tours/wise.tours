@@ -23,8 +23,8 @@ import ViewIcon from './components/ViewIcon';
 import TopicsPage from './components/pages/TopicsPage';
 import AcceptTechnologyLesson from './components/society/technologies/AcceptTechnologyLesson';
 import TechnologyLessonUser from './components/society/technologies/TechnologyLessonUser';
-// import FreeCodeCamp from './components/FreeCodeCamp/FreeCodeCamp';
-// import CodeChallenge from './components/FreeCodeCamp/CodeChallenge';
+import FreeCodeCamp from './components/FreeCodeCamp/FreeCodeCamp';
+import CodeChallenge from './components/FreeCodeCamp/CodeChallenge';
 
 
 export const CustomComponents = [
@@ -49,8 +49,8 @@ export const CustomComponents = [
   ViewIcon,
   AcceptTechnologyLesson,
   TechnologyLessonUser,
-  // FreeCodeCamp,
-  // CodeChallenge,
+  FreeCodeCamp,
+  CodeChallenge,
 ];
 
 

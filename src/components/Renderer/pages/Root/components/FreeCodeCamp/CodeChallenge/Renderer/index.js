@@ -103,10 +103,10 @@ class CodeChallengeRenderer extends PureComponent {
     const {
       // fields: { blockName },
       description,
-      instructions
+      // instructions
     } = this.getChallenge();
 
-    const { forumTopicId, title } = this.getChallenge();
+    // const { forumTopicId, title } = this.getChallenge();
     return (
       <SidePanel
         className='full-height'
@@ -128,7 +128,7 @@ class CodeChallengeRenderer extends PureComponent {
   }
 
   renderTestOutput() {
-    const { output } = this.props;
+    // const { output } = this.props;
 
     const message = `
     /**

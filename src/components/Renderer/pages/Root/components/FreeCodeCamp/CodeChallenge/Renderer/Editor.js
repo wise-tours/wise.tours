@@ -22,7 +22,7 @@ import Loader from './Loader/Loader';
 // };
 
 
-const MonacoEditor = React.lazy(() => import('react-monaco-editor'));
+// const MonacoEditor = React.lazy(() => import('react-monaco-editor'));
 
 const propTypes = {
   canFocus: PropTypes.bool,
@@ -211,6 +211,17 @@ class Editor extends Component {
   }
 
   render() {
+
+    const {
+      window,
+    } = global;
+
+    if (!window) {
+      return null;
+    }
+
+    const MonacoEditor = require('react-monaco-editor');
+
     const { contents, ext, theme, fileKey } = this.props;
     const editorTheme = theme === 'night' ? 'vs-dark-custom' : 'vs-custom';
     return (
