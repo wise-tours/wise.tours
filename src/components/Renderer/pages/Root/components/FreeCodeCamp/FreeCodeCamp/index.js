@@ -67,7 +67,7 @@ export class FreeCodeCamp extends EditorComponent {
     >
       {connectorContect => {
 
-        console.log('FreeCodeCamp connectorContect', connectorContect);
+        // console.log('FreeCodeCamp connectorContect', connectorContect);
 
         const {
           data: {

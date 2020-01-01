@@ -129,9 +129,9 @@ class Editor extends Component {
 
   editorDidMount = (editor, monaco) => {
 
-    console.log('editorDidMount', editor, monaco);
+    // console.log('editorDidMount', editor, monaco);
 
-    console.log('editorDidMount this.props', this.props);
+    // console.log('editorDidMount this.props', this.props);
 
     this._editor = editor;
     this._editor.updateOptions({
@@ -220,7 +220,7 @@ class Editor extends Component {
       return null;
     }
 
-    const MonacoEditor = require('react-monaco-editor');
+    const MonacoEditor = require('react-monaco-editor').default;
 
     const { contents, ext, theme, fileKey } = this.props;
     const editorTheme = theme === 'night' ? 'vs-dark-custom' : 'vs-custom';

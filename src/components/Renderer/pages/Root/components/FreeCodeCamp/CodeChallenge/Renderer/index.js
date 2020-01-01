@@ -46,7 +46,7 @@ class CodeChallengeRenderer extends PureComponent {
       object,
     } = this.props;
 
-    console.log('getChallengeFile getObject', object);
+    // console.log('getChallengeFile getObject', object);
 
     return object;
   }
@@ -60,7 +60,7 @@ class CodeChallengeRenderer extends PureComponent {
     } = this.getObject() || {};
     // return first(Object.keys(files).map(key => files[key]));
 
-    console.log('getChallengeFile files', files);
+    // console.log('getChallengeFile files', files);
 
     return files ? files[0] : null;
   }
@@ -69,7 +69,7 @@ class CodeChallengeRenderer extends PureComponent {
   hasPreview() {
     const { challengeType } = this.getChallenge();
 
-    console.log('challengeType', challengeType, challengeTypes.html, challengeTypes.modern);
+    // console.log('challengeType', challengeType, challengeTypes.html, challengeTypes.modern);
     
     return (
       challengeType === challengeTypes.html ||
@@ -156,13 +156,13 @@ class CodeChallengeRenderer extends PureComponent {
 
   executeChallenge = () => (...args) => {
 
-    console.log('executeChallenge args', { ...args });
+    // console.log('executeChallenge args', { ...args });
   }
 
 
   setEditorFocusability = () => (...args) => {
 
-    console.log('setEditorFocusability args', { ...args });
+    // console.log('setEditorFocusability args', { ...args });
   }
 
   render() {
@@ -171,7 +171,7 @@ class CodeChallengeRenderer extends PureComponent {
       object,
     } = this.props;
 
-    console.log('CodeChallengeRenderer object', object);
+    // console.log('CodeChallengeRenderer object', object);
 
     return (
       <DesktopLayout

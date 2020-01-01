@@ -235,8 +235,6 @@ export default class FreeModeCampModule extends PrismaModule {
                 return value;
               }, error => {
 
-                console.log('error', error);
-
                 reject(error);
               });
 

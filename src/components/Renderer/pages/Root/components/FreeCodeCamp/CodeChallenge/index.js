@@ -68,7 +68,7 @@ export class CodeChallenge extends EditorComponent {
     >
       {objectContext => {
 
-        console.log('CodeChallengeRenderer objectContext', objectContext);
+        // console.log('CodeChallengeRenderer objectContext', objectContext);
 
         const {
           object,
