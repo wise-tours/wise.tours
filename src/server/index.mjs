@@ -39,9 +39,9 @@ if (!GethServer) {
   throw new Error("Env GethServer required");
 }
 
-if (!MONGODB_URL) {
-  throw new Error("Env MONGODB_URL required");
-}
+// if (!MONGODB_URL) {
+//   throw new Error("Env MONGODB_URL required");
+// }
 
 const web3 = new Web3(GethServer);
 // web3.setProvider(new web3.providers.HttpProvider(GethServer));
