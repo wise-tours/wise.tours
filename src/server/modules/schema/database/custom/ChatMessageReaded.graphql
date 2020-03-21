@@ -1,0 +1,5 @@
+
+type ChatMessageReaded implements Node {
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
