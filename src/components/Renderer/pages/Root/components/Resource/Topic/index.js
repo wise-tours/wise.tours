@@ -5,6 +5,7 @@ import { EditableObjectContext } from '@prisma-cms/front-editor/lib/components/A
 import Resource from '../';
 
 import { TopicPage } from '../../../../../../pages/Topics/Topic';
+import { updateTopicProcessor } from '../../../../../../pages/Topics/query';
 
 export class TopicView extends TopicPage {
 
@@ -75,6 +76,17 @@ export class Topic extends Resource {
 
         if (!content || components) {
           View = this.View;
+        } else {
+          /**
+            Для старых топиков
+           */
+          return <TopicView
+            data={{
+              object,
+            }}
+            mutation={updateTopicProcessor}
+          >
+          </TopicView>
         }
 
 
