@@ -33,6 +33,7 @@ const {
   SIGNUP_SET_NOTIFICATIONS,
   GethServer = "http://localhost:8545",
   MONGODB_URL,
+  SendmailTest,
 } = process.env;
 
 if (!GethServer) {
@@ -121,12 +122,25 @@ const middlewares = [
   paginationMiddleware,
 ];
 
+
+const sendmailOptions = {};
+
+if (SendmailTest === 'true') {
+  Object.assign(sendmailOptions, {
+    smtpPort: 1025,
+    smtpHost: 'mail',
+    devHost: 'mail',
+  });
+}
+
+
 const startServer = async function () {
 
   const server = new Server({
     typeDefs: 'src/schema/generated/api.graphql',
     resolvers,
     middlewares,
+    sendmailOptions,
     MailerProps: {
       mailSender: "no-reply@prisma-cms.com",
     },
