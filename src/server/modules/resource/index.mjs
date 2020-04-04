@@ -588,31 +588,44 @@ export class TopicProcessor extends PrismaCmsResourceProcessor {
 
         const {
           content,
+          text: contentText,
         } = props || {};
 
-        const {
-          blocks,
-          // entityMap: contentEntityMap,
-        } = content || {};
+        if (contentText !== undefined) {
 
-        if (blocks && blocks.length) {
+          textLength += contentText ? contentText.length : 0;
 
-          // resourceBlocks = resourceBlocks.concat(blocks);
-
-          blocks.map(block => {
-
-            const {
-              text,
-            } = block;
-
-            textLength += text ? text.length : 0;
-
-            resourceBlocks.push(block);
-
-            return null;
+          resourceBlocks.push({
+            text: contentText || "",
           });
 
         }
+        else {
+          const {
+            blocks,
+            // entityMap: contentEntityMap,
+          } = content || {};
+
+          if (blocks && blocks.length) {
+
+            // resourceBlocks = resourceBlocks.concat(blocks);
+
+            blocks.map(block => {
+
+              const {
+                text,
+              } = block;
+
+              textLength += text ? text.length : 0;
+
+              resourceBlocks.push(block);
+
+              return null;
+            });
+
+          }
+        }
+
 
         // console.log(chalk.green("textLength"), textLength);
 

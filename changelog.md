@@ -1,3 +1,7 @@
+4.2.3
+============================================
+- Added front editor components text parsing
+
 4.2.2
 ============================================
 - Fix update old topics
