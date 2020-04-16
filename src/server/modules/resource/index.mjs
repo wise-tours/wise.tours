@@ -31,7 +31,7 @@ export class PrismaCmsResourceProcessor extends ResourceProcessor {
 
     let {
       data: {
-        blogID,
+        // blogID,
         topicID,
         parent,
         topic_tags,
@@ -101,15 +101,15 @@ export class PrismaCmsResourceProcessor extends ResourceProcessor {
 
           // let connect;
 
-          let Blog;
+          // let Blog;
 
-          if (blogID) {
-            Blog = {
-              connect: {
-                id: blogID,
-              },
-            }
-          }
+          // if (blogID) {
+          //   Blog = {
+          //     connect: {
+          //       id: blogID,
+          //     },
+          //   }
+          // }
           // else {
           //   connect = {
           //     oldID: 637,
@@ -119,7 +119,7 @@ export class PrismaCmsResourceProcessor extends ResourceProcessor {
           Object.assign(data, {
             uri,
             isfolder: false,
-            Blog,
+            // Blog,
           });
 
 
@@ -665,6 +665,8 @@ export class TopicProcessor extends PrismaCmsResourceProcessor {
     Object.assign(args, {
       data,
     });
+
+    // console.log('Topic mutate data', JSON.stringify(data, true, 2));
 
     return super.mutate(method, args, info);
   }
