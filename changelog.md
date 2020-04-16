@@ -1,3 +1,8 @@
+4.2.4
+============================================
+- Fix create topic with blog
+- Fix schema
+
 4.2.3
 ============================================
 - Added front editor components text parsing
