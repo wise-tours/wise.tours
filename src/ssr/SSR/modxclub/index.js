@@ -67,7 +67,7 @@ export class ModxclubSSR extends SSR {
     xml.startDocument('1.0', 'UTF-8')
 
     xml.startElement("sitemapindex")
-      .writeAttribute('xmlns', 'https://www.sitemaps.org/schemas/sitemap/0.9');
+      .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
     ;
 
 
@@ -137,7 +137,7 @@ export class ModxclubSSR extends SSR {
 
 
     xml.startElement("urlset")
-      .writeAttribute('xmlns', 'https://www.sitemaps.org/schemas/sitemap/0.9');
+      .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
     ;
 
 
@@ -249,7 +249,7 @@ export class ModxclubSSR extends SSR {
     if (page) {
 
       xml.startElement("urlset")
-        .writeAttribute('xmlns', 'https://www.sitemaps.org/schemas/sitemap/0.9');
+        .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
       ;
 
 
@@ -272,7 +272,7 @@ export class ModxclubSSR extends SSR {
     else {
 
       xml.startElement('sitemapindex')
-        .writeAttribute('xmlns', 'https://www.sitemaps.org/schemas/sitemap/0.9');
+        .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
       let i = 0;
 
@@ -386,7 +386,7 @@ export class ModxclubSSR extends SSR {
     if (page) {
 
       xml.startElement("urlset")
-        .writeAttribute('xmlns', 'https://www.sitemaps.org/schemas/sitemap/0.9');
+        .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
       ;
 
 
@@ -410,7 +410,7 @@ export class ModxclubSSR extends SSR {
     else {
 
       xml.startElement('sitemapindex')
-        .writeAttribute('xmlns', 'https://www.sitemaps.org/schemas/sitemap/0.9');
+        .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
       let i = 0;
 
@@ -521,7 +521,7 @@ export class ModxclubSSR extends SSR {
     if (page) {
 
       xml.startElement("urlset")
-        .writeAttribute('xmlns', 'https://www.sitemaps.org/schemas/sitemap/0.9');
+        .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
       ;
 
 
@@ -547,7 +547,7 @@ export class ModxclubSSR extends SSR {
     else {
 
       xml.startElement('sitemapindex')
-        .writeAttribute('xmlns', 'https://www.sitemaps.org/schemas/sitemap/0.9');
+        .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
       let i = 0;
 
