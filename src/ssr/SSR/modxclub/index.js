@@ -39,10 +39,10 @@ export class ModxclubSSR extends SSR {
         return this.renderResourcesSitemap(req, res, uri);
         break;
 
-      case "tags":
+      // case "tags":
 
-        return this.renderTagsSitemap(req, res, uri);
-        break;
+      //   return this.renderTagsSitemap(req, res, uri);
+      //   break;
 
       default:
         return this.renderRootSitemap(req, res, uri);
@@ -86,9 +86,9 @@ export class ModxclubSSR extends SSR {
       section: "resources",
     });
 
-    const tagsUri = cleanUri.clone().query({
-      section: "tags",
-    });
+    // const tagsUri = cleanUri.clone().query({
+    //   section: "tags",
+    // });
 
     xml.startElement("sitemap")
       .writeElement("loc", mainUri.toString())
@@ -102,9 +102,9 @@ export class ModxclubSSR extends SSR {
       .writeElement("loc", resourcesUri.toString())
       .endElement();
 
-    xml.startElement("sitemap")
-      .writeElement("loc", tagsUri.toString())
-      .endElement();
+    // xml.startElement("sitemap")
+    //   .writeElement("loc", tagsUri.toString())
+    //   .endElement();
 
 
     xml.endDocument();
@@ -147,13 +147,13 @@ export class ModxclubSSR extends SSR {
       priority: 1,
     })
 
-    this.addSitemapDocument(xml, uri, {
-      url: `/comments/`,
-      priority: 0.6,
-    })
+    // this.addSitemapDocument(xml, uri, {
+    //   url: `/comments/`,
+    //   priority: 0.6,
+    // })
 
     this.addSitemapDocument(xml, uri, {
-      url: `/people/`,
+      url: `/users/`,
       priority: 0.5,
     })
 
@@ -256,12 +256,12 @@ export class ModxclubSSR extends SSR {
       users.map(user => {
 
         const {
-          username,
+          id: userId,
           updatedAt,
         } = user;
 
         this.addSitemapDocument(xml, uri, {
-          url: `/profile/${username}/`,
+          url: `/users/${userId}/`,
           updatedAt,
           priority: 0.8,
         })
