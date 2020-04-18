@@ -331,8 +331,8 @@ export class CustomSSR extends SSR {
     }
     else {
 
-      xml.startElement('sitemapindex')
-        .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+      // xml.startElement('sitemapindex')
+      //   .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
       let i = 0;
 
@@ -456,8 +456,8 @@ export class CustomSSR extends SSR {
     }
     else {
 
-      xml.startElement('sitemapindex')
-        .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+      // xml.startElement('sitemapindex')
+      //   .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
       let i = 0;
 
@@ -589,8 +589,8 @@ export class CustomSSR extends SSR {
     }
     else {
 
-      xml.startElement('sitemapindex')
-        .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+      // xml.startElement('sitemapindex')
+      //   .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
       let i = 0;
 
@@ -712,8 +712,8 @@ export class CustomSSR extends SSR {
     }
     else {
 
-      xml.startElement('sitemapindex')
-        .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+      // xml.startElement('sitemapindex')
+      //   .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
       let i = 0;
 
