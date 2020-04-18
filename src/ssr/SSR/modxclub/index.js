@@ -1,55 +1,121 @@
 
 
-var XMLWriter = require('xml-writer');
+
+import chalk from "chalk";
+
+import URI from 'urijs';
+
+// import cheerio from "cheerio";
 
 import SSR from "../";
 
-export class ModxclubSSR extends SSR {
+var XMLWriter = require('xml-writer');
+
+
+export class CustomSSR extends SSR {
+
+
+
+  middleware = async (req, res) => {
+
+    // console.log("process.env.NODE_ENV", process.env.PRISMA_CMS_TIMELOG);
+
+
+    /**
+     * Надо сбрасывать этот объект, чтобы не попадали результаты прошлого выполнения
+     */
+    global.document = undefined;
+
+    const protocol = req.headers["server-protocol"] || req.protocol || "http";
+
+    const host = req.get('host');
+
+    const uri = new URI(`${protocol}://${host}${req.url}`);
+
+    this.timeLogStart(uri.toString());
+
+    const segment = uri.segment();
+
+
+    let response;
+
+
+    switch (segment[0]) {
+
+      case "sitemap":
+
+        response = await this.renderSitemap(req, res, uri)
+          .catch(error => {
+            console.error(chalk.red("Server error"), error);
+            res.status(500);
+            res.end(error.message);
+            ;
+          });
+
+        break;
+
+      default:
+        response = await this.renderHTML(req, res, uri)
+          .catch(error => {
+            console.error(chalk.red("Server error"), error);
+            res.status(500);
+            res.end(error.message);
+            ;
+          });
+
+    }
+
+    this.timeLogEnd();
+
+    return response;
+
+  };
 
 
   /**
    * Рендеринк карты сайта.
-   * Отдельные разделы с постраничностью:
-   * 1. Пользователи
-   * 2. Ресурсы
-   * 3. Теги
    */
+
   async renderSitemap(req, res, uri) {
 
-    let {
-      section,
-    } = uri.query(true);
+    const segment = uri.segment();
 
+    /**
+     * Убираем последний элемент
+     */
 
-    switch (section) {
-
-
-      case "main":
-
-        return this.renderMainSitemap(req, res, uri);
-        break;
-
-      case "users":
-
-        return this.renderUsersSitemap(req, res, uri);
-        break;
-
-      case "resources":
-
-        return this.renderResourcesSitemap(req, res, uri);
-        break;
-
-      // case "tags":
-
-      //   return this.renderTagsSitemap(req, res, uri);
-      //   break;
-
-      default:
-        return this.renderRootSitemap(req, res, uri);
-
+    if (segment.length === 2 && segment[1] === 'index.xml') {
+      return this.renderRootSitemap(req, res, uri);
     }
+    else {
+
+      const section = segment[1];
+
+      switch (section) {
 
 
+        case "main":
+
+          return this.renderMainSitemap(req, res, uri);
+
+        case "users":
+
+          return this.renderUsersSitemap(req, res, uri);
+
+        case "resources":
+
+          return this.renderResourcesSitemap(req, res, uri);
+
+        case "countries":
+
+          return this.renderCountriesSitemap(req, res, uri);
+
+        default:
+
+          return res.status(404).send('Section not found');
+
+      }
+    }
 
   }
 
@@ -57,7 +123,6 @@ export class ModxclubSSR extends SSR {
   renderRootSitemap(req, res, uri) {
 
     const cleanUri = uri.clone().query(null)
-    // .hostname("mamba.zone");
 
     /**
      * Выводим ссылки на разделы
@@ -74,21 +139,18 @@ export class ModxclubSSR extends SSR {
     /**
      * Формируем ссылки на разделы
      */
-    const mainUri = cleanUri.clone().query({
-      section: "main",
-    });
+    const mainUri = cleanUri.clone();
+    mainUri.directory(mainUri.directory() + '/main');
 
-    const usersUri = cleanUri.clone().query({
-      section: "users",
-    });
+    const usersUri = cleanUri.clone();
+    usersUri.directory(usersUri.directory() + '/users');
 
-    const resourcesUri = cleanUri.clone().query({
-      section: "resources",
-    });
+    const countriesUri = cleanUri.clone();
+    countriesUri.directory(countriesUri.directory() + '/countries');
 
-    // const tagsUri = cleanUri.clone().query({
-    //   section: "tags",
-    // });
+    // const resourcesUri = cleanUri.clone();
+    // resourcesUri.directory(resourcesUri.directory() + '/resources');
+
 
     xml.startElement("sitemap")
       .writeElement("loc", mainUri.toString())
@@ -99,11 +161,11 @@ export class ModxclubSSR extends SSR {
       .endElement();
 
     xml.startElement("sitemap")
-      .writeElement("loc", resourcesUri.toString())
+      .writeElement("loc", countriesUri.toString())
       .endElement();
 
     // xml.startElement("sitemap")
-    //   .writeElement("loc", tagsUri.toString())
+    //   .writeElement("loc", resourcesUri.toString())
     //   .endElement();
 
 
@@ -129,7 +191,6 @@ export class ModxclubSSR extends SSR {
   async renderMainSitemap(req, res, uri) {
 
 
-
     const xml = new XMLWriter();
 
     xml.startDocument('1.0', 'UTF-8')
@@ -147,16 +208,15 @@ export class ModxclubSSR extends SSR {
       priority: 1,
     })
 
-    // this.addSitemapDocument(xml, uri, {
-    //   url: `/comments/`,
-    //   priority: 0.6,
-    // })
-
     this.addSitemapDocument(xml, uri, {
       url: `/users/`,
-      priority: 0.5,
+      priority: 1,
     })
 
+    this.addSitemapDocument(xml, uri, {
+      url: `/countries/`,
+      priority: 1,
+    })
 
 
     xml.endDocument();
@@ -183,11 +243,11 @@ export class ModxclubSSR extends SSR {
 
     const api = this.getApi();
 
-    let {
-      page,
-    } = uri.query(true);
 
-    page = page && parseInt(page) || undefined;
+    const segment = uri.segment();
+
+    let page = segment[2];
+    page = (page && isFinite(page)) ? parseInt(page) : undefined;
 
     let limit = 1000;
 
@@ -200,7 +260,6 @@ export class ModxclubSSR extends SSR {
         edges{
           node{
             id
-            username
             updatedAt
           }
         }
@@ -256,16 +315,17 @@ export class ModxclubSSR extends SSR {
       users.map(user => {
 
         const {
-          id: userId,
+          id,
           updatedAt,
         } = user;
 
         this.addSitemapDocument(xml, uri, {
-          url: `/users/${userId}/`,
+          url: `/users/${id}/`,
           updatedAt,
-          priority: 0.8,
+          priority: 0.9,
         })
 
+        return null;
       });
 
     }
@@ -279,10 +339,7 @@ export class ModxclubSSR extends SSR {
       while (pages > i) {
         i++;
 
-        const pageUri = uri.clone().query({
-          section: "users",
-          page: i,
-        })
+        const pageUri = uri.clone().directory(`/sitemap/users/${i}/`);
 
         xml.startElement("sitemap")
           .writeElement("loc", pageUri.toString())
@@ -311,23 +368,16 @@ export class ModxclubSSR extends SSR {
 
 
   /**
-   * Ресурсы
+   * Чат-комнаты
    */
-  async renderResourcesSitemap(req, res, uri) {
-
+  async renderChatRoomsSitemap(req, res, uri) {
 
     const api = this.getApi();
-    
-    let {
-      page,
-    } = uri.query(true);
 
-    uri = uri.query({
-      section: "resources",
-    });
+    const segment = uri.segment();
 
-
-    page = page && parseInt(page) || undefined;
+    let page = segment[2];
+    page = (page && isFinite(page)) ? parseInt(page) : undefined;
 
     let limit = 1000;
 
@@ -340,8 +390,131 @@ export class ModxclubSSR extends SSR {
         edges{
           node{
             id
-            uri
             updatedAt
+          }
+        }
+      }
+    `;
+
+    let objectsResult = await api.query.chatRoomsConnection({
+      first: limit,
+      skip: page > 1 ? (page - 1) * limit : undefined,
+      where: {
+        // active: true,
+        // deleted: false,
+      },
+      orderBy: "createdAt_DESC",
+    }, schema)
+    // .catch(error => {
+    //   res.status(500);
+    //   res.end(error.message);
+    //   ;
+    // });
+
+    const {
+      aggregate: {
+        count: total,
+      },
+      edges,
+    } = objectsResult;
+
+
+    const objects = edges.map(({ node }) => node)
+
+
+    let pages = Math.ceil(total / limit);
+
+
+    const xml = new XMLWriter();
+
+    xml.startDocument('1.0', 'UTF-8')
+
+
+    if (page) {
+
+      xml.startElement("urlset")
+        .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+      ;
+
+
+      objects.map(user => {
+
+        const {
+          id,
+          updatedAt,
+        } = user;
+
+        this.addSitemapDocument(xml, uri, {
+          url: `/chat-rooms/${id}`,
+          updatedAt,
+          priority: 0.8,
+        })
+
+        return null;
+      });
+
+    }
+    else {
+
+      xml.startElement('sitemapindex')
+        .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+
+      let i = 0;
+
+      while (pages > i) {
+        i++;
+
+        const pageUri = uri.clone().directory(`/sitemap/chat-rooms/${i}/`);
+
+        xml.startElement("sitemap")
+          .writeElement("loc", pageUri.toString())
+          .endElement();
+      }
+
+    }
+
+
+    xml.endDocument();
+
+
+    res.charset = 'utf-8';
+
+    res.writeHead(200, {
+      'Content-Type': 'application/xml',
+
+    });
+
+    res.end(xml.toString());
+
+    return;
+
+  }
+
+  /**
+   * Ресурсы
+   */
+  async renderResourcesSitemap(req, res, uri) {
+
+    const api = this.getApi();
+
+    const segment = uri.segment();
+
+    let page = segment[2];
+    page = (page && isFinite(page)) ? parseInt(page) : undefined;
+
+    let limit = 1000;
+
+
+    const schema = `
+      {
+        aggregate{
+          count
+        }
+        edges{
+          node{
+            id
+            updatedAt
+            uri
           }
         }
       }
@@ -351,11 +524,18 @@ export class ModxclubSSR extends SSR {
       first: limit,
       skip: page > 1 ? (page - 1) * limit : undefined,
       where: {
-        published: true,
-        searchable: true,
-        deleted: false,
+        // active: true,
+        // deleted: false,
+        AND: [
+          {
+            uri_not: null,
+          },
+          {
+            uri_gt: '',
+          },
+        ],
       },
-      orderBy: "updatedAt_DESC",
+      orderBy: "createdAt_DESC",
     }, schema)
     // .catch(error => {
     //   res.status(500);
@@ -367,7 +547,7 @@ export class ModxclubSSR extends SSR {
       aggregate: {
         count: total,
       },
-      edges: edges,
+      edges,
     } = objectsResult;
 
 
@@ -382,7 +562,6 @@ export class ModxclubSSR extends SSR {
     xml.startDocument('1.0', 'UTF-8')
 
 
-
     if (page) {
 
       xml.startElement("urlset")
@@ -390,20 +569,21 @@ export class ModxclubSSR extends SSR {
       ;
 
 
-
-      objects.map(n => {
+      objects.map(object => {
 
         const {
-          uri: url,
+          // id,
           updatedAt,
-        } = n;
+          uri: resourceUri,
+        } = object;
 
         this.addSitemapDocument(xml, uri, {
-          url,
+          url: resourceUri,
           updatedAt,
           priority: 0.9,
         })
 
+        return null;
       });
 
     }
@@ -417,10 +597,7 @@ export class ModxclubSSR extends SSR {
       while (pages > i) {
         i++;
 
-        const pageUri = uri.clone().addQuery({
-          page: i,
-        })
-
+        const pageUri = uri.clone().directory(`/sitemap/resources/${i}/`);
 
         xml.startElement("sitemap")
           .writeElement("loc", pageUri.toString())
@@ -442,29 +619,21 @@ export class ModxclubSSR extends SSR {
 
     res.end(xml.toString());
 
-
     return;
 
   }
 
   /**
-   * Теги
+   * Страны
    */
-  async renderTagsSitemap(req, res, uri) {
-
+  async renderCountriesSitemap(req, res, uri) {
 
     const api = this.getApi();
-    
-    let {
-      page,
-    } = uri.query(true);
 
-    uri = uri.query({
-      section: "tags",
-    });
+    const segment = uri.segment();
 
-
-    page = page && parseInt(page) || undefined;
+    let page = segment[2];
+    page = (page && isFinite(page)) ? parseInt(page) : undefined;
 
     let limit = 1000;
 
@@ -477,20 +646,20 @@ export class ModxclubSSR extends SSR {
         edges{
           node{
             id
-            name
             updatedAt
           }
         }
       }
     `;
 
-    let objectsResult = await api.query.tagsConnection({
+    let objectsResult = await api.query.countriesConnection({
       first: limit,
       skip: page > 1 ? (page - 1) * limit : undefined,
       where: {
-        status_not: "Blocked",
+        // active: true,
+        // deleted: false,
       },
-      orderBy: "updatedAt_DESC",
+      orderBy: "createdAt_DESC",
     }, schema)
     // .catch(error => {
     //   res.status(500);
@@ -502,7 +671,7 @@ export class ModxclubSSR extends SSR {
       aggregate: {
         count: total,
       },
-      edges: edges,
+      edges,
     } = objectsResult;
 
 
@@ -517,7 +686,6 @@ export class ModxclubSSR extends SSR {
     xml.startDocument('1.0', 'UTF-8')
 
 
-
     if (page) {
 
       xml.startElement("urlset")
@@ -525,22 +693,20 @@ export class ModxclubSSR extends SSR {
       ;
 
 
-
-      objects.map(n => {
+      objects.map(object => {
 
         const {
-          name,
+          id,
           updatedAt,
-        } = n;
-
-        const url = `/tag/${name}`;
+        } = object;
 
         this.addSitemapDocument(xml, uri, {
-          url,
+          url: `/countries/${id}/`,
           updatedAt,
           priority: 0.9,
         })
 
+        return null;
       });
 
     }
@@ -554,10 +720,7 @@ export class ModxclubSSR extends SSR {
       while (pages > i) {
         i++;
 
-        const pageUri = uri.clone().addQuery({
-          page: i,
-        })
-
+        const pageUri = uri.clone().directory(`/sitemap/countries/${i}/`);
 
         xml.startElement("sitemap")
           .writeElement("loc", pageUri.toString())
@@ -588,4 +751,4 @@ export class ModxclubSSR extends SSR {
 }
 
 
-module.exports = ModxclubSSR;
+module.exports = CustomSSR;
