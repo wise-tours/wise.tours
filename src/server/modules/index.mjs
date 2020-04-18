@@ -37,6 +37,8 @@ import Comment from "./Comment";
 // import Gallery from "./Gallery";
 // import GalleryFile from "./GalleryFile";
 import FreeModeCampModule from "./FreeModeCamp";
+import OSMModule from "./OSM";
+import WorldModule from "./World";
 
 
 import chalk from 'chalk';
@@ -104,6 +106,8 @@ class CoreModule extends PrismaModule {
       )
       .concat([
         UserModule,
+        OSMModule,
+        WorldModule,
       ])
     );
 
@@ -332,8 +336,8 @@ class CoreModule extends PrismaModule {
       "UserCreateInput",
       "UserUpdateInput",
 
-      "ResourceCreateInput",
-      "ResourceUpdateInput",
+      // "ResourceCreateInput",
+      // "ResourceUpdateInput",
 
       // "UserCreateOneWithoutResourcesInput",
       // "NotificationTypeUpdateManyWithoutUsersInput",
@@ -497,383 +501,25 @@ class CoreModule extends PrismaModule {
 
         ...Query
       },
-      Mutation,
+      Mutation: {
+        createResource,
+        createResourceProcessor,
+        updateResource,
+        updateResourceProcessor,
+        createCodeChallengeBlockProcessor,
+        updateCodeChallengeBlockProcessor,
+        createCodeChallengeProcessor,
+        updateCodeChallengeProcessor,
+        createTemplateProcessor,
+        createProjectProcessor,
+        ...Mutation
+      },
       User,
       ...other
     } = resolvers;
 
 
-    const {
-      signin,
-      signup,
-      // createResourceProcessor,
-      updateUserProcessor,
-      createBlogProcessor,
-      updateBlogProcessor,
-      createTopicProcessor,
-      updateTopicProcessor,
-      createCommentProcessor,
-      updateCommentProcessor,
-      singleUpload,
-      multipleUpload,
-      // startImportProcessor,
-      createResetPasswordProcessor,
-      resetPasswordProcessor,
-      createProjectProcessor,
-      updateProjectProcessor,
-      createTaskProcessor,
-      updateTaskProcessor,
-      createTaskReactionProcessor,
-      deleteTaskReaction,
-      createTimerProcessor,
-      updateTimerProcessor,
 
-      // ethUnlockPersonalAccount,
-      createEthTransactionProcessor,
-      createEthAccountProcessor,
-      ethSigninOrSignup,
-      ethConnectAuthAccount,
-      ethRecoverPersonalSignature,
-
-      createChatRoomProcessor,
-      updateChatRoomProcessor,
-      createChatMessageProcessor,
-      updateChatMessageProcessor,
-      deleteNotice,
-      deleteManyNotices,
-      markAsReadedChatMessage,
-      inviteChatRoomProcessor,
-      leaveChatRoom,
-      joinChatRoom,
-      createCallRequestProcessor,
-      updateCallRequest,
-      createTemplateProcessor,
-      updateTemplateProcessor,
-      deleteTemplate,
-      createTestProcessor,
-      updateTestProcessor,
-      deleteTest,
-      deleteManyTests,
-
-      /**
-       * mc.js
-       */
-      login,
-      createSettings,
-      updateSettings,
-      createWorld,
-      createPlayer,
-      updateWorld,
-      updatePlayer,
-      // updateBlock,
-      deleteWorld,
-      runCommand,
-      // requestChunks,
-      /**
-       * Eof mc.js
-       */
-
-      createTechnologyProcessor,
-      updateTechnologyProcessor,
-      createUserTechnologyProcessor,
-      updateUserTechnologyProcessor,
-      createCareerProcessor,
-      updateCareerProcessor,
-      createTechnologyLessonProcessor,
-      updateTechnologyLessonProcessor,
-
-      createTechnologyLessonCommentProcessor,
-      updateTechnologyLessonCommentProcessor,
-      createTechnologyLessonUserProcessor,
-      updateTechnologyLessonUserProcessor,
-
-      createGalleryProcessor,
-      updateGalleryProcessor,
-      deleteGallery,
-      // createGalleryFileProcessor,
-      // updateGalleryFileProcessor,
-      // deleteGalleryFile,
-      fccImportChallengs,
-    } = Mutation;
-
-
-    let AllowedMutations = {
-      signin,
-      signup,
-      // createResourceProcessor,
-      updateUserProcessor,
-      createBlogProcessor,
-      updateBlogProcessor,
-      createTopicProcessor,
-      updateTopicProcessor,
-      createCommentProcessor,
-      updateCommentProcessor,
-      singleUpload,
-      multipleUpload,
-      // startImportProcessor,
-      createResetPasswordProcessor,
-      resetPasswordProcessor,
-      createProjectProcessor,
-      updateProjectProcessor,
-      createTaskProcessor,
-      updateTaskProcessor,
-      createTaskReactionProcessor,
-      deleteTaskReaction,
-      createTimerProcessor,
-      updateTimerProcessor,
-
-      // ethUnlockPersonalAccount,
-      createEthTransactionProcessor,
-      createEthAccountProcessor,
-      ethSigninOrSignup,
-      ethConnectAuthAccount,
-      ethRecoverPersonalSignature,
-
-      createChatRoomProcessor,
-      updateChatRoomProcessor,
-      createChatMessageProcessor,
-      updateChatMessageProcessor,
-      deleteNotice,
-      deleteManyNotices,
-      markAsReadedChatMessage,
-      inviteChatRoomProcessor,
-      leaveChatRoom,
-      joinChatRoom,
-      createCallRequestProcessor,
-      updateCallRequest,
-      updateTemplateProcessor,
-      deleteTemplate,
-      createTestProcessor,
-      updateTestProcessor,
-      deleteTest,
-      deleteManyTests,
-      /**
-       * mc.js
-       */
-      login,
-      createSettings,
-      updateSettings,
-      createWorld,
-      createPlayer,
-      updateWorld,
-      updatePlayer,
-      // updateBlock,
-      deleteWorld,
-      runCommand,
-      // requestChunks,
-      /**
-       * Eof mc.js
-       */
-
-      createTechnologyProcessor,
-      updateTechnologyProcessor,
-      createUserTechnologyProcessor,
-      updateUserTechnologyProcessor,
-      createCareerProcessor,
-      updateCareerProcessor,
-      createTechnologyLessonProcessor,
-      updateTechnologyLessonProcessor,
-
-      createTechnologyLessonCommentProcessor,
-      updateTechnologyLessonCommentProcessor,
-      createTechnologyLessonUserProcessor,
-      updateTechnologyLessonUserProcessor,
-
-      createGalleryProcessor,
-      updateGalleryProcessor,
-      deleteGallery,
-      // createGalleryFileProcessor,
-      // updateGalleryFileProcessor,
-      // deleteGalleryFile,
-      fccImportChallengs,
-
-      createTemplateProcessor: async (source, args, ctx, info) => {
-
-        // console.log("createTemplateProcessor args", args);
-
-
-        /**
-         * При создании шаблона, если не был получен проект, создаем его
-         */
-
-        const {
-          data: {
-            component,
-            Parent,
-          },
-        } = args;
-
-        if (component === "Page" && !Parent) {
-
-
-          const {
-            getProjectFromRequest,
-            currentUser,
-          } = ctx;
-
-
-          const project = await getProjectFromRequest(ctx);
-
-
-          // console.log("createTemplateProcessor project", project);
-          // console.log("createTemplateProcessor currentUser", currentUser);
-
-
-          /**
-           * Если проекта нет и есть текущий пользователь, создаем новый проект
-           */
-          if (!project && currentUser) {
-
-            const {
-              id: currentUserId,
-              username,
-            } = currentUser;
-
-            const {
-              request: {
-                headers,
-              },
-              db,
-            } = ctx;
-
-
-            // console.log("headers", headers);
-
-            const {
-              origin,
-            } = headers;
-
-            if (!origin) {
-              return this.addError("Can not get request origin");
-            }
-
-            const uri = new URI(origin);
-
-            let domain = uri.hostname();
-            let subdomain = uri.subdomain();
-
-
-            if (!domain) {
-              return this.addError("Can not get request domain");
-            }
-
-            // console.log("subdomain", subdomain, subdomain.split("."));
-
-            /**
-             * Если это поддомен, проверяем на совпадение с пользователями
-             */
-
-            if (subdomain) {
-
-              const exists = await db.exists.User({
-                username_in: subdomain.split("."),
-                username_not: username,
-              });
-
-
-              // console.log("subdomain user exists", exists);
-
-              if (exists) {
-                return {
-                  success: false,
-                  message: "Can not create project with url match other user's username",
-                  errors: [],
-                }
-              }
-
-            }
-
-            // return {
-
-            // }
-
-
-            const projectResponse = await createProjectProcessor(null, {
-              data: {
-                // domain,
-                name: domain,
-                url: origin,
-                // CreatedBy: {
-                //   connect: {
-                //     id: currentUserId,
-                //   },
-                // },
-                PrismaUsers: {
-                  connect: {
-                    id: currentUserId,
-                  },
-                },
-              },
-            }, ctx);
-
-            const {
-              success,
-              data: project,
-            } = projectResponse || {};
-
-            // console.log("createTemplateProcessor project 2", project);
-
-
-            if (!success || !project) {
-
-
-              // return {
-              //   success: false,
-              //   message: "Can not create project",
-              //   errors: [],
-              // }
-
-              return projectResponse;
-
-            }
-
-
-          }
-
-        }
-
-        // return {
-        //   success: false,
-        //   message: "Debug",
-        //   errors: [],
-        // }
-
-
-        return createTemplateProcessor(source, args, ctx, info);
-
-      },
-    };
-
-    // for(var i in AllowedMutations){
-    //   AllowedMutations[i] = () => {
-    //     throw new Error ("Ведутся технические работы. Ориентировочно закончатся в 10 утра по Москве.");
-    //   }
-    // }
-
-    // Dev
-    // for (var i in AllowedMutations) {
-
-    //   const action = AllowedMutations[i];
-
-    //   AllowedMutations[i] = (a, b, c, d) => {
-    //     return new Promise((resolve, reject) => {
-
-    //       setTimeout(async () => {
-    //         await action(a,b,c,d)
-    //           .then(resolve)
-    //           .catch(reject);
-    //       }, 2000);
-
-    //     });
-    //   }
-    // }
-
-
-
-
-    // const {
-    //   resource,
-    // } = Query
 
     return {
       ...other,
@@ -902,7 +548,165 @@ class CoreModule extends PrismaModule {
           return resource(source, args, ctx, info);
         },
       },
-      Mutation: AllowedMutations,
+      Mutation: {
+        ...Mutation,
+        createProjectProcessor,
+        createTemplateProcessor: async (source, args, ctx, info) => {
+
+          // console.log("createTemplateProcessor args", args);
+
+
+          /**
+           * При создании шаблона, если не был получен проект, создаем его
+           */
+
+          const {
+            data: {
+              component,
+              Parent,
+            },
+          } = args;
+
+          if (component === "Page" && !Parent) {
+
+
+            const {
+              getProjectFromRequest,
+              currentUser,
+            } = ctx;
+
+
+            const project = await getProjectFromRequest(ctx);
+
+
+            // console.log("createTemplateProcessor project", project);
+            // console.log("createTemplateProcessor currentUser", currentUser);
+
+
+            /**
+             * Если проекта нет и есть текущий пользователь, создаем новый проект
+             */
+            if (!project && currentUser) {
+
+              const {
+                id: currentUserId,
+                username,
+              } = currentUser;
+
+              const {
+                request: {
+                  headers,
+                },
+                db,
+              } = ctx;
+
+
+              // console.log("headers", headers);
+
+              const {
+                origin,
+              } = headers;
+
+              if (!origin) {
+                return this.addError("Can not get request origin");
+              }
+
+              const uri = new URI(origin);
+
+              let domain = uri.hostname();
+              let subdomain = uri.subdomain();
+
+
+              if (!domain) {
+                return this.addError("Can not get request domain");
+              }
+
+              // console.log("subdomain", subdomain, subdomain.split("."));
+
+              /**
+               * Если это поддомен, проверяем на совпадение с пользователями
+               */
+
+              if (subdomain) {
+
+                const exists = await db.exists.User({
+                  username_in: subdomain.split("."),
+                  username_not: username,
+                });
+
+
+                // console.log("subdomain user exists", exists);
+
+                if (exists) {
+                  return {
+                    success: false,
+                    message: "Can not create project with url match other user's username",
+                    errors: [],
+                  }
+                }
+
+              }
+
+              // return {
+
+              // }
+
+
+              const projectResponse = await createProjectProcessor(null, {
+                data: {
+                  // domain,
+                  name: domain,
+                  url: origin,
+                  // CreatedBy: {
+                  //   connect: {
+                  //     id: currentUserId,
+                  //   },
+                  // },
+                  PrismaUsers: {
+                    connect: {
+                      id: currentUserId,
+                    },
+                  },
+                },
+              }, ctx);
+
+              const {
+                success,
+                data: project,
+              } = projectResponse || {};
+
+              // console.log("createTemplateProcessor project 2", project);
+
+
+              if (!success || !project) {
+
+
+                // return {
+                //   success: false,
+                //   message: "Can not create project",
+                //   errors: [],
+                // }
+
+                return projectResponse;
+
+              }
+
+
+            }
+
+          }
+
+          // return {
+          //   success: false,
+          //   message: "Debug",
+          //   errors: [],
+          // }
+
+
+          return createTemplateProcessor(source, args, ctx, info);
+
+        },
+      },
       Log: {
         stack: () => null,
       },

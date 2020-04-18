@@ -1,0 +1,9 @@
+
+type City {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String
+  Country: Country @relation(name: "CountryCities" link: INLINE)
+  OsmNode: OsmNode! @relation(name: "OsmNodeCity" link: INLINE)
+}

@@ -1,0 +1,19 @@
+
+type Mutation {
+  importCountries: [OsmNode!]!
+  createOsmNodeProcessor(
+    data: OsmNodeCreateInput!
+  ): OsmNodeResponse!
+  updateOsmNodeProcessor(
+    data: OsmNodeUpdateInput!
+    where: OsmNodeWhereUniqueInput!
+  ): OsmNodeResponse!
+}
+
+
+type OsmNodeResponse{
+  success: Boolean!
+  message: String
+  errors: [Error!]!
+  data: OsmNode
+}

@@ -1,0 +1,17 @@
+
+type Mutation {
+  createCountryProcessor(
+    data: CountryCreateInput!
+  ): CountryResponse!
+  updateCountryProcessor(
+    data: CountryUpdateInput!
+    where: CountryWhereUniqueInput!
+  ): CountryResponse!
+}
+
+type CountryResponse{
+  success: Boolean!
+  message: String
+  errors: [Error!]!
+  data: Country
+}

@@ -19,6 +19,7 @@ import socketIO from '@prisma-cms/mc.js-module/src/modules/external/mc.js/server
 import dotenv from "dotenv";
 
 import * as helpers from "./helpers";
+import permissions from './middleware/permissions';
 
 dotenv.config();
 
@@ -120,6 +121,7 @@ class Server extends PrismaCmsServer {
 
 const middlewares = [
   paginationMiddleware,
+  permissions,
 ];
 
 

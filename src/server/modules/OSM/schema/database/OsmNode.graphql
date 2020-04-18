@@ -1,0 +1,17 @@
+
+type OsmNode {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  externalKey: Float! @unique
+  lat: Float
+  lon: Float
+  ISO3166_1: ID
+  name: String
+
+  """Тип объекта, например country"""
+  place: String
+
+  Country: Country @relation(name: "OsmNodeCountry")
+  City: City @relation(name: "OsmNodeCity")
+}

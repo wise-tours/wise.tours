@@ -1,3 +1,9 @@
+4.3.0
+============================================
+- Added World module
+- Added OSM module
+- Added countries importer
+
 4.2.4
 ============================================
 - Fix create topic with blog
