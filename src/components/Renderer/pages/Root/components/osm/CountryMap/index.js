@@ -2,10 +2,11 @@ import React from 'react';
 
 import EditorComponent from '@prisma-cms/front-editor/lib/components/App/components/';
 import { ObjectContext } from '@prisma-cms/front-editor/lib/components/App/components/public/Connectors/Connector/ListView';
+import OsmMap from '../../../../../../osm/OsmMap';
 
-export class GoogleMapLink extends EditorComponent {
+export class CountryMap extends EditorComponent {
 
-  static Name = 'GoogleMapLink';
+  static Name = 'CountryMap';
 
   static defaultProps = {
     ...EditorComponent.defaultProps,
@@ -24,7 +25,7 @@ export class GoogleMapLink extends EditorComponent {
       <div
         className={classes.panelButton}
       >
-        GoogleMapLink
+        CountryMap
       </div>
     );
   }
@@ -44,7 +45,8 @@ export class GoogleMapLink extends EditorComponent {
 
   canBeChild(child) {
 
-    return super.canBeChild(child);
+    // return super.canBeChild(child);
+    return false;
   }
 
 
@@ -60,46 +62,34 @@ export class GoogleMapLink extends EditorComponent {
     //   ...other
     // } = this.getComponentProps(this);
 
-    const children = super.renderChildren();
+    // return super.renderChildren();
 
     return <ObjectContext.Consumer
-      key="GoogleMapLink"
+      key="CountryMap"
     >
       {objectContext => {
-
-        // console.log('CodeChallengeRenderer objectContext', objectContext);
 
         const {
           object,
         } = objectContext;
-
-        if (!object) {
-          return null;
-        }
 
         const {
           lat,
           lon,
         } = object;
 
-        if (!lat || !lon) {
+        if (!isFinite(lat) || !isFinite(lon)) {
           return null;
         }
 
-        const href = `https://www.google.com/maps/@${lat},${lon},8z`;
-
-        return <a
-          href={href}
-          title={"Open in Google Maps"}
-          target="_blank"
-          rel="nofollow noopener noreferrer"
-        >
-          {children && children.length ? children : `${lat}:${lon}`}
-        </a>
+        return <OsmMap
+          lat={lat}
+          lon={lon}
+        />;
       }}
     </ObjectContext.Consumer>
   }
 
 }
 
-export default GoogleMapLink;
+export default CountryMap;

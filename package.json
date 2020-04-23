@@ -1,6 +1,6 @@
 {
   "name": "wise.tours",
-  "version": "4.4.0",
+  "version": "4.4.1",
   "description": "wise.tours site source",
   "private": false,
   "scripts": {
@@ -61,6 +61,7 @@
     "graphql": "14.0.2",
     "graphql-shield": "^7.2.5",
     "graphql-tag": "2.10.0",
+    "leaflet": "^1.6.0",
     "material-ui": "1.0.0-beta.43",
     "material-ui-icons": "^1.0.0-beta.17",
     "merge-graphql-schemas": "latest",
@@ -71,6 +72,7 @@
     "node-sass-chokidar": "^1.1.0",
     "prisma-binding": "^2.1.6",
     "react-apollo": "^2.2.3",
+    "react-leaflet": "^2.6.3",
     "react-number-format": "^4.0.6",
     "react-reflex": "^3.0.20",
     "urijs": "^1.19.1",

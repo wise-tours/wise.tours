@@ -24,6 +24,7 @@ import TopicsPage from './components/pages/TopicsPage';
 import AcceptTechnologyLesson from './components/society/technologies/AcceptTechnologyLesson';
 import TechnologyLessonUser from './components/society/technologies/TechnologyLessonUser';
 import GoogleMapLink from './components/GoogleMapLink';
+import CountryMap from './components/osm/CountryMap';
 
 
 export const CustomComponents = [
@@ -49,6 +50,7 @@ export const CustomComponents = [
   AcceptTechnologyLesson,
   TechnologyLessonUser,
   GoogleMapLink,
+  CountryMap,
 ];
 
 
