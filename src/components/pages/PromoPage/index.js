@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import Context from "@prisma-cms/context";
-
-import { Button } from 'material-ui';
-import { withStyles } from 'material-ui';
+import Button from 'material-ui/Button';
+import withStyles from 'material-ui/styles/withStyles';
 
 // import { FrontEditor } from "@prisma-cms/front";
 import FrontEditor from "@prisma-cms/front-editor/lib/components/App";
@@ -108,11 +106,9 @@ class FrontEditorPage extends PrismaCmsComponent {
       // FrontEditor,
       Grid,
       uri,
-      Link,
     } = this.context;
 
     const {
-      components,
       inEditMode,
     } = this.state;
 
@@ -598,7 +594,7 @@ class FrontEditorPage extends PrismaCmsComponent {
 
           const {
             id,
-          } = response && response.data || {}
+          } = (response && response.data) || {}
 
           if (id) {
 

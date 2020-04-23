@@ -24,6 +24,7 @@ const customStyles = theme => {
         boxShadow: "none",
 
         "& table": {
+          width: "100%",
           // border: 2,
           // borderColor: "red",
           "& thead, tbody": {
@@ -171,4 +172,4 @@ export {
   ObjectsListView as TableView,
 }
 
-export default withStyles(customStyles)(ObjectsListView);
+export default withStyles(customStyles)(props => <ObjectsListView {...props} />);

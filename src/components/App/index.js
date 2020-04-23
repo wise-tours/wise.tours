@@ -1,8 +1,6 @@
 
 import "../../styles/less/styles.css";
 
-import { Component } from "react";
-
 import { App as PrismaApp } from "@prisma-cms/front";
 
 import Renderer from "../Renderer";

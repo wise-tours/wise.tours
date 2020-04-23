@@ -12,7 +12,7 @@ import {
 import Filters from "@prisma-cms/filters";
 
 import moment from 'moment';
-import { Typography } from 'material-ui';
+import Typography from 'material-ui/Typography';
 
 
 export class UsersPageView extends PrismaCmsUsersPageView {
@@ -83,7 +83,6 @@ export class UsersPageView extends PrismaCmsUsersPageView {
         renderer: (value, record) => {
 
           const {
-            id: userId,
             username,
           } = record;
 
@@ -137,7 +136,6 @@ export class UsersPageView extends PrismaCmsUsersPageView {
         renderer: (value, record) => {
 
           const {
-            id: userId,
             username,
           } = record;
 

@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 
 import { withStyles } from 'material-ui/styles';
@@ -24,10 +23,7 @@ class BlogsPageView extends TableView {
   getColumns() {
 
     const {
-      ChatMessageLink,
-      ChatRoomLink,
       UserLink,
-      Grid,
       BlogLink,
     } = this.context;
 

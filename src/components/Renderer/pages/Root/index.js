@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import PrismaCmsComponent from "@prisma-cms/component";
 import RootConnector from '@prisma-cms/front-editor/lib/components/Root';
@@ -23,8 +22,6 @@ import ViewIcon from './components/ViewIcon';
 import TopicsPage from './components/pages/TopicsPage';
 import AcceptTechnologyLesson from './components/society/technologies/AcceptTechnologyLesson';
 import TechnologyLessonUser from './components/society/technologies/TechnologyLessonUser';
-import FreeCodeCamp from './components/FreeCodeCamp/FreeCodeCamp';
-import CodeChallenge from './components/FreeCodeCamp/CodeChallenge';
 import GoogleMapLink from './components/GoogleMapLink';
 
 
@@ -50,8 +47,6 @@ export const CustomComponents = [
   ViewIcon,
   AcceptTechnologyLesson,
   TechnologyLessonUser,
-  FreeCodeCamp,
-  CodeChallenge,
   GoogleMapLink,
 ];
 
@@ -64,8 +59,18 @@ export class RootPage extends PrismaCmsComponent {
       ...other
     } = this.props;
 
+    const {
+      user: currentUser,
+    } = this.context;
+
+    const {
+      sudo,
+    } = currentUser || {};
+
     return <RootConnector
       CustomComponents={CustomComponents}
+      currentProjectOnly={false}
+      clonable={sudo === true}
       {...other}
     />
   }

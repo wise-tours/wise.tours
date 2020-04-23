@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui';
+import withStyles from 'material-ui/styles/withStyles';
 
-import GroupIcon from 'material-ui-icons/Group';
 import Checkbox from 'material-ui/Checkbox';
-import { Typography } from 'material-ui';
+import Typography from 'material-ui/Typography';
 
 const styles = {
   root: {

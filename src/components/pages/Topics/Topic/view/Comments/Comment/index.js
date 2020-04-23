@@ -6,7 +6,7 @@
 // import EditableView from 'apollo-cms/lib/DataView/Object/Editable';
 
 // import withStyles from "material-ui/styles/withStyles";
-// import { Typography } from 'material-ui';
+// import Typography from 'material-ui/Typography';
 // import SendIcon from 'material-ui-icons/Send';
 
 // import Grid from "@prisma-cms/front/lib/modules/ui/Grid";

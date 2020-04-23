@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Task from "./Task";
-import { Typography } from 'material-ui';
-import { Link } from '@modxclub/ui';
+import Typography from 'material-ui/Typography';
 
 class TasksList extends Component {
 
@@ -29,7 +28,7 @@ class TasksList extends Component {
       output = tasks.map((n, index) => {
 
         if (tasksLimit > 0 && tasksLimit < index + 1) {
-          return;
+          return null;
         }
 
         const {

@@ -1,6 +1,6 @@
 
 
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 
 import PropTypes from "prop-types";
 
@@ -8,11 +8,12 @@ import Page from '../layout';
 
 
 import Forum from "../../view/forum"
-import { Typography, Tabs, Tab } from 'material-ui';
+import Typography from 'material-ui/Typography';
+import Tabs, { Tab } from 'material-ui/Tabs';
 
 import Comments from "./Comments";
 import Tasks from "./Tasks";
-import { withStyles } from 'material-ui';
+import withStyles from 'material-ui/styles/withStyles';
 
 import {
 	ChatRoom,

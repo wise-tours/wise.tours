@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import {
   TasksConnector,
 } from "../../cooperation/Tasks/query";
-import { Typography } from 'material-ui';
 
 import TasksView from "../../cooperation/Projects/View/Project/Tasks";
 
@@ -46,7 +45,7 @@ class ActiveTasks extends Component {
       }
     }
 
-    let tasks = objectsConnection && objectsConnection.edges.map(({ node }) => node) || [];
+    let tasks = (objectsConnection && objectsConnection.edges.map(({ node }) => node)) || [];
 
     return (
       <TasksView

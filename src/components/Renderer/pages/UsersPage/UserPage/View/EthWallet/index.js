@@ -1,6 +1,5 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Typography } from 'material-ui';
 
 import Balances from "./Balances";
 
@@ -31,7 +30,7 @@ class UserEthWallet extends Component {
       Grid,
     } = this.context;
 
-    const ethAccount = user.EthAccounts && user.EthAccounts[0] || null;
+    const ethAccount = (user.EthAccounts && user.EthAccounts[0]) || null;
 
     const {
       id: currentUserId,
@@ -48,7 +47,6 @@ class UserEthWallet extends Component {
     let actions = [];
 
     let ownWallet;
-    let ownActions = [];
 
     if (currentUserId) {
 
@@ -57,16 +55,16 @@ class UserEthWallet extends Component {
       }
       else {
 
-        let currentUserEthAccount = currentUser.EthAccounts && currentUser.EthAccounts[0] || null;
+        let currentUserEthAccount = (currentUser.EthAccounts && currentUser.EthAccounts[0]) || null;
 
         // if (currentUserEthAccount) {
 
         ownWallet = <Balances
           ethAccount={currentUserEthAccount}
           user={currentUser}
-          // style={{
-          //   marginTop: 20,
-          // }}
+        // style={{
+        //   marginTop: 20,
+        // }}
         >
 
         </Balances>
@@ -89,7 +87,7 @@ class UserEthWallet extends Component {
       <Grid
         item
         xs={12}
-        // md={6}
+      // md={6}
       >
         <Balances
           ethAccount={ethAccount}
@@ -103,7 +101,7 @@ class UserEthWallet extends Component {
       <Grid
         item
         xs={12}
-        // md={6}
+      // md={6}
       >
 
         {ownWallet}

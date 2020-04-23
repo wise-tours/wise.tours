@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 // import Connector from '@prisma-cms/front/lib/components/FrontEditor/components/Connector';
 import Connector from '@prisma-cms/front-editor/lib/components/App/components/public/Connector';
-import { Typography } from 'material-ui';
+import Typography from 'material-ui/Typography';
 
 class TopicsConnection extends Connector {
 

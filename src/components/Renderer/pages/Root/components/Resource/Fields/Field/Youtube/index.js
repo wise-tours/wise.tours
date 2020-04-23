@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { EditableObjectContext } from '@prisma-cms/front-editor/lib/components/App/context';
 import { ObjectContext } from '@prisma-cms/front-editor/lib/components/App/components/public/Connectors/Connector/ListView';
 import ResourceField from '..';
-import { TextField } from 'material-ui';
+import TextField from 'material-ui/TextField';
 
 
 

@@ -21,7 +21,6 @@ import UserItem from "./User";
 
 import { Link } from "react-router-dom";
 import { Notices } from '@prisma-cms/society';
-// import { IconButton } from 'material-ui';
 
 import PrismaCmsComponent from "@prisma-cms/component";
 

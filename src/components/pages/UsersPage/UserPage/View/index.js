@@ -1,14 +1,9 @@
-import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
-
-import Button from 'material-ui/Button';
-
+import React from 'react'
 
 import PrismaCmsUserPageView from "@prisma-cms/front/lib/components/pages/UsersPage/UserPage/View";
 
 
 import NotificationTypes from "./NotificationTypes";
-import { Typography } from 'material-ui';
 
 
 import EthWallet from "./EthWallet";
@@ -42,7 +37,7 @@ export default class UserPageView extends PrismaCmsUserPageView {
       EthAccounts,
     } = object;
 
-    return EthAccounts && EthAccounts[0] || null;
+    return (EthAccounts && EthAccounts[0]) || null;
 
   }
 
@@ -54,9 +49,6 @@ export default class UserPageView extends PrismaCmsUserPageView {
 
     let {
       id: userId,
-      // username,
-      // fullname,
-      EthAccounts,
     } = object;
 
     const {
@@ -70,15 +62,6 @@ export default class UserPageView extends PrismaCmsUserPageView {
 
 
     const ethAccount = this.getEthAccount();
-
-    // const {
-    //   balance,
-    // } = EthAccounts && EthAccounts[0] || {};
-
-
-    // const {
-    //   changePassword,
-    // } = this.state;
 
     const {
       id: currentUserId,
@@ -177,28 +160,13 @@ export default class UserPageView extends PrismaCmsUserPageView {
     const inEditMode = this.isInEditMode();
 
     const {
-      id,
-      username,
-      fullname,
-    } = object;
-
-
-    const {
       mutate,
     } = this.props;
 
     const {
-      user: currentUser,
       Grid,
     } = this.context;
 
-
-    const {
-      changePassword,
-    } = this.state;
-
-    const {
-    } = currentUser || {}
 
     const ethWallet = this.getWalletAddress();
 

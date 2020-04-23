@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import moment from "moment";
 
 import EditableView from 'apollo-cms/lib/DataView/Object/Editable';
 
 import Forum from "../../../../view/forum"
-import { Typography } from 'material-ui';
-import { withStyles } from 'material-ui';
+import Typography from 'material-ui/Typography';
+import withStyles from 'material-ui/styles/withStyles';
 
 
 const styles = {
@@ -90,8 +89,6 @@ class BlogView extends EditableView {
     const object = this.getObjectWithMutations();
 
     const {
-      id: topicId,
-      topic_tags,
       CreatedBy,
       createdAt,
     } = object || {}
@@ -249,11 +246,11 @@ class BlogView extends EditableView {
 
     if (blogId) {
       forum = <Forum
-        title={name && <Typography
+        title={name ? <Typography
           variant="subheading"
         >
           {`Топики в блоге "${name}"`}
-        </Typography> || undefined}
+        </Typography> : undefined}
         where={{
           Blog: {
             id: blogId,

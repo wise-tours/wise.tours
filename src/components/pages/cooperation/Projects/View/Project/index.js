@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // import EditableView from 'apollo-cms/lib/DataView/Object/Editable';
@@ -7,7 +7,7 @@ import withStyles from "material-ui/styles/withStyles";
 
 
 
-import { Typography } from 'material-ui';
+import Typography from 'material-ui/Typography';
 
 
 import Card, {
@@ -246,17 +246,16 @@ export class ProjectView extends PrismaCmsCooperationProjectView {
     }
 
     let {
-      id: projectId,
       name,
       url,
-      companies,
+      // companies,
       developer_id,
       developer_uri = "/",
       developer_title,
-      createdby,
+      // createdby,
       Members,
-      _isDirty,
-      _errors,
+      // _isDirty,
+      // _errors,
       Resource,
       CreatedBy,
 
@@ -267,13 +266,13 @@ export class ProjectView extends PrismaCmsCooperationProjectView {
       Image,
     } = Resource || {}
 
-    const {
-      id: createdById,
-      username: author_username,
-      fullname: author_fullname,
-      // author_photo,
-      // author_thumb,
-    } = CreatedBy || {};
+    // const {
+    //   id: createdById,
+    //   username: author_username,
+    //   fullname: author_fullname,
+    //   // author_photo,
+    //   // author_thumb,
+    // } = CreatedBy || {};
 
     let {
       path: image,
@@ -308,7 +307,7 @@ export class ProjectView extends PrismaCmsCooperationProjectView {
     }
 
     if (project_members.length) {
-      project_members.map(function (member) {
+      project_members.map((member) => {
 
         let {
           id,
@@ -320,6 +319,8 @@ export class ProjectView extends PrismaCmsCooperationProjectView {
           user={User}
           size="small"
         />);
+
+        return null;
       }, this);
     }
 
@@ -330,8 +331,7 @@ export class ProjectView extends PrismaCmsCooperationProjectView {
     var extras = [];
 
     if (object.extras && object.extras.length) {
-      object.extras.map(function (extra) {
-
+      object.extras.map((extra) => {
 
         extras.push(<Chip
           key={extra.id}
@@ -341,12 +341,14 @@ export class ProjectView extends PrismaCmsCooperationProjectView {
           label={extra.pagetitle}
         >
         </Chip>);
+
+        return null;
       }, this);
     }
 
     var dialog_actions = [];
 
-    if (this.state.url != '') {
+    if (this.state.url !== '') {
       dialog_actions.push(
         <Button
           key="link"
@@ -524,6 +526,7 @@ export class ProjectView extends PrismaCmsCooperationProjectView {
               onClick={event => {
                 this.handleOpen(image);
               }}
+              alt=''
             />
             : null
           }
@@ -561,6 +564,7 @@ export class ProjectView extends PrismaCmsCooperationProjectView {
                 href={url}
                 target="_blank"
                 title={name}
+                rel="noopener noreferrer"
               >{url}</a>
               :
               null
@@ -676,6 +680,7 @@ export class ProjectView extends PrismaCmsCooperationProjectView {
           style={{
             // minHeight: typeof window != "undefined" ? window.innerHeight * 0.8 : undefined,
           }}
+          alt=''
         />
       </Dialog>
     </Card>

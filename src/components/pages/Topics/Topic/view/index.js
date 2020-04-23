@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 
 import EditableView from 'apollo-cms/lib/DataView/Object/Editable';
@@ -11,21 +10,18 @@ import EditableView from 'apollo-cms/lib/DataView/Object/Editable';
 //   CardActions,
 // } from 'material-ui/Card';
 
-import TextField from 'material-ui/TextField';
 import withStyles from 'material-ui/styles/withStyles';
 
 import moment from "moment";
 
 import {
-  TopicLink,
   UserLink,
-  BlogLink,
 } from "@modxclub/ui"
 
 
 // import TextEditor from "@modxclub/react-editor";
 import Editor from "@modxclub/react-editor";
-import { Typography } from 'material-ui';
+import Typography from 'material-ui/Typography';
 
 import Grid from "@prisma-cms/front/lib/modules/ui/Grid";
 
@@ -115,8 +111,6 @@ class TopicView extends EditableView {
     const object = this.getObjectWithMutations();
 
     const {
-      id: topicId,
-      topic_tags,
       CreatedBy,
       createdAt,
     } = object || {}
@@ -268,25 +262,11 @@ class TopicView extends EditableView {
 
     const {
       classes,
-      fullView,
-      ...other
     } = this.props;
 
-
     const {
-      errors = [],
-    } = this.state;
-
-    const {
-      id,
-      CreatedBy,
-      createdAt,
-      Blog,
-      name,
       content,
     } = object;
-
-    const date = createdAt;
 
     const inEditMode = this.isInEditMode();
 
@@ -295,38 +275,6 @@ class TopicView extends EditableView {
     return <div
       className={classes.root}
     >
-
-      {/* {inEditMode !== true ?
-        <div
-          className={classes.header}
-          avatar={<UserLink
-            user={CreatedBy}
-          />}
-          title={<TopicLink
-            object={object}
-            className="Card--title"
-          />}
-          subheader={<div>{(date ? moment(date).format('YYYY.MM.DD HH:mm') + " " : null)}
-            {Blog ? <BlogLink
-              object={Blog}
-            /> : null}
-          </div>}
-        >
-
-
-        </div>
-        :
-        <div>
-          <TextField
-          // name="name"
-          // value={name}
-          // label="Название топика"
-          // error={errors.name && errors.name != ""}
-          // onFocus={() => { this.clearError() }}
-          // onChange={(e, value) => { this.onChangename(e, value) }}
-          />
-        </div>
-      } */}
 
       <div>
 
@@ -355,21 +303,7 @@ class TopicView extends EditableView {
         topic={object}
       />
 
-
-      {/* {fullView === true && (id > 0 && inEditMode !== true) ? <ArticleInfoComments
-        comments={comments}
-        user={this.props.user}
-      /> : null} */}
-
-      {/* {fullView === true && (id > 0 && inEditMode !== true) ? <TextEditor
-        inEditMode={true}
-        allow_edit={true}
-        target_id={id}
-        onMessageEdded={this.addMessage}
-        clearOnSave={true}
-      /> : null} */}
     </div>;
-
 
   }
 

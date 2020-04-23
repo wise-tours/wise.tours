@@ -2,12 +2,12 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import EditableView from 'apollo-cms/lib/DataView/Object/Editable';
-import { withStyles } from 'material-ui';
+import withStyles from 'material-ui/styles/withStyles';
 import {
   Grid,
   Editor,
 } from '../../../../../../ui';
-import { Typography } from 'material-ui';
+import Typography from 'material-ui/Typography';
 
 import moment from "moment";
 

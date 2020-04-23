@@ -1,13 +1,12 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 
 
 import EditorComponent from "@prisma-cms/front-editor/lib/components/App/components/";
 
 
 import { Document, Page } from 'react-pdf';
-import { Button } from 'material-ui';
-import { Typography } from 'material-ui';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
 
 
 class PdfView extends EditorComponent {
@@ -81,10 +80,7 @@ class PdfView extends EditorComponent {
     const {
       pages,
       src: file,
-      page_width,
-      scale,
       show_pages,
-      ...other
     } = this.getComponentProps(this);
 
 

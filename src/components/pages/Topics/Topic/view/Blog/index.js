@@ -1,9 +1,6 @@
 
-
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-
-import { Link } from 'react-router-dom';
 
 
 import PrismaCmsComponent from "@prisma-cms/component";
@@ -11,7 +8,7 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import View from "./View";
-import { Typography } from 'material-ui';
+import Typography from 'material-ui/Typography';
 
 export default class TopicBlog extends PrismaCmsComponent {
 

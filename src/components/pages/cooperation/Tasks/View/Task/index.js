@@ -1,13 +1,14 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import EditableView from 'apollo-cms/lib/DataView/Object/Editable';
 
-import { withStyles, IconButton } from 'material-ui';
+import IconButton from 'material-ui/IconButton';
+import withStyles from 'material-ui/styles/withStyles';
 import StartIcon from "material-ui-icons/PlayArrow";
 import StopIcon from "material-ui-icons/Stop";
 
-import { Typography } from 'material-ui';
+import Typography from 'material-ui/Typography';
 
 import Grid from "@prisma-cms/front/lib/modules/ui/Grid";
 

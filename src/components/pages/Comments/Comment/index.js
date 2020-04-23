@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import Page from "../../layout";
 
@@ -16,7 +15,7 @@ import {
 } from "@modxclub/ui/src/Comments/query.js";
 
 import Comment from "@modxclub/ui/src/Comments/Comment";
-import { Typography } from 'material-ui';
+import Typography from 'material-ui/Typography';
 
 import {
   Link,
