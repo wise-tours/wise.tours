@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { compose, graphql } from 'react-apollo';
 
-import Typography from "material-ui/Typography";
+// import Typography from "material-ui/Typography";
 
 import { Grid, CheckBox } from "@modxclub/ui";
 
@@ -37,6 +37,10 @@ class UserNotificationTypes extends Component {
       user,
       inEditMode,
     } = this.props;
+
+    if (!inEditMode) {
+      return null;
+    }
 
     const {
       user: currentUser,
@@ -80,7 +84,7 @@ class UserNotificationTypes extends Component {
         <CheckBox
           checked={NotificationTypes && NotificationTypes.findIndex(n => n.id === id) !== -1}
           label={comment || name}
-          // disabled={!inEditMode}
+          disabled={!inEditMode || loading ? true : false}
           onChange={async event => {
 
             const {

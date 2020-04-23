@@ -1,0 +1,13 @@
+
+# enum ResourceType {
+
+#   """Отзыв на пользователя"""
+#   UserReview
+# }
+
+type Resource {
+  """Отзывы по пользователю"""
+  Reviewed: User @relation(name: "UserReviewThread")
+
+  code: ID @unique
+}

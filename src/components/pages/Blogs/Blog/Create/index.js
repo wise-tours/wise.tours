@@ -27,7 +27,7 @@ export class BlogCreatePage extends BlogPage {
 
   onSave = (result) => {
 
-
+    // console.log("onSave", result);
 
     if (result && result.data) {
 

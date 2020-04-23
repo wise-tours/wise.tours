@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
-import { graphql, compose } from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 import Context from "@prisma-cms/context";
 
@@ -57,72 +56,6 @@ export class TopicCreatePage extends TopicPage {
     }
 
   }
-
-
-  // componentWillMount() {
-
-  //   const {
-  //     View,
-  //   } = this.props;
-
-
-  //   const Renderer = compose(
-  //     graphql(createTopic, {
-  //     }),
-
-  //   )(View);
-
-  //   Object.assign(this.state, {
-  //     Renderer,
-  //     data: {
-  //       object: {},
-  //     },
-  //   });
-
-  //   super.componentWillMount && super.componentWillMount();
-
-  // }
-
-
-  // render() {
-
-  //   const {
-  //     View,
-  //     ...other
-  //   } = this.props;
-
-
-  //   const {
-  //     Renderer,
-  //     data,
-  //   } = this.state;
-
-
-  //   const {
-  //     location: {
-  //       search: {
-  //         name,
-  //         place,
-  //         parent,
-  //       },
-  //     },
-  //   } = this.context;
-
-
-  //   return <Renderer
-  //     data={data}
-  //     onSave={result => this.onSave(result)}
-  //     _dirty={{
-  //       name,
-  //       parent,
-  //       place: place ? {
-  //         id: place,
-  //       } : undefined,
-  //     }}
-  //     {...other}
-  //   />
-
-  // }
 
 }
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { compose, graphql } from 'react-apollo';
 
-import Typography from "material-ui/Typography";
+// import Typography from "material-ui/Typography";
 
 import Context from "@prisma-cms/context";
 
@@ -43,7 +43,7 @@ class UserNotificationTypes extends Component {
     } = this.context;
 
 
-    if (!user || !currentUser || user.id !== currentUser.id) {
+    if (!user || !currentUser || user.id !== currentUser.id || !inEditMode) {
       return null;
     }
 
@@ -80,7 +80,7 @@ class UserNotificationTypes extends Component {
         <CheckBox
           checked={NotificationTypes && NotificationTypes.findIndex(n => n.id === id) !== -1 ? true : false}
           label={comment || name}
-          // disabled={!inEditMode}
+          disabled={!inEditMode || loading ? true : false}
           onChange={async event => {
 
             const {

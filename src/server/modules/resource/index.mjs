@@ -1142,7 +1142,6 @@ class ResourceModule extends PrismaCmsResourceModule {
         resource: async (source, args, ctx, info) => {
 
           const {
-            modifyArgs,
             db,
           } = ctx;
 

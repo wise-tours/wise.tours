@@ -89,7 +89,7 @@ class BlogsPage extends ListPage {
               history,
             },
           } = this.context;
-          history.push(`/blogs/create`);
+          history.push(`/blogs/create/`);
         }}
     />
   }

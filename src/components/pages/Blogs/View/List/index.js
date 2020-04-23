@@ -23,7 +23,10 @@ class BlogsPageView extends TableView {
   getColumns() {
 
     const {
+      // ChatMessageLink,
+      // ChatRoomLink,
       UserLink,
+      // Grid,
       BlogLink,
     } = this.context;
 

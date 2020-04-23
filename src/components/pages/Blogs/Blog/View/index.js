@@ -93,8 +93,6 @@ class BlogView extends EditableView {
       createdAt,
     } = object || {}
 
-
-
     const inEditMode = this.isInEditMode();
 
     return <div
@@ -152,7 +150,7 @@ class BlogView extends EditableView {
           <Grid
             container
             spacing={16}
-            alignItems="center"
+            alignItems="baseline"
           >
 
             <Grid
@@ -176,6 +174,21 @@ class BlogView extends EditableView {
               }
 
             </Grid>
+
+
+            {inEditMode ?
+              <Grid
+                item
+              >
+                {this.getTextField({
+                  name: "code",
+                  label: "Уникальный код",
+                  helperText: "",
+                })}
+              </Grid>
+              : null
+            }
+
 
             <Grid
               item
@@ -263,7 +276,7 @@ class BlogView extends EditableView {
               history,
             },
           } = this.context;
-          history.push(`/add-topic.html?blogID=${blogId}`);
+          history.push(`/topics/create/?blogID=${blogId}`);
         } : undefined}
       />
     }

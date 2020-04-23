@@ -1,0 +1,8 @@
+
+input BlogCreateInput {
+  code: ID
+}
+
+input BlogUpdateInput {
+  code: ID
+}

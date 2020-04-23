@@ -1,21 +1,10 @@
 
 
-import PrismaModule from "@prisma-cms/prisma-module";
-
 import UserModule, {
   UserPayload,
 } from "@prisma-cms/user-module";
 
-import MergeSchema from 'merge-graphql-schemas';
-
-import path from 'path';
 import chalk from "chalk";
-
-const moduleURL = new URL(import.meta.url);
-
-const __dirname = path.dirname(moduleURL.pathname);
-
-const { fileLoader, mergeTypes } = MergeSchema;
 
 
 export class ModxclubUserProcessor extends UserPayload {
@@ -466,125 +455,6 @@ export class ModxclubUserProcessor extends UserPayload {
 
     return result || this.prepareResponse();
 
-    /**
-     * Пытаемся получить пользователя по адресу.
-     * Если был получен, то авторизовываем. 
-     * Если нет, то создаем нового.
-     */
-
-
-    const generatedPassword = await this.generatePassword();
-
-    // console.log("ethSigninOrSignup generatedPassword", generatedPassword);
-
-
-    /**
-     * result возможен только если с аккаунтом был получен ранее авторизованный пользователь.
-     * Иначе создаем нового пользователя.
-     */
-    if (!result && EthAccountAuthed) {
-
-      result = await super.signup({
-        data: {
-          password: await this.createPassword(generatedPassword),
-          EthAccountAuthed,
-        },
-      });
-
-      // console.log("ethSigninOrSignup result", JSON.stringify(result, true, 2));
-
-    }
-
-
-    const {
-      success,
-      data,
-    } = result || {};
-
-
-
-    if (success && data) {
-
-      const {
-        id: userId,
-      } = data;
-
-
-      /**
-       * Если у аккаунт еще не указано кем он создан, привязываем его к текущему пользователю
-       */
-
-      // const ethAccount = await db.query.ethAccount({
-      //   where: {
-      //     address,
-      //   },
-      // }, `{
-      //   id
-      //   address
-      //   CreatedBy{
-      //     id
-      //   }
-      // }`);
-
-      // if (ethAccount && !ethAccount.CreatedBy) {
-
-      //   await db.mutation.updateEthAccount({
-      //     where: {
-      //       address,
-      //     },
-      //     data: {
-      //       CreatedBy: {
-      //         connect: {
-      //           id: userId,
-      //         },
-      //       },
-      //     },
-      //   })
-      //     .catch(console.error);
-
-      // }
-
-
-      /**
-       * Если аккаунт новый, привязываем к текущему пользователю
-       */
-      if (EthAccountAuthed && EthAccountAuthed.create) {
-
-        await db.mutation.updateEthAccount({
-          where: {
-            address,
-          },
-          data: {
-            CreatedBy: {
-              connect: {
-                id: userId,
-              },
-            },
-          },
-        })
-          .catch(console.error);
-
-      }
-
-
-      await db.mutation.updateUser({
-        data: {
-          LogedIns: {
-            create: {},
-          },
-          activated: true,
-        },
-        where: {
-          id: userId,
-        },
-      })
-        .catch(console.error);
-
-    }
-
-
-    return result || this.prepareResponse();
-
   }
 
 
@@ -650,7 +520,7 @@ export class ModxclubUserProcessor extends UserPayload {
       }
 
       const {
-        EthAccounts,
+        // EthAccounts,
         email,
       } = user;
 
@@ -746,40 +616,6 @@ export class ModxclubUserProcessor extends UserPayload {
 
 class ModxclubUserModule extends UserModule {
 
-
-  // constructor() {
-
-  //   super();
-
-  //   this.mergeModules([
-  //     SocialModule,
-  //   ]);
-
-  // }
-
-  // getApiSchema(types = []) {
-
-
-  //   let apiSchema = super.getApiSchema(types, [
-  //     "Mutation",
-
-  //     "UserCreateInput",
-
-  //     "ResourceCreateInput",
-  //     "ResourceUpdateInput",
-  //   ]);
-
-
-  //   let schema = fileLoader(__dirname + '/schema/api/', {
-  //     recursive: true,
-  //   });
-
-  //   apiSchema = mergeTypes([apiSchema.concat(schema)], { all: true });
-
-  //   return apiSchema;
-
-  // }
-
   async injectProjectLink(result, ctx) {
 
 
@@ -839,7 +675,7 @@ class ModxclubUserModule extends UserModule {
 
     let {
       search,
-      ...other
+      // ...other
     } = where || {};
 
 
@@ -972,7 +808,7 @@ class ModxclubUserModule extends UserModule {
               username = null,
               email = null,
               password = null,
-              ...data
+              // ...data
             },
           } = args;
 
