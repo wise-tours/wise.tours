@@ -54,12 +54,12 @@ export class NoticesMenu extends EditorComponent {
       user: currentUser,
     } = this.context;
 
-    const {
-    } = this.getEditorContext();
+    // const {
+    // } = this.getEditorContext();
 
-    const {
-      ...other
-    } = this.getComponentProps(this);
+    // const {
+    //   ...other
+    // } = this.getComponentProps(this);
 
     if (!currentUser) {
       return null;
@@ -70,7 +70,7 @@ export class NoticesMenu extends EditorComponent {
     } = currentUser;
 
     return <Notices
-      key={currentUserId}
+      key={currentUserId || 'NoticesMenu'}
       user={currentUser}
       classes={{}}
     />

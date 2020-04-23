@@ -77,7 +77,9 @@ export class JoinUserTechnologyButton extends EditorComponent {
     } = currentUser || {};
 
 
-    return <ObjectContext.Consumer>
+    return <ObjectContext.Consumer
+      key="JoinUserTechnologyButton"
+    >
 
       {objectContext => {
 

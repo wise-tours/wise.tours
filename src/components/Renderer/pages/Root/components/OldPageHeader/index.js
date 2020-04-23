@@ -32,39 +32,13 @@ class OldPageHeader extends EditorComponent {
   //   return MainMenu;
   // }
 
-  renderChildren(){
+  renderChildren() {
 
     return <MainMenu
-
+      key="OldPageHeader"
     />
   }
 
-
-  // renderMainView() {
-
-  //   // const {
-  //   //   marginTop,
-  //   //   marginBottom,
-  //   // } = this.getComponentProps(this);
-
-  //   const {
-  //     style,
-  //     marginTop,
-  //     marginBottom,
-  //     ...other
-  //   } = this.getRenderProps();
-
-  //   return <div
-  //     style={{
-  //       marginTop,
-  //       marginBottom,
-  //       ...style,
-  //     }}
-  //     {...other}
-  //   >
-  //     {super.renderMainView()}
-  //   </div>;
-  // }
 
 }
 

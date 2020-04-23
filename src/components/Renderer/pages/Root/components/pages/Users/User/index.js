@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import EditorComponent from "@prisma-cms/front-editor/lib/components/App/components/";
 
@@ -64,6 +63,7 @@ class UserPage extends EditorComponent {
     }
 
     return <CustomUserPage
+      key="UserPage"
       where={where}
     />;
   }

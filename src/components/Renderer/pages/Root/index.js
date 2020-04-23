@@ -9,9 +9,10 @@ import OldPages from './components/pages/OldPages';
 // import PdfView from './components/PdfView';
 import CreateUserPage from './components/pages/Users/User/Create';
 import Topic from './components/Resource/Topic';
-import Resource from './components/Resource';
-import ResourceFields from './components/Resource/Fields';
-import ResourceContent, { RichTextCustom } from './components/Resource/Fields/Field/ResourceContent';
+// import Resource from './components/Resource';
+// import ResourceFields from './components/Resource/Fields';
+// import ResourceContent from './components/Resource/Fields/Field/ResourceContent';
+import { RichTextCustom } from './components/Resource/Fields/Field/ResourceContent';
 import Comments from './components/Resource/Comments';
 import TopicBlog from './components/Resource/Topic/TopicBlog';
 import Youtube from './components/Resource/Fields/Field/Youtube';
@@ -36,9 +37,9 @@ export const CustomComponents = [
   Topic,
   Comments,
   TopicBlog,
-  Resource,
-  ResourceFields,
-  ResourceContent,
+  // Resource,
+  // ResourceFields,
+  // ResourceContent,
   RichTextCustom,
   Youtube,
   ChatRooms,

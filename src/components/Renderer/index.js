@@ -1,8 +1,6 @@
 
 import React from "react";
 
-import PropTypes from "prop-types";
-
 
 import { Renderer as PrismaCmsRenderer } from "@prisma-cms/front";
 import GraphqlVoyagerPage from "@prisma-cms/front/lib/components/pages/GraphqlVoyager";
@@ -154,41 +152,23 @@ export const styles = theme => {
 
 export class BoilerplateRenderer extends PrismaCmsRenderer {
 
-  // static contextTypes = {
-  //   ...PrismaCmsRenderer.contextTypes,
-  //   getQueryFragment: PropTypes.func.isRequired,
-  //   client: PropTypes.object.isRequired,
-  //   loadApiData: PropTypes.func.isRequired,
-  // }
 
+  renderProjects = (props) => {
+    const {
+      location: {
+        pathname,
+      },
+    } = props;
 
-  // static childContextTypes = {
-  //   ...PrismaCmsRenderer.childContextTypes,
-  //   UserLink: PropTypes.func,
-  //   ProjectLink: PropTypes.func,
-  //   TaskLink: PropTypes.func,
-  //   TransactionLink: PropTypes.func,
-  // }
-
-
-  // getChildContext() {
-
-  //   const {
-  //     UserLink,
-  //     ProjectLink,
-  //     TaskLink,
-  //     TransactionLink,
-  //   } = UI;
-
-  //   return {
-  //     ...super.getChildContext(),
-  //     UserLink,
-  //     ProjectLink,
-  //     TaskLink,
-  //     TransactionLink,
-  //   }
-  // }
-
+    return <ProjectPage
+      key={pathname}
+      where={{
+        // uri: "/projects/dvazhdy-proekt",
+        uri: pathname,
+      }}
+      {...props}
+    />
+  }
 
   getRoutes__() {
 
@@ -381,10 +361,12 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
       },
       {
         exact: true,
-        path: [
-          "/projects",
-          "/katalog-sajtov",
-        ],
+        path: "/projects",
+        component: ProjectsPage,
+      },
+      {
+        exact: true,
+        path: "/katalog-sajtov",
         component: ProjectsPage,
       },
       {
@@ -394,58 +376,19 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
       },
       {
         exact: false,
-        path: [
-          "/projects",
-          "/katalog-sajtov",
-        ],
-        // component: ProjectPage,
-        // path: "/projects/:projectId",
-        render: (props) => {
-          const {
-            location: {
-              pathname,
-            },
-          } = props;
-
-
-
-
-          return <ProjectPage
-            key={pathname}
-            where={{
-              // uri: "/projects/dvazhdy-proekt",
-              uri: pathname,
-            }}
-            {...props}
-          />
-        }
+        path: "/projects",
+        render: this.renderProjects,
+      },
+      {
+        exact: false,
+        path: "/katalog-sajtov",
+        render: this.renderProjects,
       },
       {
         exact: true,
         path: "/timers",
         component: TimersPage,
       },
-      // {
-      //   exact: true,
-      //   path: "/timers/:timerId",
-      //   render: (props) => {
-      //     const {
-      //       params,
-      //     } = props.match;
-
-      //     const {
-      //       timerId,
-      //     } = params || {};
-
-      //     return <TimerPage
-      //       key={timerId}
-      //       where={{
-      //         id: timerId,
-      //       }}
-      //       {...props}
-      //     />
-      //   }
-      // },
       {
         exact: true,
         path: "/tasks",
@@ -453,10 +396,7 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
       },
       {
         exact: false,
-        path: [
-          "/tasks/create/:projectId",
-          // "/tasks/create",
-        ],
+        path: "/tasks/create/:projectId",
         component: TaskCreatePage,
       },
       {
@@ -571,19 +511,12 @@ export class BoilerplateRenderer extends PrismaCmsRenderer {
       // },
     ].concat(baseRoutes);
 
-
-
-
+    // console.log('routes', routes);
 
     return routes;
   }
 
   getRoutes() {
-
-
-    const {
-      getQueryFragment,
-    } = this.context;
 
 
     let baseRoutes = super.getRoutes();

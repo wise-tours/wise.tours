@@ -50,11 +50,11 @@ export class ChatRooms extends EditorComponent {
 
   renderChildren() {
 
-    const {
-    } = this.context;
+    // const {
+    // } = this.context;
 
-    const {
-    } = this.getEditorContext();
+    // const {
+    // } = this.getEditorContext();
 
     const {
       ...other
@@ -63,6 +63,7 @@ export class ChatRooms extends EditorComponent {
     // return super.renderChildren();
 
     return <ChatRoomsPage
+      key="ChatRooms"
       {...other}
     />
   }

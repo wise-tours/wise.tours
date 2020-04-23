@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import EditorComponent from '@prisma-cms/front-editor/lib/components/App/components/';
 import EditableObject from '@prisma-cms/front-editor/lib/components/App/components/public/form/EditableObject';

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 
 import EditorComponent from "@prisma-cms/front-editor/lib/components/App/components/";
@@ -50,7 +49,9 @@ class SwitchTemplateLink extends EditorComponent {
 
   renderChildren() {
 
-    return <ObjectContext.Consumer>
+    return <ObjectContext.Consumer
+      key="SwitchTemplateLink"
+    >
       {context => {
 
 
@@ -92,33 +93,6 @@ class SwitchTemplateLink extends EditorComponent {
     </ObjectContext.Consumer>
 
   }
-
-
-  // renderMainView() {
-
-  //   // const {
-  //   //   marginTop,
-  //   //   marginBottom,
-  //   // } = this.getComponentProps(this);
-
-  //   const {
-  //     style,
-  //     marginTop,
-  //     marginBottom,
-  //     ...other
-  //   } = this.getRenderProps();
-
-  //   return <div
-  //     style={{
-  //       marginTop,
-  //       marginBottom,
-  //       ...style,
-  //     }}
-  //     {...other}
-  //   >
-  //     {super.renderMainView()}
-  //   </div>;
-  // }
 
 }
 

@@ -63,7 +63,9 @@ export class TopicsPage extends EditorComponent {
 
     // return super.renderChildren();
 
-    return <ConnectorContext.Consumer>
+    return <ConnectorContext.Consumer
+      key="TopicsPage"
+    >
       {connectorContext => {
 
         return <ForumView
