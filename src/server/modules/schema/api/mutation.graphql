@@ -1,41 +1,6 @@
 
 
 type Mutation {
-  
-  # signup(
-  #   data: UserCreateInput!
-  # ): AuthPayload!
-
-  # signin(
-  #   where: UserWhereUniqueInput!
-  #   password: String!
-  # ): AuthPayload!
-
-  # createUserProcessor(
-  #   data: UserCreateInput!
-  # ): UserResponse!
-  # updateUserProcessor(
-  #   where: UserWhereUniqueInput
-  #   data: UserUpdateInput!
-  # ): UserResponse!
-
-  # createResourceProcessor(
-  #   data: ResourceCreateInput!
-  # ): ResourceResponse!
-
-  # updateResourceProcessor(
-  #   data: ResourceUpdateInput!
-  #   where: ResourceWhereUniqueInput!
-  # ): ResourceResponse!
-
-  # singleUpload(
-  #   file: Upload!
-  # ): File
-
-  # multipleUpload(
-  #   files: [Upload!]!
-  # ): [File!]
-
 
   createBlogProcessor(
     data: BlogCreateInput!
@@ -66,21 +31,6 @@ type Mutation {
     where: ResourceWhereUniqueInput!
   ): ResourceResponse!
 
-
-  createTestProcessor(
-    data: TestCreateInput!
-  ): TestResponse!
-
-  updateTestProcessor(
-    data: TestUpdateInput!
-    where: TestWhereUniqueInput!
-  ): TestResponse!
-  
-
-  startImportProcessor(
-    sourceDbConfig: ImportDbConfig!
-    targetDbConfig: ImportDbConfig!
-  ): ImportResponse!
 
   # resetPassword(
   #   where: UserWhereUniqueInput!

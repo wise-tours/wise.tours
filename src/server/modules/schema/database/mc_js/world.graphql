@@ -1,4 +1,0 @@
-type World {
-  id: ID! @unique
-  # name: String! @unique
-}

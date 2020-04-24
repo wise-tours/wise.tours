@@ -21,13 +21,10 @@ import WebrtcModule from "@prisma-cms/webrtc-module";
 import MarketplaceModule from "@prisma-cms/marketplace-module";
 // import CooperationModule from "@prisma-cms/cooperation-module";
 
-import McJSModule from "@prisma-cms/mc.js-module";
-
 import UserModule from "./user";
 import ResourceModule from "./resource";
 import BlogModule from "./blog";
 import CooperationModule from "./cooperation";
-import TestModule from "./test";
 import Technology from "./technologies/Technology";
 import UserTechnology from "./technologies/UserTechnology";
 import TechnologyLesson from "./technologies/TechnologyLesson";
@@ -36,7 +33,6 @@ import TechnologyLessonUser from "./technologies/TechnologyLessonUser";
 import Comment from "./Comment";
 // import Gallery from "./Gallery";
 // import GalleryFile from "./GalleryFile";
-import FreeModeCampModule from "./FreeModeCamp";
 import OSMModule from "./OSM";
 import WorldModule from "./World";
 
@@ -62,7 +58,6 @@ class CoreModule extends PrismaModule {
     super(options);
 
     this.mergeModules([
-      McJSModule,
       MarketplaceModule,
       // CooperationModule,
       LogModule,
@@ -80,7 +75,6 @@ class CoreModule extends PrismaModule {
       ResourceModule,
       BlogModule,
       CooperationModule,
-      TestModule,
       UserModule,
       RouterModule,
       Technology,
@@ -97,7 +91,6 @@ class CoreModule extends PrismaModule {
 
       // Gallery,
       // GalleryFile,
-      FreeModeCampModule,
     ]
       .concat(
         EthereumModules,
