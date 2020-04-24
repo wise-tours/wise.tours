@@ -12,9 +12,6 @@ import CoreModule from "./modules";
 
 import Web3 from "web3";
 
-// import URI from "urijs";
-
-import socketIO from '@prisma-cms/mc.js-module/src/modules/external/mc.js/server/src/lib/server/socketIO';
 
 import dotenv from "dotenv";
 
@@ -106,15 +103,13 @@ const web3 = new Web3(GethServer);
 class Server extends PrismaCmsServer {
 
 
-  async beforeStart() {
+  // async beforeStart() {
 
-    // console.log("this.db", this.db);
+  //   // console.log("this.db", this.db);
 
-    socketIO(this.db);
+  //   await super.beforeStart();
 
-    await super.beforeStart();
-
-  }
+  // }
 
 }
 
