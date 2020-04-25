@@ -41,7 +41,8 @@ export default shield(
       createCountryProcessor: rules.isSudo,
       updateCountryProcessor: rules.isSudo,
       deleteCountry: rules.isSudo,
-
+      
+      exportTemplates: rules.isSudo,
     },
   },
   {

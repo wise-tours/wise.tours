@@ -18,6 +18,8 @@ import dotenv from "dotenv";
 import * as helpers from "./helpers";
 import permissions from './middleware/permissions';
 
+import seed from './seed';
+
 dotenv.config();
 
 
@@ -153,6 +155,12 @@ const startServer = async function () {
   });
 
   await server.startServer();
+
+  seed({
+    db: server.db,
+  });
+
+  // console.log('server.db', server.db);
 
 }
 

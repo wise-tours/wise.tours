@@ -36,6 +36,7 @@ import Comment from "./Comment";
 import OSMModule from "./OSM";
 import WorldModule from "./World";
 
+import ImportExportModule from './ImportExport';
 
 import chalk from 'chalk';
 
@@ -101,6 +102,7 @@ class CoreModule extends PrismaModule {
         UserModule,
         OSMModule,
         WorldModule,
+        ImportExportModule,
       ])
     );
 

@@ -1,0 +1,1715 @@
+[
+  {
+    "id": "ck932kc03005x0791u9llnmge",
+    "externalKey": null,
+    "name": "Page",
+    "description": null,
+    "component": "Page",
+    "props": {},
+    "components": [
+      {
+        "name": "AppBar",
+        "props": {},
+        "components": [
+          {
+            "name": "Grid",
+            "props": {
+              "container": true,
+              "spacing": 16,
+              "alignItems": "center"
+            },
+            "components": [
+              {
+                "name": "Grid",
+                "props": {
+                  "spacing": 0,
+                  "item": true
+                },
+                "components": [
+                  {
+                    "name": "Link",
+                    "props": {
+                      "to": "/",
+                      "style": {
+                        "color": "inherit"
+                      }
+                    },
+                    "components": [
+                      {
+                        "name": "Tag",
+                        "props": {
+                          "tag": "span"
+                        },
+                        "components": [
+                          {
+                            "name": "HtmlTag",
+                            "component": "HtmlTag",
+                            "props": {
+                              "text": "Сравнение стран для переезда"
+                            },
+                            "components": []
+                          }
+                        ],
+                        "component": "Tag"
+                      }
+                    ],
+                    "component": "Link"
+                  }
+                ],
+                "component": "Grid"
+              },
+              {
+                "name": "Grid",
+                "props": {
+                  "spacing": 0,
+                  "item": true
+                },
+                "components": [
+                  {
+                    "name": "Link",
+                    "props": {
+                      "style": {
+                        "color": "inherit"
+                      },
+                      "to": "/countries/"
+                    },
+                    "components": [
+                      {
+                        "name": "Tag",
+                        "props": {
+                          "tag": "span"
+                        },
+                        "components": [
+                          {
+                            "name": "HtmlTag",
+                            "component": "HtmlTag",
+                            "props": {
+                              "text": "Страны"
+                            },
+                            "components": []
+                          }
+                        ],
+                        "component": "Tag"
+                      }
+                    ],
+                    "component": "Link"
+                  }
+                ],
+                "component": "Grid"
+              },
+              {
+                "name": "Grid",
+                "props": {
+                  "spacing": 0,
+                  "item": true
+                },
+                "components": [
+                  {
+                    "name": "Link",
+                    "props": {
+                      "to": "/users/",
+                      "style": {
+                        "color": "inherit"
+                      }
+                    },
+                    "components": [
+                      {
+                        "name": "Tag",
+                        "props": {
+                          "tag": "span"
+                        },
+                        "components": [
+                          {
+                            "name": "HtmlTag",
+                            "component": "HtmlTag",
+                            "props": {
+                              "text": "Пользователи"
+                            },
+                            "components": []
+                          }
+                        ],
+                        "component": "Tag"
+                      }
+                    ],
+                    "component": "Link"
+                  }
+                ],
+                "component": "Grid"
+              },
+              {
+                "name": "Grid",
+                "props": {
+                  "spacing": 0,
+                  "item": true
+                },
+                "components": [
+                  {
+                    "name": "Link",
+                    "props": {
+                      "to": "/blogs/",
+                      "style": {
+                        "color": "inherit"
+                      }
+                    },
+                    "components": [
+                      {
+                        "name": "Tag",
+                        "props": {
+                          "tag": "span"
+                        },
+                        "components": [
+                          {
+                            "name": "HtmlTag",
+                            "component": "HtmlTag",
+                            "props": {
+                              "text": "Блоги"
+                            },
+                            "components": []
+                          }
+                        ],
+                        "component": "Tag"
+                      }
+                    ],
+                    "component": "Link"
+                  }
+                ],
+                "component": "Grid"
+              },
+              {
+                "name": "Grid",
+                "props": {
+                  "spacing": 0,
+                  "item": true
+                },
+                "components": [
+                  {
+                    "name": "Link",
+                    "props": {
+                      "to": "/topics/",
+                      "style": {
+                        "color": "inherit"
+                      }
+                    },
+                    "components": [
+                      {
+                        "name": "Tag",
+                        "props": {
+                          "tag": "span"
+                        },
+                        "components": [
+                          {
+                            "name": "HtmlTag",
+                            "component": "HtmlTag",
+                            "props": {
+                              "text": "Топики"
+                            },
+                            "components": []
+                          }
+                        ],
+                        "component": "Tag"
+                      }
+                    ],
+                    "component": "Link"
+                  }
+                ],
+                "component": "Grid"
+              },
+              {
+                "name": "Grid",
+                "props": {
+                  "spacing": 0,
+                  "xs": true,
+                  "item": true
+                },
+                "components": [],
+                "component": "Grid"
+              },
+              {
+                "name": "Grid",
+                "props": {
+                  "spacing": 0,
+                  "item": true
+                },
+                "components": [
+                  {
+                    "name": "Login",
+                    "props": {},
+                    "components": [],
+                    "component": "Login"
+                  }
+                ],
+                "component": "Grid"
+              }
+            ],
+            "component": "Grid"
+          }
+        ],
+        "component": "AppBar"
+      },
+      {
+        "name": "Section",
+        "props": {
+          "style": {
+            "marginLeft": "auto",
+            "marginRight": "auto",
+            "width": "100%",
+            "maxWidth": "1260px"
+          }
+        },
+        "components": [
+          {
+            "name": "EditorSwitch",
+            "props": {},
+            "components": [
+              {
+                "name": "EditorRoute",
+                "props": {
+                  "exact": true,
+                  "path": "/",
+                  "page_title": "Путешествуем с умом"
+                },
+                "components": [],
+                "component": "EditorRoute"
+              },
+              {
+                "name": "EditorRoute",
+                "props": {
+                  "exact": false,
+                  "path": "/users/"
+                },
+                "components": [
+                  {
+                    "id": "ck933o5gr00810791yf97ix7q",
+                    "name": "Users EditorSwitch",
+                    "component": "EditorSwitch",
+                    "props": {},
+                    "components": []
+                  }
+                ],
+                "component": "EditorRoute"
+              },
+              {
+                "name": "EditorRoute",
+                "props": {
+                  "exact": false,
+                  "path": "/countries/"
+                },
+                "components": [
+                  {
+                    "id": "ck952c30l07fq0864tloncji2",
+                    "name": "Countries EditorSwitch",
+                    "component": "EditorSwitch",
+                    "props": {},
+                    "components": []
+                  }
+                ],
+                "component": "EditorRoute"
+              },
+              {
+                "name": "EditorRoute",
+                "props": {
+                  "exact": false,
+                  "path": "/topics/"
+                },
+                "components": [
+                  {
+                    "name": "EditorSwitch",
+                    "props": {},
+                    "components": [
+                      {
+                        "name": "EditorRoute",
+                        "props": {
+                          "exact": true,
+                          "path": "/topics/",
+                          "page_title": "Публикации"
+                        },
+                        "components": [
+                          {
+                            "name": "Query",
+                            "props": {
+                              "query": "query resourcesConnection(\n  $first:Int\n  $skip:Int\n  $where:  ResourceWhereInput\n  $orderBy:  ResourceOrderByInput\n){\n  objectsConnection: resourcesConnection(\n    orderBy: $orderBy\n    first: $first\n    skip: $skip\n    where: $where\n  ){\n    aggregate{\n      count\n    }\n    edges{\n      node{\n        ...topic\n        CreatedBy{\n      \t\t...user\n        }\n        Comments(\n          orderBy: id_ASC\n        ){\n          id\n          updatedAt\n          CreatedBy{\n            ...user\n          }\n        }\n        Blog{\n          id\n          name\n          longtitle\n          uri\n        }\n        Tags{\n          Tag{\n            id\n            name\n          }\n        }\n      }\n    }\n  }\n}\n\nfragment topic on Resource @prismaCmsFragmentAllFields {\n  id\n}\n\nfragment user on User @prismaCmsFragmentAllFields {\n  id\n}"
+                            },
+                            "components": [
+                              {
+                                "name": "Connector",
+                                "props": {
+                                  "first": 12,
+                                  "filtersname": "filters",
+                                  "where": {
+                                    "type": "Topic"
+                                  },
+                                  "orderBy": "updatedAt_DESC"
+                                },
+                                "components": [
+                                  {
+                                    "name": "Grid",
+                                    "component": "Grid",
+                                    "props": {
+                                      "container": true,
+                                      "spacing": 8
+                                    },
+                                    "components": [
+                                      {
+                                        "name": "Grid",
+                                        "component": "Grid",
+                                        "props": {
+                                          "item": true,
+                                          "xs": 12
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "Grid",
+                                            "props": {
+                                              "container": true,
+                                              "spacing": 8,
+                                              "alignItems": "center"
+                                            },
+                                            "components": [
+                                              {
+                                                "name": "Grid",
+                                                "props": {
+                                                  "spacing": 0,
+                                                  "xs": true,
+                                                  "item": true
+                                                },
+                                                "components": [
+                                                  {
+                                                    "name": "Filters",
+                                                    "props": {},
+                                                    "components": [],
+                                                    "component": "Filters"
+                                                  }
+                                                ],
+                                                "component": "Grid"
+                                              },
+                                              {
+                                                "name": "Grid",
+                                                "props": {
+                                                  "spacing": 0,
+                                                  "item": true
+                                                },
+                                                "components": [
+                                                  {
+                                                    "name": "CreateObjectLink",
+                                                    "props": {
+                                                      "to": "/topics/create/"
+                                                    },
+                                                    "components": [
+                                                      {
+                                                        "name": "Button",
+                                                        "props": {
+                                                          "color": "primary",
+                                                          "size": "small",
+                                                          "variant": "raised"
+                                                        },
+                                                        "components": [
+                                                          {
+                                                            "name": "Tag",
+                                                            "props": {
+                                                              "tag": "span"
+                                                            },
+                                                            "components": [
+                                                              {
+                                                                "name": "HtmlTag",
+                                                                "component": "HtmlTag",
+                                                                "props": {
+                                                                  "text": "Добавить публикацию"
+                                                                },
+                                                                "components": []
+                                                              }
+                                                            ],
+                                                            "component": "Tag"
+                                                          }
+                                                        ],
+                                                        "component": "Button"
+                                                      }
+                                                    ],
+                                                    "component": "CreateObjectLink"
+                                                  }
+                                                ],
+                                                "component": "Grid"
+                                              }
+                                            ],
+                                            "component": "Grid"
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "name": "Grid",
+                                        "component": "Grid",
+                                        "props": {
+                                          "item": true,
+                                          "xs": 12
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "TopicsPage",
+                                            "props": {},
+                                            "components": [],
+                                            "component": "TopicsPage"
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "name": "Grid",
+                                        "component": "Grid",
+                                        "props": {
+                                          "item": true,
+                                          "xs": 12
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "Pagination",
+                                            "component": "Pagination",
+                                            "props": {},
+                                            "components": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "component": "Connector"
+                              }
+                            ],
+                            "component": "Query"
+                          }
+                        ],
+                        "component": "EditorRoute"
+                      },
+                      {
+                        "name": "EditorRoute",
+                        "props": {
+                          "exact": true,
+                          "path": "/topics/create/"
+                        },
+                        "components": [
+                          {
+                            "name": "Section",
+                            "props": {
+                              "style": {
+                                "marginLeft": "auto",
+                                "marginRight": "auto",
+                                "paddingLeft": "15px",
+                                "paddingRight": "15px",
+                                "maxWidth": "1260px"
+                              }
+                            },
+                            "components": [
+                              {
+                                "name": "Editable Topic",
+                                "props": {
+                                  "on_create_redirect_url": ":uri",
+                                  "new_object_cache_key": "new_topic",
+                                  "_dirty": {
+                                    "name": "",
+                                    "components": [
+                                      {
+                                        "name": "ContentEditor",
+                                        "props": {},
+                                        "components": [],
+                                        "component": "ContentEditor"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "components": [
+                                  {
+                                    "name": "Query",
+                                    "props": {
+                                      "query": "mutation create (\n  $data:TopicCreateInput!\n){\n  response: createTopicProcessor (\n    data:$data\n  ){\n    success\n    message\n    errors{\n      key\n      message\n    }\n    data{\n      ...resource\n    }\n  }\n}\n\nfragment resource on Resource @prismaCmsFragmentAllFields{\n  id\n}"
+                                    },
+                                    "components": [],
+                                    "component": "Query"
+                                  },
+                                  {
+                                    "name": "Query",
+                                    "props": {
+                                      "query": "mutation update (\n  $data:TopicUpdateInput!\n  $where:ResourceWhereUniqueInput!\n){\n  response: updateTopicProcessor (\n    data:$data\n    where:$where\n  ){\n    success\n    message\n    errors{\n      key\n      message\n    }\n    data{\n      ...resource\n    }\n  }\n}\n\nfragment resource on Resource @prismaCmsFragmentAllFields{\n  id\n}"
+                                    },
+                                    "components": [],
+                                    "component": "Query"
+                                  },
+                                  {
+                                    "name": "EditableView",
+                                    "props": {},
+                                    "components": [
+                                      {
+                                        "name": "Grid",
+                                        "props": {
+                                          "container": true,
+                                          "spacing": 8
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "Grid",
+                                            "props": {
+                                              "xs": true,
+                                              "item": true
+                                            },
+                                            "components": [
+                                              {
+                                                "name": "TextField",
+                                                "props": {
+                                                  "helperText": "Обязательное поле",
+                                                  "fullWidth": true,
+                                                  "label": "Название топика",
+                                                  "name": "name"
+                                                },
+                                                "components": [],
+                                                "component": "TextField"
+                                              }
+                                            ],
+                                            "component": "Grid"
+                                          },
+                                          {
+                                            "name": "Grid",
+                                            "props": {
+                                              "spacing": 0,
+                                              "item": true
+                                            },
+                                            "components": [
+                                              {
+                                                "name": "SudoOnly",
+                                                "props": {},
+                                                "components": [
+                                                  {
+                                                    "name": "TopicBlog",
+                                                    "props": {},
+                                                    "components": [],
+                                                    "component": "TopicBlog"
+                                                  }
+                                                ],
+                                                "component": "SudoOnly"
+                                              }
+                                            ],
+                                            "component": "Grid"
+                                          }
+                                        ],
+                                        "component": "Grid"
+                                      }
+                                    ],
+                                    "component": "EditableView"
+                                  },
+                                  {
+                                    "name": "Topic",
+                                    "props": {},
+                                    "components": [
+                                      {
+                                        "name": "ResourceFields",
+                                        "props": {},
+                                        "components": [],
+                                        "component": "ResourceFields"
+                                      },
+                                      {
+                                        "name": "Comments",
+                                        "props": {},
+                                        "components": [],
+                                        "component": "Comments"
+                                      }
+                                    ],
+                                    "component": "Topic"
+                                  },
+                                  {
+                                    "name": "Section",
+                                    "props": {},
+                                    "components": [
+                                      {
+                                        "name": "Grid",
+                                        "props": {
+                                          "container": true,
+                                          "spacing": 0
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "Grid",
+                                            "props": {
+                                              "xs": true,
+                                              "item": true
+                                            },
+                                            "components": [],
+                                            "component": "Grid"
+                                          },
+                                          {
+                                            "name": "Grid",
+                                            "props": {
+                                              "item": true
+                                            },
+                                            "components": [
+                                              {
+                                                "name": "EditableObjectButtons",
+                                                "props": {},
+                                                "components": [],
+                                                "component": "EditableObjectButtons"
+                                              }
+                                            ],
+                                            "component": "Grid"
+                                          }
+                                        ],
+                                        "component": "Grid"
+                                      }
+                                    ],
+                                    "component": "Section"
+                                  }
+                                ],
+                                "component": "EditableObject"
+                              }
+                            ],
+                            "component": "Section"
+                          }
+                        ],
+                        "component": "EditorRoute"
+                      },
+                      {
+                        "name": "EditorRoute",
+                        "props": {
+                          "exact": false,
+                          "path": "/topics/:alias+*"
+                        },
+                        "components": [
+                          {
+                            "name": "Topic router switch",
+                            "props": {},
+                            "components": [
+                              {
+                                "name": "EditorRoute",
+                                "props": {
+                                  "exact": false,
+                                  "path": "/:uri*"
+                                },
+                                "components": [
+                                  {
+                                    "name": "Query",
+                                    "props": {
+                                      "query": "query resource($where: ResourceWhereUniqueInput!) {\n  object: resource(where: $where) {\n    ...resource\n    CreatedBy {\n      ...user\n    }\n    Comments {\n      ...resource\n      CreatedBy {\n        ...user\n      }\n    }\n    Blog {\n      ...resource\n    }\n  }\n}\n\nfragment resource on Resource @prismaCmsFragmentAllFields {\n  id\n}\n\nfragment user on User @prismaCmsFragmentAllFields {\n  id\n}\n"
+                                    },
+                                    "components": [
+                                      {
+                                        "name": "ObjectConnector",
+                                        "props": {
+                                          "filtersname": "filters",
+                                          "where": {}
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "ObjectView",
+                                            "props": {},
+                                            "components": [
+                                              {
+                                                "name": "Editable Topic",
+                                                "props": {
+                                                  "on_create_redirect_url": ":uri",
+                                                  "new_object_cache_key": "topic",
+                                                  "show_header": false
+                                                },
+                                                "components": [
+                                                  {
+                                                    "name": "Query",
+                                                    "props": {
+                                                      "query": "mutation create (\n  $data:TopicCreateInput!\n){\n  response: createTopicProcessor (\n    data:$data\n  ){\n    success\n    message\n    errors{\n      key\n      message\n    }\n    data{\n      ...resource\n    }\n  }\n}\n\nfragment resource on Resource @prismaCmsFragmentAllFields{\n  id\n}"
+                                                    },
+                                                    "components": [],
+                                                    "component": "Query"
+                                                  },
+                                                  {
+                                                    "name": "Query",
+                                                    "props": {
+                                                      "query": "mutation update (\n  $data:TopicUpdateInput!\n  $where:ResourceWhereUniqueInput!\n){\n  response: updateTopicProcessor (\n    data:$data\n    where:$where\n  ){\n    success\n    message\n    errors{\n      key\n      message\n    }\n    data{\n      ...resource\n    }\n  }\n}\n\nfragment resource on Resource @prismaCmsFragmentAllFields{\n  id\n}"
+                                                    },
+                                                    "components": [],
+                                                    "component": "Query"
+                                                  },
+                                                  {
+                                                    "name": "EditableView",
+                                                    "props": {},
+                                                    "components": [
+                                                      {
+                                                        "name": "Grid",
+                                                        "props": {
+                                                          "container": true,
+                                                          "spacing": 8
+                                                        },
+                                                        "components": [
+                                                          {
+                                                            "name": "Grid",
+                                                            "props": {
+                                                              "xs": true,
+                                                              "item": true
+                                                            },
+                                                            "components": [
+                                                              {
+                                                                "name": "TextField",
+                                                                "props": {
+                                                                  "helperText": "Обязательное поле",
+                                                                  "fullWidth": true,
+                                                                  "label": "Название топика",
+                                                                  "name": "name"
+                                                                },
+                                                                "components": [],
+                                                                "component": "TextField"
+                                                              }
+                                                            ],
+                                                            "component": "Grid"
+                                                          },
+                                                          {
+                                                            "name": "Grid",
+                                                            "props": {
+                                                              "spacing": 0,
+                                                              "item": true
+                                                            },
+                                                            "components": [],
+                                                            "component": "Grid"
+                                                          }
+                                                        ],
+                                                        "component": "Grid"
+                                                      }
+                                                    ],
+                                                    "component": "EditableView"
+                                                  },
+                                                  {
+                                                    "name": "Grid",
+                                                    "props": {
+                                                      "container": true,
+                                                      "spacing": 8,
+                                                      "alignItems": "center"
+                                                    },
+                                                    "components": [
+                                                      {
+                                                        "name": "Grid",
+                                                        "props": {
+                                                          "spacing": 0,
+                                                          "item": true
+                                                        },
+                                                        "components": [
+                                                          {
+                                                            "name": "Typography",
+                                                            "props": {
+                                                              "variant": "title"
+                                                            },
+                                                            "components": [
+                                                              {
+                                                                "name": "NamedField",
+                                                                "props": {
+                                                                  "name": "Reviewed",
+                                                                  "tag": "div"
+                                                                },
+                                                                "components": [
+                                                                  {
+                                                                    "name": "Tag",
+                                                                    "props": {
+                                                                      "tag": "span"
+                                                                    },
+                                                                    "components": [
+                                                                      {
+                                                                        "name": "HtmlTag",
+                                                                        "component": "HtmlTag",
+                                                                        "props": {
+                                                                          "text": "Отзывы о пользователе "
+                                                                        },
+                                                                        "components": []
+                                                                      }
+                                                                    ],
+                                                                    "component": "Tag"
+                                                                  },
+                                                                  {
+                                                                    "name": "UserLink",
+                                                                    "props": {},
+                                                                    "components": [],
+                                                                    "component": "UserLink"
+                                                                  },
+                                                                  {
+                                                                    "name": "DefaultValue",
+                                                                    "props": {},
+                                                                    "components": [
+                                                                      {
+                                                                        "name": "NamedField",
+                                                                        "props": {
+                                                                          "name": "name"
+                                                                        },
+                                                                        "components": [],
+                                                                        "component": "NamedField"
+                                                                      }
+                                                                    ],
+                                                                    "component": "DefaultValue"
+                                                                  }
+                                                                ],
+                                                                "component": "NamedField"
+                                                              }
+                                                            ],
+                                                            "component": "Typography"
+                                                          }
+                                                        ],
+                                                        "component": "Grid"
+                                                      },
+                                                      {
+                                                        "name": "Grid",
+                                                        "props": {
+                                                          "spacing": 0,
+                                                          "xs": true,
+                                                          "item": true
+                                                        },
+                                                        "components": [],
+                                                        "component": "Grid"
+                                                      },
+                                                      {
+                                                        "name": "Grid",
+                                                        "props": {
+                                                          "spacing": 0,
+                                                          "item": true
+                                                        },
+                                                        "components": [
+                                                          {
+                                                            "name": "TopicBlog",
+                                                            "props": {},
+                                                            "components": [],
+                                                            "component": "TopicBlog"
+                                                          }
+                                                        ],
+                                                        "component": "Grid"
+                                                      },
+                                                      {
+                                                        "name": "Grid",
+                                                        "props": {
+                                                          "spacing": 0,
+                                                          "item": true
+                                                        },
+                                                        "components": [
+                                                          {
+                                                            "name": "EditableObjectButtons",
+                                                            "props": {},
+                                                            "components": [],
+                                                            "component": "EditableObjectButtons"
+                                                          }
+                                                        ],
+                                                        "component": "Grid"
+                                                      },
+                                                      {
+                                                        "name": "Grid",
+                                                        "props": {
+                                                          "spacing": 0,
+                                                          "item": true
+                                                        },
+                                                        "components": [
+                                                          {
+                                                            "name": "CreatedBy",
+                                                            "props": {},
+                                                            "components": [],
+                                                            "component": "CreatedBy"
+                                                          }
+                                                        ],
+                                                        "component": "Grid"
+                                                      }
+                                                    ],
+                                                    "component": "Grid"
+                                                  },
+                                                  {
+                                                    "name": "Topic",
+                                                    "props": {},
+                                                    "components": [
+                                                      {
+                                                        "name": "ResourceFields",
+                                                        "props": {},
+                                                        "components": [],
+                                                        "component": "ResourceFields"
+                                                      },
+                                                      {
+                                                        "name": "Comments",
+                                                        "props": {},
+                                                        "components": [],
+                                                        "component": "Comments"
+                                                      }
+                                                    ],
+                                                    "component": "Topic"
+                                                  }
+                                                ],
+                                                "component": "EditableObject"
+                                              },
+                                              {
+                                                "name": "DefaultValue",
+                                                "props": {},
+                                                "components": [
+                                                  {
+                                                    "name": "Page404",
+                                                    "props": {},
+                                                    "components": [],
+                                                    "component": "Page404"
+                                                  }
+                                                ],
+                                                "component": "DefaultValue"
+                                              }
+                                            ],
+                                            "component": "ObjectView"
+                                          }
+                                        ],
+                                        "component": "ObjectConnector"
+                                      }
+                                    ],
+                                    "component": "Query"
+                                  }
+                                ],
+                                "component": "EditorRoute"
+                              }
+                            ],
+                            "component": "EditorSwitch"
+                          }
+                        ],
+                        "component": "EditorRoute"
+                      }
+                    ],
+                    "component": "EditorSwitch"
+                  }
+                ],
+                "component": "EditorRoute"
+              },
+              {
+                "name": "EditorRoute",
+                "props": {
+                  "exact": false
+                },
+                "components": [
+                  {
+                    "name": "OldPages",
+                    "props": {},
+                    "components": [],
+                    "component": "OldPages"
+                  }
+                ],
+                "component": "EditorRoute"
+              }
+            ],
+            "component": "EditorSwitch"
+          }
+        ],
+        "component": "Section"
+      }
+    ],
+    "vars": null,
+    "rank": 1000,
+    "Parent": null
+  },
+  {
+    "id": "ck952c30l07fq0864tloncji2",
+    "externalKey": null,
+    "name": "Countries EditorSwitch",
+    "description": null,
+    "component": "EditorSwitch",
+    "props": {},
+    "components": [
+      {
+        "name": "EditorRoute",
+        "props": {
+          "exact": true,
+          "path": "/countries/",
+          "page_title": "Страны"
+        },
+        "components": [
+          {
+            "name": "Query",
+            "props": {
+              "query": "query countriesConnection (\n  $where: CountryWhereInput\n  $orderBy: CountryOrderByInput\n  $first: Int = 10\n  $skip: Int\n){\n  objectsConnection: countriesConnection (\n    where: $where\n    orderBy: $orderBy\n\t\tfirst: $first\n    skip: $skip\n  ){\n    aggregate{\n      count\n    }\n    edges{\n      node{\n        ...country\n        OsmNode {\n          ...osmNode\n        }\n      }\n    }\n  }\n}\n\nfragment country on Country @prismaCmsFragmentAllFields{\n  id\n}\n\nfragment osmNode on OsmNode @prismaCmsFragmentAllFields {\n  id\n}\n\n"
+            },
+            "components": [
+              {
+                "name": "Connector",
+                "props": {
+                  "first": 12,
+                  "filtersname": "filters",
+                  "orderBy": "name_ASC"
+                },
+                "components": [
+                  {
+                    "name": "Grid",
+                    "component": "Grid",
+                    "props": {
+                      "container": true,
+                      "spacing": 8
+                    },
+                    "components": [
+                      {
+                        "name": "Grid",
+                        "component": "Grid",
+                        "props": {
+                          "item": true,
+                          "xs": 12
+                        },
+                        "components": [
+                          {
+                            "name": "Filters",
+                            "component": "Filters",
+                            "props": {},
+                            "components": []
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Grid",
+                        "component": "Grid",
+                        "props": {
+                          "item": true,
+                          "xs": 12
+                        },
+                        "components": [
+                          {
+                            "name": "Table",
+                            "props": {
+                              "className": "prisma-cms bordered"
+                            },
+                            "components": [
+                              {
+                                "name": "TableRow",
+                                "props": {},
+                                "components": [
+                                  {
+                                    "name": "TableCell",
+                                    "props": {
+                                      "tag": "th"
+                                    },
+                                    "components": [
+                                      {
+                                        "name": "Tag",
+                                        "props": {
+                                          "tag": "span"
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "HtmlTag",
+                                            "component": "HtmlTag",
+                                            "props": {
+                                              "text": "Страна"
+                                            },
+                                            "components": []
+                                          }
+                                        ],
+                                        "component": "Tag"
+                                      }
+                                    ],
+                                    "component": "TableCell"
+                                  },
+                                  {
+                                    "name": "TableCell",
+                                    "props": {
+                                      "tag": "th"
+                                    },
+                                    "components": [
+                                      {
+                                        "name": "Tag",
+                                        "props": {
+                                          "tag": "span"
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "HtmlTag",
+                                            "component": "HtmlTag",
+                                            "props": {
+                                              "text": "Координаты"
+                                            },
+                                            "components": []
+                                          }
+                                        ],
+                                        "component": "Tag"
+                                      }
+                                    ],
+                                    "component": "TableCell"
+                                  },
+                                  {
+                                    "name": "TableCell",
+                                    "props": {
+                                      "tag": "th"
+                                    },
+                                    "components": [
+                                      {
+                                        "name": "Tag",
+                                        "props": {
+                                          "tag": "span"
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "HtmlTag",
+                                            "component": "HtmlTag",
+                                            "props": {
+                                              "text": "Численность (человек)"
+                                            },
+                                            "components": []
+                                          }
+                                        ],
+                                        "component": "Tag"
+                                      }
+                                    ],
+                                    "component": "TableCell"
+                                  },
+                                  {
+                                    "name": "TableCell",
+                                    "props": {
+                                      "tag": "th"
+                                    },
+                                    "components": [
+                                      {
+                                        "name": "Tag",
+                                        "props": {
+                                          "tag": "span"
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "HtmlTag",
+                                            "component": "HtmlTag",
+                                            "props": {
+                                              "text": "Площадь (кв. км.)"
+                                            },
+                                            "components": []
+                                          }
+                                        ],
+                                        "component": "Tag"
+                                      }
+                                    ],
+                                    "component": "TableCell"
+                                  }
+                                ],
+                                "component": "TableRow"
+                              },
+                              {
+                                "name": "ListView",
+                                "props": {},
+                                "components": [
+                                  {
+                                    "name": "EditableObject",
+                                    "props": {
+                                      "show_header": false
+                                    },
+                                    "components": [
+                                      {
+                                        "name": "Query",
+                                        "props": {},
+                                        "components": [],
+                                        "component": "Query"
+                                      },
+                                      {
+                                        "name": "TableRow",
+                                        "props": {},
+                                        "components": [
+                                          {
+                                            "name": "TableCell",
+                                            "props": {},
+                                            "components": [
+                                              {
+                                                "name": "Link",
+                                                "props": {
+                                                  "to": "/countries/:id/"
+                                                },
+                                                "components": [
+                                                  {
+                                                    "name": "NamedField",
+                                                    "props": {
+                                                      "name": "name"
+                                                    },
+                                                    "components": [],
+                                                    "component": "NamedField"
+                                                  }
+                                                ],
+                                                "component": "Link"
+                                              }
+                                            ],
+                                            "component": "TableCell"
+                                          },
+                                          {
+                                            "name": "TableCell",
+                                            "props": {},
+                                            "components": [
+                                              {
+                                                "name": "NamedField",
+                                                "props": {
+                                                  "tag": "div",
+                                                  "name": "OsmNode"
+                                                },
+                                                "components": [
+                                                  {
+                                                    "name": "GoogleMapLink",
+                                                    "props": {},
+                                                    "components": [],
+                                                    "component": "GoogleMapLink"
+                                                  }
+                                                ],
+                                                "component": "NamedField"
+                                              }
+                                            ],
+                                            "component": "TableCell"
+                                          },
+                                          {
+                                            "name": "TableCell",
+                                            "props": {},
+                                            "components": [
+                                              {
+                                                "name": "NamedField",
+                                                "props": {
+                                                  "name": "population"
+                                                },
+                                                "components": [],
+                                                "component": "NamedField"
+                                              }
+                                            ],
+                                            "component": "TableCell"
+                                          },
+                                          {
+                                            "name": "TableCell",
+                                            "props": {},
+                                            "components": [
+                                              {
+                                                "name": "NamedField",
+                                                "props": {
+                                                  "name": "sqkm"
+                                                },
+                                                "components": [],
+                                                "component": "NamedField"
+                                              }
+                                            ],
+                                            "component": "TableCell"
+                                          }
+                                        ],
+                                        "component": "TableRow"
+                                      }
+                                    ],
+                                    "component": "EditableObject"
+                                  }
+                                ],
+                                "component": "ListView"
+                              }
+                            ],
+                            "component": "Table"
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Grid",
+                        "component": "Grid",
+                        "props": {
+                          "item": true,
+                          "xs": 12
+                        },
+                        "components": [
+                          {
+                            "name": "Pagination",
+                            "component": "Pagination",
+                            "props": {},
+                            "components": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "component": "Connector"
+              }
+            ],
+            "component": "Query"
+          }
+        ],
+        "component": "EditorRoute"
+      },
+      {
+        "name": "EditorRoute",
+        "props": {
+          "exact": true,
+          "path": "/countries/:id/"
+        },
+        "components": [
+          {
+            "name": "Query",
+            "props": {
+              "query": "query country (\n  $where: CountryWhereUniqueInput!\n){\n  object: country (\n    where: $where \n  ){\n    ...country\n    OsmNode {\n      ...osmNode\n    }\n  }\n}\n\nfragment country on Country @prismaCmsFragmentAllFields {\n  id\n}\n\nfragment osmNode on OsmNode @prismaCmsFragmentAllFields {\n  id\n}\n"
+            },
+            "components": [
+              {
+                "name": "ObjectConnector",
+                "props": {
+                  "filtersname": "filters",
+                  "where": {}
+                },
+                "components": [
+                  {
+                    "name": "ObjectView",
+                    "component": "ObjectView",
+                    "props": {
+                      "field_as_pagetitle": "name"
+                    },
+                    "components": [
+                      {
+                        "name": "EditableObject",
+                        "props": {},
+                        "components": [
+                          {
+                            "name": "Query",
+                            "props": {
+                              "query": "mutation update (\n  $where: CountryWhereUniqueInput!\n  $data: CountryUpdateInput!\n){\n  response: updateCountryProcessor (\n    data: $data\n    where: $where\n  ){\n    success\n    message\n    errors{\n      key\n      message\n    }\n    data{\n      ...country\n    }\n  }\n}\n\nfragment country on Country @prismaCmsFragmentAllFields{\n  id\n}"
+                            },
+                            "components": [],
+                            "component": "Query"
+                          },
+                          {
+                            "name": "EditableView",
+                            "props": {},
+                            "components": [
+                              {
+                                "name": "TextField",
+                                "props": {
+                                  "fullWidth": true,
+                                  "label": "Страна",
+                                  "name": "name"
+                                },
+                                "components": [],
+                                "component": "TextField"
+                              }
+                            ],
+                            "component": "EditableView"
+                          },
+                          {
+                            "name": "Table",
+                            "props": {
+                              "className": "prisma-cms bordered"
+                            },
+                            "components": [
+                              {
+                                "name": "TableRow",
+                                "props": {},
+                                "components": [
+                                  {
+                                    "name": "TableCell",
+                                    "props": {
+                                      "tag": "th"
+                                    },
+                                    "components": [
+                                      {
+                                        "name": "Tag",
+                                        "props": {
+                                          "tag": "span"
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "HtmlTag",
+                                            "component": "HtmlTag",
+                                            "props": {
+                                              "text": "Координаты: "
+                                            },
+                                            "components": []
+                                          }
+                                        ],
+                                        "component": "Tag"
+                                      }
+                                    ],
+                                    "component": "TableCell"
+                                  },
+                                  {
+                                    "name": "TableCell",
+                                    "props": {},
+                                    "components": [
+                                      {
+                                        "name": "NamedField",
+                                        "props": {
+                                          "tag": "div",
+                                          "name": "OsmNode"
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "GoogleMapLink",
+                                            "props": {},
+                                            "components": [],
+                                            "component": "GoogleMapLink"
+                                          }
+                                        ],
+                                        "component": "NamedField"
+                                      }
+                                    ],
+                                    "component": "TableCell"
+                                  }
+                                ],
+                                "component": "TableRow"
+                              },
+                              {
+                                "name": "TableRow",
+                                "props": {},
+                                "components": [
+                                  {
+                                    "name": "TableCell",
+                                    "props": {
+                                      "tag": "th"
+                                    },
+                                    "components": [
+                                      {
+                                        "name": "Tag",
+                                        "props": {
+                                          "tag": "span"
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "HtmlTag",
+                                            "component": "HtmlTag",
+                                            "props": {
+                                              "text": "Численность (человек)"
+                                            },
+                                            "components": []
+                                          }
+                                        ],
+                                        "component": "Tag"
+                                      }
+                                    ],
+                                    "component": "TableCell"
+                                  },
+                                  {
+                                    "name": "TableCell",
+                                    "props": {},
+                                    "components": [
+                                      {
+                                        "name": "NamedField",
+                                        "props": {
+                                          "name": "population"
+                                        },
+                                        "components": [],
+                                        "component": "NamedField"
+                                      }
+                                    ],
+                                    "component": "TableCell"
+                                  }
+                                ],
+                                "component": "TableRow"
+                              },
+                              {
+                                "name": "TableRow",
+                                "props": {},
+                                "components": [
+                                  {
+                                    "name": "TableCell",
+                                    "props": {
+                                      "tag": "th"
+                                    },
+                                    "components": [
+                                      {
+                                        "name": "Tag",
+                                        "props": {
+                                          "tag": "span"
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "HtmlTag",
+                                            "component": "HtmlTag",
+                                            "props": {
+                                              "text": "Площадь (кв. км.)"
+                                            },
+                                            "components": []
+                                          }
+                                        ],
+                                        "component": "Tag"
+                                      }
+                                    ],
+                                    "component": "TableCell"
+                                  },
+                                  {
+                                    "name": "TableCell",
+                                    "props": {},
+                                    "components": [
+                                      {
+                                        "name": "NamedField",
+                                        "props": {
+                                          "name": "sqkm"
+                                        },
+                                        "components": [],
+                                        "component": "NamedField"
+                                      }
+                                    ],
+                                    "component": "TableCell"
+                                  }
+                                ],
+                                "component": "TableRow"
+                              }
+                            ],
+                            "component": "Table"
+                          },
+                          {
+                            "name": "NamedField",
+                            "props": {
+                              "tag": "div",
+                              "name": "OsmNode"
+                            },
+                            "components": [
+                              {
+                                "name": "CountryMap",
+                                "props": {},
+                                "components": [],
+                                "component": "CountryMap"
+                              }
+                            ],
+                            "component": "NamedField"
+                          }
+                        ],
+                        "component": "EditableObject"
+                      }
+                    ]
+                  }
+                ],
+                "component": "ObjectConnector"
+              }
+            ],
+            "component": "Query"
+          }
+        ],
+        "component": "EditorRoute"
+      }
+    ],
+    "vars": null,
+    "rank": 0,
+    "Parent": {
+      "id": "ck932kc03005x0791u9llnmge"
+    }
+  },
+  {
+    "id": "ck933o5gr00810791yf97ix7q",
+    "externalKey": null,
+    "name": "Users EditorSwitch",
+    "description": null,
+    "component": "EditorSwitch",
+    "props": {},
+    "components": [
+      {
+        "name": "EditorRoute",
+        "props": {
+          "exact": true,
+          "path": "/users/",
+          "page_title": "Пользователи"
+        },
+        "components": [
+          {
+            "name": "Query",
+            "props": {
+              "query": "query users {\n  objectsConnection: usersConnection {\n    aggregate{\n      count\n    }\n    edges{\n      node{\n        ...user\n      }\n    }\n  }\n}\n\nfragment user on User @prismaCmsFragmentAllFields {\n  id\n}\n\n"
+            },
+            "components": [
+              {
+                "name": "Connector",
+                "props": {
+                  "first": 12,
+                  "filtersname": "filters"
+                },
+                "components": [
+                  {
+                    "name": "Grid",
+                    "component": "Grid",
+                    "props": {
+                      "container": true,
+                      "spacing": 8
+                    },
+                    "components": [
+                      {
+                        "name": "Grid",
+                        "component": "Grid",
+                        "props": {
+                          "item": true,
+                          "xs": 12
+                        },
+                        "components": [
+                          {
+                            "name": "Filters",
+                            "component": "Filters",
+                            "props": {},
+                            "components": []
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Grid",
+                        "component": "Grid",
+                        "props": {
+                          "item": true,
+                          "xs": 12
+                        },
+                        "components": [
+                          {
+                            "name": "Grid",
+                            "component": "Grid",
+                            "props": {
+                              "container": true,
+                              "spacing": 8
+                            },
+                            "components": [
+                              {
+                                "name": "ListView",
+                                "component": "ListView",
+                                "props": {
+                                  "style": {
+                                    "display": "flex",
+                                    "width": "100%",
+                                    "flexWrap": "wrap"
+                                  }
+                                },
+                                "components": [
+                                  {
+                                    "name": "Grid",
+                                    "component": "Grid",
+                                    "props": {
+                                      "item": true,
+                                      "xs": 12,
+                                      "md": 6,
+                                      "xl": 3
+                                    },
+                                    "components": [
+                                      {
+                                        "name": "UserLink",
+                                        "props": {},
+                                        "components": [],
+                                        "component": "UserLink"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Grid",
+                        "component": "Grid",
+                        "props": {
+                          "item": true,
+                          "xs": 12
+                        },
+                        "components": [
+                          {
+                            "name": "Pagination",
+                            "component": "Pagination",
+                            "props": {},
+                            "components": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "component": "Connector"
+              }
+            ],
+            "component": "Query"
+          }
+        ],
+        "component": "EditorRoute"
+      },
+      {
+        "name": "EditorRoute",
+        "props": {
+          "exact": true,
+          "path": "/users/:id/"
+        },
+        "components": [
+          {
+            "name": "UserPage",
+            "props": {},
+            "components": [],
+            "component": "UserPage"
+          }
+        ],
+        "component": "EditorRoute"
+      }
+    ],
+    "vars": null,
+    "rank": 0,
+    "Parent": {
+      "id": "ck932kc03005x0791u9llnmge"
+    }
+  }
+]
