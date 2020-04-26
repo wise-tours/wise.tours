@@ -1,0 +1,13 @@
+
+"""Тип ГеоОбъекта"""
+type GeoObjectType {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String @unique
+  code: ID @unique
+
+  GeoObjects: [GeoObject!]!
+
+  CreatedBy: User
+}

@@ -41,8 +41,12 @@ export default shield(
       createCountryProcessor: rules.isSudo,
       updateCountryProcessor: rules.isSudo,
       deleteCountry: rules.isSudo,
-      
+
       exportTemplates: rules.isSudo,
+
+      createGeoObjectTypeProcessor: rules.isSudo,
+      updateGeoObjectTypeProcessor: rules.isSudo,
+      deleteGeoObjectType: rules.isSudo,
     },
   },
   {

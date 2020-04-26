@@ -1,0 +1,21 @@
+
+type GeoObject {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String
+
+  """Численность населения"""
+  population: Int
+
+  """Прощадь в километрах"""
+  sqkm: Float
+
+  type: GeoObjectType!
+
+  CreatedBy: User
+  
+  OsmNode: OsmNode @relation(name: "OsmNodeGeoObject" link: INLINE)
+}
+
+
