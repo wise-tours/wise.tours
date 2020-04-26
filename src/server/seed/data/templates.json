@@ -964,6 +964,284 @@
               {
                 "name": "EditorRoute",
                 "props": {
+                  "exact": false,
+                  "path": "/geoobjecttypes/"
+                },
+                "components": [
+                  {
+                    "name": "GeoObjectTypes",
+                    "description": null,
+                    "props": {},
+                    "component": "EditorSwitch",
+                    "components": [
+                      {
+                        "name": "EditorRoute",
+                        "props": {
+                          "exact": true,
+                          "path": "/geoobjecttypes/"
+                        },
+                        "components": [
+                          {
+                            "name": "Query",
+                            "props": {
+                              "query": "query geoObjectTypesConnection (\n  $where: GeoObjectTypeWhereInput\n  $orderBy: GeoObjectTypeOrderByInput\n  $first: Int = 10\n  $skip: Int\n){\n  objectsConnection: geoObjectTypesConnection (\n    where: $where\n    orderBy: $orderBy\n    skip: $skip\n    first: $first\n  ){\n    aggregate {\n      count\n    }\n    edges{\n      node {\n        ...geoObjectType\n      }\n    }\n  }\n}\n\nfragment geoObjectType on GeoObjectType @prismaCmsFragmentAllFields {\n  id\n}\n"
+                            },
+                            "components": [
+                              {
+                                "name": "Connector",
+                                "props": {
+                                  "first": 12,
+                                  "filtersname": "filters"
+                                },
+                                "components": [
+                                  {
+                                    "name": "Grid",
+                                    "component": "Grid",
+                                    "props": {
+                                      "container": true,
+                                      "spacing": 8
+                                    },
+                                    "components": [
+                                      {
+                                        "name": "Grid",
+                                        "component": "Grid",
+                                        "props": {
+                                          "item": true,
+                                          "xs": 12
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "Filters",
+                                            "component": "Filters",
+                                            "props": {},
+                                            "components": []
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "name": "Grid",
+                                        "component": "Grid",
+                                        "props": {
+                                          "item": true,
+                                          "xs": 12
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "Table",
+                                            "props": {},
+                                            "components": [
+                                              {
+                                                "name": "TableRow",
+                                                "props": {},
+                                                "components": [],
+                                                "component": "TableRow"
+                                              },
+                                              {
+                                                "name": "ListView",
+                                                "props": {},
+                                                "components": [
+                                                  {
+                                                    "name": "EditableObject",
+                                                    "props": {
+                                                      "show_header": false
+                                                    },
+                                                    "components": [
+                                                      {
+                                                        "name": "TableRow",
+                                                        "props": {},
+                                                        "components": [
+                                                          {
+                                                            "name": "TableCell",
+                                                            "props": {},
+                                                            "components": [
+                                                              {
+                                                                "name": "Link",
+                                                                "props": {
+                                                                  "to": "/geoobjecttypes/:id/"
+                                                                },
+                                                                "components": [
+                                                                  {
+                                                                    "name": "NamedField",
+                                                                    "props": {
+                                                                      "name": "name",
+                                                                      "tag": "div"
+                                                                    },
+                                                                    "components": [
+                                                                      {
+                                                                        "name": "DefaultValue",
+                                                                        "props": {},
+                                                                        "components": [
+                                                                          {
+                                                                            "name": "NamedField",
+                                                                            "props": {
+                                                                              "name": "id"
+                                                                            },
+                                                                            "components": [],
+                                                                            "component": "NamedField"
+                                                                          }
+                                                                        ],
+                                                                        "component": "DefaultValue"
+                                                                      }
+                                                                    ],
+                                                                    "component": "NamedField"
+                                                                  }
+                                                                ],
+                                                                "component": "Link"
+                                                              }
+                                                            ],
+                                                            "component": "TableCell"
+                                                          }
+                                                        ],
+                                                        "component": "TableRow"
+                                                      }
+                                                    ],
+                                                    "component": "EditableObject"
+                                                  }
+                                                ],
+                                                "component": "ListView"
+                                              }
+                                            ],
+                                            "component": "Table"
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "name": "Grid",
+                                        "component": "Grid",
+                                        "props": {
+                                          "item": true,
+                                          "xs": 12
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "Pagination",
+                                            "component": "Pagination",
+                                            "props": {},
+                                            "components": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "component": "Connector"
+                              }
+                            ],
+                            "component": "Query"
+                          }
+                        ],
+                        "component": "EditorRoute"
+                      },
+                      {
+                        "name": "EditorRoute",
+                        "props": {
+                          "exact": true,
+                          "path": "/geoobjecttypes/create/"
+                        },
+                        "components": [
+                          {
+                            "name": "ResetObjectContext",
+                            "props": {},
+                            "components": [
+                              {
+                                "name": "EditableObject",
+                                "props": {
+                                  "_dirty": {},
+                                  "on_create_redirect_url": "/geoobjecttypes/:id/",
+                                  "new_object_cache_key": "new_geoobjecttype"
+                                },
+                                "components": [
+                                  {
+                                    "name": "Query",
+                                    "props": {
+                                      "query": "mutation create (\n  $data: GeoObjectTypeCreateInput!\n){\n  response: createGeoObjectTypeProcessor (\n    data: $data\n  ){\n    success\n    message\n    errors{\n      key\n      message\n    }\n    data{\n      ...geoObjectType\n    }\n  }\n}\n\nfragment geoObjectType on GeoObjectType @prismaCmsFragmentAllFields {\n  id\n}\n"
+                                    },
+                                    "components": [],
+                                    "component": "Query"
+                                  },
+                                  {
+                                    "id": "ck9frexis00lc0756c3s9u418",
+                                    "name": "GeoObjectType fields",
+                                    "component": "Section",
+                                    "props": {},
+                                    "components": []
+                                  }
+                                ],
+                                "component": "EditableObject"
+                              }
+                            ],
+                            "component": "ResetObjectContext"
+                          }
+                        ],
+                        "component": "EditorRoute"
+                      },
+                      {
+                        "name": "EditorRoute",
+                        "props": {
+                          "exact": true,
+                          "path": "/geoobjecttypes/:id/"
+                        },
+                        "components": [
+                          {
+                            "name": "Query",
+                            "props": {
+                              "query": "query geoObjectType (\n  $where: GeoObjectTypeWhereUniqueInput!\n){\n  object: geoObjectType (\n    where: $where\n  ){\n    ...geoObjectType\n  }\n}\n\nfragment geoObjectType on GeoObjectType @prismaCmsFragmentAllFields {\n  id\n}\n"
+                            },
+                            "components": [
+                              {
+                                "name": "ObjectConnector",
+                                "props": {
+                                  "filtersname": "filters",
+                                  "where": {}
+                                },
+                                "components": [
+                                  {
+                                    "name": "ObjectView",
+                                    "component": "ObjectView",
+                                    "props": {},
+                                    "components": [
+                                      {
+                                        "name": "EditableObject",
+                                        "props": {},
+                                        "components": [
+                                          {
+                                            "name": "Query",
+                                            "props": {
+                                              "query": "mutation update (\n  $data: GeoObjectTypeUpdateInput!\n  $where: GeoObjectTypeWhereUniqueInput!\n){\n  response: updateGeoObjectTypeProcessor (\n    data: $data\n    where: $where\n  ){\n    success\n    message\n    errors{\n      key\n      message\n    }\n    data{\n      ...geoObjectType\n    }\n  }\n}\n\nfragment geoObjectType on GeoObjectType @prismaCmsFragmentAllFields {\n  id\n}"
+                                            },
+                                            "components": [],
+                                            "component": "Query"
+                                          },
+                                          {
+                                            "id": "ck9frexis00lc0756c3s9u418",
+                                            "name": "GeoObjectType fields",
+                                            "component": "Section",
+                                            "props": {},
+                                            "components": []
+                                          }
+                                        ],
+                                        "component": "EditableObject"
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "component": "ObjectConnector"
+                              }
+                            ],
+                            "component": "Query"
+                          }
+                        ],
+                        "component": "EditorRoute"
+                      }
+                    ],
+                    "id": "ck9fq1qw600fw0756sdm55ask"
+                  }
+                ],
+                "component": "EditorRoute"
+              },
+              {
+                "name": "EditorRoute",
+                "props": {
                   "exact": false
                 },
                 "components": [
@@ -1710,6 +1988,463 @@
     "rank": 0,
     "Parent": {
       "id": "ck932kc03005x0791u9llnmge"
+    }
+  },
+  {
+    "id": "ck9fq1qw600fw0756sdm55ask",
+    "externalKey": null,
+    "name": "GeoObjectTypes",
+    "description": null,
+    "component": "EditorSwitch",
+    "props": {},
+    "components": [
+      {
+        "name": "EditorRoute",
+        "props": {
+          "exact": true,
+          "path": "/geoobjecttypes/"
+        },
+        "components": [
+          {
+            "name": "Query",
+            "props": {
+              "query": "query geoObjectTypesConnection (\n  $where: GeoObjectTypeWhereInput\n  $orderBy: GeoObjectTypeOrderByInput\n  $first: Int = 10\n  $skip: Int\n){\n  objectsConnection: geoObjectTypesConnection (\n    where: $where\n    orderBy: $orderBy\n    skip: $skip\n    first: $first\n  ){\n    aggregate {\n      count\n    }\n    edges{\n      node {\n        ...geoObjectType\n      }\n    }\n  }\n}\n\nfragment geoObjectType on GeoObjectType @prismaCmsFragmentAllFields {\n  id\n}\n"
+            },
+            "components": [
+              {
+                "name": "Connector",
+                "props": {
+                  "first": 12,
+                  "filtersname": "filters"
+                },
+                "components": [
+                  {
+                    "name": "Grid",
+                    "component": "Grid",
+                    "props": {
+                      "container": true,
+                      "spacing": 8
+                    },
+                    "components": [
+                      {
+                        "name": "Grid",
+                        "component": "Grid",
+                        "props": {
+                          "item": true,
+                          "xs": 12
+                        },
+                        "components": [
+                          {
+                            "name": "Grid",
+                            "props": {
+                              "container": true,
+                              "spacing": 8,
+                              "alignItems": "center"
+                            },
+                            "components": [
+                              {
+                                "name": "Grid",
+                                "props": {
+                                  "spacing": 0,
+                                  "xs": true,
+                                  "item": true
+                                },
+                                "components": [],
+                                "component": "Grid"
+                              },
+                              {
+                                "name": "Grid",
+                                "props": {
+                                  "spacing": 0,
+                                  "item": true
+                                },
+                                "components": [
+                                  {
+                                    "name": "CreateObjectLink",
+                                    "props": {
+                                      "to": "/geoobjecttypes/create/"
+                                    },
+                                    "components": [],
+                                    "component": "CreateObjectLink"
+                                  }
+                                ],
+                                "component": "Grid"
+                              }
+                            ],
+                            "component": "Grid"
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Grid",
+                        "component": "Grid",
+                        "props": {
+                          "item": true,
+                          "xs": 12
+                        },
+                        "components": [
+                          {
+                            "name": "Table",
+                            "props": {
+                              "className": "prisma-cms bordered"
+                            },
+                            "components": [
+                              {
+                                "name": "TableRow",
+                                "props": {},
+                                "components": [
+                                  {
+                                    "name": "TableCell",
+                                    "props": {
+                                      "tag": "th"
+                                    },
+                                    "components": [
+                                      {
+                                        "name": "Tag",
+                                        "props": {
+                                          "tag": "span"
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "HtmlTag",
+                                            "component": "HtmlTag",
+                                            "props": {
+                                              "text": "Название"
+                                            },
+                                            "components": []
+                                          }
+                                        ],
+                                        "component": "Tag"
+                                      }
+                                    ],
+                                    "component": "TableCell"
+                                  },
+                                  {
+                                    "name": "TableCell",
+                                    "props": {
+                                      "tag": "th"
+                                    },
+                                    "components": [
+                                      {
+                                        "name": "Tag",
+                                        "props": {
+                                          "tag": "span"
+                                        },
+                                        "components": [
+                                          {
+                                            "name": "HtmlTag",
+                                            "component": "HtmlTag",
+                                            "props": {
+                                              "text": "Код"
+                                            },
+                                            "components": []
+                                          }
+                                        ],
+                                        "component": "Tag"
+                                      }
+                                    ],
+                                    "component": "TableCell"
+                                  }
+                                ],
+                                "component": "TableRow"
+                              },
+                              {
+                                "name": "ListView",
+                                "props": {},
+                                "components": [
+                                  {
+                                    "name": "EditableObject",
+                                    "props": {
+                                      "show_header": false
+                                    },
+                                    "components": [
+                                      {
+                                        "name": "TableRow",
+                                        "props": {},
+                                        "components": [
+                                          {
+                                            "name": "TableCell",
+                                            "props": {},
+                                            "components": [
+                                              {
+                                                "name": "Link",
+                                                "props": {
+                                                  "to": "/geoobjecttypes/:id/"
+                                                },
+                                                "components": [
+                                                  {
+                                                    "name": "NamedField",
+                                                    "props": {
+                                                      "name": "name",
+                                                      "tag": "div"
+                                                    },
+                                                    "components": [
+                                                      {
+                                                        "name": "DefaultValue",
+                                                        "props": {},
+                                                        "components": [
+                                                          {
+                                                            "name": "NamedField",
+                                                            "props": {
+                                                              "name": "id"
+                                                            },
+                                                            "components": [],
+                                                            "component": "NamedField"
+                                                          }
+                                                        ],
+                                                        "component": "DefaultValue"
+                                                      }
+                                                    ],
+                                                    "component": "NamedField"
+                                                  }
+                                                ],
+                                                "component": "Link"
+                                              }
+                                            ],
+                                            "component": "TableCell"
+                                          },
+                                          {
+                                            "name": "TableCell",
+                                            "props": {},
+                                            "components": [
+                                              {
+                                                "name": "NamedField",
+                                                "props": {
+                                                  "name": "code"
+                                                },
+                                                "components": [],
+                                                "component": "NamedField"
+                                              }
+                                            ],
+                                            "component": "TableCell"
+                                          }
+                                        ],
+                                        "component": "TableRow"
+                                      }
+                                    ],
+                                    "component": "EditableObject"
+                                  }
+                                ],
+                                "component": "ListView"
+                              }
+                            ],
+                            "component": "Table"
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Grid",
+                        "component": "Grid",
+                        "props": {
+                          "item": true,
+                          "xs": 12
+                        },
+                        "components": [
+                          {
+                            "name": "Pagination",
+                            "component": "Pagination",
+                            "props": {},
+                            "components": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "component": "Connector"
+              }
+            ],
+            "component": "Query"
+          }
+        ],
+        "component": "EditorRoute"
+      },
+      {
+        "name": "EditorRoute",
+        "props": {
+          "exact": true,
+          "path": "/geoobjecttypes/create/"
+        },
+        "components": [
+          {
+            "name": "ResetObjectContext",
+            "props": {},
+            "components": [
+              {
+                "name": "EditableObject",
+                "props": {
+                  "_dirty": {},
+                  "on_create_redirect_url": "/geoobjecttypes/:id/",
+                  "new_object_cache_key": "new_geoobjecttype"
+                },
+                "components": [
+                  {
+                    "name": "Query",
+                    "props": {
+                      "query": "mutation create (\n  $data: GeoObjectTypeCreateInput!\n){\n  response: createGeoObjectTypeProcessor (\n    data: $data\n  ){\n    success\n    message\n    errors{\n      key\n      message\n    }\n    data{\n      ...geoObjectType\n    }\n  }\n}\n\nfragment geoObjectType on GeoObjectType @prismaCmsFragmentAllFields {\n  id\n}\n"
+                    },
+                    "components": [],
+                    "component": "Query"
+                  },
+                  {
+                    "id": "ck9frexis00lc0756c3s9u418",
+                    "name": "GeoObjectType fields",
+                    "component": "Section",
+                    "props": {},
+                    "components": []
+                  }
+                ],
+                "component": "EditableObject"
+              }
+            ],
+            "component": "ResetObjectContext"
+          }
+        ],
+        "component": "EditorRoute"
+      },
+      {
+        "name": "EditorRoute",
+        "props": {
+          "exact": true,
+          "path": "/geoobjecttypes/:id/"
+        },
+        "components": [
+          {
+            "name": "Query",
+            "props": {
+              "query": "query geoObjectType (\n  $where: GeoObjectTypeWhereUniqueInput!\n){\n  object: geoObjectType (\n    where: $where\n  ){\n    ...geoObjectType\n  }\n}\n\nfragment geoObjectType on GeoObjectType @prismaCmsFragmentAllFields {\n  id\n}\n"
+            },
+            "components": [
+              {
+                "name": "ObjectConnector",
+                "props": {
+                  "filtersname": "filters",
+                  "where": {}
+                },
+                "components": [
+                  {
+                    "name": "ObjectView",
+                    "component": "ObjectView",
+                    "props": {},
+                    "components": [
+                      {
+                        "name": "EditableObject",
+                        "props": {},
+                        "components": [
+                          {
+                            "name": "Query",
+                            "props": {
+                              "query": "mutation update (\n  $data: GeoObjectTypeUpdateInput!\n  $where: GeoObjectTypeWhereUniqueInput!\n){\n  response: updateGeoObjectTypeProcessor (\n    data: $data\n    where: $where\n  ){\n    success\n    message\n    errors{\n      key\n      message\n    }\n    data{\n      ...geoObjectType\n    }\n  }\n}\n\nfragment geoObjectType on GeoObjectType @prismaCmsFragmentAllFields {\n  id\n}"
+                            },
+                            "components": [],
+                            "component": "Query"
+                          },
+                          {
+                            "id": "ck9frexis00lc0756c3s9u418",
+                            "name": "GeoObjectType fields",
+                            "component": "Section",
+                            "props": {},
+                            "components": []
+                          }
+                        ],
+                        "component": "EditableObject"
+                      }
+                    ]
+                  }
+                ],
+                "component": "ObjectConnector"
+              }
+            ],
+            "component": "Query"
+          }
+        ],
+        "component": "EditorRoute"
+      }
+    ],
+    "vars": null,
+    "rank": 0,
+    "Parent": {
+      "id": "ck932kc03005x0791u9llnmge"
+    }
+  },
+  {
+    "id": "ck9frexis00lc0756c3s9u418",
+    "externalKey": null,
+    "name": "GeoObjectType fields",
+    "description": null,
+    "component": "Section",
+    "props": {
+      "hide_wrapper_in_default_mode": true
+    },
+    "components": [
+      {
+        "name": "EditableView",
+        "props": {},
+        "components": [
+          {
+            "name": "Grid",
+            "props": {
+              "container": true,
+              "spacing": 8
+            },
+            "components": [
+              {
+                "name": "Grid",
+                "props": {
+                  "spacing": 0,
+                  "xs": true,
+                  "item": true
+                },
+                "components": [
+                  {
+                    "name": "TextField",
+                    "props": {
+                      "fullWidth": true,
+                      "name": "name",
+                      "label": "Название"
+                    },
+                    "components": [],
+                    "component": "TextField"
+                  }
+                ],
+                "component": "Grid"
+              },
+              {
+                "name": "Grid",
+                "props": {
+                  "spacing": 0,
+                  "xs": 12,
+                  "sm": 6,
+                  "md": 4,
+                  "lg": 3,
+                  "xl": 2,
+                  "item": true
+                },
+                "components": [
+                  {
+                    "name": "TextField",
+                    "props": {
+                      "fullWidth": true,
+                      "label": "Код",
+                      "name": "code"
+                    },
+                    "components": [],
+                    "component": "TextField"
+                  }
+                ],
+                "component": "Grid"
+              }
+            ],
+            "component": "Grid"
+          }
+        ],
+        "component": "EditableView"
+      }
+    ],
+    "vars": null,
+    "rank": 0,
+    "Parent": {
+      "id": "ck9fq1qw600fw0756sdm55ask"
     }
   }
 ]
