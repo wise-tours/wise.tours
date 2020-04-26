@@ -5,13 +5,19 @@ type GeoObject {
   updatedAt: DateTime! @updatedAt
   name: String
 
+  """Шарота"""
+  lat: Float
+
+  """Долгота"""
+  lon: Float
+
   """Численность населения"""
   population: Int
 
   """Прощадь в километрах"""
   sqkm: Float
 
-  type: GeoObjectType!
+  Type: GeoObjectType! @relation(name: "GeoObjectType")
 
   CreatedBy: User
   

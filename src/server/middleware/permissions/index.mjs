@@ -47,6 +47,10 @@ export default shield(
       createGeoObjectTypeProcessor: rules.isSudo,
       updateGeoObjectTypeProcessor: rules.isSudo,
       deleteGeoObjectType: rules.isSudo,
+
+      createGeoObjectProcessor: rules.isSudo,
+      updateGeoObjectProcessor: rules.isSudo,
+      deleteGeoObject: rules.isSudo,
     },
   },
   {

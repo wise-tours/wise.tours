@@ -7,7 +7,7 @@ type GeoObjectType {
   name: String @unique
   code: ID @unique
 
-  GeoObjects: [GeoObject!]!
+  GeoObjects: [GeoObject!]! @relation(name: "GeoObjectType")
 
   CreatedBy: User
 }

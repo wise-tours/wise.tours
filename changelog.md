@@ -1,3 +1,8 @@
+4.4.4
+============================================
+- Added geoObject
+- Fix importCountries()
+
 4.4.3
 ============================================
 - Added export/import templates

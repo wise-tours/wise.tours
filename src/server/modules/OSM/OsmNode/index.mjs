@@ -83,32 +83,9 @@ export class OsmNodeProcessor extends PrismaProcessor {
 
     const data = await this.getData(query);
 
-
     const {
       node: nodes,
     } = data;
-
-
-    // // console.log('node[0]', JSON.stringify(node[0], true, 2));
-    // console.log('node[0]', node[0]);
-    // // console.log('node', JSON.stringify(node[0], true, 2));
-
-    // node.map(n => {
-
-    //   console.log('n names', Object.keys(n));
-
-    //   const {
-    //     _attributes: {
-    //       id,
-    //       lat,
-    //       lon,
-    //     },
-    //     tag,
-    //   } = n;
-
-    //   console.log('n _attributes id', id, lat, lon);
-
-    // });
 
 
     /**
@@ -132,6 +109,10 @@ export class OsmNodeProcessor extends PrismaProcessor {
   async * upsertCountries(objects, info) {
 
     // console.log(chalk.green("updateOrCreateVideoRooms"));
+
+    const {
+      API_SUDO_USER_USERNAME,
+    } = process.env;
 
     const {
       db,
@@ -180,6 +161,20 @@ export class OsmNodeProcessor extends PrismaProcessor {
 
       // console.log('upsertCountries tags', tags);
 
+      /**
+       * Получаем уже имеющуюся запись страны
+       */
+
+      const [country] = await db.query.countries({
+        where: {
+          OsmNode: {
+            externalKey,
+          },
+        },
+      });
+
+      // console.log('country', JSON.stringify(country, true, 2));
+
       let {
         'ISO3166-1': ISO3166_1,
         name: defaultName,
@@ -222,11 +217,28 @@ export class OsmNodeProcessor extends PrismaProcessor {
       const countryData = {
         population,
         sqkm,
+        lat,
+        lon,
       }
-
+      
       const countryCreateData = {
         ...countryData,
+        /**
+         * Название объекта не обновляем, а только создаем,
+         * чтобы можно было на конечном сайте подправить.
+         */
         name,
+        id: country ? country.id : undefined,
+        Type: {
+          connect: {
+            code: "country",
+          },
+        },
+        CreatedBy: {
+          connect: {
+            username: API_SUDO_USER_USERNAME,
+          },
+        },
       };
       const countryUpdateData = {
         ...countryData,
@@ -239,13 +251,13 @@ export class OsmNodeProcessor extends PrismaProcessor {
         create: {
           ...data,
           externalKey,
-          Country: {
+          GeoObject: {
             create: countryCreateData,
           },
         },
         update: {
           ...data,
-          Country: {
+          GeoObject: {
             upsert: {
               create: countryCreateData,
               update: countryUpdateData,

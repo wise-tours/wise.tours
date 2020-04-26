@@ -4,6 +4,7 @@ import PrismaModule from "@prisma-cms/prisma-module";
 
 import CountryModule from "./Country";
 import GeoObjectTypeModule from "./GeoObjectType";
+import GeoObjectModule from "./GeoObject";
 
 import MergeSchema from 'merge-graphql-schemas';
 import path from 'path';
@@ -21,6 +22,7 @@ export default class WorldModule extends PrismaModule {
     this.mergeModules([
       CountryModule,
       GeoObjectTypeModule,
+      GeoObjectModule,
     ]);
 
   }

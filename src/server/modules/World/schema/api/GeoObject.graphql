@@ -1,0 +1,17 @@
+
+type Mutation {
+  createGeoObjectProcessor(
+    data: GeoObjectCreateInput!
+  ): GeoObjectResponse!
+  updateGeoObjectProcessor(
+    data: GeoObjectUpdateInput!
+    where: GeoObjectWhereUniqueInput!
+  ): GeoObjectResponse!
+}
+
+type GeoObjectResponse{
+  success: Boolean!
+  message: String
+  errors: [Error!]!
+  data: GeoObject
+}
