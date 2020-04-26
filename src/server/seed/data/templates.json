@@ -1284,7 +1284,7 @@
           {
             "name": "Query",
             "props": {
-              "query": "query countriesConnection (\n  $where: CountryWhereInput\n  $orderBy: CountryOrderByInput\n  $first: Int = 10\n  $skip: Int\n){\n  objectsConnection: countriesConnection (\n    where: $where\n    orderBy: $orderBy\n\t\tfirst: $first\n    skip: $skip\n  ){\n    aggregate{\n      count\n    }\n    edges{\n      node{\n        ...country\n        OsmNode {\n          ...osmNode\n        }\n      }\n    }\n  }\n}\n\nfragment country on Country @prismaCmsFragmentAllFields{\n  id\n}\n\nfragment osmNode on OsmNode @prismaCmsFragmentAllFields {\n  id\n}\n\n"
+              "query": "query geoObjectsConnection (\n  $where: GeoObjectWhereInput\n  $orderBy: GeoObjectOrderByInput\n  $first: Int = 10\n  $skip: Int\n){\n  objectsConnection: geoObjectsConnection (\n    where: $where\n    orderBy: $orderBy\n\t\tfirst: $first\n    skip: $skip\n  ){\n    aggregate{\n      count\n    }\n    edges{\n      node{\n        ...geoObject\n      }\n    }\n  }\n}\n\nfragment geoObject on GeoObject @prismaCmsFragmentAllFields{\n  id\n}\n"
             },
             "components": [
               {
@@ -1493,20 +1493,10 @@
                                             "props": {},
                                             "components": [
                                               {
-                                                "name": "NamedField",
-                                                "props": {
-                                                  "tag": "div",
-                                                  "name": "OsmNode"
-                                                },
-                                                "components": [
-                                                  {
-                                                    "name": "GoogleMapLink",
-                                                    "props": {},
-                                                    "components": [],
-                                                    "component": "GoogleMapLink"
-                                                  }
-                                                ],
-                                                "component": "NamedField"
+                                                "name": "GoogleMapLink",
+                                                "props": {},
+                                                "components": [],
+                                                "component": "GoogleMapLink"
                                               }
                                             ],
                                             "component": "TableCell"
@@ -1592,7 +1582,7 @@
           {
             "name": "Query",
             "props": {
-              "query": "query country (\n  $where: CountryWhereUniqueInput!\n){\n  object: country (\n    where: $where \n  ){\n    ...country\n    OsmNode {\n      ...osmNode\n    }\n  }\n}\n\nfragment country on Country @prismaCmsFragmentAllFields {\n  id\n}\n\nfragment osmNode on OsmNode @prismaCmsFragmentAllFields {\n  id\n}\n"
+              "query": "query geoObject (\n  $where: GeoObjectWhereUniqueInput!\n){\n  object: geoObject (\n    where: $where \n  ){\n    ...geoObject\n  }\n}\n\nfragment geoObject on GeoObject @prismaCmsFragmentAllFields {\n  id\n}\n"
             },
             "components": [
               {
@@ -1616,7 +1606,7 @@
                           {
                             "name": "Query",
                             "props": {
-                              "query": "mutation update (\n  $where: CountryWhereUniqueInput!\n  $data: CountryUpdateInput!\n){\n  response: updateCountryProcessor (\n    data: $data\n    where: $where\n  ){\n    success\n    message\n    errors{\n      key\n      message\n    }\n    data{\n      ...country\n    }\n  }\n}\n\nfragment country on Country @prismaCmsFragmentAllFields{\n  id\n}"
+                              "query": "mutation update (\n  $where: GeoObjectWhereUniqueInput!\n  $data: GeoObjectUpdateInput!\n){\n  response: updateGeoObjectProcessor (\n    data: $data\n    where: $where\n  ){\n    success\n    message\n    errors{\n      key\n      message\n    }\n    data{\n      ...geoObject\n    }\n  }\n}\n\nfragment geoObject on GeoObject @prismaCmsFragmentAllFields{\n  id\n}"
                             },
                             "components": [],
                             "component": "Query"
@@ -1679,20 +1669,10 @@
                                     "props": {},
                                     "components": [
                                       {
-                                        "name": "NamedField",
-                                        "props": {
-                                          "tag": "div",
-                                          "name": "OsmNode"
-                                        },
-                                        "components": [
-                                          {
-                                            "name": "GoogleMapLink",
-                                            "props": {},
-                                            "components": [],
-                                            "component": "GoogleMapLink"
-                                          }
-                                        ],
-                                        "component": "NamedField"
+                                        "name": "GoogleMapLink",
+                                        "props": {},
+                                        "components": [],
+                                        "component": "GoogleMapLink"
                                       }
                                     ],
                                     "component": "TableCell"
@@ -1800,10 +1780,11 @@
                             "component": "Table"
                           },
                           {
-                            "name": "NamedField",
+                            "name": "Section",
                             "props": {
-                              "tag": "div",
-                              "name": "OsmNode"
+                              "style": {
+                                "marginTop": "10px"
+                              }
                             },
                             "components": [
                               {
@@ -1813,7 +1794,7 @@
                                 "component": "CountryMap"
                               }
                             ],
-                            "component": "NamedField"
+                            "component": "Section"
                           }
                         ],
                         "component": "EditableObject"
