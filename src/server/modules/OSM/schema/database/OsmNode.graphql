@@ -12,7 +12,5 @@ type OsmNode {
   """Тип объекта, например country"""
   place: String
 
-  Country: Country @relation(name: "OsmNodeCountry")
-  City: City @relation(name: "OsmNodeCity")
   GeoObject: GeoObject @relation(name: "OsmNodeGeoObject")
 }

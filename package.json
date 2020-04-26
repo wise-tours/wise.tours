@@ -1,6 +1,6 @@
 {
   "name": "wise.tours",
-  "version": "4.4.4",
+  "version": "4.4.5",
   "description": "wise.tours site source",
   "private": false,
   "scripts": {
@@ -9,8 +9,8 @@
     "build-less": "node-less-chokidar src/styles/less",
     "start-ssr": "NODE_ENV=production node --experimental-modules src/ssr",
     "start-ssr-dev": "NODE_ENV=production PRISMA_CMS_TIMELOG=true nodemon src/ssr",
-    "start-server": "Sendmail=true node --experimental-modules src/server/",
-    "start-server-dev": "Sendmail=true SendmailTest=true nodemon --experimental-modules src/server/",
+    "start-server": "node --experimental-modules src/server/",
+    "start-server-dev": "nodemon --experimental-modules src/server/",
     "deploy": "NODE_ENV=test node --experimental-modules src/server/scripts/deploy/with-prisma",
     "build-api": "node --experimental-modules src/server/scripts/deploy/api-only",
     "analyze": "yarn source-map-explorer 'build/static/js/*.js'",

@@ -38,10 +38,6 @@ export default shield(
       deleteOsmNode: rules.isSudo,
       importCountries: rules.isSudo,
 
-      createCountryProcessor: rules.isSudo,
-      updateCountryProcessor: rules.isSudo,
-      deleteCountry: rules.isSudo,
-
       exportTemplates: rules.isSudo,
 
       createGeoObjectTypeProcessor: rules.isSudo,
@@ -51,6 +47,10 @@ export default shield(
       createGeoObjectProcessor: rules.isSudo,
       updateGeoObjectProcessor: rules.isSudo,
       deleteGeoObject: rules.isSudo,
+
+      createProjectProcessor: rules.isSudo,
+      updateProjectProcessor: rules.isSudo,
+      // deleteProject: rules.isSudo,
     },
   },
   {

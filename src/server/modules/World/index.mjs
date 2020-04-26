@@ -2,7 +2,6 @@
 import PrismaModule from "@prisma-cms/prisma-module";
 // import PrismaProcessor from "@prisma-cms/prisma-processor";
 
-import CountryModule from "./Country";
 import GeoObjectTypeModule from "./GeoObjectType";
 import GeoObjectModule from "./GeoObject";
 
@@ -20,7 +19,6 @@ export default class WorldModule extends PrismaModule {
     super(props);
 
     this.mergeModules([
-      CountryModule,
       GeoObjectTypeModule,
       GeoObjectModule,
     ]);

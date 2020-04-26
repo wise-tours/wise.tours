@@ -120,7 +120,7 @@ export class CustomSSR extends SSR {
   }
 
 
-  renderRootSitemap(req, res, uri) {
+  async renderRootSitemap(req, res, uri) {
 
     const cleanUri = uri.clone().query(null)
 
@@ -142,11 +142,11 @@ export class CustomSSR extends SSR {
     const mainUri = cleanUri.clone();
     mainUri.directory(mainUri.directory() + '/main');
 
-    const usersUri = cleanUri.clone();
-    usersUri.directory(usersUri.directory() + '/users');
+    // const usersUri = cleanUri.clone();
+    // usersUri.directory(usersUri.directory() + '/users');
 
-    const countriesUri = cleanUri.clone();
-    countriesUri.directory(countriesUri.directory() + '/countries');
+    // const countriesUri = cleanUri.clone();
+    // countriesUri.directory(countriesUri.directory() + '/countries');
 
     // const resourcesUri = cleanUri.clone();
     // resourcesUri.directory(resourcesUri.directory() + '/resources');
@@ -156,18 +156,25 @@ export class CustomSSR extends SSR {
       .writeElement("loc", mainUri.toString())
       .endElement();
 
-    xml.startElement("sitemap")
-      .writeElement("loc", usersUri.toString())
-      .endElement();
+    // xml.startElement("sitemap")
+    //   .writeElement("loc", usersUri.toString())
+    //   .endElement();
 
-    xml.startElement("sitemap")
-      .writeElement("loc", countriesUri.toString())
-      .endElement();
+    // xml.startElement("sitemap")
+    //   .writeElement("loc", countriesUri.toString())
+    //   .endElement();
 
     // xml.startElement("sitemap")
     //   .writeElement("loc", resourcesUri.toString())
     //   .endElement();
 
+
+    /**
+     * Добавляем сайтмапы внутренних разделов
+     */
+    await this.renderUsersSitemap(req, res, uri, xml);
+    await this.renderCountriesSitemap(req, res, uri, xml);
+    await this.renderResourcesSitemap(req, res, uri, xml);
 
     xml.endDocument();
 
@@ -239,7 +246,7 @@ export class CustomSSR extends SSR {
   /**
    * Пользователи
    */
-  async renderUsersSitemap(req, res, uri) {
+  async renderUsersSitemap(req, res, uri, xml) {
 
     const api = this.getApi();
 
@@ -299,7 +306,25 @@ export class CustomSSR extends SSR {
     let pages = Math.ceil(total / limit);
 
 
-    const xml = new XMLWriter();
+    if (xml) {
+
+      let i = 0;
+
+      while (pages > i) {
+        i++;
+
+        const pageUri = uri.clone().directory(`/sitemap/users/${i}/`);
+
+        xml.startElement("sitemap")
+          .writeElement("loc", pageUri.toString())
+          .endElement();
+      }
+
+      return;
+    }
+
+
+    xml = new XMLWriter();
 
     xml.startDocument('1.0', 'UTF-8')
 
@@ -329,24 +354,24 @@ export class CustomSSR extends SSR {
       });
 
     }
-    else {
+    // else {
 
-      // xml.startElement('sitemapindex')
-      //   .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+    //   // xml.startElement('sitemapindex')
+    //   //   .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
-      let i = 0;
+    //   let i = 0;
 
-      while (pages > i) {
-        i++;
+    //   while (pages > i) {
+    //     i++;
 
-        const pageUri = uri.clone().directory(`/sitemap/users/${i}/`);
+    //     const pageUri = uri.clone().directory(`/sitemap/users/${i}/`);
 
-        xml.startElement("sitemap")
-          .writeElement("loc", pageUri.toString())
-          .endElement();
-      }
+    //     xml.startElement("sitemap")
+    //       .writeElement("loc", pageUri.toString())
+    //       .endElement();
+    //   }
 
-    }
+    // }
 
 
     xml.endDocument();
@@ -493,7 +518,7 @@ export class CustomSSR extends SSR {
   /**
    * Ресурсы
    */
-  async renderResourcesSitemap(req, res, uri) {
+  async renderResourcesSitemap(req, res, uri, xml) {
 
     const api = this.getApi();
 
@@ -534,6 +559,10 @@ export class CustomSSR extends SSR {
             uri_gt: '',
           },
         ],
+        type_not_in: [
+          'Project',
+        ],
+        uri_not_starts_with: "/projects/",
       },
       orderBy: "createdAt_DESC",
     }, schema)
@@ -557,7 +586,24 @@ export class CustomSSR extends SSR {
     let pages = Math.ceil(total / limit);
 
 
-    const xml = new XMLWriter();
+    if (xml) {
+      let i = 0;
+
+      while (pages > i) {
+        i++;
+
+        const pageUri = uri.clone().directory(`/sitemap/resources/${i}/`);
+
+        xml.startElement("sitemap")
+          .writeElement("loc", pageUri.toString())
+          .endElement();
+      }
+
+      return;
+    }
+
+
+    xml = new XMLWriter();
 
     xml.startDocument('1.0', 'UTF-8')
 
@@ -587,24 +633,24 @@ export class CustomSSR extends SSR {
       });
 
     }
-    else {
+    // else {
 
-      // xml.startElement('sitemapindex')
-      //   .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+    //   // xml.startElement('sitemapindex')
+    //   //   .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
 
-      let i = 0;
+    //   let i = 0;
 
-      while (pages > i) {
-        i++;
+    //   while (pages > i) {
+    //     i++;
 
-        const pageUri = uri.clone().directory(`/sitemap/resources/${i}/`);
+    //     const pageUri = uri.clone().directory(`/sitemap/resources/${i}/`);
 
-        xml.startElement("sitemap")
-          .writeElement("loc", pageUri.toString())
-          .endElement();
-      }
+    //     xml.startElement("sitemap")
+    //       .writeElement("loc", pageUri.toString())
+    //       .endElement();
+    //   }
 
-    }
+    // }
 
 
     xml.endDocument();
@@ -626,7 +672,7 @@ export class CustomSSR extends SSR {
   /**
    * Страны
    */
-  async renderCountriesSitemap(req, res, uri) {
+  async renderCountriesSitemap(req, res, uri, xml) {
 
     const api = this.getApi();
 
@@ -636,7 +682,6 @@ export class CustomSSR extends SSR {
     page = (page && isFinite(page)) ? parseInt(page) : undefined;
 
     let limit = 1000;
-
 
     const schema = `
       {
@@ -652,12 +697,15 @@ export class CustomSSR extends SSR {
       }
     `;
 
-    let objectsResult = await api.query.countriesConnection({
+    let objectsResult = await api.query.geoObjectsConnection({
       first: limit,
       skip: page > 1 ? (page - 1) * limit : undefined,
       where: {
         // active: true,
         // deleted: false,
+        Type: {
+          code: "country",
+        },
       },
       orderBy: "createdAt_DESC",
     }, schema)
@@ -675,13 +723,34 @@ export class CustomSSR extends SSR {
     } = objectsResult;
 
 
-    const objects = edges.map(({ node }) => node)
-
+    const objects = edges.map(({ node }) => node);
 
     let pages = Math.ceil(total / limit);
 
 
-    const xml = new XMLWriter();
+    /**
+     * Если уже указан объект xml, то просто добавляем в него сайтмапы
+     */
+    if (xml) {
+
+      let i = 0;
+
+      while (pages > i) {
+        i++;
+
+        const pageUri = uri.clone().directory(`/sitemap/countries/${i}/`);
+
+        xml.startElement("sitemap")
+          .writeElement("loc", pageUri.toString())
+          .endElement();
+
+      }
+
+      return;
+    }
+
+
+    xml = new XMLWriter();
 
     xml.startDocument('1.0', 'UTF-8')
 
@@ -710,24 +779,21 @@ export class CustomSSR extends SSR {
       });
 
     }
-    else {
+    // else {
 
-      // xml.startElement('sitemapindex')
-      //   .writeAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+    //   let i = 0;
 
-      let i = 0;
+    //   while (pages > i) {
+    //     i++;
 
-      while (pages > i) {
-        i++;
+    //     const pageUri = uri.clone().directory(`/sitemap/countries/${i}/`);
 
-        const pageUri = uri.clone().directory(`/sitemap/countries/${i}/`);
+    //     xml.startElement("sitemap")
+    //       .writeElement("loc", pageUri.toString())
+    //       .endElement();
+    //   }
 
-        xml.startElement("sitemap")
-          .writeElement("loc", pageUri.toString())
-          .endElement();
-      }
-
-    }
+    // }
 
 
     xml.endDocument();
